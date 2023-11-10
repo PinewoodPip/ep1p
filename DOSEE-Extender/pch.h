@@ -28,4 +28,8 @@
 #include <thread>
 #include <utility>
 
+#include <GameDefinitions/Base/Base.h>
+#include <GameDefinitions/Base/BaseString.h>
+#include "Utils.h"
+
 #endif //PCH_H

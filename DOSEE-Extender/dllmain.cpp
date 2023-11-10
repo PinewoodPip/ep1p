@@ -9,6 +9,7 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include "Extender/ScriptExtender.h"
 
 bool ShouldRunProxy()
 {
@@ -40,6 +41,19 @@ void CreateConsole()
 
 HMODULE gThisModule{ NULL };
 
+void SetupExtender(HMODULE hModule)
+{
+	dse::gExtender = std::make_unique<dse::ScriptExtender>();
+	/*auto& config = dse::gExtender->GetConfig();
+	LoadConfig(GetConfigPath(), config);*/
+
+	DisableThreadLibraryCalls(hModule);
+
+	CreateConsole();
+
+	dse::gExtender->Initialize();
+}
+
 BOOL APIENTRY DllMain(HMODULE hModule,
 	DWORD  ul_reason_for_call,
 	LPVOID lpReserved
@@ -51,7 +65,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 		gThisModule = hModule;
 		if (ShouldRunProxy()) {
 			gDxgiWrapper = std::make_unique<DxgiWrapper>();
-			CreateConsole();
+			SetupExtender(hModule);
 		}
 		break;
 

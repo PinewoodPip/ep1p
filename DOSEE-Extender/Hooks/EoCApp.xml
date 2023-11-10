@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BinaryMappings>
+	<Mappings Version="2.0.119.430" Default="true">
+		<Mapping Name="ls::UIObjectManager::CreateUIObject">
+			48 8b cf
+			48 c7 44 24 28 80 00 00 00
+			c7 44 24 20 20 1e 00 00
+			@func e8 ?? ?? ?? ?? // CALL       ls::UIObjectManager::CreateUIObject              ObjectHandle CreateUIObject
+			<Target Type="Indirect" Offset="@func" Symbol="UIObjectManager__CreateUIObject" /> <!-- ls::UIObjectManager::CreateUIObject -->
+		</Mapping>
+		<Mapping Name="ls::UIObjectManager::GetUIObjectByType">
+			74 38 // JZ
+			48 8b 0d c8 6f ad 00 // MOV
+			ba 5e 00 00 00 // MOV
+			@func e8 46 c3 f4 ff // CALL
+			<Target Type="Indirect" Offset="@func" Symbol="UIObjectManager__GetUIObjectByType" /> <!-- ls::UIObjectManager::GetUIObjectByType -->
+		</Mapping>
+	</Mappings>
+</BinaryMappings>

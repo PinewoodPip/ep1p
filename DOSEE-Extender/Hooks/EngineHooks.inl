@@ -1,0 +1,3 @@
+
+HOOK_DEFN(UIObjectManager__CreateUIObject, UIObjectManager__CreateUIObject, UIObjectManager::CreateUIObjectProc)
+HOOK_DEFN(UIObjectManager__GetUIObjectByType, UIObjectManager__GetUIObjectByType, UIObjectManager::GetUIObjectByTypeProc)
