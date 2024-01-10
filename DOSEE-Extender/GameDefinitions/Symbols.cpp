@@ -18,6 +18,8 @@
 //#include <GameDefinitions/GameObjects/Camera.h>
 //#include <GameDefinitions/GameObjects/Material.h>
 //#include <GameDefinitions/GameObjects/Vision.h>
+#include <GameDefinitions/EntitySystem.h>
+#include <GameDefinitions/RPGStats.h>
 
 namespace dse
 {
@@ -117,6 +119,22 @@ namespace dse
 		CrtAllocFunc CrtAlloc{ nullptr };
 		CrtFreeFunc CrtFree{ nullptr };
 
+		typedef int (*CDivinityStats_Character__GetResistanceFunc)(CDivinityStats_Character* self, bool ignoreBoosts);
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetFireResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetEarthResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetWaterResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetAirResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetPoisonResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetPiercingResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetCrushingResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetSlashingResistance{ nullptr };
+		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetShadowResistance{ nullptr };
+
+		ComponentFactory<ecl::Character>** ObjectFactory__ecl_Character{ nullptr };
+
+		//typedef void (*ecl_PickingHelper_DoPickFunc)(ecl::PickingHelper* self);
+		//ecl_PickingHelper_DoPickFunc ecl_PickingHelper_DoPick{ nullptr };
+
 		FixedString::CreateProc* ls__FixedString__Create{ nullptr };
 		GlobalStringTable const** ls__GlobalStrings{ nullptr };
 
@@ -132,8 +150,9 @@ namespace dse
 		/*UIObjectManager::RegisterUIObjectCreatorProc* UIObjectManager__RegisterUIObjectCreator{ nullptr };*/
 		UIObjectManager::CreateUIObjectProc* UIObjectManager__CreateUIObject{ nullptr };
 		UIObjectManager::GetUIObjectByTypeProc* UIObjectManager__GetUIObjectByType{ nullptr };
-		/*UIObjectManager::DestroyUIObjectProc* UIObjectManager__DestroyUIObject{ nullptr };
 		UIObjectManager::GetInstanceProc* UIObjectManager__GetInstance{ nullptr };
+		UIObjectManager** UIObjectManager__Instance{ nullptr };
+		/*UIObjectManager::DestroyUIObjectProc* UIObjectManager__DestroyUIObject{ nullptr };
 		UIObjectManager** UIObjectManager__Instance{ nullptr };
 		ecl::EoCUI::ctor ecl__EoCUI__ctor{ nullptr };
 		UIObject::VMT* ecl__EoCUI__vftable{ nullptr };
@@ -173,19 +192,6 @@ namespace dse
 		inline StaticSymbols() {}
 		StaticSymbols(StaticSymbols const&) = delete;
 		StaticSymbols& operator = (StaticSymbols const&) = delete;
-
-		/*inline UIObjectManager* GetUIObjectManager() const
-		{
-			if (UIObjectManager__Instance != nullptr) {
-				return *UIObjectManager__Instance;
-			}
-			else if (UIObjectManager__GetInstance != nullptr) {
-				return UIObjectManager__GetInstance();
-			}
-			else {
-				return nullptr;
-			}
-		}*/
 
 		/*inline void RegisterUIObjectCreator(UIObjectManager* self, unsigned int index, UIObjectFunctor* creator)
 		{

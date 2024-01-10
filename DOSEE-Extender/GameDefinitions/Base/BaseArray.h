@@ -305,11 +305,6 @@ public:
 		size_ = 0;
 	}
 
-protected:
-	T* buf_{ nullptr };
-	size_type capacity_{ 0 };
-	size_type size_{ 0 };
-
 	void FreeBuffer(T* buf, size_t oldCapacity)
 	{
 		if (buf != nullptr) {
@@ -319,7 +314,8 @@ protected:
 
 			if constexpr (StoreSize) {
 				Allocator::Free((void*)((std::ptrdiff_t)buf - 8));
-			} else {
+			}
+			else {
 				Allocator::Free(buf);
 			}
 		}
@@ -333,19 +329,26 @@ protected:
 				*(uint64_t*)newBuf = newCapacity;
 
 				buf_ = (T*)((std::ptrdiff_t)newBuf + 8);
-			} else {
+			}
+			else {
 				buf_ = (T*)Allocator::Alloc(newCapacity * sizeof(T));
 			}
 
 			for (size_type i = 0; i < newCapacity; i++) {
 				new (buf_ + i) T();
 			}
-		} else {
+		}
+		else {
 			buf_ = nullptr;
 		}
 
 		capacity_ = newCapacity;
 	}
+
+protected:
+	T* buf_{ nullptr };
+	size_type capacity_{ 0 };
+	size_type size_{ 0 };
 };
 
 template <class T, class Allocator = GameMemoryAllocator, bool StoreSize = false>
@@ -499,7 +502,7 @@ public:
 		copy_from(o);
 	}
 
-	Array(Array && o)
+	Array(Array&& o)
 		: buf_(o.buf_),
 		capacity_(o.capacity_),
 		size_(o.size_),
@@ -525,7 +528,7 @@ public:
 		return *this;
 	}
 
-	Array& operator =(Array && o)
+	Array& operator =(Array&& o)
 	{
 		buf_ = o.buf_;
 		capacity_ = o.capacity_;
@@ -605,12 +608,12 @@ public:
 		return buf_;
 	}
 
-	inline T const & operator [] (size_type index) const
+	inline T const& operator [] (size_type index) const
 	{
 		return buf_[index];
 	}
 
-	inline T & operator [] (size_type index)
+	inline T& operator [] (size_type index)
 	{
 		return buf_[index];
 	}
@@ -690,6 +693,7 @@ public:
 	}
 
 private:
+	void* unknownPtr;
 	T* buf_{ nullptr };
 	uint32_t capacity_{ 0 };
 	uint32_t size_{ 0 };
@@ -712,7 +716,8 @@ private:
 	{
 		if (capacity_ > 0) {
 			return 2 * capacity_;
-		} else {
+		}
+		else {
 			return 1;
 		}
 	}

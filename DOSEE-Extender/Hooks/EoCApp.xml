@@ -15,5 +15,136 @@
 			@func e8 46 c3 f4 ff // CALL
 			<Target Type="Indirect" Offset="@func" Symbol="UIObjectManager__GetUIObjectByType" /> <!-- ls::UIObjectManager::GetUIObjectByType -->
 		</Mapping>
+		<Mapping Name="ls::UIObjectManager">
+			@instance 48 8b 0d ?? ?? ?? ?? // MOV UIObjectManager
+			4d 8b c4 // MOV
+			ba 04 00 00 00 // MOV
+			48 81 c1 e0 00 00 00 // ADD
+			@register e8 ?? ?? ?? ?? // CALL RegisterUIObjectCreator
+			<Target Type="Indirect" Offset="@instance" Symbol="UIObjectManager__Instance" />
+			<Target Type="Indirect" Offset="@register" Symbol="UIObjectManager__RegisterUIObjectCreator" />
+			<!-- ls::UIObjectManager -->
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetFireResistance">
+			ff 15 95 35 2f 00 //        CALL       qword ptr [->MSVCR120.DLL::_stricmp]             = 0127fa30
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce9619
+			48 8b 5f 40 //    MOV        RBX,qword ptr [RDI + 0x40]
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 fb 0b 14 00 //        CALL       CDvinityStats_Character::GetFireResistance       undefined GetFireResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetFireResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetEarthResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce964f
+			48 8b 5f 40 //    MOV        RBX,qword ptr [RDI + 0x40]
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 75 1a 14 00 //       CALL       CDivinityStats_Character::GetEarthResistance     undefined GetEarthResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetEarthResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetWaterResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce9685
+			48 8b 5f 40 //    MOV        RBX,qword ptr [RDI + 0x40]
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 9f 10 14 00 //       CALL       CDivinityStats_Character::GetWaterResistance     undefined GetWaterResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetWaterResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetAirResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce96bb
+			48 8b 5f 40 //    MOV        RBX,qword ptr [RDI + 0x40]
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 79 15 14 00 //       CALL       CDivinityStats_Character::GetAirResistance       undefined GetAirResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetAirResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetPoisonResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce96f1
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 e7 25 14 00 //       CALL       CDivinityStats_Character::GetPoisonResistance    undefined GetPoisonResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetPoisonResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetPiercingResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce9727
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 b1 20 14 00 //       CALL       CDivinityStats_Character::GetPiercingResistance  undefined GetPiercingResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetPiercingResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetCrushingResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce975d
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 fb 22 14 00 //      CALL       CDivinityStats_Character::GetCrushingResistance  undefined GetCrushingResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetCrushingResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetSlashingResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce9793
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 c5 1d 14 00 //      CALL       CDivinityStats_Character::GetSlashingResistance  undefined GetSlashingResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetSlashingResistance" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetShadowResistance">
+			85 c0 //          TEST       EAX,EAX
+			75 22 //          JNZ        LAB_140ce97c9
+			b2 01 //          MOV        DL,offset s_rushingResistance_1410bc600+1        = "rushingResistance"
+			48 8b ce //       MOV        RCX,RSI
+			@getter e8 0f 28 14 00 //      CALL       CDivinityStats_Character::GetShadowResistance    undefined GetShadowResistance()
+			<Target Type="Indirect" Offset="@getter" Symbol="CDivinityStats_Character__GetShadowResistance" />
+		</Mapping>
+		<Mapping Name="EoCFree">
+			48 83 7b 18 10 //       CMP        qword ptr [RBX + 0x18],0x10
+			72 08 //          JC         LAB_14002dbfc
+			48 8b 0b //       MOV        RCX,qword ptr [RBX]
+			@free e8 a4 41 6e 00 //       CALL       FUN_140711da0
+			<Target Type="Indirect" Offset="@free" Symbol="EoCFree" />
+		</Mapping>
+		<Mapping Name="EoCAlloc">
+			40 53 //          PUSH       RBX
+			48 83 ec 20 //    SUB        RSP,0x20
+			48 8b d9 //       MOV        RBX,RCX
+			c7 01 43 00 00 00 //       MOV        dword ptr [RCX],0x43
+			c7 41 10 00 00 00 00 //       MOV        dword ptr [RCX + 0x10],0x0
+			b9 18 02 00 00 //       MOV        ECX,0x218
+			@alloc e8 f0 78 db ff //       CALL       ls::GlobalAllocator::Malloc_m                    undefined Malloc_m()
+			<Target Type="Indirect" Offset="@alloc" Symbol="EoCAlloc" />
+		</Mapping>
+		<Mapping Name="ls::ObjectFactory__ecl_Character">
+			74 2e //          JZ         LAB_140aa7057
+			@factory 48 8b 15 58 79 8a 00 //       MOV        RDX,qword ptr [ls_ObjectFactory__ecl_Character]  = ??
+			0f b7 c8 //       MOVZX      ECX,AX
+			3b 4a 24 //       CMP        ECX,dword ptr [RDX + 0x24]
+			73 1f //          JNC        LAB_140aa7057
+			48 8b 4a 40 //    MOV        RCX,qword ptr [RDX + 0x40]
+			44 0f b7 f8 //    MOVZX      R15D,AX
+			c1 e8 10 //       SHR        EAX,0x10
+			66 23 c7 //       AND        AX,DI
+			66 42 3b 04 79 //       CMP        AX,word ptr [RCX + R15*0x2]
+			75 0a //          JNZ        LAB_140aa7057
+			48 8b 42 18 //    MOV        RAX,qword ptr [RDX + 0x18]
+			4e 8b 3c f8 //    MOV        R15,qword ptr [RAX + R15*0x8]
+			eb 03 //          JMP        LAB_140aa705a
+			<Target Type="Indirect" Offset="@factory" Symbol="ObjectFactory__ecl_Character" />
+		</Mapping>
+		<Mapping Name="ecl::PickingHelper::DoPick">
+			49 8b 40 18 //    MOV        RAX,qword ptr [R8 + 0x18]
+			4a 83 3c d0 00 //      CMP        qword ptr [RAX + R10*0x8],0x0
+			75 12 //          JNZ        LAB_140882b3d
+			41 89 4e 6c //    MOV        dword ptr [R14 + 0x6c],param_1
+			49 8b ce //       MOV        param_1,R14
+			@call e8 39 62 0f 00 //      CALL       ecl::PickingHelper::DoPick                       undefined DoPick()
+			8b 0d 9b a0 a6 00 //      MOV        param_1,dword ptr [DAT_1412ecbd8]                = ??
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_PickingHelper_DoPick" />
+		</Mapping>
 	</Mappings>
 </BinaryMappings>

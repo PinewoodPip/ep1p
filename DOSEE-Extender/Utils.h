@@ -15,6 +15,15 @@ std::optional<std::string> GetExeResource(int resourceId);
 void Fail(char const* reason);
 
 template <typename... Args>
+void Log(std::string msg, Args... args)
+{
+	char buf[1024];
+	_snprintf_s(buf, std::size(buf), _TRUNCATE, msg, args...);
+	std::cout << buf << std::endl;
+	std::cout.flush();
+}
+
+template <typename... Args>
 void Log(char const* msg, Args... args)
 {
 	char buf[1024];
@@ -32,9 +41,26 @@ void Log(wchar_t const* msg, Args... args)
 	std::wcout.flush();
 }
 
+template <typename... Args>
+void _LogNoEndline(char const* msg, Args... args)
+{
+	char buf[1024];
+	_snprintf_s(buf, std::size(buf), _TRUNCATE, msg, args...);
+	std::cout << buf; // TODO coloring
+	std::cout.flush();
+}
+
+#define OsiError(msg) { \
+	std::stringstream ss; \
+	ss << __FUNCTION__ "(): " msg; \
+	std::string str = ss.str(); \
+	ERR(str); \
+}
+
 // TODO coloring
 //#define ERR(msg, ...) Log(msg, __VA_ARGS__)
 //#define WARN(msg, ...) Log(msg, __VA_ARGS__)
 #define ERR(msg, ...) Log(msg, __VA_ARGS__)
 #define WARN(msg, ...) Log(msg, __VA_ARGS__)
 #define LOG(msg, ...) Log(msg, __VA_ARGS__)
+#define LOG_NO_ENDL(msg, ...) _LogNoEndline(msg, __VA_ARGS__);

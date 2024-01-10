@@ -61,6 +61,21 @@ namespace dse
 	{
 		SYM_OFF(UIObjectManager__CreateUIObject);
 		SYM_OFF(UIObjectManager__GetUIObjectByType);
+		SYM_OFF(UIObjectManager__GetInstance);
+		SYM_OFF(UIObjectManager__Instance);
+		SYM_OFF(EoCAlloc);
+		SYM_OFF(EoCFree);
+		SYM_OFF(CDivinityStats_Character__GetFireResistance);
+		SYM_OFF(CDivinityStats_Character__GetEarthResistance);
+		SYM_OFF(CDivinityStats_Character__GetWaterResistance);
+		SYM_OFF(CDivinityStats_Character__GetAirResistance);
+		SYM_OFF(CDivinityStats_Character__GetPoisonResistance);
+		SYM_OFF(CDivinityStats_Character__GetPiercingResistance);
+		SYM_OFF(CDivinityStats_Character__GetCrushingResistance);
+		SYM_OFF(CDivinityStats_Character__GetSlashingResistance);
+		SYM_OFF(CDivinityStats_Character__GetShadowResistance);
+		SYM_OFF(ObjectFactory__ecl_Character);
+		SYM_OFF(ecl_PickingHelper_DoPick);
 	}
 
 	bool LibraryManager::PostStartupFindLibraries()

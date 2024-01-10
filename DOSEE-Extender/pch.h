@@ -12,6 +12,7 @@
 
 // Windows Header Files:
 #include <windows.h>
+#include <synchapi.h>
 
 #include <memory>
 #include <cstdint>

@@ -34,6 +34,7 @@ namespace dse
 			STDWString WStringVal;
 			bool BoolVal;
 			void* PointerVal;
+			void* unknown1;
 			double DoubleVal;
 		};
 
@@ -165,15 +166,15 @@ namespace dse
 				typedef bool (*InvokeArgsProc)(FlashPlayer* self, int64_t invokeEnum, InvokeDataValue* args, unsigned numArgs);
 
 				void (*Destroy)(FlashPlayer* self);
-				void (*OnWTCompletion)(FlashPlayer* self);
+				/*void (*OnWTCompletion)(FlashPlayer* self);
 				void (*OnWTCanceled)(FlashPlayer* self);
 				void (*ExecuteWTKernel)(FlashPlayer* self);
-				int (*GetHeuristic)(FlashPlayer* self);
-				void (*OnInputEvent)(FlashPlayer* self);
-				void (*SendEventToFlash)(FlashPlayer* self);
+				int (*GetHeuristic)(FlashPlayer* self);*/
+				/*void (*OnInputEvent)(FlashPlayer* self);*/
+				void (*FireEvent)(FlashPlayer* self);
 				uint16_t* (*OnInputEventText)(FlashPlayer* self, uint16_t* retval, FlashInputEvent* event);
-				void (*SetModifierStates)(FlashPlayer* self, bool, bool, bool);
-				void (*field_48)(FlashPlayer* self);
+				/*void (*SetModifierStates)(FlashPlayer* self, bool, bool, bool);*/
+				void (*Unknown)(FlashPlayer* self);
 				Invoke6Proc Invoke6;
 				Invoke5Proc Invoke5;
 				Invoke4Proc Invoke4;
@@ -223,15 +224,15 @@ namespace dse
 			};
 
 			virtual void Destroy() = 0;
-			virtual void OnWTCompletion() = 0;
-			virtual void OnWTCanceled() = 0;
-			virtual void ExecuteWTKernel() = 0;
-			virtual int GetHeuristic() = 0;
-			virtual void OnInputEvent() = 0;
-			virtual void SendEventToFlash() = 0;
+			/*virtual void OnWTCompletion() = 0;
+			virtual void OnWTCanceled() = 0;*/
+			/*virtual void ExecuteWTKernel() = 0;
+			virtual int GetHeuristic() = 0;*/
+			/*virtual void OnInputEvent() = 0;*/
+			virtual void FireEvent() = 0;
 			virtual uint16_t* OnInputEventText(uint16_t* retval, FlashInputEvent* event) = 0;
-			virtual void SetModifierStates(bool, bool, bool) = 0;
-			virtual void field_48() = 0;
+			/*virtual void SetModifierStates(bool, bool, bool) = 0;*/
+			virtual void Unknown() = 0;
 			virtual bool Invoke6(int64_t invokeEnum, InvokeDataValue* a3, InvokeDataValue* a4, InvokeDataValue* a5, InvokeDataValue* a6, InvokeDataValue* a7, InvokeDataValue* a8) = 0;
 			virtual bool Invoke5(int64_t invokeEnum, InvokeDataValue* a3, InvokeDataValue* a4, InvokeDataValue* a5, InvokeDataValue* a6, InvokeDataValue* a7) = 0;
 			virtual bool Invoke4(int64_t invokeEnum, InvokeDataValue* a3, InvokeDataValue* a4, InvokeDataValue* a5, InvokeDataValue* a6) = 0;
@@ -456,7 +457,7 @@ namespace dse
 		virtual bool OnAPIPreResetDevice(void*);
 		virtual bool OnAPIPostResetDevice(void*);
 		virtual void OnControllerModeChanged();
-		virtual void OnPlayerDisconnect(int a1);
+		virtual void OnPlaeyerDisconnect(int a1);
 		virtual void ReleaseRenderData();
 		virtual void PrepareRenderData();
 		virtual void DoPrepareRenderData();
@@ -466,18 +467,44 @@ namespace dse
 		virtual int64_t GetBitmapHeight();
 		virtual int64_t GetBitmapWidth();
 		virtual void* GetCharacter();
-		/*virtual bool SetPlayerHandle(ComponentHandle* handle);
+		virtual bool SetPlayerHandle(ComponentHandle* handle);
 		virtual ComponentHandle* GetPlayerHandle(ComponentHandle* handle);
 		virtual bool Unknown1();
 		virtual void Unknown2();
 		virtual void* Unknown3();
-		virtual void Unknown4(void* a1);*/
-		virtual bool Visit(ObjectVisitor* visitor);
+		// Not in DOS1?
+		/*virtual void Unknown4(void* a1);
+		virtual bool Visit(ObjectVisitor* visitor);*/
 
-		char unknown[12];
+		char unknown0[12];
+
 		int Flags;
-		void* FlashPlayer;
+		ig::FlashPlayer* FlashPlayer;
 		Path Path;
+		bool isDragging_m;
+		ComponentHandle ChildUIHandle;
+		ComponentHandle ParentUIHandle;
+
+		char unknown1[20];
+
+		uint32_t Layer;
+		uint32_t RenderOrder;
+		int MovieLayout;
+
+		char unknown2[20];
+		float UIScaleMultiplier;
+		char unknown3[4];
+		FixedString AnchorID;
+		char unknown4[8];
+		ObjectHandle SomeHandle;
+		uint32_t TypeID;
+		short OwnerPlayerID;
+
+		char unknown5[6];
+		bool unknown6;
+		char unknown7;
+		bool HasTooltip_m;
+		char unknown8;
 		/*int BufferSizes;
 		int field_C;
 		int field_10;
@@ -485,11 +512,6 @@ namespace dse
 		ig::FlashPlayer* FlashPlayer;
 		Path Path;
 		bool IsDragging;
-		ComponentHandle ChildUIHandle;
-		ComponentHandle ParentUIHandle;
-		int Layer;
-		int RenderOrder;
-		int MovieLayout;
 		glm::vec2 FlashSize;
 		glm::vec2 MovieClipSize;
 		glm::vec2 FlashMovieSize;
@@ -548,6 +570,23 @@ namespace dse
 		void SetMovieClipSize(float width, float height, std::optional<float> scale);
 	};
 
+	struct ecl::PickingHelper
+	{
+		char unknown1[104];
+		ComponentHandle CurrentCharacterHandle;
+		char unknown2[4];
+		ComponentHandle CurrentItemHandle;
+		ComponentHandle CurrentObjectHandle;
+	};
+
+	struct UITargetInfo : UIObject
+	{
+		char unknown1[64];
+		ComponentHandle TargetObjectHandle;
+		char unknown[18];
+		bool ShowHP;
+;	};
+
 	struct CustomDrawStruct
 	{
 		using UIClearIcon = void(CustomDrawStruct* drawStruct);
@@ -589,15 +628,18 @@ namespace dse
 		using DestroyUIObjectProc = void(UIObjectManager* self, ComponentHandle* handle);
 		using GetInstanceProc = UIObjectManager * ();
 
-		void* InputEventListenerVMT;
-		void* InputDeviceListenerVMT;
-		void* APIEventListenerVMT;
+		//void* InputEventListenerVMT;
+		//void* InputDeviceListenerVMT;
+		//void* APIEventListenerVMT;
 
-		/*CRITICAL_SECTION CriticalSection3;*/
-		int64_t WorkerThreadJobVMT;
-		int64_t field_D0;
-		Map<uint32_t, UIObjectFunctor*> UIObjectCreators;
-		ObjectSet<UIObject*> UIObjects;
+		///*CRITICAL_SECTION CriticalSection3;*/
+		//int64_t WorkerThreadJobVMT;
+		//int64_t field_D0;
+		//Map<uint32_t, UIObjectFunctor*> UIObjectCreators;
+		char unknown[256];
+		UIObject** UIObjects; // TODO Set
+		char set_internals[4];
+		unsigned int UIObjectsCount;
 		bool ShouldPrepareRenderData;
 		bool SortNeeded;
 		bool RefreshTopNeeded;
@@ -755,7 +797,7 @@ namespace dse
 			uint8_t GameObjectPickFlags;
 		};
 
-		struct PickingHelper : public PickingHelperBase
+		/*struct PickingHelper : public PickingHelperBase
 		{
 			struct GameObjectPicker
 			{
@@ -775,7 +817,7 @@ namespace dse
 			void* PlaceablePick;
 			void* WalkablePick;
 			void* ControllerPointerManager;
-		};
+		};*/
 
 		struct PickingHelperManager
 		{

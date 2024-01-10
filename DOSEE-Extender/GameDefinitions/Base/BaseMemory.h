@@ -47,11 +47,15 @@ extern MemoryAllocationTracker gMemoryAllocationTracker;
 #endif
 
 #if defined(OSI_EOCAPP)
-typedef void * (* EoCAllocFunc)(void * self, std::size_t size);
+typedef void* (*EoCAllocFunc)(std::size_t size);
 #else
-typedef void * (* EoCAllocFunc)(void * self, std::size_t size, char const * file, int line, char const * function);
+typedef void * (* EoCAllocFunc)(void * self, std::size_t size, char const * file, int line, char const * function); // TODO check
 #endif
-typedef void (* EoCFreeFunc)(void * self, void * ptr);
+#if defined(OSI_EOCAPP)
+typedef void (*EoCFreeFunc)(void* ptr);
+#else
+typedef void (*EoCFreeFunc)(void* self, void* ptr); // TODO check
+#endif
 
 typedef void * (* CrtAllocFunc)(std::size_t size);
 typedef void (* CrtFreeFunc)(void * ptr);

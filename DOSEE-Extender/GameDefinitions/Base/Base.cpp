@@ -80,7 +80,7 @@ void* MSVCMemoryAllocator::Alloc(std::size_t size)
 void * GameAllocInternal(std::size_t size)
 {
 #if defined(OSI_EOCAPP)
-	return GetStaticSymbols().EoCAlloc(nullptr, size);
+	return GetStaticSymbols().EoCAlloc(size);
 #else
 	return GetStaticSymbols().EoCAlloc(nullptr, size, "", 1, "");
 #endif
@@ -115,7 +115,7 @@ void GameFree(void * ptr)
 		gMemoryAllocationTracker.Free(ptr);
 	}
 #endif
-	GetStaticSymbols().EoCFree(nullptr, ptr);
+	GetStaticSymbols().EoCFree(ptr);
 }
 
 void* CrtAllocRaw(std::size_t size)

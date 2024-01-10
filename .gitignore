@@ -39,3 +39,5 @@ x64/
 DOSEE-Extender/DOSEE-Extender.vcxproj.user
 External/
 packages/
+DOSEE-Extender/DOSEE-Extender.vcxproj
+DOSEE-Extender/DOSEE-Extender.vcxproj.filters

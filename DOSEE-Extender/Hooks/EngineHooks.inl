@@ -1,3 +1,4 @@
 
 HOOK_DEFN(UIObjectManager__CreateUIObject, UIObjectManager__CreateUIObject, UIObjectManager::CreateUIObjectProc)
 HOOK_DEFN(UIObjectManager__GetUIObjectByType, UIObjectManager__GetUIObjectByType, UIObjectManager::GetUIObjectByTypeProc)
+HOOK_DEFN(ecl_PickingHelper_DoPick, ecl_PickingHelper_DoPick, StaticSymbols::ecl_PickingHelper_DoPickProc)
