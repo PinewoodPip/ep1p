@@ -229,19 +229,19 @@ struct TypedHandle
 		return Handle == oh.Handle;
 	}
 
-	inline uint32_t GetType() const // TODO
+	inline uint32_t GetType() const
 	{
-		return Handle >> 54;
+		return Handle >> 26; // Highest 6 bits
 	}
 
-	inline uint32_t GetSalt() const // TODO
+	inline uint32_t GetSalt() const
 	{
-		return (Handle >> 32) & 0x3fffff;
+		return (Handle >> 16) & 0x3ff; // 10 bits
 	}
 
-	inline uint32_t GetIndex() const // TODO
+	inline uint16_t GetIndex() const
 	{
-		return (uint32_t)(Handle & 0xffffffff);
+		return (uint16_t)(Handle & 0xffff); // 16 bits
 	}
 
 	explicit inline operator bool() const
@@ -265,6 +265,7 @@ enum GenericComponentHandleTag {};
 
 using EntityHandle = TypedHandle<EntityHandleTag>;
 using ComponentHandle = TypedHandle<GenericComponentHandleTag>;
+using ObjectHandle = TypedHandle<EntityHandleTag>;
 
 extern const ComponentHandle NullComponentHandle;
 
