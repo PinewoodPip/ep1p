@@ -189,12 +189,13 @@ struct ScratchBuffer
 
 struct Path
 {
-	typedef StringView* (GetPrefixForRootProc)(StringView* path, unsigned int rootType);
+	typedef WStringView* (GetPrefixForRootProc)(WStringView* path, unsigned int rootType);
 
 	inline Path() {}
 
 	inline Path(STDWString const& s) : Name(s) {}
 
+	char unknown[8];
 	STDWString Name; // STDString in DOS2?
 	// TODO editor support?
 //#if !defined(OSI_EOCAPP)
