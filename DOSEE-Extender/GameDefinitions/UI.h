@@ -9,6 +9,11 @@
 
 namespace dse
 {
+	enum UITypeID
+	{
+		UITypeID_TargetInfo = 41,
+	};
+
 	namespace ig
 	{
 		enum class DataType : int32_t
@@ -577,6 +582,11 @@ namespace dse
 		char unknown2[4];
 		ComponentHandle CurrentItemHandle;
 		ComponentHandle CurrentObjectHandle;
+	};
+
+	struct ecl::EocUIControl
+	{
+		// TODO
 	};
 
 	struct UITargetInfo : UIObject

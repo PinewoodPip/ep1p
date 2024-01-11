@@ -146,5 +146,19 @@
 			8b 0d 9b a0 a6 00 //      MOV        param_1,dword ptr [DAT_1412ecbd8]                = ??
 			<Target Type="Indirect" Offset="@call" Symbol="ecl_PickingHelper_DoPick" />
 		</Mapping>
+		<Mapping Name="ecl::EocUIControl::OpenExamineUI">
+			@EocUIControlRef 48 8b 0d 6a a5 93 00 //       MOV        targetAction,qword ptr [EoCUIControl]            = ??
+			4c 8d 45 6f //    LEA        param_3=>local_res10,[RBP + 0x6f]
+			41 0f b7 d6 //    MOVZX      character,R14W
+			@call e8 2d 32 e5 ff //      CALL       ecl::UIExamine::OpenExamineUI                    void OpenExamineUI(EocUIControl
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_EocUIControl_OpenExamineUI" />
+			<Target Type="Indirect" Offset="@EocUIControlRef" Symbol="ecl_EocUIControl" />
+		</Mapping>
+		<Mapping Name="ls_InputManager_InjectInput">
+			45 33 c0 //       XOR        R8D,R8D
+			48 8b ce //       MOV        param_1,RSI
+			@call e8 43 e3 ff ff //       CALL       ls::InputManager::InjectInput                    undefined InjectInput(InputManag
+			<Target Type="Indirect" Offset="@call" Symbol="ls_InputManager_InjectInput" />
+		</Mapping>
 	</Mappings>
 </BinaryMappings>

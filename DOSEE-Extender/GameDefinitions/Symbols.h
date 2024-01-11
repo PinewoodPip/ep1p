@@ -20,6 +20,7 @@
 #include <GameDefinitions/EntitySystem.h>
 #include <GameDefinitions/Character.h>
 #include <GameDefinitions/RPGStats.h>
+#include <GameDefinitions/Input.h>
 
 namespace dse
 {
@@ -134,6 +135,14 @@ namespace dse
 
 		using ecl_PickingHelper_DoPickProc = void (ecl::PickingHelper* self);
 		ecl_PickingHelper_DoPickProc* ecl_PickingHelper_DoPick{ nullptr };
+
+		ecl::EocUIControl** ecl_EocUIControl{ nullptr };
+
+		using ecl_EocUIControl_OpenExamineUIProc = void(ecl::EocUIControl* self, short playerID, ComponentHandle* objectHandle);
+		ecl_EocUIControl_OpenExamineUIProc* ecl_EocUIControl_OpenExamineUI{ nullptr };
+
+		using ls_InputManager_InjectInputProc = bool (InputManager* self, InputRawChange* rawInputChange, bool unknown);
+		ls_InputManager_InjectInputProc* ls_InputManager_InjectInput{ nullptr };
 
 		FixedString::CreateProc* ls__FixedString__Create{ nullptr };
 		GlobalStringTable const** ls__GlobalStrings{ nullptr };

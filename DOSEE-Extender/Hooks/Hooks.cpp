@@ -3,6 +3,8 @@
 #include <Extender/ScriptExtender.h>
 #include <format>
 #include "Utils/Text.h"
+#include "Extender/Utils/CharacterUtils.h"
+#include "GameDefinitions/UI.h"
 
 BEGIN_SE()
 
@@ -36,6 +38,7 @@ void Hooks::Startup()
 
 	lib.UIObjectManager__CreateUIObject.SetPostHook(&Hooks::OnCreateUIObject, this);
 	lib.ecl_PickingHelper_DoPick.SetPostHook(&Hooks::OnPickingHelperDone, this);
+	lib.ls_InputManager_InjectInput.SetPreHook(&Hooks::OnInjectInput, this);
 
 	loaded_ = true;
 }
@@ -70,8 +73,7 @@ void Hooks::OnCreateUIObject(UIObjectManager* self, ComponentHandle* handle, uns
 void Hooks::OnPickingHelperDone(ecl::PickingHelper* self)
 {
 	ComponentHandle characterHandle = self->CurrentCharacterHandle;
-	ComponentFactory<ecl::Character>* factory = *GetStaticSymbols().ObjectFactory__ecl_Character;
-	ecl::Character* character = factory->Get(characterHandle);
+	ecl::Character* character = ClientCharacterUtils::GetCharacter(characterHandle);
 	if (character)
 	{
 		LOG("Picking done");
@@ -105,6 +107,15 @@ static bool OnInvoke2(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	if (ui)
 	{
 		//LOG(L"Invoke2 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeID))
+		{
+			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			for (auto listener : listeners)
+			{
+				listener->OnInvoke2(ui, invokeEnum, invokeData1, invokeData2);
+			}
+		}
 	}
 	return flashPlayerHooks.OriginalInvoke2(flashPlayer, invokeEnum, invokeData1, invokeData2);
 }
@@ -115,40 +126,13 @@ static bool OnInvoke3(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	if (ui)
 	{
 		//LOG(L"Invoke3 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
-		if (invokeEnum == 9 && ui->TypeID == 0x29)
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeID))
 		{
-			UITargetInfo* targetInfoUI = (UITargetInfo*)ui;
-			targetInfoUI->ShowHP = true;
-			ComponentFactory<ecl::Character>* factory = *GetStaticSymbols().ObjectFactory__ecl_Character;
-			ecl::Character* character = factory->Get(gExtender->GetHooks().LastPickerCharacterHandle);
-
-			if (character)
+			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			for (auto listener : listeners)
 			{
-				CDivinityStats_Character* stats = character->Stats;
-				int32_t slashingResistance = GetStaticSymbols().CDivinityStats_Character__GetSlashingResistance(stats, false);
-				int32_t piercingResistance = GetStaticSymbols().CDivinityStats_Character__GetPiercingResistance(stats, false);
-				int32_t crushingResistance = GetStaticSymbols().CDivinityStats_Character__GetCrushingResistance(stats, false);
-				int32_t fireResistance = GetStaticSymbols().CDivinityStats_Character__GetFireResistance(stats, false);
-				int32_t waterResistance = GetStaticSymbols().CDivinityStats_Character__GetWaterResistance(stats, false);
-				int32_t earthResistance = GetStaticSymbols().CDivinityStats_Character__GetEarthResistance(stats, false);
-				int32_t airResistance = GetStaticSymbols().CDivinityStats_Character__GetAirResistance(stats, false);
-				int32_t poisonResistance = GetStaticSymbols().CDivinityStats_Character__GetPoisonResistance(stats, false);
-				int32_t tenebriumResistance = GetStaticSymbols().CDivinityStats_Character__GetShadowResistance(stats, false);
-				std::string formattedResistances = std::format("{}  {}  {}  {}  {}  {}\n{}  {}  {}",
-					Text::Colorize(std::format("{}%", std::to_string(fireResistance)), "f77c27"),
-					Text::Colorize(std::format("{}%", std::to_string(waterResistance)), "27aff6"),
-					Text::Colorize(std::format("{}%", std::to_string(earthResistance)), "aa7840"),
-					Text::Colorize(std::format("{}%", std::to_string(airResistance)), "8f83cb"),
-					Text::Colorize(std::format("{}%", std::to_string(poisonResistance)), "5bd42b"),
-					Text::Colorize(std::format("{}%", std::to_string(tenebriumResistance)), "5b34ca"),
-					Text::Colorize(std::format("S: {}%", std::to_string(slashingResistance)), "acacac"),
-					Text::Colorize(std::format("P: {}%", std::to_string(piercingResistance)), "acacac"),
-					Text::Colorize(std::format("C: {}%", std::to_string(crushingResistance)), "acacac")
-				);
-				invokeData2->WStringVal = dse::STDWString(formattedResistances.begin(), formattedResistances.end());
-
-				std::string healthBarHeaderLabel = std::format("{} - {}/{} HP", std::string(invokeData1->WStringVal.begin(), invokeData1->WStringVal.end()), character->Stats->CurrentHP, character->Stats->MaxHP);
-				invokeData1->WStringVal = dse::STDWString(healthBarHeaderLabel.begin(), healthBarHeaderLabel.end());
+				listener->OnInvoke3(ui, invokeEnum, invokeData1, invokeData2, invokeData3);
 			}
 		}
 	}
@@ -231,6 +215,38 @@ void Hooks::CaptureExternalInterfaceCalls(UIObject* uiObject)
 	WriteAnchor _w((uint8_t*)vmt, sizeof(*vmt));
 	OriginalUIObjectCallHandlers.insert(std::make_pair(vmt, vmt->OnFunctionCalled));
 	vmt->OnFunctionCalled = &UIObjectFunctionCallCapture;
+}
+
+void Hooks::RegisterUIListener(int typeID, UIEventListener* listener)
+{
+	if (!this->EventListeners.contains(typeID))
+	{
+		this->EventListeners.insert(std::make_pair(typeID, std::vector<UIEventListener*>()));
+	}
+	auto listeners = this->EventListeners.find(typeID);
+	listeners->second.push_back(listener);
+}
+
+ecl::Character* Hooks::GetLastPickerCharacter()
+{
+	return ClientCharacterUtils::GetCharacter(this->LastPickerCharacterHandle);
+}
+
+void Hooks::OnInjectInput(InputManager* self, InputRawChange* change, bool unknown)
+{
+	if (!unknown)
+	{
+		LOG(std::format("RawInputType {} Value1 {} Value2 {} State {}", (int)change->RawInputID, change->Value1, change->Value2, (uint8_t)change->State).c_str());
+
+		if (change->RawInputID == RawInputType::T)
+		{
+			ecl::Character* character = this->GetLastPickerCharacter();
+			if (character)
+			{
+				GetStaticSymbols().ecl_EocUIControl_OpenExamineUI(*GetStaticSymbols().ecl_EocUIControl, 1, &this->LastPickerCharacterHandle);
+			}
+		}
+	}
 }
 
 END_SE()

@@ -8,6 +8,7 @@
 #include <ctime>
 #include <psapi.h>
 #include <regex>
+#include <Epip/Epip.h>
 
 #undef DEBUG_SERVER_CLIENT
 
@@ -62,6 +63,8 @@ namespace dse
 		/*Log("Library startup took %d ms", ms);*/
 
 		PostStartup();
+
+		gEpip->Startup();
 	}
 
 	void ScriptExtender::Shutdown()

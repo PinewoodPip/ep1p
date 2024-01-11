@@ -71,12 +71,13 @@ struct AppliedMaterial;
 struct EoCSoundManager;
 
 struct InputManager;
-struct InputValue;
 struct InputEvent;
 struct InjectInputData;
 
 struct SkillAIParams;
 struct PlayerManager;
+
+struct App;
 
 class ScriptExtenderMessage;
 
@@ -224,6 +225,7 @@ namespace ecl
 	struct EntityManager;
 	struct ShroudManager;
 	struct PickingHelper;
+	struct EocUIControl;
 	struct PickingHelperManager;
 	struct TurnManager;
 	struct LevelManager;
