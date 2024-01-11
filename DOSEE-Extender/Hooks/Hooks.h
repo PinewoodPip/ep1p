@@ -7,8 +7,13 @@ BEGIN_SE()
 class UIEventListener
 {
 public:
-	virtual bool OnInvoke2(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* a1, ig::InvokeDataValue* a2) { return false; };
-	virtual bool OnInvoke3(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* a1, ig::InvokeDataValue* a2, ig::InvokeDataValue* a3) { return false; };
+	virtual bool OnInvoke0(UIObject* ui, int64_t invokeEnum) { return false; };
+	virtual bool OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1) { return false; };
+	virtual bool OnInvoke2(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2) { return false; };
+	virtual bool OnInvoke3(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3) { return false; };
+	virtual bool OnInvoke4(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4) { return false; };
+	virtual bool OnInvoke5(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4, ig::InvokeDataValue* invokeData5) { return false; };
+	virtual bool OnInvoke6(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4, ig::InvokeDataValue* invokeData5, ig::InvokeDataValue* invokeData6) { return false; };
 };
 
 class Hooks

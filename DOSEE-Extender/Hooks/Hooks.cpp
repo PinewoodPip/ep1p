@@ -87,6 +87,15 @@ static bool OnInvoke0(ig::FlashPlayer* flashPlayer, int64_t invokeEnum)
 	if (ui)
 	{
 		//LOG(L"Invoke0 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeID))
+		{
+			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			for (auto listener : listeners)
+			{
+				listener->OnInvoke0(ui, invokeEnum);
+			}
+		}
 	}
 	return flashPlayerHooks.OriginalInvoke0(flashPlayer, invokeEnum);
 }
@@ -97,6 +106,15 @@ static bool OnInvoke1(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	if (ui)
 	{
 		//LOG(L"Invoke1 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeID))
+		{
+			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			for (auto listener : listeners)
+			{
+				listener->OnInvoke1(ui, invokeEnum, invokeData1);
+			}
+		}
 	}
 	return flashPlayerHooks.OriginalInvoke1(flashPlayer, invokeEnum, invokeData1);
 }
@@ -139,6 +157,63 @@ static bool OnInvoke3(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	return flashPlayerHooks.OriginalInvoke3(flashPlayer, invokeEnum, invokeData1, invokeData2, invokeData3);
 }
 
+static bool OnInvoke4(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4)
+{
+	UIObject* ui = FindUIObjectByFlashPlayer(flashPlayer);
+	if (ui)
+	{
+		//LOG(L"Invoke4 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeID))
+		{
+			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			for (auto listener : listeners)
+			{
+				listener->OnInvoke4(ui, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4);
+			}
+		}
+	}
+	return flashPlayerHooks.OriginalInvoke4(flashPlayer, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4);
+}
+
+static bool OnInvoke5(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4, ig::InvokeDataValue* invokeData5)
+{
+	UIObject* ui = FindUIObjectByFlashPlayer(flashPlayer);
+	if (ui)
+	{
+		//LOG(L"Invoke5 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeID))
+		{
+			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			for (auto listener : listeners)
+			{
+				listener->OnInvoke5(ui, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4, invokeData5);
+			}
+		}
+	}
+	return flashPlayerHooks.OriginalInvoke5(flashPlayer, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4, invokeData5);
+}
+
+static bool OnInvoke6(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4, ig::InvokeDataValue* invokeData5, ig::InvokeDataValue* invokeData6)
+{
+	UIObject* ui = FindUIObjectByFlashPlayer(flashPlayer);
+	if (ui)
+	{
+		//LOG(L"Invoke6 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeID))
+		{
+			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			for (auto listener : listeners)
+			{
+				listener->OnInvoke6(ui, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4, invokeData5, invokeData6);
+			}
+		}
+	}
+	return flashPlayerHooks.OriginalInvoke6(flashPlayer, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4, invokeData5, invokeData6);
+}
+
 void CaptureInvokes(UIObject* ui)
 {
 	// Only do this once; all FlashPlayers use the same VMT
@@ -156,6 +231,12 @@ void CaptureInvokes(UIObject* ui)
 	vmt->Invoke2 = &OnInvoke2;
 	flashPlayerHooks.OriginalInvoke3 = vmt->Invoke3;
 	vmt->Invoke3 = &OnInvoke3;
+	flashPlayerHooks.OriginalInvoke4 = vmt->Invoke4;
+	vmt->Invoke4 = &OnInvoke4;
+	flashPlayerHooks.OriginalInvoke5 = vmt->Invoke5;
+	vmt->Invoke5 = &OnInvoke5;
+	flashPlayerHooks.OriginalInvoke6 = vmt->Invoke6;
+	vmt->Invoke6 = &OnInvoke6;
 	flashPlayerHooks.Hooked = true;
 }
 
@@ -204,6 +285,7 @@ void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned 
 		WARN("Couldn't find original OnFunctionCalled handler for UI object");
 	}
 
+	// Setup Invoke captures, if necessary
 	CaptureInvokes(self);
 }
 
