@@ -72,8 +72,8 @@ private:
 	bool CanShowError();
 	bool CanShowMessages();
 
-	/*bool ApplyPatch(SymbolMappings::Patch& patch);
-	bool UndoPatch(SymbolMappings::Patch& patch);*/
+	bool ApplyPatch(SymbolMappings::Patch& patch);
+	/*bool UndoPatch(SymbolMappings::Patch& patch);*/
 
 	SymbolMappings mappings_;
 	SymbolMapper symbolMapper_;

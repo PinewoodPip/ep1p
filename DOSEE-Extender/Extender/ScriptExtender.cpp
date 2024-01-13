@@ -65,6 +65,7 @@ namespace dse
 		PostStartup();
 
 		gEpip->Startup();
+		GetLibraryManager().ApplyCodePatches();
 	}
 
 	void ScriptExtender::Shutdown()

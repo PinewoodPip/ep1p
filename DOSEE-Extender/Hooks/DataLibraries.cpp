@@ -226,11 +226,11 @@ namespace dse
 
 	void LibraryManager::ApplyCodePatches()
 	{
-
+		//ApplyCodePatch("ecl::UIExamine::SetupInformation Loremaster patch");
 	}
 
 
-	/*bool LibraryManager::ApplyCodePatch(std::string const& mapping)
+	bool LibraryManager::ApplyCodePatch(std::string const& mapping)
 	{
 		auto it = mappings_.Mappings.find(mapping);
 		if (it == mappings_.Mappings.end()) {
@@ -251,7 +251,7 @@ namespace dse
 		return hasChanges;
 	}
 
-
+	/*
 	bool LibraryManager::UndoCodePatch(std::string const& mapping)
 	{
 		auto it = mappings_.Mappings.find(mapping);
@@ -267,7 +267,7 @@ namespace dse
 
 		return hasChanges;
 	}
-
+	*/
 
 	bool LibraryManager::ApplyPatch(SymbolMappings::Patch& patch)
 	{
@@ -283,7 +283,7 @@ namespace dse
 		return true;
 	}
 
-
+	/*
 	bool LibraryManager::UndoPatch(SymbolMappings::Patch& patch)
 	{
 		if (!patch.WasApplied) return false;

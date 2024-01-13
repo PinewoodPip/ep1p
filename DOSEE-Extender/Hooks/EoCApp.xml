@@ -160,5 +160,15 @@
 			@call e8 43 e3 ff ff //       CALL       ls::InputManager::InjectInput                    undefined InjectInput(InputManag
 			<Target Type="Indirect" Offset="@call" Symbol="ls_InputManager_InjectInput" />
 		</Mapping>
+		<Mapping Name="ecl::UIExamine::SetupInformation Loremaster patch">
+			48 8b 5c 24 38 //      MOV        RBX,qword ptr [RSP + local_9f0]
+			@patch 85 f6 //          TEST       ESI,ESI
+			41 0f 48 f4 //    CMOVS      ESI,R12D
+			89 74 24 48 //    MOV        dword ptr [RSP + loremaster],ESI
+			eb 53 //          JMP        LAB_140950865
+			<Patch Type="Absolute" Offset="@patch">
+				be 05 00 00 00 90
+			</Patch>
+		</Mapping>
 	</Mappings>
 </BinaryMappings>
