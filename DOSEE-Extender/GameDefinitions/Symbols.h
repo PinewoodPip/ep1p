@@ -141,6 +141,9 @@ namespace dse
 		using ecl_EocUIControl_OpenExamineUIProc = void(ecl::EocUIControl* self, short playerID, ComponentHandle* objectHandle);
 		ecl_EocUIControl_OpenExamineUIProc* ecl_EocUIControl_OpenExamineUI{ nullptr };
 
+		using ecl_GameStateEventManager_ExecuteGameStateChangedEventProc = void(void* self, uint32_t unknown1, uint32_t unknown2);
+		ecl_GameStateEventManager_ExecuteGameStateChangedEventProc* ecl_GameStateEventManager_ExecuteGameStateChangedEvent{ nullptr };
+
 		using ls_InputManager_InjectInputProc = bool (InputManager* self, InputRawChange* rawInputChange, bool unknown);
 		ls_InputManager_InjectInputProc* ls_InputManager_InjectInput{ nullptr };
 
@@ -185,8 +188,10 @@ namespace dse
 		ig::PlayerCreateFastNameUTF8 IgPlayerCreateFastNameUTF8{ nullptr };
 		ig::PlayerCallMethod IgPlayerCallMethod{ nullptr };
 
+		*/
+
 		ig::SetWarningCallbackProc IgSetWarningCallback{ nullptr };
-		ig::SetTraceCallbackUTF8Proc IgSetTraceCallbackUTF8{ nullptr };*/
+		ig::SetTraceCallbackUTF8Proc IgSetTraceCallbackUTF8{ nullptr };
 
 		void* DUMMY1{ nullptr };
 		std::map<uint8_t const*, EoCLibraryInfo> Libraries;

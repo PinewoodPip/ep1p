@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BinaryMappings>
 	<Mappings Version="2.0.119.430" Default="true">
+		<DllImport Symbol="IgSetWarningCallback" Module="iggy_w64.dll" Proc="IggySetWarningCallback" />
+		<DllImport Symbol="IgSetTraceCallbackUTF8" Module="iggy_w64.dll" Proc="IggySetTraceCallbackUTF8" />
+		
 		<Mapping Name="ls::UIObjectManager::CreateUIObject">
 			48 8b cf
 			48 c7 44 24 28 80 00 00 00
@@ -169,6 +172,13 @@
 			<Patch Type="Absolute" Offset="@patch">
 				be 05 00 00 00 90
 			</Patch>
+		</Mapping>
+		<Mapping Name="ecl::GameStateEventManager::ExecuteGameStateChangedEvent">
+			74 0e //          JZ         LAB_140876ecd
+			48 8b 0d 82 7a ad 00 //      MOV        param_1,qword ptr [DAT_14134e948]                = ??
+			8b d6 //          MOV        param_2,ESI
+			@call e8 93 bd 06 00 //      CALL       ecl::GameStateEventManager::ExecuteGameStateCh   undefined ExecuteGameStateChange
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_GameStateEventManager_ExecuteGameStateChangedEvent" />
 		</Mapping>
 	</Mappings>
 </BinaryMappings>

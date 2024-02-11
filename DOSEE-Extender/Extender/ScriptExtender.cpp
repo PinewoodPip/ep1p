@@ -113,6 +113,41 @@ namespace dse
 	{
 	}
 
+	void ScriptExtender::OnIggyTraceCallback(void* unknown1, void* unknown2, char const* msg)
+	{
+		LOG("[IGGY] TRACE:", msg);
+	}
+
+	void ScriptExtender::OnIggyWarningCallback(void* unknown1, void* unknown2, int warningType, char const* msg)
+	{
+		if (warningType == 201 || warningType == 408)
+		{
+			return;
+		}
+		if (warningType == 503) {
+			STDString errmsg(msg);
+			// These warnings are spammed for every UI that doesn't catch these events.
+			if (errmsg.find("onEventResolution") != std::string::npos
+				|| errmsg.find("onEventResize") != std::string::npos) {
+				return;
+			}
+		}
+		LOG("[IGGY] WARNING:", std::to_string(warningType).c_str(), msg);
+	}
+
+	void ScriptExtender::RegisterIggyCallbacks()
+	{
+		auto const& symbols = GetStaticSymbols();
+		if (symbols.IgSetTraceCallbackUTF8)
+		{
+			symbols.IgSetTraceCallbackUTF8(&OnIggyTraceCallback, nullptr);
+		}
+		if (symbols.IgSetWarningCallback)
+		{
+			symbols.IgSetWarningCallback(&OnIggyWarningCallback, nullptr);
+		}
+	}
+
 	void ScriptExtender::PostStartup()
 	{
 		if (postStartupDone_) return;

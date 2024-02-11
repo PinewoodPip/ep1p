@@ -19,6 +19,7 @@ public:
 	void Initialize();
 	void PostStartup();
 	void Shutdown();
+	void RegisterIggyCallbacks();
 
 	inline bool WasInitialized() const
 	{
@@ -84,6 +85,8 @@ private:
 	bool postStartupDone_{ false };
 
 	void OnBaseModuleLoaded(void* self);
+	static void OnIggyTraceCallback(void* unknown1, void* unknown2, char const* msg);
+	static void OnIggyWarningCallback(void* unknown1, void* unknown2, int warningType, char const* msg);
 };
 
 extern std::unique_ptr<ScriptExtender> gExtender;

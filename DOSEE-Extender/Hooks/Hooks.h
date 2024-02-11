@@ -25,6 +25,7 @@ public:
 		uint64_t resourceFlags, short playerID, ComponentHandle* result);
 	void OnPickingHelperDone(ecl::PickingHelper* self);
 	void OnInjectInput(InputManager* self, InputRawChange* change, bool unknown);
+	void OnGameStateChanged(void* eventManager, uint32_t unknown1, uint32_t unknown2);
 
 	void CaptureExternalInterfaceCalls(UIObject* uiObject);
 	void RegisterUIListener(int typeID, UIEventListener* listener);

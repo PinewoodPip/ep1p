@@ -622,6 +622,12 @@ namespace ecl
 	struct EoCClient : public ProtectedGameObject<EoCClient>
 	{
 		using HandleErrorProc = void(EoCClient* self, STDWString const* message, bool exitGame, STDWString const* a4);
+		// TODO move
+		enum GameState : uint32_t
+		{
+			Running = 17,
+			PrepareRunning = 22,
+		};
 
 		void* VMT;
 		void* GameEventManagerVMT;

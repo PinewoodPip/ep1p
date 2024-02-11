@@ -1,6 +1,7 @@
 #pragma once
 #include <pch.h>
 #include <Extender/ScriptExtender.h>
+#include <string>
 #include <format>
 #include "Utils/Text.h"
 #include "Extender/Utils/CharacterUtils.h"
@@ -39,8 +40,19 @@ void Hooks::Startup()
 	lib.UIObjectManager__CreateUIObject.SetPostHook(&Hooks::OnCreateUIObject, this);
 	lib.ecl_PickingHelper_DoPick.SetPostHook(&Hooks::OnPickingHelperDone, this);
 	lib.ls_InputManager_InjectInput.SetPreHook(&Hooks::OnInjectInput, this);
+	lib.ecl_GameStateEventManager_ExecuteGameStateChangedEvent.SetPostHook(&Hooks::OnGameStateChanged, this);
 
 	loaded_ = true;
+}
+
+void Hooks::OnGameStateChanged(void* eventManager, uint32_t newState, uint32_t unknown2)
+{
+	LOG("State changed");
+	LOG(std::to_string(newState).c_str());
+	if (newState == ecl::EoCClient::GameState::PrepareRunning)
+	{
+		gExtender->RegisterIggyCallbacks();
+	}
 }
 
 UIObject* FindUIObjectByFlashPlayer(ig::FlashPlayer* flashPlayer)

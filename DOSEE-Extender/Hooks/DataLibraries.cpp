@@ -79,6 +79,9 @@ namespace dse
 		SYM_OFF(ecl_EocUIControl_OpenExamineUI);
 		SYM_OFF(ecl_EocUIControl);
 		SYM_OFF(ls_InputManager_InjectInput);
+		SYM_OFF(IgSetWarningCallback);
+		SYM_OFF(IgSetTraceCallbackUTF8);
+		SYM_OFF(ecl_GameStateEventManager_ExecuteGameStateChangedEvent);
 	}
 
 	bool LibraryManager::PostStartupFindLibraries()
