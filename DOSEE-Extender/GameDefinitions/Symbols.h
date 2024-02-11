@@ -21,6 +21,7 @@
 #include <GameDefinitions/Character.h>
 #include <GameDefinitions/RPGStats.h>
 #include <GameDefinitions/Input.h>
+#include <GameDefinitions/Level.h>
 
 namespace dse
 {
@@ -136,6 +137,7 @@ namespace dse
 		using ecl_PickingHelper_DoPickProc = void (ecl::PickingHelper* self);
 		ecl_PickingHelper_DoPickProc* ecl_PickingHelper_DoPick{ nullptr };
 
+		ecl::LevelManager** ecl_LevelManager{ nullptr };
 		ecl::EocUIControl** ecl_EocUIControl{ nullptr };
 
 		using ecl_EocUIControl_OpenExamineUIProc = void(ecl::EocUIControl* self, short playerID, ComponentHandle* objectHandle);

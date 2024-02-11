@@ -16,6 +16,12 @@ public:
 	virtual bool OnInvoke6(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4, ig::InvokeDataValue* invokeData5, ig::InvokeDataValue* invokeData6) { return false; };
 };
 
+class GameStateChangedEventListener
+{
+public:
+	virtual void OnGameStateChanged(int newState) = 0;
+};
+
 class Hooks
 {
 public:
@@ -29,6 +35,7 @@ public:
 
 	void CaptureExternalInterfaceCalls(UIObject* uiObject);
 	void RegisterUIListener(int typeID, UIEventListener* listener);
+	void RegisterGameStateChangedListener(GameStateChangedEventListener* listener);
 
 	ecl::Character* GetLastPickerCharacter();
 

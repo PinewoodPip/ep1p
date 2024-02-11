@@ -47,11 +47,13 @@ void Hooks::Startup()
 
 void Hooks::OnGameStateChanged(void* eventManager, uint32_t newState, uint32_t unknown2)
 {
-	LOG("State changed");
-	LOG(std::to_string(newState).c_str());
 	if (newState == ecl::EoCClient::GameState::PrepareRunning)
 	{
 		gExtender->RegisterIggyCallbacks();
+	}
+	for (auto listener : gExtender->GetHooks().GameStateChangedListeners)
+	{
+		listener->OnGameStateChanged(newState);
 	}
 }
 
@@ -319,6 +321,11 @@ void Hooks::RegisterUIListener(int typeID, UIEventListener* listener)
 	}
 	auto listeners = this->EventListeners.find(typeID);
 	listeners->second.push_back(listener);
+}
+
+void Hooks::RegisterGameStateChangedListener(GameStateChangedEventListener* listener)
+{
+	GameStateChangedListeners.insert(listener);
 }
 
 ecl::Character* Hooks::GetLastPickerCharacter()

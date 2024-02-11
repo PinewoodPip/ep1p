@@ -8,6 +8,9 @@
 #define BEGIN_NS(ns) namespace dse::ns {
 #define END_NS() }
 
+#define undefined char
+#define undefined1 char
+
 BEGIN_SE()
 
 // Helper struct to allow function overloading without (real) template-dependent parameters
