@@ -180,5 +180,21 @@
 			@call e8 93 bd 06 00 //      CALL       ecl::GameStateEventManager::ExecuteGameStateCh   undefined ExecuteGameStateChange
 			<Target Type="Indirect" Offset="@call" Symbol="ecl_GameStateEventManager_ExecuteGameStateChangedEvent" />
 		</Mapping>
+		<Mapping Name="esv::Character::UpdateOverEncumbered patch">
+			48 8b ce //       MOV        character,RSI
+			0f af c3 //       IMUL       EAX,EBX
+			ff c0 //          INC        EAX
+			69 d8 10 27 00 00 //       IMUL       EBX,EAX,0x2710
+			e8 72 af 02 00 //      CALL       FUN_140bd0240                                    undefined FUN_140bd0240()
+			3b c3 //          CMP        EAX,EBX
+			@patch 7e 27 //          JLE        LAB_140ba52f9
+			8b 05 00 79 74 00 //      MOV        EAX,dword ptr [DAT_1412ecbd8]                    = ??
+			4c 8d 44 24 30 //       LEA        R8=>local_res8,[RSP + 0x30]
+			ba 33 00 00 00 //      MOV        EDX,0x33
+			<Patch Type="Absolute" Offset="@patch">
+				71 27
+			</Patch>
+			<!-- jump if not overflow (ie. always, not entering the "if") -->
+		</Mapping>
 	</Mappings>
 </BinaryMappings>

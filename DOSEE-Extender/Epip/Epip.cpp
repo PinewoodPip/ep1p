@@ -8,6 +8,7 @@ void Epip::Startup()
 {
 	this->_TargetInfo.Startup();
 	this->_WorldTooltips.Setup();
+	this->_InfiniteCarryWeight.Setup();
 }
 
 std::unique_ptr<Epip> gEpip;
