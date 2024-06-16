@@ -8,6 +8,7 @@
 #include "EquipmentDegradation.h"
 #include "SharedCivils.h"
 #include "AutoIdentify.h"
+#include "DeadPartyXP.h"
 
 using namespace epip;
 
@@ -26,6 +27,7 @@ private:
 	EquipmentDegradation _EquipmentDegradation;
 	SharedCivils _SharedCivils;
 	AutoIdentify _AutoIdentify;
+	DeadPartyXP _DeadPartyXP;
 };
 
 extern std::unique_ptr<Epip> gEpip;

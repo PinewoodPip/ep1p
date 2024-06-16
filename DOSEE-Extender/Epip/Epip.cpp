@@ -15,6 +15,7 @@ void Epip::Startup()
 	this->_EquipmentDegradation.Setup();
 	this->_SharedCivils.Setup();
 	this->_AutoIdentify.Setup();
+	this->_DeadPartyXP.Setup();
 }
 
 std::unique_ptr<Epip> gEpip;
