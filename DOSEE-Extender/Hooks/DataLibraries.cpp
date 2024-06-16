@@ -89,6 +89,7 @@ namespace dse
 		SYM_OFF(esv_ScriptParam_DontCare);
 		SYM_OFF(ecl_GameStateEventManager_ExecuteGameStateChangedEvent);
 		SYM_OFF(ObjectPool__esv_ScriptParam_Release);
+		SYM_OFF(CDivinityStats_Item_DegradeDurability);
 		SYM_OFF(ecl_EocUIControl_ShowCommonMessageBox);
 		SYM_OFF(esv_ScriptParam_GetItem);
 		SYM_OFF(esv_ScriptParam_GetCharacter);

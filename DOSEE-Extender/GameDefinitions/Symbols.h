@@ -153,6 +153,9 @@ namespace dse
 
 		using ObjectPool__esv_ScriptParam_ReleaseProc = void(void* pool, esv::PlanManager::ScriptParam* param);
 		ObjectPool__esv_ScriptParam_ReleaseProc* ObjectPool__esv_ScriptParam_Release{ nullptr };
+		using CDivinityStats_Item_DegradeDurabilityProc = void* (CDivinityStats_Item* item, int amount, int chance);
+		CDivinityStats_Item_DegradeDurabilityProc* CDivinityStats_Item_DegradeDurability{ nullptr };
+
 		using ecl_EocUIControl_ShowCommonMessageBoxProc = void(ecl::EocUIControl* self, wchar_t* msg);
 		ecl_EocUIControl_ShowCommonMessageBoxProc* ecl_EocUIControl_ShowCommonMessageBox{ nullptr };
 		using esv_ScriptParam_GetCharacterProc = esv::Character* (esv::PlanManager::ScriptParam* self);

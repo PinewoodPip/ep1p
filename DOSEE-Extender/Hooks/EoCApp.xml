@@ -243,6 +243,17 @@
 			@call e8 d4 40 69 ff //      CALL       FUN_140273850                                    undefined FUN_140273850()
 			<Target Type="Indirect" Offset="@call" Symbol="ObjectPool__esv_ScriptParam_Release" />
 		</Mapping>
+		<Mapping Name="CDivinityStats_Character::DegradeDurability">
+			e8 9f 77 02 00 //       CALL       CDivinityStats_Character::HasTalent              bool HasTalent(CDivinityStats_Ch
+			b9 32 00 00 00 //      MOV        ECX,0x32
+			41 b8 64 00 00 00 //      MOV        R8D,0x64
+			84 c0 //          TEST       AL,AL
+			8b d3 //          MOV        EDX,EBX
+			44 0f 45 c1 //    CMOVNZ     R8D,ECX
+			48 8b ce //       MOV        RCX,RSI
+			@call e8 84 4a fe ff //      CALL       CDivinityStats_Item::DegradeDurability           undefined DegradeDurability()
+			<Target Type="Indirect" Offset="@call" Symbol="CDivinityStats_Item_DegradeDurability" />
+		</Mapping>
 		<Mapping Name="ecl::EocUIControl::ShowCommonMessageBox">
 			49 8b cb //       MOV        RCX,R11
 			@call e8 60 95 e3 ff //      CALL       ecl::EocUIControl::ShowCommonMessageBox          undefined ShowCommonMessageBox(e

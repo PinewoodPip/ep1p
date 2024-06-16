@@ -4,6 +4,7 @@
 #include "InfiniteCarryWeight.h"
 #include "ScriptBugWatchdog.h"
 #include "OsirisImprovements.h"
+#include "EquipmentDegradation.h"
 
 using namespace epip;
 
@@ -18,6 +19,7 @@ private:
 	InfiniteCarryWeight _InfiniteCarryWeight;
 	ScriptBugWatchdog _ScriptBugWatchdog;
 	OsirisImprovements _OsirisImprovements;
+	EquipmentDegradation _EquipmentDegradation;
 };
 
 extern std::unique_ptr<Epip> gEpip;

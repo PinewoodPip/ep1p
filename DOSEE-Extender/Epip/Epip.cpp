@@ -11,6 +11,7 @@ void Epip::Startup()
 	this->_InfiniteCarryWeight.Setup();
 	this->_ScriptBugWatchdog.Setup();
 	this->_OsirisImprovements.Setup();
+	this->_EquipmentDegradation.Setup();
 }
 
 std::unique_ptr<Epip> gEpip;
