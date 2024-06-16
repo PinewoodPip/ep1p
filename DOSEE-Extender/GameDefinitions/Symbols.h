@@ -138,6 +138,9 @@ namespace dse
 		using ecl_PickingHelper_DoPickProc = void (ecl::PickingHelper* self);
 		ecl_PickingHelper_DoPickProc* ecl_PickingHelper_DoPick{ nullptr };
 
+		using esv_ItemHelpers_GenerateTreasureItemProc = esv::Item* (void* request, int16_t unknown);
+		esv_ItemHelpers_GenerateTreasureItemProc* esv_ItemHelpers_GenerateTreasureItem{ nullptr };
+
 		ecl::LevelManager** ecl_LevelManager{ nullptr };
 		esv::PlanManager::ScriptParam** esv_ScriptParam_DontCare{ nullptr };
 		ecl::EocUIControl** ecl_EocUIControl{ nullptr };

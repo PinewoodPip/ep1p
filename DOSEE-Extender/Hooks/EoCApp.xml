@@ -149,6 +149,16 @@
 			8b 0d 9b a0 a6 00 //      MOV        param_1,dword ptr [DAT_1412ecbd8]                = ??
 			<Target Type="Indirect" Offset="@call" Symbol="ecl_PickingHelper_DoPick" />
 		</Mapping>
+		<Mapping Name="esv::ItemHelpers::GenerateTreasureItem">
+			48 8d 0c 1e //    LEA        param_1,[RSI + RBX*0x1]
+			41 8b d7 //       MOV        param_2,R15D
+			bf 01 00 00 00 //      MOV        EDI,0x1
+			@call e8 9f ef 0c 00 //      CALL       esv::ItemHelpers::GenerateTreasureItem           esv::Item * GenerateTreasureItem
+			48 8b d8 //       MOV        RBX,RAX
+			48 85 c0 //       TEST       RAX,RAX
+
+			<Target Type="Indirect" Offset="@call" Symbol="esv_ItemHelpers_GenerateTreasureItem" />
+		</Mapping>
 		<Mapping Name="ecl::EocUIControl::OpenExamineUI">
 			@EocUIControlRef 48 8b 0d 6a a5 93 00 //       MOV        targetAction,qword ptr [EoCUIControl]            = ??
 			4c 8d 45 6f //    LEA        param_3=>local_res10,[RBP + 0x6f]
@@ -204,6 +214,26 @@
 			eb 53 //          JMP        LAB_140950865
 			<Patch Type="Absolute" Offset="@patch">
 				be 05 00 00 00 90
+			</Patch>
+		</Mapping>
+		<Mapping Name="esv::Character::AddExperience patch">
+			48 8b 05 c8 a3 73 00 //      MOV        RAX,qword ptr [ls_GlobalSwitches]                = NaP
+			8b 88 38 01 00 00 //      MOV        character,dword ptr [RAX + 0x138]
+			83 c1 fe //       ADD        character,-0x2
+			83 f9 01 //       CMP        character,0x1
+			@patch 0f 86 21 09 00 00 //      JBE        LAB_140ba80ab
+			<Patch Type="Absolute" Offset="@patch">
+				90 90 90 90 90 90
+			</Patch>
+		</Mapping>
+		<Mapping Name="ecl::Character::AddExperience patch">
+			48 8b 05 18 e0 a4 00 //      MOV        RAX,qword ptr [ls_GlobalSwitches]                = NaP
+			8b 88 38 01 00 00 //      MOV        character,dword ptr [RAX + 0x138]
+			83 c1 fe //       ADD        character,-0x2
+			83 f9 01 //       CMP        character,0x1
+			@patch 0f 86 79 09 00 00 //      JBE        LAB_1408944b3
+			<Patch Type="Absolute" Offset="@patch">
+				90 90 90 90 90 90
 			</Patch>
 		</Mapping>
 		<Mapping Name="ls::GlobalSwitches">

@@ -7,6 +7,7 @@
 #include "OsirisImprovements.h"
 #include "EquipmentDegradation.h"
 #include "SharedCivils.h"
+#include "AutoIdentify.h"
 
 using namespace epip;
 
@@ -24,6 +25,7 @@ private:
 	OsirisImprovements _OsirisImprovements;
 	EquipmentDegradation _EquipmentDegradation;
 	SharedCivils _SharedCivils;
+	AutoIdentify _AutoIdentify;
 };
 
 extern std::unique_ptr<Epip> gEpip;

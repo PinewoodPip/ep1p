@@ -14,6 +14,7 @@ void Epip::Startup()
 	this->_OsirisImprovements.Setup();
 	this->_EquipmentDegradation.Setup();
 	this->_SharedCivils.Setup();
+	this->_AutoIdentify.Setup();
 }
 
 std::unique_ptr<Epip> gEpip;

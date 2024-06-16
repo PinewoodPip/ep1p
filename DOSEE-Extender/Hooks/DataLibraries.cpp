@@ -76,6 +76,7 @@ namespace dse
 		SYM_OFF(CDivinityStats_Character__GetShadowResistance);
 		SYM_OFF(ObjectFactory__ecl_Character);
 		SYM_OFF(ecl_PickingHelper_DoPick);
+		SYM_OFF(esv_ItemHelpers_GenerateTreasureItem);
 		SYM_OFF(ecl_EocUIControl_OpenExamineUI);
 		SYM_OFF(ecl_EocUIControl);
 		SYM_OFF(esv_ActivationManager);
