@@ -6,6 +6,7 @@
 #include "SkillRangeEffectFix.h"
 #include "OsirisImprovements.h"
 #include "EquipmentDegradation.h"
+#include "SharedCivils.h"
 
 using namespace epip;
 
@@ -22,6 +23,7 @@ private:
 	SkillRangeEffectsFix _SkillRangeEffectsFix;
 	OsirisImprovements _OsirisImprovements;
 	EquipmentDegradation _EquipmentDegradation;
+	SharedCivils _SharedCivils;
 };
 
 extern std::unique_ptr<Epip> gEpip;

@@ -169,6 +169,16 @@ namespace dse
 		esv_ScriptParam_GetCharacterProc* esv_ScriptParam_GetCharacter{ nullptr };
 		using esv_ScriptParam_GetItemProc = esv::Item* (esv::PlanManager::ScriptParam* self);
 		esv_ScriptParam_GetItemProc* esv_ScriptParam_GetItem{ nullptr };
+
+		using esv_Item_GenerateTreasureProc = void(esv::Item* self, esv::Character* character);
+		esv_Item_GenerateTreasureProc* esv_Item_GenerateTreasure{ nullptr };
+
+		using CDivinityStats_Character_GetAbilityBoostFromPrimaryStatProc = int(CDivinityStats_Character* self, AbilityType ability, bool excludeBoosts);
+		CDivinityStats_Character_GetAbilityBoostFromPrimaryStatProc* CDivinityStats_Character_GetAbilityBoostFromPrimaryStat{ nullptr };
+
+		using CDivinityStats_Character_HasTalentProc = bool(CDivinityStats_Character* self, TalentType talent, bool excludeBoosts);
+		CDivinityStats_Character_HasTalentProc* CDivinityStats_Character_HasTalent{ nullptr };
+
 		using ls_InputManager_InjectInputProc = bool (InputManager* self, InputRawChange* rawInputChange, bool unknown);
 		ls_InputManager_InjectInputProc* ls_InputManager_InjectInput{ nullptr };
 

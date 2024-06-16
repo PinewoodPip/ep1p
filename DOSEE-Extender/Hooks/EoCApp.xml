@@ -297,5 +297,31 @@
 			</Patch>
 			<!-- jump if not overflow (ie. always, not entering the "if") -->
 		</Mapping>
+		<Mapping Name="esv::Item::GenerateTreasure">
+			48 8b d7 //       MOV        RDX,RDI
+			48 8b cb //       MOV        RCX,RBX
+			@call e8 13 00 00 00 //      CALL       esv::Item::GenerateTreasure                      undefined GenerateTreasure(esv::
+			48 8b 5c 24 30 //      MOV        RBX,qword ptr [RSP + local_res8]
+			b0 01 //          MOV        AL,0x1
+			48 83 c4 20 //    ADD        RSP,0x20
+			<Target Type="Indirect" Offset="@call" Symbol="esv_Item_GenerateTreasure" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetAbilityBoostFromPrimaryStat">
+			@call e8 ee 2a 28 00 //      CALL       CDivinityStats_Character::GetAbilityBoostFromP   undefined GetAbilityBoostFromPri
+			45 33 c0 //       XOR        R8D,R8D
+			48 8b cf //       MOV        param_1,RDI
+			41 8d 50 26 //    LEA        param_2,[R8 + 0x26]
+			03 e8 //          ADD        EBP,EAX
+			@call2 e8 fd ee 2a 00 //      CALL       CDivinityStats_Character::HasTalent              bool HasTalent(CDivinityStats_Ch
+			84 c0 //          TEST       AL,AL
+			74 02 //          JZ         LAB_140b9df19
+			ff c5 //          INC        luckyCharm
+			45 33 c0 //       XOR        R8D,R8D
+			48 8b cf //       MOV        param_1,RDI
+			41 8d 50 09 //    LEA        param_2,[R8 + 0x9]
+			e8 b8 8c 28 00 //      CALL       CDivinityStats_Character::GetTraitValue          undefined GetTraitValue(CDivinit
+			<Target Type="Indirect" Offset="@call" Symbol="CDivinityStats_Character_GetAbilityBoostFromPrimaryStat" />
+			<Target Type="Indirect" Offset="@call2" Symbol="CDivinityStats_Character_HasTalent" />
+		</Mapping>
 	</Mappings>
 </BinaryMappings>

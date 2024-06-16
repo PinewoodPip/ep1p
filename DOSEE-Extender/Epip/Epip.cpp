@@ -13,6 +13,7 @@ void Epip::Startup()
 	this->_SkillRangeEffectsFix.Setup();
 	this->_OsirisImprovements.Setup();
 	this->_EquipmentDegradation.Setup();
+	this->_SharedCivils.Setup();
 }
 
 std::unique_ptr<Epip> gEpip;
