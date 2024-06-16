@@ -153,6 +153,13 @@ namespace dse
 
 		using ObjectPool__esv_ScriptParam_ReleaseProc = void(void* pool, esv::PlanManager::ScriptParam* param);
 		ObjectPool__esv_ScriptParam_ReleaseProc* ObjectPool__esv_ScriptParam_Release{ nullptr };
+
+		using Effect_UpdateIsVisibleProc = void(Effect* effect, void* cullDesc, void* visualSet, int visiblityFlags);
+		Effect_UpdateIsVisibleProc* Effect_UpdateIsVisible{ nullptr };
+
+		using MoveableObject_CheckVisibleProc = int(void* obj, void* cullDesc);
+		MoveableObject_CheckVisibleProc* MoveableObject_CheckVisible{ nullptr };
+
 		using CDivinityStats_Item_DegradeDurabilityProc = void* (CDivinityStats_Item* item, int amount, int chance);
 		CDivinityStats_Item_DegradeDurabilityProc* CDivinityStats_Item_DegradeDurability{ nullptr };
 

@@ -10,6 +10,7 @@ void Epip::Startup()
 	this->_WorldTooltips.Setup();
 	this->_InfiniteCarryWeight.Setup();
 	this->_ScriptBugWatchdog.Setup();
+	this->_SkillRangeEffectsFix.Setup();
 	this->_OsirisImprovements.Setup();
 	this->_EquipmentDegradation.Setup();
 }

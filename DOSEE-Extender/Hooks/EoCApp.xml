@@ -243,6 +243,27 @@
 			@call e8 d4 40 69 ff //      CALL       FUN_140273850                                    undefined FUN_140273850()
 			<Target Type="Indirect" Offset="@call" Symbol="ObjectPool__esv_ScriptParam_Release" />
 		</Mapping>
+		<Mapping Name="ls::Effect::UpdateIsVisible patch">
+			@patch 75 05 //          JNZ        LAB_1407aa5e1
+			@call e8 8f b9 03 00 //      CALL       ls::MoveableObject::CheckVisible                 undefined CheckVisible()
+			0f b7 4f 1c //    MOVZX      ECX,word ptr [RDI + 0x1c]
+			85 c0 //          TEST       EAX,EAX
+			0f b6 83 6a 02 00 00 //      MOVZX      EAX,byte ptr [RBX + 0x26a]
+			40 0f 95 c6 //    SETNZ      SIL
+			0a 83 69 02 00 00 //      OR         AL,byte ptr [RBX + 0x269]
+			<Patch Type="Absolute" Offset="@patch">
+				90 90 90 90 90 90 90
+			</Patch>
+			<Target Type="Indirect" Offset="@call" Symbol="MoveableObject_CheckVisible" />
+		</Mapping>
+		<Mapping Name="ls::Effect::UpdateIsVisible">
+			@call 48 8d 05 39 00 00 00 //      LEA        RAX,[ls::Effect::UpdateIsVisible_m]
+			48 89 83 18 01 00 00 //      MOV        qword ptr [RBX + 0x118],RAX=>ls::Effect::Updat
+			80 a3 40 02 00 00 fe //      AND        byte ptr [RBX + 0x240],0xfe
+			48 8b 03 //       MOV        RAX,qword ptr [RBX]
+			ff 90 c0 00 00 00  //       CALL       qword ptr [RAX + 0xc0]=>->FUN_1407a77c0          undefined FUN_1407a77c0()
+			<Target Type="Indirect" Offset="@call" Symbol="Effect_UpdateIsVisible" />
+		</Mapping>
 		<Mapping Name="CDivinityStats_Character::DegradeDurability">
 			e8 9f 77 02 00 //       CALL       CDivinityStats_Character::HasTalent              bool HasTalent(CDivinityStats_Ch
 			b9 32 00 00 00 //      MOV        ECX,0x32

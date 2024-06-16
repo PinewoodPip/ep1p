@@ -3,6 +3,7 @@
 #include "WorldTooltips.h"
 #include "InfiniteCarryWeight.h"
 #include "ScriptBugWatchdog.h"
+#include "SkillRangeEffectFix.h"
 #include "OsirisImprovements.h"
 #include "EquipmentDegradation.h"
 
@@ -18,6 +19,7 @@ private:
 	WorldTooltips _WorldTooltips;
 	InfiniteCarryWeight _InfiniteCarryWeight;
 	ScriptBugWatchdog _ScriptBugWatchdog;
+	SkillRangeEffectsFix _SkillRangeEffectsFix;
 	OsirisImprovements _OsirisImprovements;
 	EquipmentDegradation _EquipmentDegradation;
 };
