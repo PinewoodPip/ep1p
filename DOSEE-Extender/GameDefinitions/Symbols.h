@@ -21,6 +21,7 @@
 #include <GameDefinitions/Character.h>
 #include <GameDefinitions/RPGStats.h>
 #include <GameDefinitions/Input.h>
+#include <GameDefinitions/Misc.h>
 #include <GameDefinitions/Level.h>
 
 namespace dse
@@ -140,6 +141,7 @@ namespace dse
 		ecl::LevelManager** ecl_LevelManager{ nullptr };
 		esv::PlanManager::ScriptParam** esv_ScriptParam_DontCare{ nullptr };
 		ecl::EocUIControl** ecl_EocUIControl{ nullptr };
+		GlobalSwitches** GlobalSwitches{ nullptr };
 
 		esv::ActivationManager** esv_ActivationManager{ nullptr };
 

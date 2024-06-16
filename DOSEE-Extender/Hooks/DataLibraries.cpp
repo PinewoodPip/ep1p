@@ -85,6 +85,7 @@ namespace dse
 		SYM_OFF(OsirisCharacterEvents);
 		SYM_OFF(IgSetWarningCallback);
 		SYM_OFF(IgSetTraceCallbackUTF8);
+		SYM_OFF(GlobalSwitches);
 		SYM_OFF(esv_ScriptParam_DontCare);
 		SYM_OFF(ecl_GameStateEventManager_ExecuteGameStateChangedEvent);
 		SYM_OFF(ObjectPool__esv_ScriptParam_Release);

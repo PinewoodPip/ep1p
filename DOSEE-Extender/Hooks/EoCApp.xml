@@ -206,6 +206,12 @@
 				be 05 00 00 00 90
 			</Patch>
 		</Mapping>
+		<Mapping Name="ls::GlobalSwitches">
+			e8 8e b3 90 ff //      CALL       FUN_140030510                                    undefined FUN_140030510()
+			@instance 48 8b 15 b7 c9 bb 00 //       MOV        RDX,qword ptr [ls_GlobalSwitches]                = NaP
+			48 83 c2 58 //    ADD        RDX,0x58
+			<Target Type="Indirect" Offset="@instance" Symbol="GlobalSwitches" />
+		</Mapping>
 		<Mapping Name="esv_ScriptParam entity Getters">
 			48 8b c8 //       MOV        RCX,RAX
 			@itemgetter e8 cf 28 02 00 //      CALL       esv::ScriptParam::GetItem                        esv::Item * GetItem(esv::ScriptP
