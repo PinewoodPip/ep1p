@@ -90,7 +90,6 @@ void Hooks::OnPickingHelperDone(ecl::PickingHelper* self)
 	ecl::Character* character = ClientCharacterUtils::GetCharacter(characterHandle);
 	if (character)
 	{
-		LOG("Picking done");
 		LastPickerCharacterHandle = characterHandle;
 	}
 }
@@ -299,6 +298,17 @@ void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned 
 		WARN("Couldn't find original OnFunctionCalled handler for UI object");
 	}
 
+	// Forward event to listeners
+	Hooks hooks = gExtender->GetHooks();
+	if (hooks.EventListeners.contains(self->TypeID))
+	{
+		auto listeners = hooks.EventListeners.find(self->TypeID)->second;
+		for (auto listener : listeners)
+		{
+			listener->OnFunctionCalled(function, numArgs, args);
+		}
+	}
+
 	// Setup Invoke captures, if necessary
 	CaptureInvokes(self);
 }
@@ -337,7 +347,7 @@ void Hooks::OnInjectInput(InputManager* self, InputRawChange* change, bool unkno
 {
 	if (!unknown)
 	{
-		LOG(std::format("RawInputType {} Value1 {} Value2 {} State {}", (int)change->RawInputID, change->Value1, change->Value2, (uint8_t)change->State).c_str());
+		//LOG(std::format("RawInputType {} Value1 {} Value2 {} State {}", (int)change->RawInputID, change->Value1, change->Value2, (uint8_t)change->State).c_str());
 
 		if (change->RawInputID == RawInputType::T)
 		{

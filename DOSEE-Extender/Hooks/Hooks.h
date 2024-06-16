@@ -14,6 +14,8 @@ public:
 	virtual bool OnInvoke4(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4) { return false; };
 	virtual bool OnInvoke5(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4, ig::InvokeDataValue* invokeData5) { return false; };
 	virtual bool OnInvoke6(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3, ig::InvokeDataValue* invokeData4, ig::InvokeDataValue* invokeData5, ig::InvokeDataValue* invokeData6) { return false; };
+
+	virtual void OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) {};
 };
 
 class GameStateChangedEventListener
@@ -42,6 +44,7 @@ public:
 	ComponentHandle LastPickerCharacterHandle = {};
 
 	std::unordered_map<int, std::vector<UIEventListener*>> EventListeners;
+	std::set<GameStateChangedEventListener*> GameStateChangedListeners;
 private:
 	bool loaded_{ false };
 };
