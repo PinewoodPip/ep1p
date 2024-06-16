@@ -131,6 +131,7 @@ namespace dse
 		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetShadowResistance{ nullptr };
 
 		ComponentFactory<ecl::Character>** ObjectFactory__ecl_Character{ nullptr };
+		esv::PlanManager::ScriptParam** esv_ScriptParam_DontCare{ nullptr };
 
 		//typedef void (*ecl_PickingHelper_DoPickFunc)(ecl::PickingHelper* self);
 		//ecl_PickingHelper_DoPickFunc ecl_PickingHelper_DoPick{ nullptr };

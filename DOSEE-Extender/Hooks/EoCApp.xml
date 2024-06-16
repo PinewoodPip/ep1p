@@ -163,6 +163,39 @@
 			@call e8 43 e3 ff ff //       CALL       ls::InputManager::InjectInput                    undefined InjectInput(InputManag
 			<Target Type="Indirect" Offset="@call" Symbol="ls_InputManager_InjectInput" />
 		</Mapping>
+		<Mapping Name="esv_ActivationManager">
+			0f 84 c0 00 00 00 //      JZ         LAB_140c07559
+			@ref 48 8b 0d c8 75 74 00 //      MOV        RCX,qword ptr [esv_ActivationManager]            = NaP
+			48 8b d3 //       MOV        RDX,RBX
+			e8 78 3a 03 00 //      CALL       FUN_140c3af20                                    undefined FUN_140c3af20()
+			48 83 bf 30 01 00 00 00 //       CMP        qword ptr [RDI + 0x130],0x0
+			<Target Type="Indirect" Offset="@ref" Symbol="esv_ActivationManager" />
+		</Mapping>
+		<Mapping Name="SendItemUsedOsirisEvent">
+			4c 8b c0 //       MOV        param_3,RAX
+			@call e8 89 b9 05 00 //      CALL       SendOsirisItemUsedEvent_wut                      undefined SendOsirisItemUsedEven
+			48 8b 0d 2a 3e 7a 00 //      MOV        param_1,qword ptr [DAT_14134ea78]                = ??
+			4d 8b c7 //       MOV        param_3,R15
+			49 8b d6 //       MOV        param_2,R14
+			e8 17 36 08 00 //      CALL       FUN_140c2e270                                    undefined FUN_140c2e270()
+			<Target Type="Indirect" Offset="@call" Symbol="esv_OsirisCharacterFunctions_SendItemUsedEvent" />
+		</Mapping>
+		<Mapping Name="esv::ActivationManager::ThrowOnCharacterItemEvent">
+			4c 89 74 24 50 //      MOV        qword ptr [RSP + local_res18],R14
+			@call e8 7f a2 03 00 //      CALL       esv::ActivationManager::ThrowOnCharacterItemEv   undefined ThrowOnCharacterItemEv
+			48 8b 0d 68 d3 74 00 //      MOV        param_1,qword ptr [DAT_14134ead0]                = ??
+			48 85 ff //       TEST       RDI,RDI
+			74 0c //          JZ         LAB_140c01779
+			<Target Type="Indirect" Offset="@call" Symbol="esv_ActivationManager_ThrowOnCharacterItemEvent" />
+		</Mapping>
+		<Mapping Name="OsirisCharacterEventManager">
+			e8 15 60 08 00 //      CALL       FUN_140c30c20                                    undefined FUN_140c30c20()
+			@ref 48 8b 35 d6 3e 7a 00 //      MOV        RSI,qword ptr [osiriseventmanager]               = ??
+			49 8b 07 //       MOV        RAX,qword ptr [R15]
+			48 8d 54 24 70 //      LEA        param_2=>local_2c8,[RSP + 0x70]
+			49 8b cf //       MOV        param_1,R15
+			<Target Type="Indirect" Offset="@ref" Symbol="OsirisCharacterEvents" />
+		</Mapping>
 		<Mapping Name="ecl::UIExamine::SetupInformation Loremaster patch">
 			48 8b 5c 24 38 //      MOV        RBX,qword ptr [RSP + local_9f0]
 			@patch 85 f6 //          TEST       ESI,ESI
@@ -173,12 +206,42 @@
 				be 05 00 00 00 90
 			</Patch>
 		</Mapping>
+		<Mapping Name="esv_ScriptParam entity Getters">
+			48 8b c8 //       MOV        RCX,RAX
+			@itemgetter e8 cf 28 02 00 //      CALL       esv::ScriptParam::GetItem                        esv::Item * GetItem(esv::ScriptP
+			eb 08 //          JMP        LAB_140bb950b
+			48 8b c8 //       MOV        RCX,RAX
+			@charactergetter e8 45 26 02 00 //      CALL       esv::ScriptParam::GetCharacter                   esv::Character * GetCharacter(es
+			<Target Type="Indirect" Offset="@itemgetter" Symbol="esv_ScriptParam_GetItem" />
+			<Target Type="Indirect" Offset="@charactergetter" Symbol="esv_ScriptParam_GetCharacter" />
+		</Mapping>
+		<Mapping Name="esv::ScriptParam::DontCare">
+			41 80 e6 01 //    AND        R14B,0x1
+			@ref 48 3b 0d 84 69 70 00 //      CMP        param_1,qword ptr [esv_ScriptParam_DontCare]     = ??
+			48 8b f9 //       MOV        RDI,param_1
+			75 14 //          JNZ        LAB_140bdc92d                                 undefined FUN_140bfb4e0()
+			<Target Type="Indirect" Offset="@ref" Symbol="esv_ScriptParam_DontCare" />
+		</Mapping>
 		<Mapping Name="ecl::GameStateEventManager::ExecuteGameStateChangedEvent">
 			74 0e //          JZ         LAB_140876ecd
 			48 8b 0d 82 7a ad 00 //      MOV        param_1,qword ptr [DAT_14134e948]                = ??
 			8b d6 //          MOV        param_2,ESI
 			@call e8 93 bd 06 00 //      CALL       ecl::GameStateEventManager::ExecuteGameStateCh   undefined ExecuteGameStateChange
 			<Target Type="Indirect" Offset="@call" Symbol="ecl_GameStateEventManager_ExecuteGameStateChangedEvent" />
+		</Mapping>
+		<Mapping Name="esv::ScriptParamPool::Release">
+			48 8b 1d 33 3b 70 00 //      MOV        RBX,qword ptr [Pool_esv_ScriptParam_m]           = ??
+			ff 50 08 //       CALL       qword ptr [RAX + 0x8]
+			48 8d 4b 28 //    LEA        RCX,[RBX + 0x28]
+			48 8b d7 //       MOV        RDX,RDI
+			@call e8 d4 40 69 ff //      CALL       FUN_140273850                                    undefined FUN_140273850()
+			<Target Type="Indirect" Offset="@call" Symbol="ObjectPool__esv_ScriptParam_Release" />
+		</Mapping>
+		<Mapping Name="ecl::EocUIControl::ShowCommonMessageBox">
+			49 8b cb //       MOV        RCX,R11
+			@call e8 60 95 e3 ff //      CALL       ecl::EocUIControl::ShowCommonMessageBox          undefined ShowCommonMessageBox(e
+			80 7c 24 50 00 //      CMP        byte ptr [RSP + local_d08],0x0
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_EocUIControl_ShowCommonMessageBox" />
 		</Mapping>
 		<Mapping Name="esv::Character::UpdateOverEncumbered patch">
 			48 8b ce //       MOV        character,RSI

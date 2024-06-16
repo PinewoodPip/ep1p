@@ -78,10 +78,19 @@ namespace dse
 		SYM_OFF(ecl_PickingHelper_DoPick);
 		SYM_OFF(ecl_EocUIControl_OpenExamineUI);
 		SYM_OFF(ecl_EocUIControl);
+		SYM_OFF(esv_ActivationManager);
 		SYM_OFF(ls_InputManager_InjectInput);
+		SYM_OFF(esv_OsirisCharacterFunctions_SendItemUsedEvent);
+		SYM_OFF(esv_ActivationManager_ThrowOnCharacterItemEvent);
+		SYM_OFF(OsirisCharacterEvents);
 		SYM_OFF(IgSetWarningCallback);
 		SYM_OFF(IgSetTraceCallbackUTF8);
+		SYM_OFF(esv_ScriptParam_DontCare);
 		SYM_OFF(ecl_GameStateEventManager_ExecuteGameStateChangedEvent);
+		SYM_OFF(ObjectPool__esv_ScriptParam_Release);
+		SYM_OFF(ecl_EocUIControl_ShowCommonMessageBox);
+		SYM_OFF(esv_ScriptParam_GetItem);
+		SYM_OFF(esv_ScriptParam_GetCharacter);
 	}
 
 	bool LibraryManager::PostStartupFindLibraries()
@@ -254,7 +263,6 @@ namespace dse
 		return hasChanges;
 	}
 
-	/*
 	bool LibraryManager::UndoCodePatch(std::string const& mapping)
 	{
 		auto it = mappings_.Mappings.find(mapping);
@@ -270,7 +278,6 @@ namespace dse
 
 		return hasChanges;
 	}
-	*/
 
 	bool LibraryManager::ApplyPatch(SymbolMappings::Patch& patch)
 	{
@@ -286,7 +293,6 @@ namespace dse
 		return true;
 	}
 
-	/*
 	bool LibraryManager::UndoPatch(SymbolMappings::Patch& patch)
 	{
 		if (!patch.WasApplied) return false;
@@ -295,5 +301,5 @@ namespace dse
 		memcpy(const_cast<uint8_t*>(patch.ResolvedRef), patch.OriginalBytes.data(), patch.OriginalBytes.size());
 		patch.WasApplied = false;
 		return true;
-	}*/
+	}
 }

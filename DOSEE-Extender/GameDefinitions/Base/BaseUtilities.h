@@ -10,6 +10,7 @@
 
 #define undefined char
 #define undefined1 char
+#define uint uint32_t
 
 BEGIN_SE()
 

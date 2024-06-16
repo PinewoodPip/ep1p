@@ -2,8 +2,8 @@
 #include "UI/TargetInfo.h"
 #include "WorldTooltips.h"
 #include "InfiniteCarryWeight.h"
+#include "ScriptBugWatchdog.h"
 
-//using namespace dse;
 using namespace epip;
 
 class Epip
@@ -15,6 +15,7 @@ private:
 	KeyboardBottomBar _KeyboardBottomBar;
 	WorldTooltips _WorldTooltips;
 	InfiniteCarryWeight _InfiniteCarryWeight;
+	ScriptBugWatchdog _ScriptBugWatchdog;
 };
 
 extern std::unique_ptr<Epip> gEpip;

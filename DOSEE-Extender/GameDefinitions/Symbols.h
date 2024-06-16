@@ -138,7 +138,10 @@ namespace dse
 		ecl_PickingHelper_DoPickProc* ecl_PickingHelper_DoPick{ nullptr };
 
 		ecl::LevelManager** ecl_LevelManager{ nullptr };
+		esv::PlanManager::ScriptParam** esv_ScriptParam_DontCare{ nullptr };
 		ecl::EocUIControl** ecl_EocUIControl{ nullptr };
+
+		esv::ActivationManager** esv_ActivationManager{ nullptr };
 
 		using ecl_EocUIControl_OpenExamineUIProc = void(ecl::EocUIControl* self, short playerID, ComponentHandle* objectHandle);
 		ecl_EocUIControl_OpenExamineUIProc* ecl_EocUIControl_OpenExamineUI{ nullptr };
@@ -146,8 +149,24 @@ namespace dse
 		using ecl_GameStateEventManager_ExecuteGameStateChangedEventProc = void(void* self, uint32_t unknown1, uint32_t unknown2);
 		ecl_GameStateEventManager_ExecuteGameStateChangedEventProc* ecl_GameStateEventManager_ExecuteGameStateChangedEvent{ nullptr };
 
+		using ObjectPool__esv_ScriptParam_ReleaseProc = void(void* pool, esv::PlanManager::ScriptParam* param);
+		ObjectPool__esv_ScriptParam_ReleaseProc* ObjectPool__esv_ScriptParam_Release{ nullptr };
+		using ecl_EocUIControl_ShowCommonMessageBoxProc = void(ecl::EocUIControl* self, wchar_t* msg);
+		ecl_EocUIControl_ShowCommonMessageBoxProc* ecl_EocUIControl_ShowCommonMessageBox{ nullptr };
+		using esv_ScriptParam_GetCharacterProc = esv::Character* (esv::PlanManager::ScriptParam* self);
+		esv_ScriptParam_GetCharacterProc* esv_ScriptParam_GetCharacter{ nullptr };
+		using esv_ScriptParam_GetItemProc = esv::Item* (esv::PlanManager::ScriptParam* self);
+		esv_ScriptParam_GetItemProc* esv_ScriptParam_GetItem{ nullptr };
 		using ls_InputManager_InjectInputProc = bool (InputManager* self, InputRawChange* rawInputChange, bool unknown);
 		ls_InputManager_InjectInputProc* ls_InputManager_InjectInput{ nullptr };
+
+		using esv_OsirisCharacterFunctions_SendItemUsedEventProc = bool(void* self, ObjectHandle* characterHandle, ObjectHandle* itemHandle);
+		esv_OsirisCharacterFunctions_SendItemUsedEventProc* esv_OsirisCharacterFunctions_SendItemUsedEvent{ nullptr };
+
+		using esv_ActivationManager_ThrowOnCharacterItemEventProc = void(esv::ActivationManager* self, esv::Character* character, esv::Item* item, char* eventName);
+		esv_ActivationManager_ThrowOnCharacterItemEventProc* esv_ActivationManager_ThrowOnCharacterItemEvent{ nullptr };
+
+		OsirisCharacterEventManager** OsirisCharacterEvents{ nullptr };
 
 		FixedString::CreateProc* ls__FixedString__Create{ nullptr };
 		GlobalStringTable const** ls__GlobalStrings{ nullptr };
