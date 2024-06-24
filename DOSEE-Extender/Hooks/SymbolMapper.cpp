@@ -292,7 +292,11 @@ void SymbolMappingLoader::AddKnownModule(std::string const& name)
 
 bool SymbolMappingLoader::LoadBuiltinMappings()
 {
-	auto xml = GetExeResource(IDR_BINARY_MAPPINGS_EOCAPP); // TODO editor support?
+#if defined(OSI_EOCAPP)
+	auto xml = GetExeResource(IDR_BINARY_MAPPINGS_EOCAPP);
+#else
+	auto xml = GetExeResource(IDR_BINARY_MAPPINGS_EOCPLUGIN);
+#endif
 
 	if (!xml) {
 		ERR("Couldn't load binary mappings resource");

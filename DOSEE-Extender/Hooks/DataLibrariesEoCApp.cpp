@@ -5,6 +5,7 @@
 #include <functional>
 #include <psapi.h>
 
+#if defined(OSI_EOCAPP)
 namespace dse
 {
 	void LibraryManager::PreRegisterLibraries(SymbolMappingLoader& loader)
@@ -32,3 +33,4 @@ namespace dse
 		return true;
 	}
 }
+#endif

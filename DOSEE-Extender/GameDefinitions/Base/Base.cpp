@@ -108,6 +108,7 @@ void * GameAllocRaw(std::size_t size, char const* tag)
 	return ptr;
 }
 
+#if defined(OSI_EOCAPP)
 void GameFree(void * ptr)
 {
 #if defined(TRACK_ALLOCATIONS)
@@ -117,6 +118,26 @@ void GameFree(void * ptr)
 #endif
 	GetStaticSymbols().EoCFree(ptr);
 }
+#else
+void GameFree(void* self, void* ptr)
+{
+#if defined(TRACK_ALLOCATIONS)
+	if (ptr) {
+		gMemoryAllocationTracker.Free(ptr);
+	}
+#endif
+	GetStaticSymbols().EoCFree(self, ptr);
+}
+void GameFree(void* ptr)
+{
+#if defined(TRACK_ALLOCATIONS)
+	if (ptr) {
+		gMemoryAllocationTracker.Free(ptr);
+	}
+#endif
+	GetStaticSymbols().EoCFree(nullptr, ptr); // TODO
+}
+#endif
 
 void* CrtAllocRaw(std::size_t size)
 {

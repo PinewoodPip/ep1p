@@ -42,7 +42,7 @@ namespace dse
 			// TODO check version
 		}
 		else {
-			ERR("Failed to retrieve game version info.");
+			//ERR("Failed to retrieve game version info.");
 		}
 
 		/*Log("ScriptExtender::Initialize: Starting");*/
@@ -115,7 +115,8 @@ namespace dse
 
 	void ScriptExtender::OnIggyTraceCallback(void* unknown1, void* unknown2, char const* msg)
 	{
-		LOG("[IGGY] TRACE:", msg);
+		LOG("[IGGY] TRACE:");
+		LOG(msg);
 	}
 
 	void ScriptExtender::OnIggyWarningCallback(void* unknown1, void* unknown2, int warningType, char const* msg)

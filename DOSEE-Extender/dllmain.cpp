@@ -14,7 +14,7 @@
 
 bool ShouldRunProxy()
 {
-	return GetModuleHandleW(L"EoCApp.exe") != NULL; // TODO editor support?
+	return GetModuleHandleW(L"EoCApp.exe") != NULL || GetModuleHandleW(L"TheDivinityEngine.exe") != NULL;
 }
 
 void CreateConsole()

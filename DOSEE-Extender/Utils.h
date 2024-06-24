@@ -8,6 +8,7 @@ extern HMODULE gThisModule;
 #define END_SE() }
 
 #define IDR_BINARY_MAPPINGS_EOCAPP      102
+#define IDR_BINARY_MAPPINGS_EOCPLUGIN      109
 
 std::optional<std::string> GetExeResource(int resourceId);
 

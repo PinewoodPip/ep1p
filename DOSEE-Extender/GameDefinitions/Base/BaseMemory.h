@@ -54,7 +54,7 @@ typedef void * (* EoCAllocFunc)(void * self, std::size_t size, char const * file
 #if defined(OSI_EOCAPP)
 typedef void (*EoCFreeFunc)(void* ptr);
 #else
-typedef void (*EoCFreeFunc)(void* self, void* ptr); // TODO check
+typedef void (*EoCFreeFunc)(void* self, void* ptr);
 #endif
 
 typedef void * (* CrtAllocFunc)(std::size_t size);

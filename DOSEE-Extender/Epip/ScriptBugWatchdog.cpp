@@ -5,7 +5,9 @@
 void ScriptBugWatchdog::Setup()
 {
 	auto& lib = gExtender->GetEngineHooks();
+#if defined(OSI_EOCAPP)
 	lib.esv_ActivationManager_ThrowOnCharacterItemEvent.SetWrapper(&ScriptBugWatchdog::OnActivateCharacterItemEvent, this);
+#endif
 	lib.ObjectPool__esv_ScriptParam_Release.SetWrapper(&ScriptBugWatchdog::OnScriptParamRelease, this);
 }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BinaryMappings>
+	<Mappings Version="2.0.119.430" Default="true">
+		<Mapping Name="ScriptParam Pool Release">
+			48 8b 5c 24 50 //      MOV        RBX,qword ptr [RSP + local_res8]
+			b8 ff ff 00 00 //      MOV        EAX,0xffff
+			66 01 47 08 //    ADD        word ptr [RDI + 0x8],AX
+			75 08 //          JNZ        LAB_180a84df5
+			48 8b d7 //       MOV        RDX,RDI
+			@call e8 4b dc 73 ff //      CALL       FUN_1801c2a40                                    undefined FUN_1801c2a40(void * p
+			<Target Type="Indirect" Offset="@call" Symbol="ObjectPool__esv_ScriptParam_Release" />
+		</Mapping>
+		<Mapping Name="esv::ScriptParam::DontCare">
+			4c 8d 05 2f 4d 44 00 //      LEA        R8,[s_Can_only_use___when_it's_an_OUT_p_180f24   = "Can only use _ when it's an O
+			ba 09 00 00 00 //      MOV        EDX,0x9
+			48 8b c8 //       MOV        RCX,scriptParam
+			ff 15 91 be 2f 00 //      CALL       qword ptr [->GAMEENGINE.DLL::ls::ScriptErrorCo   = 016f8266                               XREF[1]:     180adfe0a(j)
+			@ref 48 8b 3d 82 16 cc 00 //      MOV        RDI,qword ptr [esv_ScriptParam_DontCare]         = NaP
+			e9 b7 00 00 00 //      JMP        LAB_180adfeea
+			<Target Type="Indirect" Offset="@ref" Symbol="esv_ScriptParam_DontCare" />
+		</Mapping>
+	</Mappings>
+</BinaryMappings>

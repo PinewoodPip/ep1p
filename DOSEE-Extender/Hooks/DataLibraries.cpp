@@ -145,6 +145,11 @@ namespace dse
 	{
 		HMODULE hGameModule = GetModuleHandleW(L"EoCApp.exe"); // TODO editor support
 		if (hGameModule == NULL) {
+			// TODO
+			version.Major = 2;
+			version.Minor = 0;
+			version.Revision = 119;
+			version.Build = 430;
 			return false;
 		}
 
