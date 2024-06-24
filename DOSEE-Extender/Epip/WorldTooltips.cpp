@@ -8,22 +8,52 @@ using namespace epip;
 
 void WorldTooltips::Setup()
 {
-	gExtender->GetHooks().RegisterGameStateChangedListener(this);
+	auto& lib = gExtender->GetEngineHooks();
+	lib.ecl_ItemProtocol_UpdateItems.SetPostHook(&WorldTooltips::OnUpdateItems, this);
 }
 
-void WorldTooltips::OnGameStateChanged(int newState)
+eoc::IActionData* GetActionData(eoc::ItemTemplate* itemTemplate, eoc::IActionData::ActionType type)
 {
-	if (newState == ecl::EoCClient::GameState::PrepareRunning)
+	for (auto action : itemTemplate->BaseActionData)
 	{
-		// Enable world tooltips for all item templates on the level
-		// TODO also do this for items spawned later on - use template manager instead
-		auto levelManager = *gStaticSymbols->ecl_LevelManager;
-		auto level = levelManager->CurrentLevel;
+		if (action->Type == type)
+		{
+			return action;
+		}
+	}
+	return nullptr;
+}
+
+void WorldTooltips::OnUpdateItems(void* netProtocol)
+{
+	auto levelManager = *gStaticSymbols->ecl_LevelManager;
+	auto level = levelManager->CurrentLevel;
+	if (level)
+	{
 		auto items = level->ItemManager->ItemSet;
 		for (auto item : items)
 		{
 			auto itemTemplate = (eoc::ItemTemplate*)item->GetCurrentTemplate();
-			itemTemplate->Tooltip = 2;
+			int previousTooltip = itemTemplate->Tooltip;
+			if (previousTooltip != 2)
+			{
+				bool shouldHaveTooltip = item->Stats != nullptr;
+
+				//shouldHaveTooltip |= (item->LockLevel > 0 && item->LockLevel <= 7);
+				//shouldHaveTooltip |= itemTemplate->IsKey; // Might be a wrong field name?
+
+				if (itemTemplate->InventoryType > 0)
+				{
+					// There are items that have inventory type set but cannot be opened,
+					// ex. broken vases.
+					shouldHaveTooltip |= GetActionData(itemTemplate, eoc::IActionData::ActionType::OpenClose) != nullptr;
+				}
+
+				if (shouldHaveTooltip)
+				{
+					itemTemplate->Tooltip = 2;
+				}
+			}
 		}
 	}
 }

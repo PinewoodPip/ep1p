@@ -23,6 +23,7 @@
 #include <GameDefinitions/Input.h>
 #include <GameDefinitions/Misc.h>
 #include <GameDefinitions/Level.h>
+#include <GameDefinitions/Inventory.h>
 
 namespace dse
 {
@@ -192,6 +193,11 @@ namespace dse
 		esv_ActivationManager_ThrowOnCharacterItemEventProc* esv_ActivationManager_ThrowOnCharacterItemEvent{ nullptr };
 
 		OsirisCharacterEventManager** OsirisCharacterEvents{ nullptr };
+
+		using ecl_ItemProtocol_UpdateItemsProc = void(void* self);
+		ecl_ItemProtocol_UpdateItemsProc* ecl_ItemProtocol_UpdateItems{ nullptr };
+
+		ComponentFactory<ecl::Inventory>** ecl_InventoryFactory{ nullptr };
 
 		FixedString::CreateProc* ls__FixedString__Create{ nullptr };
 		GlobalStringTable const** ls__GlobalStrings{ nullptr };

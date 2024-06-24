@@ -84,6 +84,8 @@ namespace dse
 		SYM_OFF(esv_OsirisCharacterFunctions_SendItemUsedEvent);
 		SYM_OFF(esv_ActivationManager_ThrowOnCharacterItemEvent);
 		SYM_OFF(OsirisCharacterEvents);
+		SYM_OFF(ecl_InventoryFactory);
+		SYM_OFF(ecl_ItemProtocol_UpdateItems);
 		SYM_OFF(IgSetWarningCallback);
 		SYM_OFF(IgSetTraceCallbackUTF8);
 		SYM_OFF(GlobalSwitches);

@@ -236,6 +236,22 @@
 				90 90 90 90 90 90
 			</Patch>
 		</Mapping>
+		<Mapping Name="ecl::InventoryFactory">
+			@ref 48 8b 15 8b 2e aa 00 //      MOV        param_2,qword ptr [ObjectFactory__ecl_Inventory] = ??
+			0f b7 c8 //       MOVZX      item,AX
+			3b 4a 24 //       CMP        item,dword ptr [param_2 + 0x24]
+			0f 83 4d 01 00 00 //      JNC        LAB_1408abc06
+			48 8b 4a 40 //    MOV        item,qword ptr [param_2 + 0x40]
+			44 0f b7 c0 //    MOVZX      param_3,AX
+			<Target Type="Indirect" Offset="@ref" Symbol="ecl_InventoryFactory" />
+		</Mapping>
+		<Mapping Name="ecl::ItemProtocol::UpdateItems">
+			49 8b cd //       MOV        RCX,R13
+			@call e8 13 d1 ff ff //      CALL       ecl::ItemProtocol::UpdateItems
+			b8 01 00 00 00 //      MOV        EAX,0x1
+			e9 f0 04 00 00 //      JMP        LAB_140a39267
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_ItemProtocol_UpdateItems" />
+		</Mapping>
 		<Mapping Name="ls::GlobalSwitches">
 			e8 8e b3 90 ff //      CALL       FUN_140030510                                    undefined FUN_140030510()
 			@instance 48 8b 15 b7 c9 bb 00 //       MOV        RDX,qword ptr [ls_GlobalSwitches]                = NaP

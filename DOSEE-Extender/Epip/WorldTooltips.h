@@ -3,13 +3,12 @@
 
 BEGIN_NS(epip)
 
-class WorldTooltips : GameStateChangedEventListener
+class WorldTooltips
 {
 public:
 	void Setup();
 
-	void OnGameStateChanged(int newState) override;
+	void OnUpdateItems(void* netProtocol);
 };
 
 END_NS()
-

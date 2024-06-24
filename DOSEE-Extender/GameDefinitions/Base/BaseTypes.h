@@ -265,7 +265,7 @@ enum GenericComponentHandleTag {};
 
 using EntityHandle = TypedHandle<EntityHandleTag>;
 using ComponentHandle = TypedHandle<GenericComponentHandleTag>;
-using ObjectHandle = TypedHandle<EntityHandleTag>;
+using ObjectHandle = ComponentHandle;
 
 extern const ComponentHandle NullComponentHandle;
 
