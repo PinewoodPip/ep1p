@@ -258,6 +258,28 @@
 			48 83 c2 58 //    ADD        RDX,0x58
 			<Target Type="Indirect" Offset="@instance" Symbol="GlobalSwitches" />
 		</Mapping>
+		<Mapping Name="GetOsirisSaveFileVersion">
+			@func e8 b3 03 00 00
+			85 c0 //          TEST       EAX,EAX
+			0f 84 12 02 00 00 //      JZ         LAB_140c0cdb7
+			<Target Type="Indirect" Offset="@func" Symbol="GetOsirisSaveFileVersion" />
+		</Mapping>
+		<Mapping Name="RunStoryPatch">
+			@func e8 61 2b 00 00 //      CALL       esv::StoryImplementation::RunStoryPatch          undefined RunStoryPatch()
+			84 c0 //          TEST       AL,AL
+			0f 84 b2 02 00 00 //      JZ         LAB_140c0cef9
+			<Target Type="Indirect" Offset="@func" Symbol="RunStoryPatch" />
+		</Mapping>
+		<Mapping Name="storypatch patch">
+			e8 b3 03 00 00 //      CALL       GetOsirisSaveFileVersion                         undefined GetOsirisSaveFileVersi
+			@patch 85 c0 //          TEST       EAX,EAX
+			0f 84 12 02 00 00 //      JZ         LAB_140c0cdb7
+			3b c7 //          CMP        EAX,EDI
+			0f 86 0a 02 00 00 //      JBE        LAB_140c0cdb7
+			<Patch Type="Absolute" Offset="@patch">
+				90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+			</Patch>
+		</Mapping>
 		<Mapping Name="esv_ScriptParam entity Getters">
 			48 8b c8 //       MOV        RCX,RAX
 			@itemgetter e8 cf 28 02 00 //      CALL       esv::ScriptParam::GetItem                        esv::Item * GetItem(esv::ScriptP

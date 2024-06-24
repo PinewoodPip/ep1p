@@ -142,6 +142,11 @@ namespace dse
 		using esv_ItemHelpers_GenerateTreasureItemProc = esv::Item* (void* request, int16_t unknown);
 		esv_ItemHelpers_GenerateTreasureItemProc* esv_ItemHelpers_GenerateTreasureItem{ nullptr };
 
+		using RunStoryPatchProc = bool (void* param1, Path* path1, Path* path2);
+		RunStoryPatchProc* RunStoryPatch{ nullptr };
+
+		using GetOsirisSaveFileVersionProc = int (STDString* param1, Path* param2);
+		GetOsirisSaveFileVersionProc* GetOsirisSaveFileVersion{ nullptr };
 		ecl::LevelManager** ecl_LevelManager{ nullptr };
 		esv::PlanManager::ScriptParam** esv_ScriptParam_DontCare{ nullptr };
 		ecl::EocUIControl** ecl_EocUIControl{ nullptr };

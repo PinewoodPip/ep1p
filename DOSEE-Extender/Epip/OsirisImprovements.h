@@ -8,6 +8,8 @@ class OsirisImprovements : GameStateChangedEventListener
 public:
 	void Setup();
 
+	int OnOsirisGetSaveFileVersion(StaticSymbols::GetOsirisSaveFileVersionProc* next, STDString* param1, Path* param2);
+
 	void OnGameStateChanged(int newState) override;
 };
 
