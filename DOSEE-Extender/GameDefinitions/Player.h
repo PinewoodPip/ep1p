@@ -1,0 +1,97 @@
+#pragma once
+#include <GameDefinitions/Base/Base.h>
+#include <GameDefinitions/Enumerations.h>
+#include <GameDefinitions/EntitySystem.h>
+#include <GameDefinitions/RPGStats.h>
+#include <Utils.h>
+
+BEGIN_NS(ecl)
+
+struct PlayerManager : ProtectedGameObject<PlayerManager>
+{
+	void** VMT;
+	short NextPlayerID;
+    undefined field2_0xa;
+    undefined field3_0xb;
+    undefined field4_0xc;
+    undefined field5_0xd;
+    undefined field6_0xe;
+    undefined field7_0xf;
+    undefined field8_0x10;
+    undefined field9_0x11;
+    undefined field10_0x12;
+    undefined field11_0x13;
+    undefined field12_0x14;
+    undefined field13_0x15;
+    undefined field14_0x16;
+    undefined field15_0x17;
+    Set<short> SomeShortSet;
+    undefined field30_0x30;
+    undefined field31_0x31;
+    undefined field32_0x32;
+    undefined field33_0x33;
+    undefined field34_0x34;
+    undefined field35_0x35;
+    undefined field36_0x36;
+    undefined field37_0x37;
+    Set<short> PlayerIDSet;
+    undefined PlayerDataMap;
+    undefined field50_0x51;
+    undefined field51_0x52;
+    undefined field52_0x53;
+    undefined field53_0x54;
+    undefined field54_0x55;
+    undefined field55_0x56;
+    undefined field56_0x57;
+    undefined field57_0x58;
+    undefined field58_0x59;
+    undefined field59_0x5a;
+    undefined field60_0x5b;
+    undefined field61_0x5c;
+    undefined field62_0x5d;
+    undefined field63_0x5e;
+    undefined field64_0x5f;
+    undefined field65_0x60;
+    undefined field66_0x61;
+    undefined field67_0x62;
+    undefined field68_0x63;
+    undefined field69_0x64;
+    undefined field70_0x65;
+    undefined field71_0x66;
+    undefined field72_0x67;
+    undefined field73_0x68;
+    undefined field74_0x69;
+    undefined field75_0x6a;
+    undefined field76_0x6b;
+    undefined field77_0x6c;
+    undefined field78_0x6d;
+    undefined field79_0x6e;
+    undefined field80_0x6f;
+    undefined field81_0x70;
+    undefined field82_0x71;
+    undefined field83_0x72;
+    undefined field84_0x73;
+    undefined field85_0x74;
+    undefined field86_0x75;
+    undefined field87_0x76;
+    undefined field88_0x77;
+    undefined field89_0x78;
+    undefined field90_0x79;
+    undefined field91_0x7a;
+    undefined field92_0x7b;
+    undefined field93_0x7c;
+    undefined field94_0x7d;
+    undefined field95_0x7e;
+    undefined field96_0x7f;
+    undefined field97_0x80;
+    undefined field98_0x81;
+    undefined field99_0x82;
+    undefined field100_0x83;
+    undefined field101_0x84;
+    undefined field102_0x85;
+    undefined field103_0x86;
+    undefined field104_0x87;
+    Set<void*> RenderViewSet;
+};
+
+END_NS()

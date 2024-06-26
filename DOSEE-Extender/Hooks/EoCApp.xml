@@ -260,6 +260,23 @@
 			48 83 c2 58 //    ADD        RDX,0x58
 			<Target Type="Indirect" Offset="@instance" Symbol="GlobalSwitches" />
 		</Mapping>
+		<Mapping Name="ecl::PartyManager">
+			@ref 48 8b 0d 24 9c 97 00 //      MOV        RCX,qword ptr [ecl_PartyManager]                 = ??
+			e8 b7 c9 f1 ff //      CALL       FUN_1408f1690                                    undefined FUN_1408f1690()
+			84 c0 //          TEST       AL,AL
+			75 2d //          JNZ        LAB_1409d4d0a
+			<Target Type="Indirect" Offset="@ref" Symbol="ecl_PartyManager" />
+		</Mapping>
+		<Mapping Name="ecl::PlayerManager">
+			@ref 48 8b 0d af 24 a7 00 //      MOV        param_1,qword ptr [ecl_PlayerManager]            = ??
+			0f b7 da //       MOVZX      EBX,playerId
+			@func e8 4f ca 00 00 //      CALL       GetCharacterByPlayerID                           ecl::Character * GetCharacterByP
+			48 8b f8 //       MOV        RDI,RAX
+			48 85 c0 //       TEST       RAX,RAX
+			0f 84 ae 00 00 00 //      JZ         LAB_14086f78b
+			<Target Type="Indirect" Offset="@ref" Symbol="ecl_PlayerManager" />
+			<Target Type="Indirect" Offset="@func" Symbol="ecl_PlayerManager_GetCharacterByPlayerID" />
+		</Mapping>
 		<Mapping Name="GetOsirisSaveFileVersion">
 			@func e8 b3 03 00 00
 			85 c0 //          TEST       EAX,EAX
@@ -282,6 +299,26 @@
 				90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
 			</Patch>
 		</Mapping>
+		<Mapping Name="ecl::LevelManager">
+			75 2e //          JNZ        LAB_140b23c7c
+			@ref 48 8b 05 c3 ac 82 00 //      MOV        RAX,qword ptr [ecl::LevelManager]                = NaP
+			48 83 78 08 00 //      CMP        qword ptr [RAX + 0x8],0x0
+			0f 84 a1 08 00 00 //      JZ         LAB_140b24501
+			<Target Type="Indirect" Offset="@ref" Symbol="ecl_LevelManager" />
+		</Mapping>
+		<Mapping Name="ecl::EoCClient">
+			@ref 48 8b 05 11 1c 92 00 //      MOV        RAX,qword ptr [ecl::EoCClient]                   = NaP
+			33 ff //          XOR        EDI,EDI
+			4d 8b e9 //       MOV        R13,R9
+			4c 8b 78 48 //    MOV        R15,qword ptr [RAX + 0x48]
+			41 8b 41 08 //    MOV        EAX,dword ptr [R9 + 0x8]
+			4c 8b e1 //       MOV        R12,RCX
+			05 64 ff ff ff //      ADD        EAX,0xffffff64
+			89 7c 24 38 //    MOV        dword ptr [RSP + local_200],EDI
+			83 f8 0a //       CMP        EAX,0xa
+			0f 87 00 05 00 00 //      JA         switchD_140a2cc4c::caseD_9d
+			<Target Type="Indirect" Offset="@ref" Symbol="ecl_EoCClient" />
+		</Mapping>
 		<Mapping Name="esv_ScriptParam entity Getters">
 			48 8b c8 //       MOV        RCX,RAX
 			@itemgetter e8 cf 28 02 00 //      CALL       esv::ScriptParam::GetItem                        esv::Item * GetItem(esv::ScriptP
@@ -290,6 +327,32 @@
 			@charactergetter e8 45 26 02 00 //      CALL       esv::ScriptParam::GetCharacter                   esv::Character * GetCharacter(es
 			<Target Type="Indirect" Offset="@itemgetter" Symbol="esv_ScriptParam_GetItem" />
 			<Target Type="Indirect" Offset="@charactergetter" Symbol="esv_ScriptParam_GetCharacter" />
+		</Mapping>
+		<Mapping Name="esv::CharacterManager">
+			@ref 48 8b 15 a6 50 7b 00 //      MOV        RDX,qword ptr [ls_ObjectFactory__esv_Character]  = ??
+			0f b7 c8 //       MOVZX      ECX,AX
+			3b 4a 24 //       CMP        ECX,dword ptr [RDX + 0x24]
+			0f 83 26 01 00 00 //      JNC        LAB_140b99bf4
+			<Target Type="Indirect" Offset="@ref" Symbol="ObjectFactory__esv_Character" />
+		</Mapping>
+		<Mapping Name="esv::ItemManager">
+			0f 84 c3 00 00 00 //      JZ         LAB_140c01edc
+			41 8b 04 24 //    MOV        EAX,dword ptr [R12]
+			@ref 48 8b 0d 2c cd 74 00 //      MOV        param_1,qword ptr [ls_ObjectFactory__esv_Item]   = ??
+			48 8d 54 24 50 //      LEA        param_2=>local_res8,[RSP + 0x50]
+			89 44 24 50 //    MOV        dword ptr [RSP + local_res8],EAX
+			e8 4e 7b 65 ff //      CALL       FUN_140259980                                    undefined FUN_140259980()
+			<Target Type="Indirect" Offset="@ref" Symbol="ObjectFactory__esv_Item" />
+		</Mapping>
+		<Mapping Name="esv::PartyManager">
+			@ref 48 8b 0d a3 a0 69 00 //      MOV        RCX,qword ptr [esv_PartyManager]                 = ??
+			48 8d 54 24 30 //      LEA        RDX=>local_88,[RSP + 0x30]
+			f3 0f 11 44 24 30 //      MOVSS      dword ptr [RSP + local_88],XMM0
+			f3 0f 10 45 40 //      MOVSS      XMM0,dword ptr [RBP + 0x40]
+			f3 0f 11 4c 24 34 //      MOVSS      dword ptr [RSP + local_88+0x4],XMM1
+			f3 0f 11 44 24 38 //      MOVSS      dword ptr [RSP + local_80],XMM0
+			e8 72 6a f4 ff //      CALL       FUN_140bfb4e0                                    undefined FUN_140bfb4e0()
+			<Target Type="Indirect" Offset="@ref" Symbol="esv_PartyManager" />
 		</Mapping>
 		<Mapping Name="esv::ScriptParam::DontCare">
 			41 80 e6 01 //    AND        R14B,0x1

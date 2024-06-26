@@ -1161,7 +1161,7 @@ struct Party
 	undefined field37_0x25;
 	undefined field38_0x26;
 	undefined field39_0x27;
-	ObjectSet<Character*> CharacterSet;
+	CompactSet<Character*> CharacterSet; // TODO which set type is this exactly?
 };
 
 
@@ -1657,7 +1657,7 @@ struct Party
 	undefined field53_0x35;
 	undefined field54_0x36;
 	undefined field55_0x37;
-	ObjectSet<Character*> CharacterSet;
+	Set<Character*> CharacterSet; // TODO which set type is this exactly?
 	undefined field77_0x50;
 	undefined field78_0x51;
 	undefined field79_0x52;

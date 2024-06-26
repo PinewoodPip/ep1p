@@ -19,6 +19,7 @@
 //#include <GameDefinitions/GameObjects/Material.h>
 //#include <GameDefinitions/GameObjects/Vision.h>
 #include <GameDefinitions/EntitySystem.h>
+#include <GameDefinitions/Character.h>
 #include <GameDefinitions/RPGStats.h>
 
 namespace dse
@@ -131,6 +132,9 @@ namespace dse
 		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetShadowResistance{ nullptr };
 
 		ComponentFactory<ecl::Character>** ObjectFactory__ecl_Character{ nullptr };
+		ComponentFactory<esv::Character>** ObjectFactory__esv_Character{ nullptr };
+
+		ComponentFactory<esv::Item>** ObjectFactory__esv_Item{ nullptr };
 		esv::PlanManager::ScriptParam** esv_ScriptParam_DontCare{ nullptr };
 
 		//typedef void (*ecl_PickingHelper_DoPickFunc)(ecl::PickingHelper* self);

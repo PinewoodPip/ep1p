@@ -91,9 +91,17 @@ namespace dse
 		SYM_OFF(IgPlayerCallMethod);
 		SYM_OFF(IgPlayerCreateFastNameUTF8);
 		SYM_OFF(GlobalSwitches);
+		SYM_OFF(ecl_PartyManager);
+		SYM_OFF(ecl_PlayerManager);
+		SYM_OFF(ecl_PlayerManager_GetCharacterByPlayerID);
 		SYM_OFF(GetOsirisSaveFileVersion);
 		SYM_OFF(RunStoryPatch);
+		SYM_OFF(ecl_LevelManager);
+		SYM_OFF(ecl_EoCClient);
+		SYM_OFF(esv_PartyManager);
 		SYM_OFF(esv_ScriptParam_DontCare);
+		SYM_OFF(ObjectFactory__esv_Character);
+		SYM_OFF(ObjectFactory__esv_Item);
 		SYM_OFF(ecl_GameStateEventManager_ExecuteGameStateChangedEvent);
 		SYM_OFF(ObjectPool__esv_ScriptParam_Release);
 		SYM_OFF(Effect_UpdateIsVisible);

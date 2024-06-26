@@ -22,6 +22,8 @@
 #include <GameDefinitions/RPGStats.h>
 #include <GameDefinitions/Input.h>
 #include <GameDefinitions/Misc.h>
+#include <GameDefinitions/Effect.h>
+#include <GameDefinitions/Player.h>
 #include <GameDefinitions/Level.h>
 #include <GameDefinitions/Inventory.h>
 
@@ -135,6 +137,9 @@ namespace dse
 		CDivinityStats_Character__GetResistanceFunc CDivinityStats_Character__GetShadowResistance{ nullptr };
 
 		ComponentFactory<ecl::Character>** ObjectFactory__ecl_Character{ nullptr };
+		ComponentFactory<esv::Character>** ObjectFactory__esv_Character{ nullptr };
+
+		ComponentFactory<esv::Item>** ObjectFactory__esv_Item{ nullptr };
 
 		using ecl_PickingHelper_DoPickProc = void (ecl::PickingHelper* self);
 		ecl_PickingHelper_DoPickProc* ecl_PickingHelper_DoPick{ nullptr };
@@ -142,13 +147,23 @@ namespace dse
 		using esv_ItemHelpers_GenerateTreasureItemProc = esv::Item* (void* request, int16_t unknown);
 		esv_ItemHelpers_GenerateTreasureItemProc* esv_ItemHelpers_GenerateTreasureItem{ nullptr };
 
+		ecl::PartyManager** ecl_PartyManager{ nullptr };
+
 		using RunStoryPatchProc = bool (void* param1, Path* path1, Path* path2);
 		RunStoryPatchProc* RunStoryPatch{ nullptr };
 
 		using GetOsirisSaveFileVersionProc = int (STDString* param1, Path* param2);
 		GetOsirisSaveFileVersionProc* GetOsirisSaveFileVersion{ nullptr };
+
+		using ecl_PlayerManager_GetCharacterByPlayerIDProc = ecl::Character* (ecl::PlayerManager* self, short playerID);
+		ecl_PlayerManager_GetCharacterByPlayerIDProc* ecl_PlayerManager_GetCharacterByPlayerID{ nullptr };
+
+		ecl::PlayerManager** ecl_PlayerManager{ nullptr };
 		ecl::LevelManager** ecl_LevelManager{ nullptr };
+		ecl::EoCClient** ecl_EoCClient{ nullptr };
+		esv::PartyManager** esv_PartyManager{ nullptr };
 		esv::PlanManager::ScriptParam** esv_ScriptParam_DontCare{ nullptr };
+
 		ecl::EocUIControl** ecl_EocUIControl{ nullptr };
 		GlobalSwitches** GlobalSwitches{ nullptr };
 
@@ -174,6 +189,7 @@ namespace dse
 
 		using ecl_EocUIControl_ShowCommonMessageBoxProc = void(ecl::EocUIControl* self, wchar_t* msg);
 		ecl_EocUIControl_ShowCommonMessageBoxProc* ecl_EocUIControl_ShowCommonMessageBox{ nullptr };
+
 		using esv_ScriptParam_GetCharacterProc = esv::Character* (esv::PlanManager::ScriptParam* self);
 		esv_ScriptParam_GetCharacterProc* esv_ScriptParam_GetCharacter{ nullptr };
 		using esv_ScriptParam_GetItemProc = esv::Item* (esv::PlanManager::ScriptParam* self);
