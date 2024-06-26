@@ -11,48 +11,156 @@ using namespace dse;
 
 void TargetInfo::Startup()
 {
-	gExtender->GetHooks().RegisterUIListener(UITypeID::UITypeID_TargetInfo, this);
+	gExtender->GetHooks().RegisterUIListener((int)UIObject::TypeID::TargetInfo, this);
+}
+
+int GetMaxAP(CDivinityStats_Character* stats)
+{
+	int maxAP = 0;
+	for (auto dynStat : stats->DynamicStats)
+	{
+		maxAP += dynStat->APMaximum;
+	}
+	return maxAP;
+}
+
+STDWString GetResistancesString(ecl::Character* character)
+{
+	CDivinityStats_Character* stats = character->Stats;
+	int32_t slashingResistance = GetStaticSymbols().CDivinityStats_Character__GetSlashingResistance(stats, false);
+	int32_t piercingResistance = GetStaticSymbols().CDivinityStats_Character__GetPiercingResistance(stats, false);
+	int32_t crushingResistance = GetStaticSymbols().CDivinityStats_Character__GetCrushingResistance(stats, false);
+	int32_t fireResistance = GetStaticSymbols().CDivinityStats_Character__GetFireResistance(stats, false);
+	int32_t waterResistance = GetStaticSymbols().CDivinityStats_Character__GetWaterResistance(stats, false);
+	int32_t earthResistance = GetStaticSymbols().CDivinityStats_Character__GetEarthResistance(stats, false);
+	int32_t airResistance = GetStaticSymbols().CDivinityStats_Character__GetAirResistance(stats, false);
+	int32_t poisonResistance = GetStaticSymbols().CDivinityStats_Character__GetPoisonResistance(stats, false);
+	int32_t tenebriumResistance = GetStaticSymbols().CDivinityStats_Character__GetShadowResistance(stats, false);
+	std::string formattedResistances = std::format("{}  {}  {}  {}  {}  {}\n{}  {}  {}",
+		Text::Colorize(std::format("{}%", std::to_string(fireResistance)), "f77c27"),
+		Text::Colorize(std::format("{}%", std::to_string(waterResistance)), "27aff6"),
+		Text::Colorize(std::format("{}%", std::to_string(earthResistance)), "aa7840"),
+		Text::Colorize(std::format("{}%", std::to_string(airResistance)), "8f83cb"),
+		Text::Colorize(std::format("{}%", std::to_string(poisonResistance)), "5bd42b"),
+		Text::Colorize(std::format("{}%", std::to_string(tenebriumResistance)), "5b34ca"),
+		Text::Colorize(std::format("S: {}%", std::to_string(slashingResistance)), "acacac"),
+		Text::Colorize(std::format("P: {}%", std::to_string(piercingResistance)), "acacac"),
+		Text::Colorize(std::format("C: {}%", std::to_string(crushingResistance)), "acacac")
+	);
+	
+	return STDWString(formattedResistances.begin(), formattedResistances.end());
+}
+
+ig::InvokeDataValue _CreateBoolInvokeData(bool value)
+{
+	ig::InvokeDataValue data = ig::InvokeDataValue();
+	data.TypeId = ig::DataType::Bool;
+	data.BoolVal = value;
+	return data;
+}
+
+ig::InvokeDataValue _CreateStringInvokeData(STDWString value)
+{
+	ig::InvokeDataValue data = ig::InvokeDataValue();
+	data.TypeId = ig::DataType::WString;
+	data.StringVal = "";
+	data.WStringVal = value;
+	data.BoolVal = false;
+	data.DoubleVal = 0;
+	return data;
+}
+
+void TargetInfo::UpdateResistances(UITargetInfo* ui, ig::InvokeDataValue* labelInvokeData)
+{
+	ecl::Character* character = gExtender->GetHooks().GetCurrentPickerCharacter();
+	ig::InvokeDataValue invokeData;
+
+
+	TryRegisterInvokes((UITargetInfo*)ui);
+	if (character)
+	{
+		// Show resistances under the healthbar
+		STDWString resistancesStr = GetResistancesString(character);
+		invokeData = _CreateStringInvokeData(resistancesStr);
+	}
+	else
+	{
+		invokeData = _CreateStringInvokeData(STDWString());
+	}
+	ui->FlashPlayer->Invoke1((uint64_t)UITargetInfo::Invokes::pipSetResistances, &invokeData);
+}
+
+void TargetInfo::UpdateHPBarText(UITargetInfo* ui)
+{
+	ecl::Character* character = gExtender->GetHooks().GetCurrentPickerCharacter();
+	ig::InvokeDataValue invokeData;
+
+	TryRegisterInvokes((UITargetInfo*)ui);
+	if (character)
+	{
+		// Show current and max HP
+		std::string healthBarHeaderLabel = std::format("{}/{} HP", character->Stats->CurrentHP, character->Stats->MaxHP);
+		auto str = dse::STDWString(healthBarHeaderLabel.begin(), healthBarHeaderLabel.end());
+		invokeData = _CreateStringInvokeData(str);
+	}
+	else
+	{
+		invokeData = _CreateStringInvokeData(STDWString());
+	}
+	ui->FlashPlayer->Invoke1((uint64_t)UITargetInfo::Invokes::pipSetHPBarText, &invokeData);
+}
+
+bool IsClientInCombat()
+{
+	auto manager = *gStaticSymbols->UIObjectManager__Instance;
+	for (int i = 0; i < manager->UIObjectsCount; ++i)
+	{
+		auto ui = manager->UIObjects[i];
+		if (ui->TypeID == (uint64_t)UIObject::TypeID::CombatTurn)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool TargetInfo::OnInvoke0(UIObject* ui, int64_t invokeEnum)
+{
+	if (invokeEnum == (uint64_t)UITargetInfo::Invokes::show)
+	{
+		// Update UI position offset
+		TryRegisterInvokes((UITargetInfo*)ui);
+		ig::InvokeDataValue invokeData = _CreateBoolInvokeData(IsClientInCombat());
+		ui->FlashPlayer->Invoke1((uint64_t)UITargetInfo::Invokes::pipSetInCombat, &invokeData);
+	}
+	return false;
+}
+
+bool TargetInfo::OnInvoke2(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2)
+{
+	if (invokeEnum == (uint64_t)UITargetInfo::Invokes::setHPBars)
+	{
+		UpdateHPBarText((UITargetInfo*)ui);
+	}
+	return false;
 }
 
 bool TargetInfo::OnInvoke3(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3)
 {
-	if (invokeEnum == 9) // setText
+	if (invokeEnum == (uint64_t)UITargetInfo::Invokes::setText)
 	{
-		ComponentHandle pointerCharacterHandle = gExtender->GetHooks().LastPickerCharacterHandle;
-		UITargetInfo* targetInfoUI = (UITargetInfo*)ui;
-		targetInfoUI->ShowHP = true;
-		ecl::Character* character = ClientCharacterUtils::GetCharacter(gExtender->GetHooks().LastPickerCharacterHandle);
-
-		if (character)
-		{
-			// Show resistances under the healthbar
-			CDivinityStats_Character* stats = character->Stats;
-			int32_t slashingResistance = GetStaticSymbols().CDivinityStats_Character__GetSlashingResistance(stats, false);
-			int32_t piercingResistance = GetStaticSymbols().CDivinityStats_Character__GetPiercingResistance(stats, false);
-			int32_t crushingResistance = GetStaticSymbols().CDivinityStats_Character__GetCrushingResistance(stats, false);
-			int32_t fireResistance = GetStaticSymbols().CDivinityStats_Character__GetFireResistance(stats, false);
-			int32_t waterResistance = GetStaticSymbols().CDivinityStats_Character__GetWaterResistance(stats, false);
-			int32_t earthResistance = GetStaticSymbols().CDivinityStats_Character__GetEarthResistance(stats, false);
-			int32_t airResistance = GetStaticSymbols().CDivinityStats_Character__GetAirResistance(stats, false);
-			int32_t poisonResistance = GetStaticSymbols().CDivinityStats_Character__GetPoisonResistance(stats, false);
-			int32_t tenebriumResistance = GetStaticSymbols().CDivinityStats_Character__GetShadowResistance(stats, false);
-			std::string formattedResistances = std::format("{}  {}  {}  {}  {}  {}\n{}  {}  {}",
-				Text::Colorize(std::format("{}%", std::to_string(fireResistance)), "f77c27"),
-				Text::Colorize(std::format("{}%", std::to_string(waterResistance)), "27aff6"),
-				Text::Colorize(std::format("{}%", std::to_string(earthResistance)), "aa7840"),
-				Text::Colorize(std::format("{}%", std::to_string(airResistance)), "8f83cb"),
-				Text::Colorize(std::format("{}%", std::to_string(poisonResistance)), "5bd42b"),
-				Text::Colorize(std::format("{}%", std::to_string(tenebriumResistance)), "5b34ca"),
-				Text::Colorize(std::format("S: {}%", std::to_string(slashingResistance)), "acacac"),
-				Text::Colorize(std::format("P: {}%", std::to_string(piercingResistance)), "acacac"),
-				Text::Colorize(std::format("C: {}%", std::to_string(crushingResistance)), "acacac")
-			);
-			invokeData2->WStringVal = dse::STDWString(formattedResistances.begin(), formattedResistances.end());
-
-			// Show current and max HP besides name
-			std::string healthBarHeaderLabel = std::format("{} - {}/{} HP", std::string(invokeData1->WStringVal.begin(), invokeData1->WStringVal.end()), character->Stats->CurrentHP, character->Stats->MaxHP);
-			invokeData1->WStringVal = dse::STDWString(healthBarHeaderLabel.begin(), healthBarHeaderLabel.end());
-		}
+		UpdateHPBarText((UITargetInfo*)ui);
+		UpdateResistances((UITargetInfo*)ui, invokeData2);
 	}
 	return false;
+}
+
+void TargetInfo::TryRegisterInvokes(UITargetInfo* ui)
+{
+	if (ui->FlashPlayer->Invokes.size() <= (uint64_t)UITargetInfo::Invokes::pipSetHPBarText)
+	{
+		ui->FlashPlayer->AddInvokeName((uint64_t)UITargetInfo::Invokes::pipSetHPBarText, _strdup("pipUpdateHPText"));
+		ui->FlashPlayer->AddInvokeName((uint64_t)UITargetInfo::Invokes::pipSetResistances, _strdup("pipUpdateResistancesText"));
+		ui->FlashPlayer->AddInvokeName((uint64_t)UITargetInfo::Invokes::pipSetInCombat, _strdup("pipSetInCombat"));
+	}
 }

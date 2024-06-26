@@ -115,8 +115,7 @@ namespace dse
 
 	void ScriptExtender::OnIggyTraceCallback(void* unknown1, void* unknown2, char const* msg)
 	{
-		LOG("[IGGY] TRACE:");
-		LOG(msg);
+		LOG(std::format("[IGGY] TRACE: {}", msg).c_str());
 	}
 
 	void ScriptExtender::OnIggyWarningCallback(void* unknown1, void* unknown2, int warningType, char const* msg)
@@ -133,7 +132,7 @@ namespace dse
 				return;
 			}
 		}
-		LOG("[IGGY] WARNING:", std::to_string(warningType).c_str(), msg);
+		LOG(std::format("[IGGY] WARNING: {} {}", warningType, msg).c_str());
 	}
 
 	void ScriptExtender::RegisterIggyCallbacks()

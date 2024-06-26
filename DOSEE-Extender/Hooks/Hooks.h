@@ -24,6 +24,22 @@ public:
 	virtual void OnGameStateChanged(int newState) = 0;
 };
 
+struct FlashPlayerHooks
+{
+	bool Hooked{ false };
+	ig::FlashPlayer::VMT* VMT{ nullptr };
+	ig::FlashPlayer::VMT::Invoke6Proc OriginalInvoke6{ nullptr };
+	ig::FlashPlayer::VMT::Invoke5Proc OriginalInvoke5{ nullptr };
+	ig::FlashPlayer::VMT::Invoke4Proc OriginalInvoke4{ nullptr };
+	ig::FlashPlayer::VMT::Invoke3Proc OriginalInvoke3{ nullptr };
+	ig::FlashPlayer::VMT::Invoke2Proc OriginalInvoke2{ nullptr };
+	ig::FlashPlayer::VMT::Invoke1Proc OriginalInvoke1{ nullptr };
+	ig::FlashPlayer::VMT::Invoke0Proc OriginalInvoke0{ nullptr };
+	ig::FlashPlayer::VMT::InvokeArgsProc OriginalInvokeArgs{ nullptr };
+
+	/*void Hook(ig::FlashPlayer::VMT* vmt);*/
+};
+
 class Hooks
 {
 public:
@@ -39,9 +55,14 @@ public:
 	void RegisterUIListener(int typeID, UIEventListener* listener);
 	void RegisterGameStateChangedListener(GameStateChangedEventListener* listener);
 
+	std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc>& GetOriginalUIObjectCallHandlers();
+	FlashPlayerHooks& GetFlashPlayerHooks();
+
 	ecl::Character* GetLastPickerCharacter();
+	ecl::Character* GetCurrentPickerCharacter();
 
 	ComponentHandle LastPickerCharacterHandle = {};
+	ComponentHandle CurrentPickerCharacterHandle = {};
 
 	std::unordered_map<int, std::vector<UIEventListener*>> EventListeners;
 	std::set<GameStateChangedEventListener*> GameStateChangedListeners;

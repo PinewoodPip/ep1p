@@ -242,13 +242,14 @@ namespace dse
 		ig::ValueSetF64Proc IgValueSetF64{ nullptr };
 		ig::ValueSetStringUTF8Proc IgValueSetStringUTF8{ nullptr };
 
-		ig::PlayerCreateFastNameUTF8 IgPlayerCreateFastNameUTF8{ nullptr };
-		ig::PlayerCallMethod IgPlayerCallMethod{ nullptr };
+		
 
 		*/
 
 		ig::SetWarningCallbackProc IgSetWarningCallback{ nullptr };
 		ig::SetTraceCallbackUTF8Proc IgSetTraceCallbackUTF8{ nullptr };
+		ig::PlayerCallMethod IgPlayerCallMethod{ nullptr };
+		ig::PlayerCreateFastNameUTF8 IgPlayerCreateFastNameUTF8{ nullptr };
 
 		void* DUMMY1{ nullptr };
 		std::map<uint8_t const*, EoCLibraryInfo> Libraries;

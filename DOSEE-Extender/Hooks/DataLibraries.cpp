@@ -88,6 +88,8 @@ namespace dse
 		SYM_OFF(ecl_ItemProtocol_UpdateItems);
 		SYM_OFF(IgSetWarningCallback);
 		SYM_OFF(IgSetTraceCallbackUTF8);
+		SYM_OFF(IgPlayerCallMethod);
+		SYM_OFF(IgPlayerCreateFastNameUTF8);
 		SYM_OFF(GlobalSwitches);
 		SYM_OFF(GetOsirisSaveFileVersion);
 		SYM_OFF(RunStoryPatch);

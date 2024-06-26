@@ -6,26 +6,12 @@
 #include "Utils/Text.h"
 #include "Extender/Utils/CharacterUtils.h"
 #include "GameDefinitions/UI.h"
+#include "GameDefinitions/Misc.h"
+#include <algorithm>
 
 BEGIN_SE()
 
 std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc> OriginalUIObjectCallHandlers;
-
-struct FlashPlayerHooks
-{
-	bool Hooked{ false };
-	ig::FlashPlayer::VMT* VMT{ nullptr };
-	ig::FlashPlayer::VMT::Invoke6Proc OriginalInvoke6{ nullptr };
-	ig::FlashPlayer::VMT::Invoke5Proc OriginalInvoke5{ nullptr };
-	ig::FlashPlayer::VMT::Invoke4Proc OriginalInvoke4{ nullptr };
-	ig::FlashPlayer::VMT::Invoke3Proc OriginalInvoke3{ nullptr };
-	ig::FlashPlayer::VMT::Invoke2Proc OriginalInvoke2{ nullptr };
-	ig::FlashPlayer::VMT::Invoke1Proc OriginalInvoke1{ nullptr };
-	ig::FlashPlayer::VMT::Invoke0Proc OriginalInvoke0{ nullptr };
-	ig::FlashPlayer::VMT::InvokeArgsProc OriginalInvokeArgs{ nullptr };
-
-	/*void Hook(ig::FlashPlayer::VMT* vmt);*/
-};
 
 FlashPlayerHooks flashPlayerHooks;
 
@@ -37,10 +23,12 @@ void Hooks::Startup()
 
 	auto& lib = gExtender->GetEngineHooks();
 
+#if defined(OSI_EOCAPP)
 	lib.UIObjectManager__CreateUIObject.SetPostHook(&Hooks::OnCreateUIObject, this);
 	lib.ecl_PickingHelper_DoPick.SetPostHook(&Hooks::OnPickingHelperDone, this);
 	lib.ls_InputManager_InjectInput.SetPreHook(&Hooks::OnInjectInput, this);
 	lib.ecl_GameStateEventManager_ExecuteGameStateChangedEvent.SetPostHook(&Hooks::OnGameStateChanged, this);
+#endif
 
 	loaded_ = true;
 }
@@ -92,6 +80,7 @@ void Hooks::OnPickingHelperDone(ecl::PickingHelper* self)
 	{
 		LastPickerCharacterHandle = characterHandle;
 	}
+	CurrentPickerCharacterHandle = character ? characterHandle : ComponentHandle();
 }
 
 static bool OnInvoke0(ig::FlashPlayer* flashPlayer, int64_t invokeEnum)
@@ -338,9 +327,24 @@ void Hooks::RegisterGameStateChangedListener(GameStateChangedEventListener* list
 	GameStateChangedListeners.insert(listener);
 }
 
+std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc>& Hooks::GetOriginalUIObjectCallHandlers()
+{
+	return OriginalUIObjectCallHandlers;
+}
+
+FlashPlayerHooks& Hooks::GetFlashPlayerHooks()
+{
+	return flashPlayerHooks;
+}
+
 ecl::Character* Hooks::GetLastPickerCharacter()
 {
 	return ClientCharacterUtils::GetCharacter(this->LastPickerCharacterHandle);
+}
+
+ecl::Character* Hooks::GetCurrentPickerCharacter()
+{
+	return ClientCharacterUtils::GetCharacter(this->CurrentPickerCharacterHandle);
 }
 
 void Hooks::OnInjectInput(InputManager* self, InputRawChange* change, bool unknown)

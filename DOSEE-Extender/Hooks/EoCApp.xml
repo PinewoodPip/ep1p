@@ -3,6 +3,8 @@
 	<Mappings Version="2.0.119.430" Default="true">
 		<DllImport Symbol="IgSetWarningCallback" Module="iggy_w64.dll" Proc="IggySetWarningCallback" />
 		<DllImport Symbol="IgSetTraceCallbackUTF8" Module="iggy_w64.dll" Proc="IggySetTraceCallbackUTF8" />
+		<DllImport Symbol="IgPlayerCallMethod" Module="iggy_w64.dll" Proc="IggyPlayerCallMethodRS" />
+		<DllImport Symbol="IgPlayerCreateFastNameUTF8" Module="iggy_w64.dll" Proc="IggyPlayerCreateFastNameUTF8" />
 		
 		<Mapping Name="ls::UIObjectManager::CreateUIObject">
 			48 8b cf

@@ -9,11 +9,6 @@
 
 namespace dse
 {
-	enum UITypeID
-	{
-		UITypeID_TargetInfo = 41,
-	};
-
 	namespace ig
 	{
 		enum class DataType : int32_t
@@ -35,12 +30,14 @@ namespace dse
 		struct InvokeDataValue
 		{
 			DataType TypeId;
+			undefined _Padding1[4];
 			STDString StringVal;
 			STDWString WStringVal;
 			bool BoolVal;
-			void* PointerVal;
-			void* unknown1;
-			double DoubleVal;
+			//void* PointerVal;
+			//void* unknown1;
+			undefined _Padding2[15];
+			float DoubleVal;
 		};
 
 		struct IggyValuePath
@@ -51,6 +48,12 @@ namespace dse
 			void* Ref;
 			int32_t ArrayIndex;
 			int32_t Type;
+		};
+
+		struct FlashInvokeName
+		{
+			void* IggyFastPathRef;
+			char* Name;
 		};
 
 		struct IggyDataValue
@@ -246,38 +249,49 @@ namespace dse
 			virtual bool Invoke1(int64_t invokeEnum, InvokeDataValue* a3) = 0;
 			virtual bool Invoke0(int64_t invokeEnum) = 0;
 			virtual bool InvokeArgs(int64_t invokeEnum, InvokeDataValue* args, unsigned numArgs) = 0;
+
 			virtual bool HasFreeStringScratchArea(uint64_t size) = 0;
 			virtual bool HasFreeWStringScratchArea(uint64_t size) = 0;
 			virtual bool HasInvokes() = 0;
 			virtual void field_A8() = 0;
 			virtual void InvokeByName(char const* name, uint64_t unknown, InvokeDataValue* arg) = 0;
+
 			virtual void SetRenderRectangle(glm::ivec2 const& topLeft, glm::ivec2 const& size, uint8_t type) = 0;
-			virtual void SetPosition(glm::ivec2 const& position) = 0;
-			virtual glm::ivec2 const& GetPosition() = 0;
-			virtual void field_D0() = 0;
+			//virtual void SetPosition(glm::ivec2 const& position) = 0;
+			virtual void FireResolutionEvents(int* resolution) = 0;
+			//virtual glm::ivec2 const& GetPosition() = 0;
+			virtual void GetSomething() = 0;
+			virtual void GetDisplaySize() = 0;
 			virtual void Render() = 0;
 			virtual void field_E0() = 0;
 			virtual void field_E8() = 0;
 			virtual void GetFlashMovieProperties() = 0;
 			virtual void GotoFrame(uint64_t frame) = 0;
 			virtual void ForceGotoFrame(uint64_t frame) = 0;
+
 			virtual FlashObject* CreateFlashObject(char const* path, int arrayIndex) = 0;
 			virtual ig::FlashObject* GetRootObject() = 0;
 			virtual void SetFrameRate(uint32_t frameRate) = 0;
 			virtual void SetPath(Path* path) = 0;
-			virtual void OnFunctionCalled() = 0;
+			//virtual void OnFunctionCalled() = 0;
 			virtual void Tick() = 0;
+
 			virtual void field_138() = 0;
 			virtual void Init() = 0;
+
 			virtual void OnEventTerminate() = 0;
-			virtual void Activate() = 0;
-			virtual void Deactivate() = 0;
+			virtual void UpdateMousePosition() = 0;
+
+			virtual void Activate() = 0; // TODO
+			virtual void Deactivate() = 0; // TODO
+
 			virtual void GainFocus() = 0;
-			virtual void LoseFocus() = 0;
-			virtual void CopyEditableValue() = 0;
+			virtual void SetMousePosition() = 0;
+
+			/*virtual void CopyEditableValue() = 0;
 			virtual void PasteEditableValue() = 0;
 			virtual void Cut() = 0;
-			virtual void SetFlashMousePosition() = 0;
+			virtual void SetFlashMousePosition() = 0;*/
 			virtual void SetupEventMapping() = 0;
 			virtual void SetStageSize(unsigned width, unsigned height) = 0;
 			virtual void AddInvokeName(int index, char const* name) = 0;
@@ -285,37 +299,42 @@ namespace dse
 			virtual void LoadTextureFile(Path* path) = 0;
 			virtual void EnableMouseProcessing() = 0;
 
+			undefined unknown[0x20];
+			ig::FlashObject* FlashRoot; // 0x28
+			ig::IggyValuePath* Parent;
+			undefined unknown2[8];
+			CompactSet<ig::FlashInvokeName> Invokes;
 
-			__int64 field_8;
-			glm::ivec2 Position;
-			glm::ivec2 RenderRectangeleSize;
-			glm::ivec2 RenderRectangeleSize2;
-			__int16 field_28;
-			void* IggyPlayer;
-			IggyValuePath* IggyPlayerRootPath;
-			ObjectSet<FlashInvokeDefinition> Invokes;
-			int FlashInvokePool;
-			int field_64;
-#if !defined(OSI_EOCAPP)
-			char const* PoolName;
-#endif
-			/*CRITICAL_SECTION CriticalSection;*/
-			char Invoked_M;
-			char field_99;
-			ObjectSet<FlashInvoke*> QueuedInvokes;
-			ObjectSet<FlashInvoke*> Invokes2;
-			ObjectSet<InvokeDataValue> InvokeValues;
-			ObjectSet<FlashPlayer*> FlashPlayers;
-			__int64 field_120;
-			__int64 field_128;
-			ig::FlashObject* RootFlashObject;
-			RefMap<uint32_t, uint32_t> InputEvents;
-			ScratchBuffer* ScratchString1;
-			ScratchBuffer* ScratchStringW;
-			ScratchBuffer* ScratchString2;
-			Path Path;
-			__int64 field_188;
-			__int64 field_190;
+//			__int64 field_8;
+//			glm::ivec2 Position;
+//			glm::ivec2 RenderRectangeleSize;
+//			glm::ivec2 RenderRectangeleSize2;
+//			__int16 field_28;
+//			void* IggyPlayer;
+//			IggyValuePath* IggyPlayerRootPath;
+//			ObjectSet<FlashInvokeDefinition> Invokes;
+//			int FlashInvokePool;
+//			int field_64;
+//#if !defined(OSI_EOCAPP)
+//			char const* PoolName;
+//#endif
+//			/*CRITICAL_SECTION CriticalSection;*/
+//			char Invoked_M;
+//			char field_99;
+//			ObjectSet<FlashInvoke*> QueuedInvokes;
+//			ObjectSet<FlashInvoke*> Invokes2;
+//			ObjectSet<InvokeDataValue> InvokeValues;
+//			ObjectSet<FlashPlayer*> FlashPlayers;
+//			__int64 field_120;
+//			__int64 field_128;
+//			ig::FlashObject* RootFlashObject;
+//			RefMap<uint32_t, uint32_t> InputEvents;
+//			ScratchBuffer* ScratchString1;
+//			ScratchBuffer* ScratchStringW;
+//			ScratchBuffer* ScratchString2;
+//			Path Path;
+//			__int64 field_188;
+//			__int64 field_190;
 		};
 
 		struct IggyBinding
@@ -385,6 +404,87 @@ namespace dse
 		typedef float (GetUIScaleMultiplierProc)(UIObject* self);
 		typedef void (RaiseFlagProc)(UIObject* self, UIObjectFlags flags);
 
+		enum class TypeID : int
+		{
+			ActionProgression = 0,
+			OptionsSettings0 = 1,
+			Book = 2,
+			Overhead = 4,
+			ChatLog = 5,
+			CombatLog = 6,
+			CombatTurn = 7,
+			ContainerInventory = 8,
+			ContextMenu = 9,
+			ControllerContextMenu = 10,
+			OptionsInput = 11,
+			Dialog = 12,
+			DummyOverhead = 13,
+			Equipment = 14,
+			Fade = 15,
+			OptionsSettings_Gameplay = 16,
+			MsgBox = 17,
+			InGameMenu = 18,
+			Inventory = 20,
+			ItemSplitter = 21,
+			Journal = 22,
+			LoadingScreen = 23,
+			ServerList = 24,
+			MainMenu = 26,
+			MessageBox = 27,
+			Minimap = 28,
+			MouseIcon = 29,
+			Subtitles = 30,
+			MultiplayerInGameMenu = 31,
+			ControllerInGameMenu = 32,
+			TextDisplay = 32,
+			OptionsSettings1 = 33,
+			Pickpocket = 35,
+			PlayerPortraits = 36,
+			SaveLoad = 37,
+			SkillBar = 38,
+			Skills = 39,
+			Stats = 40,
+			TargetInfo = 41,
+			TextDisplay_2 = 42,
+			Tooltip = 43,
+			OptionsSettings2 = 44,
+			Trade = 45,
+			Waypoints = 46,
+			WorldTooltip = 47,
+			Mods = 48,
+			UserProfile = 51,
+			CharacterAssign = 52,
+			Credits = 53,
+			ItemStackCombine = 55,
+			TutorialBox = 56,
+			TutorialLog = 57,
+			ControllerBottomBar = 62,
+			ControllerMinimap = 63,
+			StatsPanel_c = 67,
+			CharacterCreation = 76,
+			ControllerJournal = 77,
+			ControllerMainMenu = 79,
+			Trade_c = 80,
+			SaveLoad_c = 81,
+			ControllerMessageBox = 82,
+			MsgBox_c = 83,
+			GameMenu_c = 84,
+			Waypoints_c = 85,
+			ControllerSortBy = 86,
+			Installation = 87,
+			ControllerPartyManagement = 89,
+			ControllerPanelSelect = 90,
+			ControllerItemAction = 93,
+			ControllerCharacterAssign = 99,
+			TutorialBox_c = 102,
+			ControllerObjectContextMenu = 104,
+			Saving = 105,
+			FullscreenHUD = 106,
+			KeyboardCraft = 108,
+			Mods_c = 109,
+			Examine = 110
+		};
+
 		struct VMT
 		{
 			OnFunctionCalledProc OnFunctionCalled;
@@ -432,7 +532,6 @@ namespace dse
 			void* (*Unknown3)(UIObject* self);
 			void (*Unknown4)(UIObject* self, void* a1);
 		};
-
 
 		virtual void OnFunctionCalled(const char* a1, unsigned int a2, ig::InvokeDataValue* a3);
 		virtual void CustomDrawCallback(void* a1);
@@ -497,6 +596,7 @@ namespace dse
 		int MovieLayout;
 
 		char unknown2[20];
+
 		float UIScaleMultiplier;
 		char unknown3[4];
 		FixedString AnchorID;
@@ -507,7 +607,7 @@ namespace dse
 
 		char unknown5[6];
 		bool unknown6;
-		char unknown7;
+		bool unknown7;
 		bool HasTooltip_m;
 		char unknown8;
 		/*int BufferSizes;
@@ -591,6 +691,26 @@ namespace dse
 
 	struct UITargetInfo : UIObject
 	{
+		enum class Invokes : int
+		{
+			setHPColour = 1,
+			hide,
+			show,
+			clearTweens,
+			updateStatuses,
+			setHPBars,
+			setArmourBar,
+			setArmourBarColour,
+			setText,
+			requestAnchorCombatTurn,
+			requestAnchorScreen,
+
+			// PIP
+			pipSetHPBarText,
+			pipSetResistances,
+			pipSetInCombat,
+
+		};
 		char unknown1[64];
 		ComponentHandle TargetObjectHandle;
 		char unknown[18];
