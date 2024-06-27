@@ -10,6 +10,24 @@ extern HMODULE gThisModule;
 #define IDR_BINARY_MAPPINGS_EOCAPP      102
 #define IDR_BINARY_MAPPINGS_EOCPLUGIN      109
 
+inline std::string StringToUTF8(std::wstring_view s)
+{
+	int size = WideCharToMultiByte(CP_UTF8, 0, s.data(), (int)s.size(), NULL, 0, NULL, NULL);
+	std::string converted;
+	converted.resize(size);
+	WideCharToMultiByte(CP_UTF8, 0, s.data(), (int)s.size(), converted.data(), (int)converted.size(), NULL, NULL);
+	return converted;
+}
+
+inline std::wstring StringFromUTF8(std::string_view s)
+{
+	int size = MultiByteToWideChar(CP_UTF8, 0, s.data(), (int)s.size(), NULL, 0);
+	std::wstring converted;
+	converted.resize(size);
+	MultiByteToWideChar(CP_UTF8, 0, s.data(), (int)s.size(), converted.data(), (int)converted.size());
+	return converted;
+}
+
 std::optional<std::string> GetExeResource(int resourceId);
 
 [[noreturn]]

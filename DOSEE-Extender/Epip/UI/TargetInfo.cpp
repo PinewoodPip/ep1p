@@ -6,6 +6,7 @@
 #include "Hooks/Hooks.h"
 #include "Extender/Utils/CharacterUtils.h"
 #include "GameDefinitions/UI.h"
+#include "Epip/EpipSettings.h"
 
 using namespace dse;
 
@@ -77,7 +78,7 @@ void TargetInfo::UpdateResistances(UITargetInfo* ui, ig::InvokeDataValue* labelI
 
 
 	TryRegisterInvokes((UITargetInfo*)ui);
-	if (character)
+	if (character && gSettings->ExtraTargetInfo)
 	{
 		// Show resistances under the healthbar
 		STDWString resistancesStr = GetResistancesString(character);

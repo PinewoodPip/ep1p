@@ -46,8 +46,6 @@ void SetupExtender(HMODULE hModule)
 {
 	dse::gExtender = std::make_unique<dse::ScriptExtender>();
 	gEpip = std::make_unique<Epip>();
-	/*auto& config = dse::gExtender->GetConfig();
-	LoadConfig(GetConfigPath(), config);*/
 
 	DisableThreadLibraryCalls(hModule);
 

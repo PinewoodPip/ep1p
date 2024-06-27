@@ -675,6 +675,29 @@ namespace dse
 		void SetMovieClipSize(float width, float height, std::optional<float> scale);
 	};
 
+	struct UIGameOptionsMenu : UIObject
+	{
+		enum Invokes
+		{
+			setTopTitle = 1,
+			setTitle,
+			setButtonText,
+			addMenuLabel,
+			addMenuDropDown,
+			addMenuDropDownEntry,
+			selectMenuDropDownEntry,
+			setMenuDropDownEnabled,
+			setMenuDropDownDisabledTooltip,
+			addMenuCheckbox,
+			setMenuCheckbox,
+			addMenuSlider,
+			addCheckBoxOptions,
+			addBtnHint,
+			clearBtnHints,
+			addingDone,
+		};
+	};
+
 	struct ecl::PickingHelper
 	{
 		char unknown1[104];

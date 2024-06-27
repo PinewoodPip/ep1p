@@ -1,14 +1,25 @@
 #include "pch.h"
 #include "ScriptBugWatchdog.h"
 #include "Extender/ScriptExtender.h"
+#include "Epip/EpipSettings.h"
 
 void ScriptBugWatchdog::Setup()
 {
 	auto& lib = gExtender->GetEngineHooks();
+	// Always run the warning.
 #if defined(OSI_EOCAPP)
 	lib.esv_ActivationManager_ThrowOnCharacterItemEvent.SetWrapper(&ScriptBugWatchdog::OnActivateCharacterItemEvent, this);
 #endif
-	lib.ObjectPool__esv_ScriptParam_Release.SetWrapper(&ScriptBugWatchdog::OnScriptParamRelease, this);
+	// Editor build does not use the setting file.
+#if defined(OSI_EOCPLUGIN)
+	bool workaroundEnabled = true;
+#else
+	bool workaroundEnabled = gSettings->FixDontCareScriptParam;
+#endif
+	if (workaroundEnabled)
+	{
+		lib.ObjectPool__esv_ScriptParam_Release.SetWrapper(&ScriptBugWatchdog::OnScriptParamRelease, this);
+	}
 }
 
 bool IsParamTypeWrong(esv::PlanManager::ScriptParam* param, esv::PlanManager::ScriptParam::ParamType expectedType)

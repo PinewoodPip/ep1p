@@ -2,14 +2,18 @@
 #include "WorldTooltips.h"
 #include "Extender/ScriptExtender.h"
 #include <GameDefinitions/Item.h>
+#include "Epip/EpipSettings.h"
 
 using namespace dse;
 using namespace epip;
 
 void WorldTooltips::Setup()
 {
-	auto& lib = gExtender->GetEngineHooks();
-	lib.ecl_ItemProtocol_UpdateItems.SetPostHook(&WorldTooltips::OnUpdateItems, this);
+	if (gSettings->MoreWorldTooltips)
+	{
+		auto& lib = gExtender->GetEngineHooks();
+		lib.ecl_ItemProtocol_UpdateItems.SetPostHook(&WorldTooltips::OnUpdateItems, this);
+	}
 }
 
 eoc::IActionData* GetActionData(eoc::ItemTemplate* itemTemplate, eoc::IActionData::ActionType type)

@@ -265,7 +265,7 @@ namespace dse
 
 	void LibraryManager::ApplyCodePatches()
 	{
-		//ApplyCodePatch("ecl::UIExamine::SetupInformation Loremaster patch");
+
 	}
 
 

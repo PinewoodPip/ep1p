@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "SharedCivils.h"
 #include "Extender/ScriptExtender.h"
+#include "Epip/EpipSettings.h"
 
 using namespace dse;
 using namespace epip;
@@ -23,8 +24,12 @@ int GetLuck(CDivinityStats_Character* stats)
 void SharedCivils::Setup()
 {
 	auto& lib = gExtender->GetEngineHooks();
-	lib.CDivinityStats_Character_GetAbilityBoostFromPrimaryStat.SetWrapper(&SharedCivils::OnCharacterStatsGetAbilityBoostFromPrimaryStat, this);
-	lib.esv_Item_GenerateTreasure.SetWrapper(&SharedCivils::OnItemGenerateTreasure, this);
+	lib.CDivinityStats_Character_GetAbilityBoostFromPrimaryStat.SetWrapper(&SharedCivils::OnCharacterStatsGetAbilityBoostFromPrimaryStat, this); // Always hook this as it might be used by multiple tweaks.
+
+	if (gSettings->SharedLuckyCharmLooting)
+	{
+		lib.esv_Item_GenerateTreasure.SetWrapper(&SharedCivils::OnItemGenerateTreasure, this);
+	}
 }
 
 void SharedCivils::OnItemGenerateTreasure(StaticSymbols::esv_Item_GenerateTreasureProc* next, esv::Item* item, esv::Character* character)
