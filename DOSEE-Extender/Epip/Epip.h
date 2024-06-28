@@ -12,6 +12,7 @@
 #include "AutoIdentify.h"
 #include "DeadPartyXP.h"
 #include "UI/ExamineTweaks.h"
+#include "CameraTweaks.h"
 
 using namespace epip;
 
@@ -36,6 +37,7 @@ private:
 	AutoIdentify _AutoIdentify;
 	DeadPartyXP _DeadPartyXP;
 	ExamineTweaks _ExamineTweaks;
+	CameraTweaks _CameraTweaks;
 };
 
 END_NS()

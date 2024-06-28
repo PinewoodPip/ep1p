@@ -21,6 +21,7 @@ void Epip::Startup()
 	this->_AutoIdentify.Setup();
 	this->_DeadPartyXP.Setup();
 	this->_ExamineTweaks.Setup();
+	this->_CameraTweaks.Setup();
 #endif
 	this->_ScriptBugWatchdog.Setup();
 }
@@ -42,6 +43,7 @@ void Epip::LoadConfig(std::wstring const& configPath, EpipSettings& config)
 
 #define EPIP_FOR_SETTING(setting) config.ConfigGet(root, #setting, config.setting);
 	EPIP_FOR_ALL_BOOL_SETTINGS();
+	EPIP_FOR_ALL_FLOAT_SETTINGS();
 #define EPIP_FOR_SETTING(setting) uint32_t setting##Temp; \
 	config.ConfigGet(root, #setting, setting##Temp); \
 	config.setting = (EpipSettings::setting##Choices)setting##Temp;

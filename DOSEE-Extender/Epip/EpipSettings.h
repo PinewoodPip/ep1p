@@ -23,6 +23,9 @@ BEGIN_NS(epip)
 #define EPIP_FOR_ALL_ENUM_SETTINGS() \
 	EPIP_FOR_SETTING(ExamineInformation)
 
+#define EPIP_FOR_ALL_FLOAT_SETTINGS() \
+	EPIP_FOR_SETTING(CameraMaxDistance)
+
 struct EpipSettings
 {
 public:
@@ -41,6 +44,7 @@ public:
 		StoryLogging,
 		FixDontCareScriptParam,
 		FixSkillRangeGFX,
+		CameraMaxDistance,
 	};
 	enum class ExamineInformationChoices
 	{
@@ -62,6 +66,7 @@ public:
 	bool StoryLogging = false;
 	bool FixDontCareScriptParam = true;
 	bool FixSkillRangeGFX = true;
+	float CameraMaxDistance = 19.0f; // Game default
 
 	void SetByID(int id, bool value)
 	{
@@ -74,6 +79,13 @@ public:
 	{
 #define EPIP_FOR_SETTING(setting) if (id == (int)Settings::setting) setting = (setting##Choices) value;
 		EPIP_FOR_ALL_ENUM_SETTINGS();
+#undef EPIP_FOR_SETTING
+	}
+
+	void SetByID(int id, float value)
+	{
+#define EPIP_FOR_SETTING(setting) if (id == (int)Settings::setting) setting = value;
+		EPIP_FOR_ALL_FLOAT_SETTINGS();
 #undef EPIP_FOR_SETTING
 	}
 
@@ -110,6 +122,14 @@ public:
 		}
 	}
 
+	void ConfigGet(Json::Value& node, char const* key, float& value)
+	{
+		auto configVar = node[key];
+		if (!configVar.isNull() && configVar.isDouble()) {
+			value = configVar.asDouble();
+		}
+	}
+
 	void ConfigGet(Json::Value& node, char const* key, std::wstring& value)
 	{
 		auto configVar = node[key];
@@ -123,6 +143,7 @@ public:
 		Json::Value root;
 #define EPIP_FOR_SETTING(setting) root[#setting] = setting;
 		EPIP_FOR_ALL_BOOL_SETTINGS();
+		EPIP_FOR_ALL_FLOAT_SETTINGS();
 #define EPIP_FOR_SETTING(setting) root[#setting] = (int)setting;
 		EPIP_FOR_ALL_ENUM_SETTINGS();
 #undef EPIP_FOR_SETTING

@@ -13,6 +13,7 @@ public:
 	void RenderLabel(ig::FlashPlayer* flashPlayer, STDWString label);
 	void RenderComboBox(ig::FlashPlayer* flashPlayer, int id, STDWString label, STDWString tooltip, std::vector<STDWString> options, int selectedIndex);
 	void RenderCheckbox(ig::FlashPlayer* flashPlayer, const int id, const STDWString label, bool enabled, int stateID, bool filtered, const STDWString tooltip);
+	void RenderSlider(ig::FlashPlayer* flashPlayer, const int id, const STDWString label, float amount, float minimum, float maximum, int snapInterval, bool hideNumbers, const STDWString tooltip);
 	void ApplyPendingChanges();
 	void SaveToFile();
 
