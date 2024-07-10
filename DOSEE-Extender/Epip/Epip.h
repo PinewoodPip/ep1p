@@ -1,6 +1,7 @@
 #pragma once
 #include "EpipSettings.h"
 #include "UI/TargetInfo.h"
+#include "UI/KeyboardBottomBar.h"
 #include "UI/GameOptionsSettings.h"
 #include "WorldTooltips.h"
 #include "InfiniteCarryWeight.h"

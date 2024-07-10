@@ -90,9 +90,9 @@ static bool OnInvoke0(ig::FlashPlayer* flashPlayer, int64_t invokeEnum)
 	{
 		//LOG(L"Invoke0 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeID))
+		if (hooks.EventListeners.contains(ui->TypeId))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke0(ui, invokeEnum);
@@ -109,9 +109,9 @@ static bool OnInvoke1(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	{
 		//LOG(L"Invoke1 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeID))
+		if (hooks.EventListeners.contains(ui->TypeId))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke1(ui, invokeEnum, invokeData1);
@@ -128,7 +128,7 @@ static bool OnInvoke2(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	{
 		//LOG(L"Invoke2 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeID))
+		if (hooks.EventListeners.contains(ui->TypeId))
 		{
 			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
 			for (auto listener : listeners)
@@ -147,9 +147,9 @@ static bool OnInvoke3(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	{
 		//LOG(L"Invoke3 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeID))
+		if (hooks.EventListeners.contains(ui->TypeId))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke3(ui, invokeEnum, invokeData1, invokeData2, invokeData3);
@@ -166,9 +166,9 @@ static bool OnInvoke4(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	{
 		//LOG(L"Invoke4 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeID))
+		if (hooks.EventListeners.contains(ui->TypeId))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke4(ui, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4);
@@ -185,9 +185,9 @@ static bool OnInvoke5(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	{
 		//LOG(L"Invoke5 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeID))
+		if (hooks.EventListeners.contains(ui->TypeId))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke5(ui, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4, invokeData5);
@@ -204,9 +204,9 @@ static bool OnInvoke6(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 	{
 		//LOG(L"Invoke6 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeID))
+		if (hooks.EventListeners.contains(ui->TypeId))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke6(ui, invokeEnum, invokeData1, invokeData2, invokeData3, invokeData4, invokeData5, invokeData6);
@@ -289,9 +289,9 @@ void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned 
 
 	// Forward event to listeners
 	Hooks hooks = gExtender->GetHooks();
-	if (hooks.EventListeners.contains(self->TypeID))
+	if (hooks.EventListeners.contains(self->TypeId))
 	{
-		auto listeners = hooks.EventListeners.find(self->TypeID)->second;
+		auto listeners = hooks.EventListeners.find(self->TypeId)->second;
 		for (auto listener : listeners)
 		{
 			listener->OnFunctionCalled(function, numArgs, args);

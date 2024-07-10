@@ -602,7 +602,7 @@ namespace dse
 		FixedString AnchorID;
 		char unknown4[8];
 		ObjectHandle SomeHandle;
-		uint32_t TypeID;
+		uint32_t TypeId;
 		short OwnerPlayerID;
 
 		char unknown5[6];
@@ -710,6 +710,292 @@ namespace dse
 	struct ecl::EocUIControl
 	{
 		// TODO
+	};
+
+	struct UIKeyboardBottomBar : UIObject
+	{
+		enum class Invokes : int
+		{
+			setAnchor,
+			setHPColour,
+			setActiveAp,
+			setmaxAp,
+			setBonusAp,
+			setAvailableAp,
+			setGreyAp,
+			setArmourBar,
+			setArmourBarColour,
+			setExp,
+			setHealth,
+			setSlotCooldown,
+			updateSlots,
+			setSlowPreviewEnabled,
+			setSlotEnabled,
+			setAllSlotsEnabled,
+			showActiveSkill,
+			clearAll,
+			updateSlotData,
+			setBarSelectorVisible,
+			setSneakBtnState,
+			setStanceBtnState,
+			setBtnDisabled,
+			setBtnTooltip,
+			setBarSelectorText,
+
+			// PIP
+			pipSetExtendedMode,
+		};
+		/*undefined field1_0xb4;
+		undefined field2_0xb5;
+		undefined field3_0xb6;
+		undefined field4_0xb7;*/
+		undefined field5_0xb8;
+		undefined field6_0xb9;
+		undefined field7_0xba;
+		undefined field8_0xbb;
+		undefined field9_0xbc;
+		undefined field10_0xbd;
+		undefined field11_0xbe;
+		undefined field12_0xbf;
+		undefined field13_0xc0;
+		undefined field14_0xc1;
+		undefined field15_0xc2;
+		undefined field16_0xc3;
+		undefined field17_0xc4;
+		undefined field18_0xc5;
+		undefined field19_0xc6;
+		undefined field20_0xc7;
+		undefined field21_0xc8;
+		undefined field22_0xc9;
+		undefined field23_0xca;
+		undefined field24_0xcb;
+		undefined field25_0xcc;
+		undefined field26_0xcd;
+		undefined field27_0xce;
+		undefined field28_0xcf;
+		undefined field29_0xd0;
+		undefined field30_0xd1;
+		undefined field31_0xd2;
+		undefined field32_0xd3;
+		undefined field33_0xd4;
+		undefined field34_0xd5;
+		undefined field35_0xd6;
+		undefined field36_0xd7;
+		int CurrentMaxAP;
+		undefined field38_0xdc;
+		undefined field39_0xdd;
+		undefined field40_0xde;
+		undefined field41_0xdf;
+		undefined field42_0xe0;
+		undefined field43_0xe1;
+		undefined field44_0xe2;
+		undefined field45_0xe3;
+		int SomethingAPRelated;
+		undefined field47_0xe8;
+		undefined field48_0xe9;
+		undefined field49_0xea;
+		undefined field50_0xeb;
+		undefined field51_0xec;
+		undefined field52_0xed;
+		undefined field53_0xee;
+		undefined field54_0xef;
+		undefined field55_0xf0;
+		undefined field56_0xf1;
+		undefined field57_0xf2;
+		undefined field58_0xf3;
+		undefined field59_0xf4;
+		undefined field60_0xf5;
+		undefined field61_0xf6;
+		undefined field62_0xf7;
+		undefined field63_0xf8;
+		undefined field64_0xf9;
+		undefined field65_0xfa;
+		undefined field66_0xfb;
+		undefined field67_0xfc;
+		undefined field68_0xfd;
+		undefined field69_0xfe;
+		undefined field70_0xff;
+		undefined field71_0x100;
+		undefined field72_0x101;
+		undefined field73_0x102;
+		undefined field74_0x103;
+		undefined field75_0x104;
+		undefined field76_0x105;
+		undefined field77_0x106;
+		undefined field78_0x107;
+		undefined field79_0x108;
+		undefined field80_0x109;
+		undefined field81_0x10a;
+		undefined field82_0x10b;
+		undefined field83_0x10c;
+		undefined field84_0x10d;
+		undefined field85_0x10e;
+		undefined field86_0x10f;
+		undefined field87_0x110;
+		char CurrentRow; /* Created by retype action */
+		undefined1 HotbarFlags_m; /* Created by retype action */
+		undefined field90_0x113;
+		undefined field91_0x114;
+		undefined field92_0x115;
+		undefined field93_0x116;
+		undefined field94_0x117;
+		undefined field95_0x118;
+		undefined field96_0x119;
+		undefined field97_0x11a;
+		undefined field98_0x11b;
+		undefined field99_0x11c;
+		undefined field100_0x11d;
+		undefined field101_0x11e;
+		undefined field102_0x11f;
+		undefined field103_0x120;
+		undefined field104_0x121;
+		undefined field105_0x122;
+		undefined field106_0x123;
+		undefined field107_0x124;
+		undefined field108_0x125;
+		undefined field109_0x126;
+		undefined field110_0x127;
+		undefined field111_0x128;
+		undefined field112_0x129;
+		undefined field113_0x12a;
+		undefined field114_0x12b;
+		undefined field115_0x12c;
+		undefined field116_0x12d;
+		undefined field117_0x12e;
+		undefined field118_0x12f;
+		undefined1 SlotIconsDrawStruct_m; /* Created by retype action */
+		undefined field120_0x131;
+		undefined field121_0x132;
+		undefined field122_0x133;
+		undefined field123_0x134;
+		undefined field124_0x135;
+		undefined field125_0x136;
+		undefined field126_0x137;
+		undefined field127_0x138;
+		undefined field128_0x139;
+		undefined field129_0x13a;
+		undefined field130_0x13b;
+		undefined field131_0x13c;
+		undefined field132_0x13d;
+		undefined field133_0x13e;
+		undefined field134_0x13f;
+		undefined field135_0x140;
+		undefined field136_0x141;
+		undefined field137_0x142;
+		undefined field138_0x143;
+		undefined field139_0x144;
+		undefined field140_0x145;
+		undefined field141_0x146;
+		undefined field142_0x147;
+		undefined field143_0x148;
+		undefined field144_0x149;
+		undefined field145_0x14a;
+		undefined field146_0x14b;
+		undefined field147_0x14c;
+		undefined field148_0x14d;
+		undefined field149_0x14e;
+		undefined field150_0x14f;
+		undefined field151_0x150;
+		undefined field152_0x151;
+		undefined field153_0x152;
+		undefined field154_0x153;
+		undefined field155_0x154;
+		undefined field156_0x155;
+		undefined field157_0x156;
+		undefined field158_0x157;
+		undefined field159_0x158;
+		undefined field160_0x159;
+		undefined field161_0x15a;
+		undefined field162_0x15b;
+		undefined field163_0x15c;
+		undefined field164_0x15d;
+		undefined field165_0x15e;
+		undefined field166_0x15f;
+		uint field167_0x160;
+		undefined field168_0x164;
+		undefined field169_0x165;
+		undefined field170_0x166;
+		undefined field171_0x167;
+		undefined field172_0x168;
+		undefined field173_0x169;
+		undefined field174_0x16a;
+		undefined field175_0x16b;
+		undefined field176_0x16c;
+		undefined field177_0x16d;
+		undefined field178_0x16e;
+		undefined field179_0x16f;
+		void* SlotDataSet; /* Created by retype action */
+		undefined field181_0x178;
+		undefined field182_0x179;
+		undefined field183_0x17a;
+		undefined field184_0x17b;
+		uint SlotDataSetcount; /* Created by retype action */
+		undefined field186_0x180;
+		undefined field187_0x181;
+		undefined field188_0x182;
+		undefined field189_0x183;
+		undefined field190_0x184;
+		undefined field191_0x185;
+		undefined field192_0x186;
+		undefined field193_0x187;
+		undefined field194_0x188;
+		undefined field195_0x189;
+		undefined field196_0x18a;
+		undefined field197_0x18b;
+		undefined field198_0x18c;
+		undefined field199_0x18d;
+		undefined field200_0x18e;
+		undefined field201_0x18f;
+		undefined1 SlotIconDrawStruct_m; /* Created by retype action */
+		undefined field203_0x191;
+		undefined field204_0x192;
+		undefined field205_0x193;
+		undefined field206_0x194;
+		undefined field207_0x195;
+		undefined field208_0x196;
+		undefined field209_0x197;
+		undefined field210_0x198;
+		undefined field211_0x199;
+		undefined field212_0x19a;
+		undefined field213_0x19b;
+		int field214_0x19c;
+		undefined field215_0x1a0;
+		undefined field216_0x1a1;
+		undefined field217_0x1a2;
+		undefined field218_0x1a3;
+		undefined field219_0x1a4;
+		undefined field220_0x1a5;
+		undefined field221_0x1a6;
+		undefined field222_0x1a7;
+		int field223_0x1a8;
+		int LastHoveredSkillAPCost;
+		undefined field225_0x1b0;
+		undefined field226_0x1b1;
+		undefined field227_0x1b2;
+		undefined field228_0x1b3;
+		int CurrentHoveredSlotIndex;
+		undefined field230_0x1b8;
+		undefined field231_0x1b9;
+		undefined field232_0x1ba;
+		undefined field233_0x1bb;
+		char SomeFlags; /* Created by retype action */
+		undefined field235_0x1bd;
+		undefined field236_0x1be;
+		undefined field237_0x1bf;
+		undefined field238_0x1c0;
+		undefined field239_0x1c1;
+		undefined field240_0x1c2;
+		undefined field241_0x1c3;
+		undefined field242_0x1c4;
+		undefined field243_0x1c5;
+		undefined field244_0x1c6;
+		undefined field245_0x1c7;
+		undefined field246_0x1c8;
+		undefined field247_0x1c9;
+		undefined field248_0x1ca;
+		undefined field249_0x1cb;
+		uint SomeSlotIndex;
+		undefined1 SomeFlags2; /* Created by retype action */
 	};
 
 	struct UITargetInfo : UIObject

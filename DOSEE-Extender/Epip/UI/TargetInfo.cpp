@@ -117,7 +117,7 @@ bool IsClientInCombat()
 	for (int i = 0; i < manager->UIObjectsCount; ++i)
 	{
 		auto ui = manager->UIObjects[i];
-		if (ui->TypeID == (uint64_t)UIObject::TypeID::CombatTurn)
+		if (ui->TypeId == (uint64_t)UIObject::TypeID::CombatTurn)
 		{
 			return true;
 		}

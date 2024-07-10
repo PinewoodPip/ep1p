@@ -254,6 +254,92 @@
 			e9 f0 04 00 00 //      JMP        LAB_140a39267
 			<Target Type="Indirect" Offset="@call" Symbol="ecl_ItemProtocol_UpdateItems" />
 		</Mapping>
+		<Mapping Name="ecl::UIBottomBar::FillIconBuffer patch">
+			8d 3c 80 //       LEA        EDI,[RAX + RAX*0x4]
+			03 ff //          ADD        index,index
+			@patch 8d 6f 0a //       LEA        EBP,[index + 0xa]
+			3b fd //          CMP        index,EBP
+			0f 83 de 01 00 00 //      JNC        LAB_140a1ce0a
+			<Patch Type="Absolute" Offset="@patch">
+				8d 6f 14
+			</Patch>
+		</Mapping>
+		<Mapping Name="ecl::UIKeyboardBottomBar::ctor patch">
+			@patch1 41 8d 4c 24 d8 //      LEA        param_1,[R12 + -0x28]
+			48 89 87 70 01 00 00 //      MOV        qword ptr [RDI + 0x170],RAX
+			48 8d 05 4e f4 66 00 //      LEA        RAX,[PTR_FUN_14108f7b8]                          = 1401d6140
+			48 89 87 68 01 00 00 //      MOV        qword ptr [RDI + 0x168],RAX=>PTR_FUN_14108f7b8   = 1401d6140
+			4c 89 af a0 01 00 00 //      MOV        qword ptr [RDI + 0x1a0],R13
+			e8 63 e6 60 ff //      CALL       CreateIconAtlasDrawStruct                        FixedString * CreateIconAtlasDra
+			48 89 87 90 01 00 00 //      MOV        qword ptr [RDI + 0x190],RAX
+			@patch2 48 c7 87 98 01 00 00 0a 00 00 00 //      MOV        qword ptr [RDI + 0x198],0xa
+			<Patch Type="Absolute" Offset="@patch1">
+				41 8d 4c 24 e2
+			</Patch>
+			<Patch Type="Absolute" Offset="@patch2">
+				48 c7 87 98 01 00 00 14 00 00 00
+			</Patch>
+		</Mapping>
+		<Mapping Name="ecl::UIBottomBar::SetSlot patch">
+			49 8b f0 //       MOV        RSI,param_3
+			44 8b f2 //       MOV        R14D,param_2
+			8d 1c 80 //       LEA        EBX,[RAX + RAX*0x4]
+			48 8b e9 //       MOV        RBP,param_1
+			03 db //          ADD        EBX,EBX
+			@patch 44 8d 7b 0a //    LEA        R15D,[RBX + 0xa]
+			41 3b df //       CMP        EBX,R15D
+			73 5c //          JNC        LAB_140a1f01d
+			<Patch Type="Absolute" Offset="@patch">
+				44 8d 7b 14
+			</Patch>
+		</Mapping>
+		<Mapping Name="ecl::UIBottomBar::UpdateSlots patch">
+			@patch 8d 48 0a //       LEA        param_1,[RAX + 0xa]
+			89 44 24 28 //    MOV        dword ptr [RSP + local_150],EAX
+			89 4c 24 2c //    MOV        dword ptr [RSP + stopIndex],param_1
+			3b c1 //          CMP        EAX,param_1
+			0f 83 45 07 00 00 //      JNC        LAB_140a20164
+			<Patch Type="Absolute" Offset="@patch">
+				8d 48 14
+			</Patch>
+		</Mapping>
+		<Mapping Name="ecl::UIBottomBar::UpdateSlots and UpdateSlotCooldowns">
+			@call1 e8 ae d6 ff ff //      CALL       ecl::UIBottomBar::UpdateSlotCooldowns            undefined UpdateSlotCooldowns()
+			f6 86 bc 01 00 00 08 //      TEST       byte ptr [RSI + 0x1bc],0x8
+			74 08 //          JZ         LAB_140a21eb3
+			48 8b ce //       MOV        param_1,RSI
+			@call2 e8 5d da ff ff //      CALL       ecl::UIBottomBar::UpdateSlots                    undefined UpdateSlots(ecl::UIBot
+			<Target Type="Indirect" Offset="@call1" Symbol="ecl_UIBottomBar_UpdateSlotCooldowns" />
+			<Target Type="Indirect" Offset="@call2" Symbol="ecl_UIBottomBar_UpdateSlots" />
+		</Mapping>
+		<Mapping Name="ecl::UIBottomBar::UpdateSlots2 patch">
+			e8 16 fc ff ff //      CALL       ecl::UIBottomBar::UpdateSpecificSlot             undefined UpdateSpecificSlot(ecl
+			ff c3 //          INC        EBX
+			@patch 83 fb 0a //       CMP        EBX,0xa
+			72 ef //          JC         LAB_140a1f520
+			<Patch Type="Absolute" Offset="@patch">
+				83 fb 14
+			</Patch>
+		</Mapping>
+		<Mapping Name="ecl::UIBottomBar::UpdateSlots2">
+			49 8b cf //       MOV        param_1,R15
+			@call e8 5f f3 ff ff //      CALL       ecl::UIBottomBar::UpdateSlots2                   undefined UpdateSlots2(ecl::UIBo
+			48 83 7d 88 08 //      CMP        qword ptr [RBP + local_f0],0x8
+			72 0a //          JC         LAB_140a201b2
+			48 8b 4c 24 70 //      MOV        param_1,qword ptr [RSP + local_108]
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_UIBottomBar_UpdateSlots2" />
+		</Mapping>
+		<Mapping Name="ecl::UIBottomBar::UpdateSlotCooldowns patch">
+			@patch 8d 75 0a //       LEA        ESI,[RBP + 0xa]
+			4c 8b 04 d0 //    MOV        R8,qword ptr [RAX + RDX*0x8]
+			4c 89 54 24 20 //      MOV        qword ptr [RSP + local_b8],R10
+			89 b4 24 e0 00 00 00 //      MOV        dword ptr [RSP + local_res8],ESI
+			4d 85 c0 //       TEST       R8,R8
+			74 21 //          JZ         LAB_140a1f63f
+			<Patch Type="Absolute" Offset="@patch">
+				8d 75 14
+			</Patch>
+		</Mapping>
 		<Mapping Name="ls::GlobalSwitches">
 			e8 8e b3 90 ff //      CALL       FUN_140030510                                    undefined FUN_140030510()
 			@instance 48 8b 15 b7 c9 bb 00 //       MOV        RDX,qword ptr [ls_GlobalSwitches]                = NaP

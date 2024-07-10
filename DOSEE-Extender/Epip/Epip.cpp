@@ -12,6 +12,7 @@ void Epip::Startup()
 
 	this->_GameOptionsSettings.Setup();
 	this->_TargetInfo.Startup();
+	this->_KeyboardBottomBar.Setup();
 	this->_WorldTooltips.Setup();
 	this->_InfiniteCarryWeight.Setup();
 	this->_SkillRangeEffectsFix.Setup();

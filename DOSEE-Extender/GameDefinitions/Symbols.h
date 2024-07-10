@@ -155,6 +155,13 @@ namespace dse
 		using GetOsirisSaveFileVersionProc = int (STDString* param1, Path* param2);
 		GetOsirisSaveFileVersionProc* GetOsirisSaveFileVersion{ nullptr };
 
+		using ecl_UIBottomBar_UpdateSlotsProc = void(UIKeyboardBottomBar* ui, char flags_m);
+		ecl_UIBottomBar_UpdateSlotsProc* ecl_UIBottomBar_UpdateSlots{ nullptr };
+		using ecl_UIBottomBar_UpdateSlots2Proc = void(UIKeyboardBottomBar* ui);
+		ecl_UIBottomBar_UpdateSlots2Proc* ecl_UIBottomBar_UpdateSlots2{ nullptr };
+		using ecl_UIBottomBar_UpdateSlotCooldownsProc = void(UIKeyboardBottomBar* ui);
+		ecl_UIBottomBar_UpdateSlotCooldownsProc* ecl_UIBottomBar_UpdateSlotCooldowns{ nullptr };
+
 		using ecl_PlayerManager_GetCharacterByPlayerIDProc = ecl::Character* (ecl::PlayerManager* self, short playerID);
 		ecl_PlayerManager_GetCharacterByPlayerIDProc* ecl_PlayerManager_GetCharacterByPlayerID{ nullptr };
 

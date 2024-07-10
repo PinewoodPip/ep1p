@@ -95,6 +95,9 @@ namespace dse
 		SYM_OFF(ecl_PlayerManager);
 		SYM_OFF(ecl_PlayerManager_GetCharacterByPlayerID);
 		SYM_OFF(GetOsirisSaveFileVersion);
+		SYM_OFF(ecl_UIBottomBar_UpdateSlots);
+		SYM_OFF(ecl_UIBottomBar_UpdateSlots2);
+		SYM_OFF(ecl_UIBottomBar_UpdateSlotCooldowns);
 		SYM_OFF(RunStoryPatch);
 		SYM_OFF(ecl_LevelManager);
 		SYM_OFF(ecl_EoCClient);
