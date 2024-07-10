@@ -5,10 +5,12 @@
 #include "Extender/ScriptExtender.h"
 
 using namespace dse;
+using namespace epip;
 
 void KeyboardBottomBar::Setup()
 {
 	gExtender->GetHooks().RegisterGameStateChangedListener(this);
+	gExtender->GetHooks().RegisterUIListener((int)UIObject::TypeID::SkillBar, &_UIListener);
 
 	if (gSettings->ExtendedHotbar)
 	{
@@ -33,6 +35,21 @@ void KeyboardBottomBar::Setup()
 
 void KeyboardBottomBar::OnUpdateSlots(StaticSymbols::ecl_UIBottomBar_UpdateSlotsProc* next, UIKeyboardBottomBar* ui, char flags_m)
 {
+	// Ensure we're on even rows (with 0-based index; ie. uneven rows using 1-based)
+	// We want the first, third and fifth rows to be used only.
+	if (ui->CurrentRow == 1)
+	{
+		ui->CurrentRow = 0;
+		auto param = UIUtils::CreateStringInvokeData(L"1");
+		ui->FlashPlayer->Invoke1((int)UIKeyboardBottomBar::Invokes::setBarSelectorText, &param);
+	}
+	else if (ui->CurrentRow == 3)
+	{
+		ui->CurrentRow = 2;
+		auto param = UIUtils::CreateStringInvokeData(L"3");
+		ui->FlashPlayer->Invoke1((int)UIKeyboardBottomBar::Invokes::setBarSelectorText, &param);
+	}
+
 	// Disable iterator patches when on the last row,
 	// as otherwise the game would crash accessing beyond the 50th slot.
 	if (ui->CurrentRow == 4)
@@ -72,6 +89,29 @@ void KeyboardBottomBar::OnGameStateChanged(int newState)
 
 			param = UIUtils::CreateBoolInvokeData(gSettings->LockBottomBar);
 			ui->FlashPlayer->Invoke1((int)UIKeyboardBottomBar::Invokes::pipSetDraggingLocked, &param);
+		}
+	}
+}
+
+void KeyboardBottomBarListener::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
+{
+	// Increment/decrement rows by 2 instead, so as to display the expected slots.
+	if (gSettings->ExtendedHotbar)
+	{
+		auto ui = (UIKeyboardBottomBar*)UIUtils::GetUIByType(UIObject::TypeID::SkillBar);
+		if (strcmp(uiCall, "prevHotbar") == 0)
+		{
+			if (ui->CurrentRow != 0)
+			{
+				ui->CurrentRow--;
+			}
+		}
+		else if (strcmp(uiCall, "nextHotbar") == 0)
+		{
+			if (ui->CurrentRow != 4)
+			{
+				ui->CurrentRow++;
+			}
 		}
 	}
 }
