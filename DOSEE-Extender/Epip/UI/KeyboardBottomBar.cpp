@@ -65,9 +65,13 @@ void KeyboardBottomBar::OnGameStateChanged(int newState)
 		{
 			// Should only run once per UI, as bottomBar is recreated per-session.
 			ui->FlashPlayer->AddInvokeName((int)UIKeyboardBottomBar::Invokes::pipSetExtendedMode, "pipSetExtendedMode");
+			ui->FlashPlayer->AddInvokeName((int)UIKeyboardBottomBar::Invokes::pipSetDraggingLocked, "pipSetDraggingLocked");
 
 			auto param = UIUtils::CreateBoolInvokeData(gSettings->ExtendedHotbar);
 			ui->FlashPlayer->Invoke1((int)UIKeyboardBottomBar::Invokes::pipSetExtendedMode, &param);
+
+			param = UIUtils::CreateBoolInvokeData(gSettings->LockBottomBar);
+			ui->FlashPlayer->Invoke1((int)UIKeyboardBottomBar::Invokes::pipSetDraggingLocked, &param);
 		}
 	}
 }

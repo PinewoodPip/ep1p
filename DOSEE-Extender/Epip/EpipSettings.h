@@ -18,7 +18,8 @@ BEGIN_NS(epip)
 	EPIP_FOR_SETTING(InfiniteCarryWeight) \
 	EPIP_FOR_SETTING(StoryLogging) \
 	EPIP_FOR_SETTING(FixDontCareScriptParam) \
-	EPIP_FOR_SETTING(FixSkillRangeGFX)
+	EPIP_FOR_SETTING(FixSkillRangeGFX) \
+	EPIP_FOR_SETTING(LockBottomBar)
 	
 #define EPIP_FOR_ALL_ENUM_SETTINGS() \
 	EPIP_FOR_SETTING(ExamineInformation)
@@ -45,6 +46,7 @@ public:
 		FixDontCareScriptParam,
 		FixSkillRangeGFX,
 		CameraMaxDistance,
+		LockBottomBar,
 	};
 	enum class ExamineInformationChoices
 	{
@@ -67,6 +69,7 @@ public:
 	bool FixDontCareScriptParam = true;
 	bool FixSkillRangeGFX = true;
 	float CameraMaxDistance = 19.0f; // Game default
+	bool LockBottomBar = false;
 
 	void SetByID(int id, bool value)
 	{

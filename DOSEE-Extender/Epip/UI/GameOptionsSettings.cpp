@@ -56,6 +56,7 @@ void GameOptionsSettings::Render(ig::FlashPlayer* flashPlayer)
 	CHECKBOX(InfiniteCarryWeight, L"Infinite Carry Weight", L"If enabled, characters will no longer become overencumbered from surpassing their carry weight limit.<br>Existing overencumbered characters will remain overencumbered.");
 	CHECKBOX(FixSkillRangeGFX, L"Fix Skill Range Indicators", L"If enabled, skill range indicator circle effects will be shown even if the caster is not on screen.<br>Has a minimal performance impact.");
 	SLIDER(CameraMaxDistance, L"Maximum Camera Distance", L"Controls how far you can zoom out the camera.<br>Game default is 19m.", 19.0f, 30.0f, 1.0f);
+	CHECKBOX(LockBottomBar, L"Lock Hotbar dragging by default", L"If enabled, the hotbar will be locked upon loading into a game, preventing slot contents from being dragged out of it.<br>You may use the lock button in the bottom left of the UI to lock/unlock dragging while playing.");
 
 	RenderLabel(flashPlayer, L"Ep1p Developer Settings");
 	CHECKBOX(FixDontCareScriptParam, L"Scripting Engine Collapse Fix", L"If enabled, a patch will be applied to prevent the scripting engine from randomly breaking.<br>Don't disable this unless you know what you're doing!");

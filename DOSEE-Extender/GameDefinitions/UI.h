@@ -744,6 +744,7 @@ namespace dse
 
 			// PIP
 			pipSetExtendedMode,
+			pipSetDraggingLocked,
 		};
 		/*undefined field1_0xb4;
 		undefined field2_0xb5;
