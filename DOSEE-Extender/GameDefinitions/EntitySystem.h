@@ -614,8 +614,16 @@ namespace ecl
 		// TODO move
 		enum GameState : uint32_t
 		{
+			InitConnection = 4,
+			Idle = 5,
+			SwapLevel = 9,
+			LoadLevel = 10,
+			LoadModule = 11,
+			LoadSession = 12,
+			UnloadLevel = 14,
 			Running = 17,
 			PrepareRunning = 22,
+			StartServer = 23,
 		};
 
 		void* VMT;

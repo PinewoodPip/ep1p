@@ -5,6 +5,7 @@
 #include "Extender/ScriptExtender.h"
 #include "Hooks/Hooks.h"
 #include "Extender/Utils/CharacterUtils.h"
+#include "Extender/Utils/Pointer.h"
 #include "GameDefinitions/UI.h"
 #include "Epip/EpipSettings.h"
 
@@ -73,7 +74,7 @@ ig::InvokeDataValue _CreateStringInvokeData(STDWString value)
 
 void TargetInfo::UpdateResistances(UITargetInfo* ui, ig::InvokeDataValue* labelInvokeData)
 {
-	ecl::Character* character = gExtender->GetHooks().GetCurrentPickerCharacter();
+	ecl::Character* character = PointerUtils::GetCurrentPickerCharacter();
 	ig::InvokeDataValue invokeData;
 
 
@@ -93,7 +94,7 @@ void TargetInfo::UpdateResistances(UITargetInfo* ui, ig::InvokeDataValue* labelI
 
 void TargetInfo::UpdateHPBarText(UITargetInfo* ui)
 {
-	ecl::Character* character = gExtender->GetHooks().GetCurrentPickerCharacter();
+	ecl::Character* character = PointerUtils::GetCurrentPickerCharacter();
 	ig::InvokeDataValue invokeData;
 
 	TryRegisterInvokes((UITargetInfo*)ui);

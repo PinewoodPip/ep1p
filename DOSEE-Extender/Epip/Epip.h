@@ -14,6 +14,7 @@
 #include "DeadPartyXP.h"
 #include "UI/ExamineTweaks.h"
 #include "CameraTweaks.h"
+#include "Hotkeys.h"
 
 using namespace epip;
 
@@ -40,6 +41,7 @@ private:
 	DeadPartyXP _DeadPartyXP;
 	ExamineTweaks _ExamineTweaks;
 	CameraTweaks _CameraTweaks;
+	Hotkeys _Hotkeys;
 };
 
 END_NS()

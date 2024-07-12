@@ -10,6 +10,7 @@ public:
 	static ig::InvokeDataValue CreateDoubleInvokeData(int value);
 	static ig::InvokeDataValue CreateBoolInvokeData(bool value);
 	static ig::InvokeDataValue CreateStringInvokeData(STDWString value);
+	static bool IsPausedOrInputFocused();
 };
 
 END_SE()

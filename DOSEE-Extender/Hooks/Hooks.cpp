@@ -327,6 +327,11 @@ void Hooks::RegisterGameStateChangedListener(GameStateChangedEventListener* list
 	GameStateChangedListeners.insert(listener);
 }
 
+void Hooks::RegisterInputListener(InputListener* listener)
+{
+	InputListeners.push_back(listener);
+}
+
 std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc>& Hooks::GetOriginalUIObjectCallHandlers()
 {
 	return OriginalUIObjectCallHandlers;
@@ -337,30 +342,11 @@ FlashPlayerHooks& Hooks::GetFlashPlayerHooks()
 	return flashPlayerHooks;
 }
 
-ecl::Character* Hooks::GetLastPickerCharacter()
-{
-	return ClientCharacterUtils::GetCharacter(this->LastPickerCharacterHandle);
-}
-
-ecl::Character* Hooks::GetCurrentPickerCharacter()
-{
-	return ClientCharacterUtils::GetCharacter(this->CurrentPickerCharacterHandle);
-}
-
 void Hooks::OnInjectInput(InputManager* self, InputRawChange* change, bool unknown)
 {
-	if (!unknown)
+	for (auto listener : InputListeners)
 	{
-		//LOG(std::format("RawInputType {} Value1 {} Value2 {} State {}", (int)change->RawInputID, change->Value1, change->Value2, (uint8_t)change->State).c_str());
-
-		if (change->RawInputID == RawInputType::T)
-		{
-			ecl::Character* character = this->GetLastPickerCharacter();
-			if (character)
-			{
-				GetStaticSymbols().ecl_EocUIControl_OpenExamineUI(*GetStaticSymbols().ecl_EocUIControl, 1, &this->LastPickerCharacterHandle);
-			}
-		}
+		listener->OnRawInput(self, change, unknown);
 	}
 }
 

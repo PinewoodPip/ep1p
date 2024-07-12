@@ -21,6 +21,7 @@ void Epip::Startup()
 	this->_DeadPartyXP.Setup();
 	this->_ExamineTweaks.Setup();
 	this->_CameraTweaks.Setup();
+	this->_Hotkeys.Setup();
 #endif
 	this->_ScriptBugWatchdog.Setup();
 }

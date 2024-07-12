@@ -24,6 +24,12 @@ public:
 	virtual void OnGameStateChanged(int newState) = 0;
 };
 
+class InputListener
+{
+public:
+	virtual void OnRawInput(InputManager* self, InputRawChange* change, bool unknown) = 0;
+};
+
 struct FlashPlayerHooks
 {
 	bool Hooked{ false };
@@ -54,18 +60,17 @@ public:
 	void CaptureExternalInterfaceCalls(UIObject* uiObject);
 	void RegisterUIListener(int typeID, UIEventListener* listener);
 	void RegisterGameStateChangedListener(GameStateChangedEventListener* listener);
+	void RegisterInputListener(InputListener* listener);
 
 	std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc>& GetOriginalUIObjectCallHandlers();
 	FlashPlayerHooks& GetFlashPlayerHooks();
-
-	ecl::Character* GetLastPickerCharacter();
-	ecl::Character* GetCurrentPickerCharacter();
 
 	ComponentHandle LastPickerCharacterHandle = {};
 	ComponentHandle CurrentPickerCharacterHandle = {};
 
 	std::unordered_map<int, std::vector<UIEventListener*>> EventListeners;
 	std::set<GameStateChangedEventListener*> GameStateChangedListeners;
+	std::vector<InputListener*> InputListeners;
 private:
 	bool loaded_{ false };
 };

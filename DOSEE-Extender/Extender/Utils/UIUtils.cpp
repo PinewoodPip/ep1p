@@ -46,4 +46,9 @@ ig::InvokeDataValue UIUtils::CreateStringInvokeData(STDWString value)
 	return data;
 }
 
+bool UIUtils::IsPausedOrInputFocused()
+{
+	return ((*gStaticSymbols->UIObjectManager__Instance)->AggregateModalFlags_m & 0x1e00) != 0;
+}
+
 END_SE()

@@ -159,6 +159,13 @@ namespace dse
 			char const* Name;
 		};
 
+		struct FlashPlayerProperties
+		{
+			int Width;
+			int Height;
+			int ints[4];
+			long longs[3];
+		};
 
 		struct FlashPlayer : ProtectedGameObject<FlashPlayer>
 		{
@@ -172,6 +179,7 @@ namespace dse
 				typedef bool (*Invoke1Proc)(FlashPlayer* self, int64_t invokeEnum, InvokeDataValue* a3);
 				typedef bool (*Invoke0Proc)(FlashPlayer* self, int64_t invokeEnum);
 				typedef bool (*InvokeArgsProc)(FlashPlayer* self, int64_t invokeEnum, InvokeDataValue* args, unsigned numArgs);
+				typedef bool (*GetFlashMoviePropertiesProc)(FlashPlayer* self, ig::FlashPlayerProperties* out);
 
 				void (*Destroy)(FlashPlayer* self);
 				/*void (*OnWTCompletion)(FlashPlayer* self);
@@ -193,17 +201,22 @@ namespace dse
 				InvokeArgsProc InvokeArgs;
 				bool (*HasFreeStringScratchArea)(FlashPlayer* self, uint64_t size);
 				bool (*HasFreeWStringScratchArea)(FlashPlayer* self, uint64_t size);
-				bool (*HasInvokes)(FlashPlayer* self);
-				void (*field_A8)(FlashPlayer* self);
-				void (*InvokeByName)(FlashPlayer* self, char const* name, uint64_t unknown, InvokeDataValue* arg);
+				void (*Unknown1)(FlashPlayer* self);
+				void (*Unknown2)(FlashPlayer* self);
+				void (*Unknown3)(FlashPlayer* self);
+				//bool (*HasInvokes)(FlashPlayer* self);
+				//void (*field_A8)(FlashPlayer* self);
+				//void (*InvokeByName)(FlashPlayer* self, char const* name, uint64_t unknown, InvokeDataValue* arg);
 				void (*SetRenderRectangle)(FlashPlayer* self);
+				void (*FireResolutionEvents)(FlashPlayer* self);
 				void (*SetSize)(FlashPlayer* self, glm::ivec2 const& size);
-				int* (*GetSize)(FlashPlayer* self);
-				void (*field_D0)(FlashPlayer* self);
+				void (*GetDisplaySize)(FlashPlayer* self); // TODO return type
+				//int* (*GetSize)(FlashPlayer* self);
+				//void (*Unknown)(FlashPlayer* self);
 				void (*Render)(FlashPlayer* self);
 				void (*field_E0)(FlashPlayer* self);
 				void (*field_E8)(FlashPlayer* self);
-				void (*GetFlashMovieProperties)(FlashPlayer* self);
+				GetFlashMoviePropertiesProc GetFlashMovieProperties;
 				void (*GotoFrame)(FlashPlayer* self, uint64_t frame);
 				void (*ForceGotoFrame)(FlashPlayer* self, uint64_t frame);
 				FlashObject* (*CreateFlashObject)(FlashPlayer* self, char const* path, int arrayIndex);
@@ -492,36 +505,37 @@ namespace dse
 			void (*Destroy)(UIObject* self, bool);
 			void(*SetHandle)(UIObject* self, ComponentHandle*);
 			ComponentHandle* (*GetHandle)(UIObject* self, ComponentHandle*);
+			void(*ReleaseChildMenuHandle)(UIObject* self);
 			void(*RequestDelete)(UIObject* self);
 			void(*SetOwnerPlayerId)(UIObject* self, uint64_t);
 			void(*SetPos)(UIObject* self, glm::ivec2 const&);
-			void(*KeepWithin)(UIObject* self, int, int);
+			//void(*KeepWithin)(UIObject* self, int, int);
 			void(*Show)(UIObject* self);
 			void(*Hide)(UIObject* self);
 			const char* (*GetDebugName)(UIObject* self);
 			bool(*IsControllerUI)(UIObject* self);
 			void(*Init)(UIObject* self);
-			void(*InitAPI)(UIObject* self);
+			//void(*InitAPI)(UIObject* self);
 			void(*Update)(UIObject* self, float);
-			void(*PostUpdate)(UIObject* self, float);
+			//void(*PostUpdate)(UIObject* self, float);
 			void(*Render)(UIObject* self, void*, void*);
 			void(*RegisterInvokeNames)(UIObject* self);
 			void(*Resize)(UIObject* self);
 			void* (*OnInputEvent)(UIObject* self, void*, void*);
-			uint8_t* (*SendEventToFlash)(UIObject* self, uint8_t* a2, void* a3, unsigned int a4);
+			//uint8_t* (*SendEventToFlash)(UIObject* self, uint8_t* a2, void* a3, unsigned int a4);
 			void* (*OnInputEventText)(UIObject* self, void*, void*);
 			uint16_t* (*OnUnlinkedInput)(UIObject* self, uint16_t*, uint32_t, uint16_t);
-			void(*SetModifierStates)(UIObject* self, bool, bool, bool, bool);
+			//void(*SetModifierStates)(UIObject* self, bool, bool, bool, bool);
 			bool(*OnAPIPreResetDevice)(UIObject* self, void*);
 			bool(*OnAPIPostResetDevice)(UIObject* self, void*);
 			void(*OnControllerModeChanged)(UIObject* self);
 			void(*OnPlayerDisconnect)(UIObject* self, int);
 			void(*ReleaseRenderData)(UIObject* self);
-			void(*PrepareRenderData)(UIObject* self);
-			void(*DoPrepareRenderData)(UIObject* self);
+			//void(*PrepareRenderData)(UIObject* self);
+			//void(*DoPrepareRenderData)(UIObject* self);
 			void(*Activate)(UIObject* self);
 			void(*Deactivate)(UIObject* self);
-			void(*LoseFocus)(UIObject* self);
+			//void(*LoseFocus)(UIObject* self);
 			int64_t(*GetBitmapHeight)(UIObject* self);
 			int64_t(*GetBitmapWidth)(UIObject* self);
 			void* (*GetCharacter)(UIObject* self);
@@ -530,7 +544,7 @@ namespace dse
 			bool (*Unknown1)(UIObject* self);
 			void(*Unknown2)(UIObject* self);
 			void* (*Unknown3)(UIObject* self);
-			void (*Unknown4)(UIObject* self, void* a1);
+			//void (*Unknown4)(UIObject* self, void* a1);
 		};
 
 		virtual void OnFunctionCalled(const char* a1, unsigned int a2, ig::InvokeDataValue* a3);
@@ -595,7 +609,12 @@ namespace dse
 		uint32_t RenderOrder;
 		int MovieLayout;
 
-		char unknown2[20];
+		float McSizeWidth;
+		float McSizeHeight;
+		float FlashMovieSizeWidth;
+		float FlashMovieSizeHeight;
+
+		char unknown2[4];
 
 		float UIScaleMultiplier;
 		char unknown3[4];
@@ -833,8 +852,8 @@ namespace dse
 		undefined field85_0x10e;
 		undefined field86_0x10f;
 		undefined field87_0x110;
-		char CurrentRow; /* Created by retype action */
-		undefined1 HotbarFlags_m; /* Created by retype action */
+		char CurrentRow;
+		undefined1 HotbarFlags_m;
 		undefined field90_0x113;
 		undefined field91_0x114;
 		undefined field92_0x115;
@@ -864,7 +883,7 @@ namespace dse
 		undefined field116_0x12d;
 		undefined field117_0x12e;
 		undefined field118_0x12f;
-		undefined1 SlotIconsDrawStruct_m; /* Created by retype action */
+		undefined1 SlotIconsDrawStruct_m;
 		undefined field120_0x131;
 		undefined field121_0x132;
 		undefined field122_0x133;
@@ -925,12 +944,12 @@ namespace dse
 		undefined field177_0x16d;
 		undefined field178_0x16e;
 		undefined field179_0x16f;
-		void* SlotDataSet; /* Created by retype action */
+		void* SlotDataSet;
 		undefined field181_0x178;
 		undefined field182_0x179;
 		undefined field183_0x17a;
 		undefined field184_0x17b;
-		uint SlotDataSetcount; /* Created by retype action */
+		uint SlotDataSetcount;
 		undefined field186_0x180;
 		undefined field187_0x181;
 		undefined field188_0x182;
@@ -947,7 +966,7 @@ namespace dse
 		undefined field199_0x18d;
 		undefined field200_0x18e;
 		undefined field201_0x18f;
-		undefined1 SlotIconDrawStruct_m; /* Created by retype action */
+		undefined1 SlotIconDrawStruct_m;
 		undefined field203_0x191;
 		undefined field204_0x192;
 		undefined field205_0x193;
@@ -979,7 +998,7 @@ namespace dse
 		undefined field231_0x1b9;
 		undefined field232_0x1ba;
 		undefined field233_0x1bb;
-		char SomeFlags; /* Created by retype action */
+		char SomeFlags;
 		undefined field235_0x1bd;
 		undefined field236_0x1be;
 		undefined field237_0x1bf;
@@ -996,7 +1015,7 @@ namespace dse
 		undefined field248_0x1ca;
 		undefined field249_0x1cb;
 		uint SomeSlotIndex;
-		undefined1 SomeFlags2; /* Created by retype action */
+		undefined1 SomeFlags2;
 	};
 
 	struct UITargetInfo : UIObject
@@ -1080,23 +1099,136 @@ namespace dse
 		UIObject** UIObjects; // TODO Set
 		char set_internals[4];
 		unsigned int UIObjectsCount;
-		bool ShouldPrepareRenderData;
-		bool SortNeeded;
-		bool RefreshTopNeeded;
-		bool IsRenderingObjects;
-		bool AllowRawInput;
-		bool LastInteractedWithUIObject;
-		int UIDesignedHeight;
-		int UIDesignedWidth;
-		Map<ComponentHandle, uint64_t>* LastFrameDirtyFlags;
-		Map<ComponentHandle, uint64_t>* CharacterDirtyFlags;
-		/*CRITICAL_SECTION DirtyFlagsCriticalSection;*/
-		std::array<PlayerState, 4> PlayerStates;
-		/*CRITICAL_SECTION PrecachedDataCriticalSection;*/
-		RefMap<STDString, uint32_t> PrecachedUIData;
-		ComponentHandle LastUIObjectUnderCursor;
-		UIObjectFlags ModalAggregateFlags;
-		UIObjectFlags TextInputAggregateFlags;
+		undefined field262_0x110;
+		undefined field263_0x111;
+		undefined field264_0x112;
+		undefined field265_0x113;
+		undefined field266_0x114;
+		undefined field267_0x115;
+		undefined field268_0x116;
+		undefined field269_0x117;
+		short RequestedSortFlags_m;
+		undefined1 RenderObjects;
+		undefined field272_0x11b;
+		float field273_0x11c;
+		undefined field274_0x120;
+		undefined field275_0x121;
+		undefined field276_0x122;
+		undefined field277_0x123;
+		undefined field278_0x124;
+		undefined field279_0x125;
+		undefined field280_0x126;
+		undefined field281_0x127;
+		uint UIObjectsAmount_m;
+		undefined field283_0x12c;
+		undefined field284_0x12d;
+		undefined field285_0x12e;
+		undefined field286_0x12f;
+		undefined field287_0x130;
+		undefined field288_0x131;
+		undefined field289_0x132;
+		undefined field290_0x133;
+		undefined field291_0x134;
+		undefined field292_0x135;
+		undefined field293_0x136;
+		undefined field294_0x137;
+		undefined1 SomePlayerField;
+		undefined field296_0x139;
+		undefined field297_0x13a;
+		undefined field298_0x13b;
+		undefined field299_0x13c;
+		undefined field300_0x13d;
+		undefined field301_0x13e;
+		undefined field302_0x13f;
+		ObjectHandle SomeHandle1;
+		ObjectHandle SomeHandle2;
+		undefined field305_0x148;
+		undefined field306_0x149;
+		undefined field307_0x14a;
+		undefined field308_0x14b;
+		undefined field309_0x14c;
+		undefined field310_0x14d;
+		undefined field311_0x14e;
+		undefined field312_0x14f;
+		undefined field313_0x150;
+		undefined field314_0x151;
+		undefined field315_0x152;
+		undefined field316_0x153;
+		ObjectHandle field317_0x154;
+		ObjectHandle field318_0x158;
+		undefined field319_0x15c;
+		undefined field320_0x15d;
+		undefined field321_0x15e;
+		undefined field322_0x15f;
+		undefined field323_0x160;
+		undefined field324_0x161;
+		undefined field325_0x162;
+		undefined field326_0x163;
+		undefined field327_0x164;
+		undefined field328_0x165;
+		undefined field329_0x166;
+		undefined field330_0x167;
+		ObjectHandle field331_0x168;
+		ObjectHandle field332_0x16c;
+		undefined field333_0x170;
+		undefined field334_0x171;
+		undefined field335_0x172;
+		undefined field336_0x173;
+		undefined field337_0x174;
+		undefined field338_0x175;
+		undefined field339_0x176;
+		undefined field340_0x177;
+		undefined field341_0x178;
+		undefined field342_0x179;
+		undefined field343_0x17a;
+		undefined field344_0x17b;
+		ObjectHandle field345_0x17c;
+		ObjectHandle field346_0x180;
+		short field347_0x184;
+		undefined field348_0x186;
+		undefined field349_0x187;
+		undefined field350_0x188;
+		undefined field351_0x189;
+		undefined field352_0x18a;
+		undefined field353_0x18b;
+		undefined field354_0x18c;
+		undefined field355_0x18d;
+		undefined field356_0x18e;
+		undefined field357_0x18f;
+		undefined field358_0x190;
+		undefined field359_0x191;
+		undefined field360_0x192;
+		undefined field361_0x193;
+		undefined field362_0x194;
+		undefined field363_0x195;
+		undefined field364_0x196;
+		undefined field365_0x197;
+		undefined field366_0x198;
+		undefined field367_0x199;
+		undefined field368_0x19a;
+		undefined field369_0x19b;
+		undefined field370_0x19c;
+		undefined field371_0x19d;
+		undefined field372_0x19e;
+		undefined field373_0x19f;
+		UIObjectFlags AggregateModalFlags_m;
+		//bool ShouldPrepareRenderData;
+		//bool SortNeeded;
+		//bool RefreshTopNeeded;
+		//bool IsRenderingObjects;
+		//bool AllowRawInput;
+		//bool LastInteractedWithUIObject;
+		//int UIDesignedHeight;
+		//int UIDesignedWidth;
+		//Map<ComponentHandle, uint64_t>* LastFrameDirtyFlags;
+		//Map<ComponentHandle, uint64_t>* CharacterDirtyFlags;
+		///*CRITICAL_SECTION DirtyFlagsCriticalSection;*/
+		//std::array<PlayerState, 4> PlayerStates;
+		///*CRITICAL_SECTION PrecachedDataCriticalSection;*/
+		//RefMap<STDString, uint32_t> PrecachedUIData;
+		//ComponentHandle LastUIObjectUnderCursor;
+		//UIObjectFlags ModalAggregateFlags;
+		//UIObjectFlags TextInputAggregateFlags;
 
 		//UIObject* GetByType(int typeId) const;
 	};
