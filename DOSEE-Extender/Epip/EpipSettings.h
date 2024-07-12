@@ -3,6 +3,7 @@
 #include <sstream>
 #include <fstream>
 #include "json/json.h"
+#include "GameDefinitions/Input.h"
 
 BEGIN_NS(epip)
 
@@ -23,10 +24,13 @@ BEGIN_NS(epip)
 	EPIP_FOR_SETTING(CreateConsole)
 	
 #define EPIP_FOR_ALL_ENUM_SETTINGS() \
-	EPIP_FOR_SETTING(ExamineInformation)
+	EPIP_FOR_SETTING(ExamineInformation) \
 
 #define EPIP_FOR_ALL_FLOAT_SETTINGS() \
 	EPIP_FOR_SETTING(CameraMaxDistance)
+
+#define EPIP_FOR_ALL_UINT_SETTINGS() \
+	EPIP_FOR_SETTING(ExamineKeybind)
 
 struct EpipSettings
 {
@@ -49,6 +53,7 @@ public:
 		CameraMaxDistance,
 		LockBottomBar,
 		CreateConsole,
+		ExamineKeybind,
 	};
 	enum class ExamineInformationChoices
 	{
@@ -73,6 +78,7 @@ public:
 	float CameraMaxDistance = 19.0f; // Game default
 	bool LockBottomBar = false;
 	bool CreateConsole = false;
+	uint32_t ExamineKeybind = (uint32_t)RawInputType::T;
 
 	void SetByID(int id, bool value)
 	{
@@ -92,6 +98,13 @@ public:
 	{
 #define EPIP_FOR_SETTING(setting) if (id == (int)Settings::setting) setting = value;
 		EPIP_FOR_ALL_FLOAT_SETTINGS();
+#undef EPIP_FOR_SETTING
+	}
+
+	void SetByID(int id, uint32_t value)
+	{
+#define EPIP_FOR_SETTING(setting) if (id == (int)Settings::setting) setting = value;
+		EPIP_FOR_ALL_UINT_SETTINGS();
 #undef EPIP_FOR_SETTING
 	}
 
@@ -150,6 +163,7 @@ public:
 #define EPIP_FOR_SETTING(setting) root[#setting] = setting;
 		EPIP_FOR_ALL_BOOL_SETTINGS();
 		EPIP_FOR_ALL_FLOAT_SETTINGS();
+		EPIP_FOR_ALL_UINT_SETTINGS();
 #define EPIP_FOR_SETTING(setting) root[#setting] = (int)setting;
 		EPIP_FOR_ALL_ENUM_SETTINGS();
 #undef EPIP_FOR_SETTING

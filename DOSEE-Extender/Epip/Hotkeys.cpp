@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Hotkeys.h"
+#include "EpipSettings.h"
 #include "Extender/Utils/Pointer.h"
 #include "Extender/Utils/UIUtils.h"
 #include "Extender/ScriptExtender.h"
@@ -18,7 +19,7 @@ void Hotkeys::OnRawInput(InputManager* self, InputRawChange* change, bool unknow
 	{
 		//LOG(std::format("RawInputType {} Value1 {} Value2 {} State {}", (int)change->RawInputID, change->Value1, change->Value2, (uint8_t)change->State).c_str());
 
-		if (change->RawInputID == RawInputType::T && !UIUtils::IsPausedOrInputFocused())
+		if (change->RawInputID == (RawInputType)gSettings->ExamineKeybind && !UIUtils::IsPausedOrInputFocused())
 		{
 			ecl::Character* character = PointerUtils::GetCurrentPickerCharacter();
 			if (character)
