@@ -65,10 +65,10 @@ void Hooks::OnCreateUIObject(UIObjectManager* self, ComponentHandle* handle, uns
 {
 	LOG("UIObject created with typeID %d", creatorId);
 	UIObject* ui = (self->UIObjects)[self->UIObjectsCount - 1];
-	if (ui)
+	// The new UI is not always the last one in the set - they might be sorted?
+	for (int i = 0; i < self->UIObjectsCount; ++i)
 	{
-		LOG(L"from %s", ui->Path.Name.c_str());
-		CaptureExternalInterfaceCalls(ui);
+		CaptureExternalInterfaceCalls(self->UIObjects[i]);
 	}
 }
 
@@ -130,7 +130,7 @@ static bool OnInvoke2(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::Invo
 		Hooks hooks = gExtender->GetHooks();
 		if (hooks.EventListeners.contains(ui->TypeId))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeID)->second;
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke2(ui, invokeEnum, invokeData1, invokeData2);
@@ -245,7 +245,7 @@ void CaptureInvokes(UIObject* ui)
 void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned int numArgs, ig::InvokeDataValue* args)
 {
 	int i;
-	LOG("UICall %s argsCount %d", function, numArgs);
+	/*LOG("UICall %s argsCount %d", function, numArgs);
 	LOG(L"	from %s", self->Path.Name.c_str());
 	for (i = 0; i < numArgs; ++i)
 	{
@@ -277,15 +277,7 @@ void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned 
 		}
 		break;
 	}
-	LOG("");
-	auto vmt = *reinterpret_cast<UIObject::VMT**>(self);
-	auto handler = OriginalUIObjectCallHandlers.find(vmt);
-	if (handler != OriginalUIObjectCallHandlers.end()) {
-		handler->second(self, function, numArgs, args);
-	}
-	else {
-		WARN("Couldn't find original OnFunctionCalled handler for UI object");
-	}
+	LOG("");*/
 
 	// Forward event to listeners
 	Hooks hooks = gExtender->GetHooks();
@@ -296,6 +288,15 @@ void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned 
 		{
 			listener->OnFunctionCalled(function, numArgs, args);
 		}
+	}
+
+	auto vmt = *reinterpret_cast<UIObject::VMT**>(self);
+	auto handler = OriginalUIObjectCallHandlers.find(vmt);
+	if (handler != OriginalUIObjectCallHandlers.end()) {
+		handler->second(self, function, numArgs, args);
+	}
+	else {
+		WARN("Couldn't find original OnFunctionCalled handler for UI object");
 	}
 
 	// Setup Invoke captures, if necessary
