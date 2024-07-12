@@ -37,7 +37,9 @@ void CreateConsole()
 	FILE* inputStream;
 	freopen_s(&inputStream, "CONIN$", "r", stdin);
 
-	std::cout << "Hello world" << std::endl;
+	std::cout << "---------------------------------" << std::endl;
+	std::cout << "DOSEE Script Non-Extender + Ep1p" << std::endl;
+	std::cout << "---------------------------------" << std::endl;
 }
 
 HMODULE gThisModule{ NULL };
@@ -49,7 +51,11 @@ void SetupExtender(HMODULE hModule)
 
 	DisableThreadLibraryCalls(hModule);
 
-	CreateConsole();
+	gEpip->SetupConfig();
+	if (gSettings->CreateConsole)
+	{
+		CreateConsole();
+	}
 
 	dse::gExtender->Initialize();
 }

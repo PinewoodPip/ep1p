@@ -7,9 +7,7 @@ using namespace dse;
 void Epip::Startup()
 {
 #if defined(OSI_EOCAPP)
-	gSettings = std::make_unique<EpipSettings>();
-	LoadConfig(EpipSettings::GetConfigPath(), *gSettings);
-
+	SetupConfig();
 	this->_GameOptionsSettings.Setup();
 	this->_TargetInfo.Startup();
 	this->_KeyboardBottomBar.Setup();
@@ -25,6 +23,17 @@ void Epip::Startup()
 	this->_CameraTweaks.Setup();
 #endif
 	this->_ScriptBugWatchdog.Setup();
+}
+
+void Epip::SetupConfig()
+{
+#if defined(OSI_EOCAPP)
+	if (!gSettings)
+	{
+		gSettings = std::make_unique<EpipSettings>();
+		LoadConfig(EpipSettings::GetConfigPath(), *gSettings);
+	}
+#endif
 }
 
 void Epip::LoadConfig(std::wstring const& configPath, EpipSettings& config)

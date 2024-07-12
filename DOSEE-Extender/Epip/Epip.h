@@ -23,6 +23,7 @@ class Epip
 {
 public:
 	void Startup();
+	void SetupConfig();
 	void LoadConfig(std::wstring const& configPath, EpipSettings& config);
 private:
 	TargetInfo _TargetInfo;
