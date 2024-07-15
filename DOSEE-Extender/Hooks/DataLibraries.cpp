@@ -83,6 +83,7 @@ namespace dse
 		SYM_OFF(ls_InputManager_InjectInput);
 		SYM_OFF(esv_OsirisCharacterFunctions_SendItemUsedEvent);
 		SYM_OFF(esv_ActivationManager_ThrowOnCharacterItemEvent);
+		SYM_OFF(ecl_UIExamine_SetupInformation);
 		SYM_OFF(OsirisCharacterEvents);
 		SYM_OFF(ecl_InventoryFactory);
 		SYM_OFF(ecl_ItemProtocol_UpdateItems);

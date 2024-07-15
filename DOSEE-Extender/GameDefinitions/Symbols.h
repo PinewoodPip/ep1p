@@ -220,6 +220,9 @@ namespace dse
 		using esv_ActivationManager_ThrowOnCharacterItemEventProc = void(esv::ActivationManager* self, esv::Character* character, esv::Item* item, char* eventName);
 		esv_ActivationManager_ThrowOnCharacterItemEventProc* esv_ActivationManager_ThrowOnCharacterItemEvent{ nullptr };
 
+		using ecl_UIExamine_SetupInformationProc = void(UIObject* self, bool clearPanel);
+		ecl_UIExamine_SetupInformationProc* ecl_UIExamine_SetupInformation{ nullptr };
+
 		OsirisCharacterEventManager** OsirisCharacterEvents{ nullptr };
 
 		using ecl_ItemProtocol_UpdateItemsProc = void(void* self);

@@ -218,6 +218,15 @@
 				be 05 00 00 00 90
 			</Patch>
 		</Mapping>
+		<Mapping Name="ecl::UIExamine::SetupInformation">
+			e8 88 93 ff ff //      CALL       FUN_14094dc10                                    undefined FUN_14094dc10()
+			41 0f b6 d7 //    MOVZX      objectHandle,R15B
+			48 8b cf //       MOV        param_1,RDI
+			@call e8 cc bc ff ff //      CALL       ecl::UIExamine::SetupInformation                 void SetupInformation(ecl::UIExa
+			48 8b 4f 18 //    MOV        param_1,qword ptr [RDI + 0x18]
+			44 88 bf e8 00 00 00 //      MOV        byte ptr [RDI + 0xe8],R15B
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_UIExamine_SetupInformation" />
+		</Mapping>
 		<Mapping Name="esv::Character::AddExperience patch">
 			48 8b 05 c8 a3 73 00 //      MOV        RAX,qword ptr [ls_GlobalSwitches]                = NaP
 			8b 88 38 01 00 00 //      MOV        character,dword ptr [RAX + 0x138]
