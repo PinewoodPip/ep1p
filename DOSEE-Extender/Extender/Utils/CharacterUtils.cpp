@@ -15,6 +15,19 @@ ecl::Character* ClientCharacterUtils::GetCharacter(ComponentHandle handle)
 	return factory->Get(handle);
 }
 
+ecl::Character* ClientCharacterUtils::GetCharacter(CDivinityStats_Character* stats)
+{
+	auto factory = *gStaticSymbols->ObjectFactory__ecl_Character;
+	for (auto character : factory->Components)
+	{
+		if (character->Stats == stats)
+		{
+			return character;
+		}
+	}
+	return nullptr;
+}
+
 CompactSet<ecl::Character*>* ClientCharacterUtils::GetPartyMembers(ComponentHandle partyHandle)
 {
 	ecl::PartyManager* manager = *GetStaticSymbols().ecl_PartyManager;
@@ -35,6 +48,19 @@ esv::Character* ServerCharacterUtils::GetCharacter(ComponentHandle handle)
 	ComponentFactory<esv::Character>* factory = *GetStaticSymbols().ObjectFactory__esv_Character;
 
 	return factory->Get(handle);
+}
+
+esv::Character* ServerCharacterUtils::GetCharacter(CDivinityStats_Character* stats)
+{
+	auto factory = *gStaticSymbols->ObjectFactory__esv_Character;
+	for (auto character : factory->Components)
+	{
+		if (character->Stats == stats)
+		{
+			return character;
+		}
+	}
+	return nullptr;
 }
 
 CompactSet<esv::Character*>* ServerCharacterUtils::GetPartyMembers(ComponentHandle partyHandle)
