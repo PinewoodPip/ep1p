@@ -24,10 +24,9 @@ int GetLuck(CDivinityStats_Character* stats)
 void SharedCivils::Setup()
 {
 	auto& lib = gExtender->GetEngineHooks();
-	lib.CDivinityStats_Character_GetAbilityBoostFromPrimaryStat.SetWrapper(&SharedCivils::OnCharacterStatsGetAbilityBoostFromPrimaryStat, this); // Always hook this as it might be used by multiple tweaks.
-
 	if (gSettings->SharedLuckyCharmLooting)
 	{
+		gExtender->GetHooks().RegisterAbilityBoostListener(this);
 		lib.esv_Item_GenerateTreasure.SetWrapper(&SharedCivils::OnItemGenerateTreasure, this);
 	}
 }
@@ -38,15 +37,15 @@ void SharedCivils::OnItemGenerateTreasure(StaticSymbols::esv_Item_GenerateTreasu
 	next(item, character);
 }
 
-int SharedCivils::OnCharacterStatsGetAbilityBoostFromPrimaryStat(StaticSymbols::CDivinityStats_Character_GetAbilityBoostFromPrimaryStatProc* next, CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts)
+int SharedCivils::OnGetAbilityBoost(CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts)
 {
 	if (_GeneratingTreasure && ability == AbilityType::Luck)
 	{
 		_GeneratingTreasure = false;
 
+		// Get the highest luck of all player characters
 		int characterLuck = GetLuck(stats);
 		int highestLuck = 0;
-
 		esv::Character* character = nullptr;
 		auto factory = *gStaticSymbols->ObjectFactory__esv_Character;
 		for (auto otherCharacter : factory->Components)
@@ -59,5 +58,5 @@ int SharedCivils::OnCharacterStatsGetAbilityBoostFromPrimaryStat(StaticSymbols::
 		// Add a boost to bring the calculated Lucky Charm to the maximum of all party members.
 		return std::max(0, highestLuck - characterLuck);
 	}
-	return next(stats, ability, excludeBoosts);
+	return 0;
 }

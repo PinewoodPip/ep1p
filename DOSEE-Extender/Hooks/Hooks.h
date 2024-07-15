@@ -30,6 +30,12 @@ public:
 	virtual void OnRawInput(InputManager* self, InputRawChange* change, bool unknown) = 0;
 };
 
+class GetAbilityBoostListener
+{
+public:
+	virtual int OnGetAbilityBoost(CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts) = 0; // Return non-zero to override vanilla behaviour.
+};
+
 struct FlashPlayerHooks
 {
 	bool Hooked{ false };
@@ -56,11 +62,13 @@ public:
 	void OnPickingHelperDone(ecl::PickingHelper* self);
 	void OnInjectInput(InputManager* self, InputRawChange* change, bool unknown);
 	void OnGameStateChanged(void* eventManager, uint32_t unknown1, uint32_t unknown2);
+	int OnCharacterStatsGetAbilityBoostFromPrimaryStat(StaticSymbols::CDivinityStats_Character_GetAbilityBoostFromPrimaryStatProc* next, CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts);
 
 	void CaptureExternalInterfaceCalls(UIObject* uiObject);
 	void RegisterUIListener(int typeID, UIEventListener* listener);
 	void RegisterGameStateChangedListener(GameStateChangedEventListener* listener);
 	void RegisterInputListener(InputListener* listener);
+	void RegisterAbilityBoostListener(GetAbilityBoostListener* listener);
 
 	std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc>& GetOriginalUIObjectCallHandlers();
 	FlashPlayerHooks& GetFlashPlayerHooks();
@@ -71,6 +79,7 @@ public:
 	std::unordered_map<int, std::vector<UIEventListener*>> EventListeners;
 	std::set<GameStateChangedEventListener*> GameStateChangedListeners;
 	std::vector<InputListener*> InputListeners;
+	std::vector<GetAbilityBoostListener*> AbilityBoostListeners;
 private:
 	bool loaded_{ false };
 };

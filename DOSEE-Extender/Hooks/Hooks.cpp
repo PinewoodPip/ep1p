@@ -28,6 +28,7 @@ void Hooks::Startup()
 	lib.ecl_PickingHelper_DoPick.SetPostHook(&Hooks::OnPickingHelperDone, this);
 	lib.ls_InputManager_InjectInput.SetPreHook(&Hooks::OnInjectInput, this);
 	lib.ecl_GameStateEventManager_ExecuteGameStateChangedEvent.SetPostHook(&Hooks::OnGameStateChanged, this);
+	lib.CDivinityStats_Character_GetAbilityBoostFromPrimaryStat.SetWrapper(&Hooks::OnCharacterStatsGetAbilityBoostFromPrimaryStat, this); // Always hook this as it might be used by multiple tweaks.
 #endif
 
 	loaded_ = true;
@@ -81,6 +82,31 @@ void Hooks::OnPickingHelperDone(ecl::PickingHelper* self)
 		LastPickerCharacterHandle = characterHandle;
 	}
 	CurrentPickerCharacterHandle = character ? characterHandle : ComponentHandle();
+}
+
+int Hooks::OnCharacterStatsGetAbilityBoostFromPrimaryStat(StaticSymbols::CDivinityStats_Character_GetAbilityBoostFromPrimaryStatProc* next, CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts)
+{
+	for (auto listener : AbilityBoostListeners)
+	{
+		int value = listener->OnGetAbilityBoost(stats, ability, excludeBoosts);
+		if (value != 0)
+		{
+			return value;
+		}
+	}
+	return next(stats, ability, excludeBoosts);
+}
+
+static bool OnGetFlashMovieProperties(ig::FlashPlayer* flashPlayer, ig::FlashPlayerProperties* props)
+{
+	UIObject* hotbar = FindUIObjectByFlashPlayer(flashPlayer);
+	bool success = flashPlayerHooks.OriginalGetFlashMovieProperties(flashPlayer, props);
+	if (hotbar && hotbar->TypeId == (int)UIObject::TypeID::SkillBar)
+	{
+		//props->Width = 700;
+		//hotbar->McSizeWidth = 700;
+	}
+	return success;
 }
 
 static bool OnInvoke0(ig::FlashPlayer* flashPlayer, int64_t invokeEnum)
@@ -331,6 +357,11 @@ void Hooks::RegisterGameStateChangedListener(GameStateChangedEventListener* list
 void Hooks::RegisterInputListener(InputListener* listener)
 {
 	InputListeners.push_back(listener);
+}
+
+void Hooks::RegisterAbilityBoostListener(GetAbilityBoostListener* listener)
+{
+	AbilityBoostListeners.push_back(listener);
 }
 
 std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc>& Hooks::GetOriginalUIObjectCallHandlers()

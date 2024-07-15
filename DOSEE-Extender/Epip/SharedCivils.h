@@ -3,14 +3,13 @@
 
 BEGIN_NS(epip)
 
-class SharedCivils
+class SharedCivils : public GetAbilityBoostListener
 {
 public:
 	void Setup();
-
 private:
 	void OnItemGenerateTreasure(StaticSymbols::esv_Item_GenerateTreasureProc* next, esv::Item* item, esv::Character* character);
-	int OnCharacterStatsGetAbilityBoostFromPrimaryStat(StaticSymbols::CDivinityStats_Character_GetAbilityBoostFromPrimaryStatProc* next, CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts);
+	virtual int OnGetAbilityBoost(CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts) override;
 
 	bool _GeneratingTreasure = false;
 };
