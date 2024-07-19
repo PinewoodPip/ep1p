@@ -15,6 +15,7 @@
 #include "UI/ExamineTweaks.h"
 #include "CameraTweaks.h"
 #include "Hotkeys.h"
+#include "UI/MainMenu.h"
 
 using namespace epip;
 
@@ -42,6 +43,7 @@ private:
 	ExamineTweaks _ExamineTweaks;
 	CameraTweaks _CameraTweaks;
 	Hotkeys _Hotkeys;
+	MainMenu _MainMenu;
 };
 
 END_NS()

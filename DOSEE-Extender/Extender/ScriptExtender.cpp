@@ -24,11 +24,12 @@ namespace dse
 {
 	std::unique_ptr<ScriptExtender> gExtender;
 
-	ScriptExtender::ScriptExtender()
+	ScriptExtender::ScriptExtender(HMODULE handle)
+	{
 		/*: server_(config_),
 		client_(config_),
 		hitProxy_(*this)*/
-	{
+		_ModuleHandle = handle;
 	}
 
 	void ScriptExtender::Initialize()

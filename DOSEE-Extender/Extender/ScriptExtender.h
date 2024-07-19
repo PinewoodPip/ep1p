@@ -14,7 +14,7 @@ BEGIN_SE()
 class ScriptExtender
 {
 public:
-	ScriptExtender();
+	ScriptExtender(HMODULE handle);
 
 	void Initialize();
 	void PostStartup();
@@ -70,6 +70,11 @@ public:
 		return hooks_;
 	}
 
+	inline HMODULE GetModuleHandle()
+	{
+		return _ModuleHandle;
+	}
+
 private:
 	/*esv::ScriptExtender server_;
 	ecl::ScriptExtender client_;*/
@@ -83,6 +88,7 @@ private:
 	/*ExtenderConfig config_;*/
 	bool extensionsEnabled_{ false };
 	bool postStartupDone_{ false };
+	HMODULE _ModuleHandle;
 
 	void OnBaseModuleLoaded(void* self);
 	static void OnIggyTraceCallback(void* unknown1, void* unknown2, char const* msg);

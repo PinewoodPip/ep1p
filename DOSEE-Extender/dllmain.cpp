@@ -46,7 +46,7 @@ HMODULE gThisModule{ NULL };
 
 void SetupExtender(HMODULE hModule)
 {
-	dse::gExtender = std::make_unique<dse::ScriptExtender>();
+	dse::gExtender = std::make_unique<dse::ScriptExtender>(hModule);
 	gEpip = std::make_unique<Epip>();
 
 	DisableThreadLibraryCalls(hModule);

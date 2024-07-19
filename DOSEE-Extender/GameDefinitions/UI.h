@@ -1018,6 +1018,35 @@ namespace dse
 		undefined1 SomeFlags2;
 	};
 
+	struct UIMainMenu : UIObject
+	{
+		enum class Invokes : int
+		{
+			setDebugText = 1,
+			removeItems,
+			setMenuTitle,
+			addMenuButton,
+			openMenu,
+			setKickstarterBadgeVisible,
+			addBtnHint,
+			clearBtnHints,
+			setSplashText,
+			setSplashSingleText,
+			openSplashScreen,
+			hideSplashButtonHint,
+			showSplashButtonHint,
+			closeSplashScreen,
+			setProfile,
+			allowChange,
+			setDifficulityMode, // Larian typo
+			setCopyrightText,
+			addLoadingElements,
+			removeLoadingElements,
+			clearLoadingElements,
+			showLoadingIcon,
+		};
+	};
+
 	struct UITargetInfo : UIObject
 	{
 		enum class Invokes : int

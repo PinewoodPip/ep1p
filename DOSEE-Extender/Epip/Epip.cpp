@@ -22,6 +22,7 @@ void Epip::Startup()
 	this->_ExamineTweaks.Setup();
 	this->_CameraTweaks.Setup();
 	this->_Hotkeys.Setup();
+	this->_MainMenu.Setup();
 #endif
 	this->_ScriptBugWatchdog.Setup();
 }

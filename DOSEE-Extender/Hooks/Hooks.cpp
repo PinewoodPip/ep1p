@@ -65,11 +65,11 @@ void Hooks::OnCreateUIObject(UIObjectManager* self, ComponentHandle* handle, uns
 	uint64_t resourceFlags, short playerID, ComponentHandle* result)
 {
 	LOG("UIObject created with typeID %d", creatorId);
-	UIObject* ui = (self->UIObjects)[self->UIObjectsCount - 1];
 	// The new UI is not always the last one in the set - they might be sorted?
 	for (int i = 0; i < self->UIObjectsCount; ++i)
 	{
-		CaptureExternalInterfaceCalls(self->UIObjects[i]);
+		UIObject* ui = self->UIObjects[i];
+		CaptureExternalInterfaceCalls(ui);
 	}
 }
 
@@ -131,13 +131,22 @@ static bool OnInvoke0(ig::FlashPlayer* flashPlayer, int64_t invokeEnum)
 static bool OnInvoke1(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::InvokeDataValue* invokeData1)
 {
 	UIObject* ui = FindUIObjectByFlashPlayer(flashPlayer);
+	int typeID = -1;
 	if (ui)
+	{
+		typeID = ui->TypeId;
+	}
+	else if (!ui && flashPlayer->Invokes.size() > 0 && strcmp(flashPlayer->Invokes[1].Name, "setDebugText") == 0) // Finding the UIObject from flash player is impossible during the first tick or so of its existence, as they are not immediately added to the UIObjectManager set - there's some queue system.
+	{
+		typeID = (int)UIObject::TypeID::MainMenu;
+	}
+	if (typeID != -1)
 	{
 		//LOG(L"Invoke1 ID %d from TypeID %d path %s", invokeEnum, ui->TypeID, ui->Path.Name.c_str());
 		Hooks hooks = gExtender->GetHooks();
-		if (hooks.EventListeners.contains(ui->TypeId))
+		if (hooks.EventListeners.contains(typeID))
 		{
-			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
+			auto listeners = hooks.EventListeners.find(typeID)->second;
 			for (auto listener : listeners)
 			{
 				listener->OnInvoke1(ui, invokeEnum, invokeData1);
