@@ -1,0 +1,51 @@
+site_name: Ep1p
+site_url: https://pinewood.team/ep1p/
+theme:
+  name: material
+  collapse_navigation: false
+  navigation_depth: 3
+  logo: img/ep1p_logo.png
+  favicon: img/ep1p_icon.png
+markdown_extensions:
+    - pymdownx.highlight:
+        anchor_linenums: true
+    - toc:
+        permalink: True
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences
+    - pymdownx.keys:
+        key_map: {
+          "m1": "Left Mouse Button",
+          "m2": "Right Mouse Button",
+          "m3": "Middle Mouse Button",
+          "m4": "Mouse M4",
+          "m5": "Mouse M5",
+        }
+    - admonition
+    - attr_list
+    - md_in_html
+    - tables
+extra:
+  analytics:
+    provider: google
+    property: G-066MSBESE0
+extra_css:
+  - css/extra.css
+# extra_javascript:
+#   - js/extra.js
+plugins:
+  - search
+  - meta-descriptions
+  - mkdocs-video:
+      css_style:
+        height: "400px"
+        width: "100%"
+
+nav:
+  - Home: index.md
+  - Download & Installation: download.md
+  - Patch Notes: patchnotes.md
+  - FAQ: faq.md
+  - Reverse Engineering Notes:
+    - Osiris: re/osiris.md

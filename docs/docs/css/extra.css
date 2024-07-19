@@ -1,0 +1,158 @@
+:root {
+  --md-default-fg-color--light: #404040;
+  --md-code-hl-function-color: #7a008f;
+  --md-default-bg-color: #f2f2f2;
+  --md-primary-fg-color: #5858ad;
+  --tpw-font-size: .75rem;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Center content if the width is too low for the table of contents to display */
+@media screen and (max-width: 60em) {
+  .md-main__inner.md-grid {
+    justify-content: center !important;
+  }
+}
+
+.md-typeset {
+  font-size: var(--tpw-font-size) !important;
+}
+
+.md-typeset ol li, .md-typeset ul li {
+  margin-bottom: 4px !important;
+}
+
+.md-header__button.md-logo img {
+  height: 2rem !important; /* Header itself has no height set; it's dictated by the logo */
+  margin: 5px 0 !important;
+}
+
+.md-header__button {
+  margin: 0 0 0 0px !important;
+  padding: 0 !important;
+}
+
+.md-nav__link {
+  user-select: none;
+}
+
+.hljs-comment {
+  color: #3e3e3e;
+}
+
+.hljs-params {
+  color: #893917;
+  font-weight: bold;
+}
+
+.hljs-keyword {
+  color: #893917
+}
+
+.hljs-title {
+  color: #032982;
+}
+
+code {
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
+}
+
+p {
+  line-height: 24px;
+  margin: 0;
+  margin-bottom: 9px;
+  margin-top: 9px;
+  font-size: var(--tpw-font-size) !important;
+}
+
+h5, h4, h3, h2, h1 {
+  margin: 18px 0 8px 0 !important;
+  font-weight: 700 !important;
+  color: var(--md-default-fg-color--light);
+}
+
+h5 {
+  text-transform: none !important;
+  font-size: 110% !important;
+}
+
+code {
+  font-size: 90% !important;
+}
+
+.admonition-title {
+  color: #000000 !important;
+}
+
+/* Used by nightly.md table; prevents text in first column from wrapping */
+td:first-child {
+  white-space: nowrap;
+}
+
+img {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+summary {
+  user-select: none;
+}
+
+/* Admonitions */
+
+.admonition {
+  border-radius: 0px !important;
+  border-color: transparent !important;
+}
+
+.admonition.info {
+  background-color: #e7f2fa;
+}
+
+.admonition.warning {
+  background-color: #ffedcc;
+}
+
+.admonition {
+  font-size: var(--tpw-font-size) !important;
+}
+
+/* Content area */
+.md-main__inner.md-grid {
+  max-width: 65rem !important;
+  justify-content: space-between; /* Snap first and last element to edges, so that the center grid element is centered but can leave a gap (through max-width) */
+}
+
+.md-content {
+  max-width: 38rem !important;
+  background: white;
+}
+
+.md-main__inner {
+  margin-top: 0px !important;
+}
+
+/* Centering tables */
+.md-typeset__table {
+  display: flex !important;
+}
+
+.md-typeset__table table {
+  margin: 0 auto !important;
+  flex-grow: 0;
+  width: unset !important;
+}
+
+/* Code Highlighting */
+
+/* Function keyword, table and function name */
+.nf, .nc, .kr { 
+  font-weight: 700;
+}
