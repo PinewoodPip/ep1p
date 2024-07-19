@@ -93,7 +93,7 @@ void KeyboardBottomBar::OnGameStateChanged(int newState)
 	}
 }
 
-void KeyboardBottomBarListener::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
+bool KeyboardBottomBarListener::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
 {
 	// Increment/decrement rows by 2 instead, so as to display the expected slots.
 	if (gSettings->ExtendedHotbar)
@@ -114,4 +114,5 @@ void KeyboardBottomBarListener::OnFunctionCalled(const char* uiCall, int paramsC
 			}
 		}
 	}
+	return false;
 }

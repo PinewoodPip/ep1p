@@ -19,7 +19,7 @@ public:
 
 	virtual bool OnInvoke0(UIObject* ui, int64_t invokeEnum) override;
 	virtual bool OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1) override;
-	void OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
+	bool OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
 
 private:
 	EpipSettings* _CurrentSettings;

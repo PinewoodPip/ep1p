@@ -316,22 +316,27 @@ void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned 
 
 	// Forward event to listeners
 	Hooks hooks = gExtender->GetHooks();
+	bool prevented = false;
 	if (hooks.EventListeners.contains(self->TypeId))
 	{
 		auto listeners = hooks.EventListeners.find(self->TypeId)->second;
 		for (auto listener : listeners)
 		{
-			listener->OnFunctionCalled(function, numArgs, args);
+			bool preventRequested = listener->OnFunctionCalled(function, numArgs, args);
+			prevented |= preventRequested;
 		}
 	}
 
-	auto vmt = *reinterpret_cast<UIObject::VMT**>(self);
-	auto handler = OriginalUIObjectCallHandlers.find(vmt);
-	if (handler != OriginalUIObjectCallHandlers.end()) {
-		handler->second(self, function, numArgs, args);
-	}
-	else {
-		WARN("Couldn't find original OnFunctionCalled handler for UI object");
+	if (!prevented)
+	{
+		auto vmt = *reinterpret_cast<UIObject::VMT**>(self);
+		auto handler = OriginalUIObjectCallHandlers.find(vmt);
+		if (handler != OriginalUIObjectCallHandlers.end()) {
+			handler->second(self, function, numArgs, args);
+		}
+		else {
+			WARN("Couldn't find original OnFunctionCalled handler for UI object");
+		}
 	}
 
 	// Setup Invoke captures, if necessary

@@ -9,7 +9,7 @@ BEGIN_NS(epip)
 // Must be a separate class to workaround an issue with wrappers and multiple inheritance.
 class KeyboardBottomBarListener : public UIEventListener
 {
-	virtual void OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
+	virtual bool OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
 };
 
 class KeyboardBottomBar : public GameStateChangedEventListener
