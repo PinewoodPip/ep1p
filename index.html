@@ -1,0 +1,782 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Ep1p is the spiritual prequel to Epip, bringing numerous QoL &amp; UI adjustments to Divinity: Original Sin Enhanced Edition, such as a longer hotbar, more informative healthbars, shared loremaster &amp; lucky charm, engine bug fixes and more.">
+      
+      
+      
+        <link rel="canonical" href="https://pinewood.team/ep1p/">
+      
+      
+      
+        <link rel="next" href="download/">
+      
+      
+      <link rel="icon" href="img/ep1p_icon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.29">
+    
+    
+      
+        <title>Ep1p</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.76a95c52.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-066MSBESE0"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-066MSBESE0",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-066MSBESE0",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ep1p" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Ep1p" class="md-header__button md-logo" aria-label="Ep1p" data-md-component="logo">
+      
+  <img src="img/ep1p_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ep1p
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Ep1p" class="md-nav__button md-logo" aria-label="Ep1p" data-md-component="logo">
+      
+  <img src="img/ep1p_logo.png" alt="logo">
+
+    </a>
+    Ep1p
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#download-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download &amp; Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotbar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotbar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings menu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shared-civils" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shared "civils"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-portraits-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Player portraits UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-health-bar-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Target health bar UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examine-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examine UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug fixes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modding-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modding improvements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="download/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Download & Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="patchnotes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reverse Engineering Notes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reverse Engineering Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="re/osiris/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Osiris
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#download-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download &amp; Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hotbar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotbar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings menu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shared-civils" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shared "civils"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-portraits-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Player portraits UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-health-bar-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Target health bar UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examine-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examine UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug fixes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modding-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modding improvements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<div><h1 id="ep1p">Ep1p<a class="headerlink" href="#ep1p" title="Permanent link">¶</a></h1>
+<p>Ep1p is the spiritual prequel to <a href="https://pinewood.team/epip">Epip</a>, bringing numerous QoL &amp; UI adjustments to <em>Divinity: Original Sin Enhanced Edition</em>, such as a longer hotbar, more informative healthbars, shared loremaster &amp; lucky charm, engine bug fixes and more.</p>
+<h2 id="download-installation">Download &amp; Installation<a class="headerlink" href="#download-installation" title="Permanent link">¶</a></h2>
+<p><a href="download/">Download and installation instructions can be found here.</a></p>
+<details>
+<summary>Credits &amp; Special Thanks</summary>
+<p>Special thanks to:</p>
+<ul>
+<li>Norbyte, without whose reverse-engineering mentoring and motivation this project likely would've taken years longer to develop.<ul>
+<li>Ep1p also makes use of code from his DOS2 extender as boilerplate.</li>
+</ul>
+</li>
+<li>The Epic Encounters community, for keeping interest in DOS1 alive.<ul>
+<li>Special thanks to Ameranth &amp; bleah11 for the motivation to look into the scripting engine bugs.</li>
+</ul>
+</li>
+</ul>
+</details>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">¶</a></h2>
+<p>Ep1p features various QoL &amp; UI improvements and fixes, most of them being configurable from the in-game <a href="#settings-menu">settings menu</a>.</p>
+<h3 id="hotbar">Hotbar<a class="headerlink" href="#hotbar" title="Permanent link">¶</a></h3>
+<p>An option to use a longer hotbar that displays 20 slots at once has been added (<em>"Extended Hotbar"</em> setting).</p>
+<p>TODO img</p>
+<p>Additionally, a lock button has been added; when enabled, the contents of the slots cannot be dragged out. In addition to this, a bug has been fixed in the UI that made dragging slots out far easier than was intended - you now need to move the cursor 10 pixels instead of just 1 pixel to start dragging, solving the infamous accidental dragging issues. These 2 features are available when the extended hotbar is disabled as well.</p>
+<p>Note that the maximum amount of hotbar slots (50) remains unchanged - as such, the extra 10 slots to the right of the third row are not usable.</p>
+<h3 id="settings-menu">Settings menu<a class="headerlink" href="#settings-menu" title="Permanent link">¶</a></h3>
+<p>The gameplay settings menu has new options that allow you to configure Ep1p's various features.</p>
+<p>TODO img</p>
+<div class="admonition warning">
+<p>Changing settings requires the game to be fully restarted - don't wait to do so, or you might run into crashes.</p>
+</div>
+<div class="admonition warning">
+<p>If playing multiplayer, the following settings need to be the same for all players:</p>
+<ul>
+<li>"Always grant XP to dead party members"</li>
+<li>"Unlimited Carry Weight"</li>
+<li>"Unlimited Equipment Durability"</li>
+<li>"Shared Lucky Charm"</li>
+</ul>
+</div>
+<p>Settings are stored in <code>Ep1pSettings.json</code> within the <code>Shipping</code> folder, after modifying them once in-game.</p>
+<h3 id="shared-civils">Shared "civils"<a class="headerlink" href="#shared-civils" title="Permanent link">¶</a></h3>
+<p>Settings have been added to "share" loremaster and lucky charm scores across the party for the purposes of examining and looting respectively, like in DOS2. Mods that add scripted aspects to these stats are unaffected.</p>
+<p>There is currently no visual feedback for this.</p>
+<h3 id="player-portraits-ui">Player portraits UI<a class="headerlink" href="#player-portraits-ui" title="Permanent link">¶</a></h3>
+<p>The status bars by the player portraits on the right will now wrap once a player character has &gt;6 statuses, reducing the likelihood of them obscuring the center of the screen.</p>
+<h3 id="target-health-bar-ui">Target health bar UI<a class="headerlink" href="#target-health-bar-ui" title="Permanent link">¶</a></h3>
+<p>The health bar UI that appears when hovering over characters has received numerous improvements, mainly to reduce the amount of trips to the examine UI:
+- Exact character vitality amounts are now shown.
+- Character resistances are now shown.
+- Statuses now display in 2 columns, like in DOS2 - making better use of screen space and making them less likely to overflow the screen.</p>
+<h3 id="examine-ui">Examine UI<a class="headerlink" href="#examine-ui" title="Permanent link">¶</a></h3>
+<p>A hotkey to open the examine UI for characters has been added, defaulting to <code>T</code>. This hotkey is usable even in situations where you normally wouldn't be able to bring up the context menu, such as when it is not your turn.</p>
+<p>Additionally, it's possible to configure the UI to show all information regardless of loremaster, or use the <a href="#shared-civils">highest loremaster of the party</a>.</p>
+<div class="admonition info">
+<p>Hotkeys currently cannot be modified in-game, but you can change them by <a href="faq/#can-i-rebind-the-new-hotkeys">editing the settings file</a>.</p>
+</div>
+<h3 id="other-features">Other features<a class="headerlink" href="#other-features" title="Permanent link">¶</a></h3>
+<ul>
+<li>Auto-identify: marks items as identified when they're generated.</li>
+<li>Unlimited carry weight: prevents characters from gaining the "overencumbered" status</li>
+<li>Unlimited equipment durability: prevents weapons and armor from losing durability.</li>
+<li>Dead party members in Tactician &amp; Honour modes can receive experience.</li>
+<li>Showing world tooltips for all containers (barrels, crates, etc.)<ul>
+<li>Unfortunately, clicking their tooltips will still cause your character to attempt to pick them up rather than loot them.</li>
+</ul>
+</li>
+<li>The maximum camera zoom can be adjusted.<ul>
+<li>Note that render distance limits are not adjusted; as such, at high camera distances, you may see features such as shadows or surfaces disappear.</li>
+</ul>
+</li>
+</ul>
+<h3 id="bug-fixes">Bug fixes<a class="headerlink" href="#bug-fixes" title="Permanent link">¶</a></h3>
+<p>Some bugs in the game have had workarounds made:</p>
+<ul>
+<li>Added a workaround for the scripting engine breaking "randomly", most infamously during the tutorial dungeon while using Epic Encounters.<ul>
+<li>This appears to be the bug that caused the door and pressure plate at the end of the tutorial to not work, as well as random mechanics breaking and torches not getting toggled when interacting with them, fixable only by fully restarting the game.</li>
+<li>If you disable this workaround in the settings menu, Ep1p will still notify with a message box you when it detects the issue has occurred.</li>
+</ul>
+</li>
+<li>Added a workaround for the skill range indicator effects not appearing if you begin casting a skill while the character is not on screen.</li>
+</ul>
+<h3 id="modding-improvements">Modding improvements<a class="headerlink" href="#modding-improvements" title="Permanent link">¶</a></h3>
+<p>A few changes have been made to help with regular modding:</p>
+<ul>
+<li>Osiris logging can be enabled, which will log to <code>osiris.log</code> in the <code>Shipping</code> folder, similar to DOS2.</li>
+<li>Story patching can be forced to facilitate testing scripting changes on existing saves.<ul>
+<li>Note that it <a href="re/osiris/#story-patching">is possible to perform story patching without Ep1p</a>; the mod merely makes it more convenient.</li>
+</ul>
+</li>
+</ul></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>
