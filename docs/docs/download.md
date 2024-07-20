@@ -2,7 +2,7 @@
 !!! info ""
     Only version 2.0.119.430 (Steam release) of the game is supported.
 
-- [Latest version download (v0.9.0.0).](TODO)
+- [Latest version download (v0.9.0.0).](https://drive.google.com/file/d/1FBiktbfshbQQv5T8nYYLJpo1xyuLzYen/view?usp=drive_link)
 - [Patchnotes](patchnotes.md)
 
 Ep1p can be installed or removed at any point alongside any `.pak` mods and does not require starting a new playthrough.
@@ -10,7 +10,7 @@ Ep1p can be installed or removed at any point alongside any `.pak` mods and does
 Installation:
 
 1. Unzip the archive.
-2. Place `DXGI.dll` in the game's `Shipping` folder, so that it is in the same folder as `EoCApp.exe`.
+2. Copy `DXGI.dll` from the `Shipping` folder into the game's `Shipping` folder, so that it is in the same folder as `EoCApp.exe`.
 3. Copy the contents of the `Data` folder into the game's `Data` folder, so that the `.swf` files end up in `C:\Program Files (x86)\Steam\steamapps\common\Divinity Original Sin Enhanced Edition\Data\Public\Game\GUI` (or equivalent relative path).
 
 If step 2 is done correctly, you will see "Ep1p" written near the version number in the game's main menu.
