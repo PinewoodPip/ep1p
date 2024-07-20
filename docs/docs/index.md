@@ -6,6 +6,7 @@ Ep1p is the spiritual prequel to [Epip](https://pinewood.team/epip), bringing nu
 - [Download and installation instructions](download.md)
 - [Features overview](#features)
 - [FAQ](faq.md)
+- [Epip & Ep1p development Discord channel](https://discord.gg/SevYmQc573)
 
 <details markdown="1">
 <summary>Credits & Special Thanks</summary>

@@ -27,7 +27,7 @@ To verify you did step 3 right, open the gameplay settings menu, scroll to the b
     - "Unlimited Equipment Durability"
     - "Shared Lucky Charm"
 
-Due to the mod's nature of patching game code, it's possible there may be bugs that lead to crashes. Please report any in [#epipeline](https://discord.gg/SevYmQc573); as a temporary workaround in such cases, you may try disabling any troublesome features in the [settings menu](#settings-menu).
+Due to the mod's nature of patching game code, it's possible there may be bugs that lead to crashes. Please report any in [#epipeline](https://discord.gg/SevYmQc573); as a temporary workaround in such cases, you may try disabling any troublesome features in the [settings menu](index.md/#settings-menu).
 
 To uninstall, remove all files added by the mod.
 
