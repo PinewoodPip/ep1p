@@ -1,10 +1,11 @@
 
 !!! info ""
-    Only version 2.0.119.430 (Steam release) of the game is supported - the GOG equivalent might work, but is untested.
+    Only version 2.0.119.430 (Steam release) of the game is supported.
 
-[Latest version download (v0.9.0.0).](TODO)
+- [Latest version download (v0.9.0.0).](TODO)
+- [Patchnotes](patchnotes.md)
 
-Ep1p can be installed or removed at any point and does not require starting a new playthrough.
+Ep1p can be installed or removed at any point alongside any `.pak` mods and does not require starting a new playthrough.
 
 Installation:
 
