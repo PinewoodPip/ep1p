@@ -41,27 +41,27 @@ void GameOptionsSettings::Render(ig::FlashPlayer* flashPlayer)
 	RenderLabel(flashPlayer, L"Ep1p Settings");
 #define CHECKBOX(setting, name, tooltip) RenderCheckbox(flashPlayer, (int)EpipSettings::Settings::setting, name, true, gSettings->setting, false, tooltip);
 #define SLIDER(setting, name, tooltip, minimum, maximum, snapInterval) RenderSlider(flashPlayer, (int)EpipSettings::Settings::setting, name, gSettings->setting, minimum, maximum, snapInterval, false, tooltip);
-	CHECKBOX(ExtendedHotbar, L"Extended Hotbar", L"If enabled, the Hotbar UI will show 20 slots at a time.");
-	CHECKBOX(ExtraTargetInfo, L"Show target resistances", L"If enabled, the target healthbar UI will show resistances of characters.");
+	CHECKBOX(ExtendedHotbar, L"Extended Hotbar", L"If enabled, the Hotbar UI will show 20 slots per row.<br>The maximum amount of hotbar slots (50) remains unchanged.");
+	CHECKBOX(LockBottomBar, L"Lock Hotbar dragging by default", L"If enabled, the hotbar will be locked upon loading into a game, preventing slot contents from being dragged out of it.<br>You may use the lock button in the bottom left of the UI to lock/unlock dragging while playing.");
+	CHECKBOX(ExtraTargetInfo, L"Show resistances by target healthbar", L"If enabled, the healthbar UI that shows while hovering over characters will show their resistances.");
 	CHECKBOX(MoreWorldTooltips, L"Show world tooltips for containers", L"If enabled, world tooltips will be shown for all container items.");
-	CHECKBOX(DeadPartyMemberXP, L"Grant XP to dead party members", L"If enabled, dead party members will still be able to receive experience in Tactician & Honour modes.");
-	CHECKBOX(SharedLuckyCharmLooting, L"Shared Lucky Charm (looting-only)", L"If enabled, looting will use the highest Lucky Charm of all characters in the party.");
+	CHECKBOX(SharedLuckyCharmLooting, L"Shared Lucky Charm", L"If enabled, looting will use the highest Lucky Charm of all characters in the party. Does not affect any other Lucky Charm effects.");
 	CHECKBOX(AutoIdentify, L"Auto-Identify", L"If enabled, new looted items will not require to be identified.");
 	RenderComboBox(flashPlayer, (int)EpipSettings::Settings::ExamineInformation, L"Examine UI Information", L"Controls the information displayed within the Examine UI.<br>- Vanilla: unchanged.<br>- Shared Loremaster: the highest Loremaster of all party members will be used to determine which information to show.<br>- Full information: all information is shown regardless of Loremaster.", std::vector<STDWString>({
 		L"Vanilla",
 		L"Shared Loremaster",
 		L"Full information",
 	}), (int)gSettings->ExamineInformation);
-	CHECKBOX(InfiniteEquipmentDurability, L"Infinite Equipment Durability", L"If enabled, weapons and armor will not lose durability from use.<br>Existing broken items will still need to be repaired.");
-	CHECKBOX(InfiniteCarryWeight, L"Infinite Carry Weight", L"If enabled, characters will no longer become overencumbered from surpassing their carry weight limit.<br>Existing overencumbered characters will remain overencumbered.");
-	CHECKBOX(FixSkillRangeGFX, L"Fix Skill Range Indicators", L"If enabled, skill range indicator circle effects will be shown even if the caster is not on screen.<br>Has a minimal performance impact.");
+	CHECKBOX(InfiniteEquipmentDurability, L"Unlimited Equipment Durability", L"If enabled, weapons and armor will not lose durability from use.<br>Existing broken items will still need to be repaired.");
+	CHECKBOX(InfiniteCarryWeight, L"Unlimited Carry Weight", L"If enabled, characters will no longer become overencumbered from surpassing their carry weight limit.<br>Existing overencumbered characters will remain overencumbered.");
+	CHECKBOX(DeadPartyMemberXP, L"Always grant XP to dead party members", L"If enabled, dead party members will be able to receive experience in Tactician & Honour modes.");
 	SLIDER(CameraMaxDistance, L"Maximum Camera Distance", L"Controls how far you can zoom out the camera.<br>Game default is 19m.", 19.0f, 30.0f, 1.0f);
-	CHECKBOX(LockBottomBar, L"Lock Hotbar dragging by default", L"If enabled, the hotbar will be locked upon loading into a game, preventing slot contents from being dragged out of it.<br>You may use the lock button in the bottom left of the UI to lock/unlock dragging while playing.");
+	CHECKBOX(FixSkillRangeGFX, L"Fix skill range indicators", L"If enabled, skill range indicator circle effects will be shown even if the caster is not on screen.<br>Has a minimal performance impact.");
 
 	RenderLabel(flashPlayer, L"Ep1p Developer Settings");
-	CHECKBOX(FixDontCareScriptParam, L"Scripting Engine Collapse Fix", L"If enabled, a patch will be applied to prevent the scripting engine from randomly breaking.<br>Don't disable this unless you know what you're doing!");
-	CHECKBOX(ForceStoryPatching, L"Force Story Patching", L"If enabled, story patching will be performed on each session load.");
-	CHECKBOX(StoryLogging, L"Story Logging", L"If enabled, story scripting will be logged to osirislog.log in the game executable's folder. This will slow the game down considerably.");
+	CHECKBOX(FixDontCareScriptParam, L"Scripting Engine Collapse Fix", L"If enabled, a patch will be applied to prevent the scripting engine from randomly breaking.<br>If disabled, you will still be notified when Ep1p detects the scripting engine broke.");
+	CHECKBOX(ForceStoryPatching, L"Force Story Patching", L"If enabled, story patching will be performed on each session load.<br>This will increase load times considerably.");
+	CHECKBOX(StoryLogging, L"Story Logging", L"If enabled, story scripting will be logged to osirislog.log in the game executable's folder.<br>This will slow the game down considerably.");
 #undef CHECKBOX
 }
 
@@ -152,7 +152,7 @@ bool GameOptionsSettings::OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::Invoke
 	return false;
 }
 
-void GameOptionsSettings::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
+bool GameOptionsSettings::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
 {
 	if (strcmp(uiCall, "checkBoxID") == 0)
 	{
@@ -179,4 +179,5 @@ void GameOptionsSettings::OnFunctionCalled(const char* uiCall, int paramsCount, 
 	{
 		ApplyPendingChanges();
 	}
+	return false;
 }
