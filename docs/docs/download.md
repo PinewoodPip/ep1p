@@ -14,6 +14,8 @@ Installation:
 
 If step 2 is done correctly, you will see "Ep1p" written near the version number in the game's main menu.
 
+![Version watermark.](img/version_watermark.png)
+
 To verify you did step 3 right, open the gameplay settings menu, scroll to the bottom and verify that the UI's background displays correctly.
 
 !!! warning ""

@@ -42,3 +42,6 @@ packages/
 DOSEE-Extender/DOSEE-Extender.vcxproj
 DOSEE-Extender/DOSEE-Extender.vcxproj.filters
 enc_temp_folder/
+
+# Doc site build
+docs/site

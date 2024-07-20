@@ -2,8 +2,10 @@
 
 Ep1p is the spiritual prequel to [Epip](https://pinewood.team/epip), bringing numerous QoL & UI adjustments to *Divinity: Original Sin Enhanced Edition*, such as a longer hotbar, more informative healthbars, shared loremaster & lucky charm, engine bug fixes and more.
 
-## Download & Installation
-[Download and installation instructions can be found here.](download.md)
+## Links
+- [Download and installation instructions](download.md)
+- [Features overview](#features)
+- [FAQ](faq.md)
 
 <details markdown="1">
 <summary>Credits & Special Thanks</summary>
@@ -21,7 +23,7 @@ Ep1p features various QoL & UI improvements and fixes, most of them being config
 ### Hotbar
 An option to use a longer hotbar that displays 20 slots at once has been added (*"Extended Hotbar"* setting).
 
-TODO img
+![Extended Hotbar.](img/features/bottom_bar.png)
 
 Additionally, a lock button has been added; when enabled, the contents of the slots cannot be dragged out. In addition to this, a bug has been fixed in the UI that made dragging slots out far easier than was intended - you now need to move the cursor 10 pixels instead of just 1 pixel to start dragging, solving the infamous accidental dragging issues. These 2 features are available when the extended hotbar is disabled as well.
 
@@ -30,7 +32,7 @@ Note that the maximum amount of hotbar slots (50) remains unchanged - as such, t
 ### Settings menu
 The gameplay settings menu has new options that allow you to configure Ep1p's various features.
 
-TODO img
+![Settings menu.](img/features/settings_menu.png)
 
 !!! warning ""
     Changing settings requires the game to be fully restarted - don't wait to do so, or you might run into crashes.
@@ -53,11 +55,15 @@ There is currently no visual feedback for this.
 ### Player portraits UI
 The status bars by the player portraits on the right will now wrap once a player character has >6 statuses, reducing the likelihood of them obscuring the center of the screen.
 
+![Wrapping status bar.](img/features/player_info.png)
+
 ### Target health bar UI
 The health bar UI that appears when hovering over characters has received numerous improvements, mainly to reduce the amount of trips to the examine UI:
 - Exact character vitality amounts are now shown.
 - Character resistances are now shown.
 - Statuses now display in 2 columns, like in DOS2 - making better use of screen space and making them less likely to overflow the screen.
+
+![Target info UI.](img/features/target_info.png)
 
 ### Examine UI
 A hotkey to open the examine UI for characters has been added, defaulting to `T`. This hotkey is usable even in situations where you normally wouldn't be able to bring up the context menu, such as when it is not your turn.
