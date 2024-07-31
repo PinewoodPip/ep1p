@@ -197,6 +197,12 @@ namespace dse
 		using ecl_EocUIControl_ShowCommonMessageBoxProc = void(ecl::EocUIControl* self, wchar_t* msg);
 		ecl_EocUIControl_ShowCommonMessageBoxProc* ecl_EocUIControl_ShowCommonMessageBox{ nullptr };
 
+		using CDivinityStats_Character_GetDefenseDamageReductionProc = float(CDivinityStats_Character* character, int level);
+		CDivinityStats_Character_GetDefenseDamageReductionProc* CDivinityStats_Character_GetDefenseDamageReduction{ nullptr };
+
+		using CDivinityStats_Character_GetDefenseFromLevelProc = int(CDivinityStats_Character* character, int level, bool excludeBoosts);
+		CDivinityStats_Character_GetDefenseFromLevelProc* CDivinityStats_Character_GetDefenseFromLevel{ nullptr };
+
 		using esv_ScriptParam_GetCharacterProc = esv::Character* (esv::PlanManager::ScriptParam* self);
 		esv_ScriptParam_GetCharacterProc* esv_ScriptParam_GetCharacter{ nullptr };
 		using esv_ScriptParam_GetItemProc = esv::Item* (esv::PlanManager::ScriptParam* self);

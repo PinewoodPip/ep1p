@@ -28,27 +28,52 @@ int GetMaxAP(CDivinityStats_Character* stats)
 
 STDWString GetResistancesString(ecl::Character* character)
 {
+	auto& symbols = GetStaticSymbols();
 	CDivinityStats_Character* stats = character->Stats;
-	int32_t slashingResistance = GetStaticSymbols().CDivinityStats_Character__GetSlashingResistance(stats, false);
-	int32_t piercingResistance = GetStaticSymbols().CDivinityStats_Character__GetPiercingResistance(stats, false);
-	int32_t crushingResistance = GetStaticSymbols().CDivinityStats_Character__GetCrushingResistance(stats, false);
-	int32_t fireResistance = GetStaticSymbols().CDivinityStats_Character__GetFireResistance(stats, false);
-	int32_t waterResistance = GetStaticSymbols().CDivinityStats_Character__GetWaterResistance(stats, false);
-	int32_t earthResistance = GetStaticSymbols().CDivinityStats_Character__GetEarthResistance(stats, false);
-	int32_t airResistance = GetStaticSymbols().CDivinityStats_Character__GetAirResistance(stats, false);
-	int32_t poisonResistance = GetStaticSymbols().CDivinityStats_Character__GetPoisonResistance(stats, false);
-	int32_t tenebriumResistance = GetStaticSymbols().CDivinityStats_Character__GetShadowResistance(stats, false);
-	std::string formattedResistances = std::format("{}  {}  {}  {}  {}  {}\n{}  {}  {}",
-		Text::Colorize(std::format("{}%", std::to_string(fireResistance)), "f77c27"),
-		Text::Colorize(std::format("{}%", std::to_string(waterResistance)), "27aff6"),
-		Text::Colorize(std::format("{}%", std::to_string(earthResistance)), "aa7840"),
-		Text::Colorize(std::format("{}%", std::to_string(airResistance)), "8f83cb"),
-		Text::Colorize(std::format("{}%", std::to_string(poisonResistance)), "5bd42b"),
-		Text::Colorize(std::format("{}%", std::to_string(tenebriumResistance)), "5b34ca"),
-		Text::Colorize(std::format("S: {}%", std::to_string(slashingResistance)), "acacac"),
-		Text::Colorize(std::format("P: {}%", std::to_string(piercingResistance)), "acacac"),
-		Text::Colorize(std::format("C: {}%", std::to_string(crushingResistance)), "acacac")
-	);
+	int32_t fireResistance = symbols.CDivinityStats_Character__GetFireResistance(stats, false);
+	int32_t waterResistance = symbols.CDivinityStats_Character__GetWaterResistance(stats, false);
+	int32_t earthResistance = symbols.CDivinityStats_Character__GetEarthResistance(stats, false);
+	int32_t airResistance = symbols.CDivinityStats_Character__GetAirResistance(stats, false);
+	int32_t poisonResistance = symbols.CDivinityStats_Character__GetPoisonResistance(stats, false);
+	int32_t tenebriumResistance = symbols.CDivinityStats_Character__GetShadowResistance(stats, false);
+	std::string formattedResistances;
+
+	if (character->PlayerData)
+	{
+		// Also show armor for players
+		int armor = symbols.CDivinityStats_Character_GetDefenseFromLevel(stats, stats->Level, false);
+		float armorDR = symbols.CDivinityStats_Character_GetDefenseDamageReduction(stats, stats->Level);
+
+		formattedResistances = std::format("{}  {}  {}  {}  {}  {}\n{}  {}",
+			Text::Colorize(std::format("{}%", std::to_string(fireResistance)), "f77c27"),
+			Text::Colorize(std::format("{}%", std::to_string(waterResistance)), "27aff6"),
+			Text::Colorize(std::format("{}%", std::to_string(earthResistance)), "aa7840"),
+			Text::Colorize(std::format("{}%", std::to_string(airResistance)), "8f83cb"),
+			Text::Colorize(std::format("{}%", std::to_string(poisonResistance)), "5bd42b"),
+			Text::Colorize(std::format("{}%", std::to_string(tenebriumResistance)), "5b34ca"),
+			Text::Colorize(std::format("Armor: {}", std::to_string(armor)), "acacac"),
+			Text::Colorize(std::format("({:.0f}% Phys. DR)", armorDR * 100.0f), "acacac")
+		);
+	}
+	else
+	{
+		// Also show pierce/crush/slash resistances for non-players
+		int32_t slashingResistance = symbols.CDivinityStats_Character__GetSlashingResistance(stats, false);
+		int32_t piercingResistance = symbols.CDivinityStats_Character__GetPiercingResistance(stats, false);
+		int32_t crushingResistance = symbols.CDivinityStats_Character__GetCrushingResistance(stats, false);
+
+		formattedResistances = std::format("{}  {}  {}  {}  {}  {}\n{}  {}  {}",
+			Text::Colorize(std::format("{}%", std::to_string(fireResistance)), "f77c27"),
+			Text::Colorize(std::format("{}%", std::to_string(waterResistance)), "27aff6"),
+			Text::Colorize(std::format("{}%", std::to_string(earthResistance)), "aa7840"),
+			Text::Colorize(std::format("{}%", std::to_string(airResistance)), "8f83cb"),
+			Text::Colorize(std::format("{}%", std::to_string(poisonResistance)), "5bd42b"),
+			Text::Colorize(std::format("{}%", std::to_string(tenebriumResistance)), "5b34ca"),
+			Text::Colorize(std::format("S: {}%", std::to_string(slashingResistance)), "acacac"),
+			Text::Colorize(std::format("P: {}%", std::to_string(piercingResistance)), "acacac"),
+			Text::Colorize(std::format("C: {}%", std::to_string(crushingResistance)), "acacac")
+		);
+	}
 	
 	return STDWString(formattedResistances.begin(), formattedResistances.end());
 }
@@ -76,7 +101,6 @@ void TargetInfo::UpdateResistances(UITargetInfo* ui, ig::InvokeDataValue* labelI
 {
 	ecl::Character* character = PointerUtils::GetCurrentPickerCharacter();
 	ig::InvokeDataValue invokeData;
-
 
 	TryRegisterInvokes((UITargetInfo*)ui);
 	if (character && gSettings->ExtraTargetInfo)

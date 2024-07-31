@@ -513,6 +513,20 @@
 			@call e8 84 4a fe ff //      CALL       CDivinityStats_Item::DegradeDurability           undefined DegradeDurability()
 			<Target Type="Indirect" Offset="@call" Symbol="CDivinityStats_Item_DegradeDurability" />
 		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetDefenseDamageReduction">
+			@call e8 d7 fe fe ff //      CALL       CDivinityStats_Character::GetDefenseDamageRedu   float GetDefenseDamageReductionA
+			ba 01 00 00 00 //      MOV        EDX,0x1
+			48 8b cf //       MOV        RCX,RDI
+			f3 0f 59 05 23 14 2e 00 //      MULSS      XMM0,dword ptr [DAT_14111199c]                   = 42C80000h
+			<Target Type="Indirect" Offset="@call" Symbol="CDivinityStats_Character_GetDefenseDamageReduction" />
+		</Mapping>
+		<Mapping Name="CDivinityStats_Character::GetDefenseFromLevel">
+			@call e8 f0 97 00 00 //      CALL       CDivinityStats_Character::GetDefenseFromLevel    undefined GetDefenseFromLevel()
+			85 c0 //          TEST       EAX,EAX
+			0f 8e 8e 00 00 00 //      JLE        LAB_140e204e6
+			66 0f 6e c8 //    MOVD       XMM1,EAX
+			<Target Type="Indirect" Offset="@call" Symbol="CDivinityStats_Character_GetDefenseFromLevel" />
+		</Mapping>
 		<Mapping Name="ecl::EocUIControl::ShowCommonMessageBox">
 			49 8b cb //       MOV        RCX,R11
 			@call e8 60 95 e3 ff //      CALL       ecl::EocUIControl::ShowCommonMessageBox          undefined ShowCommonMessageBox(e

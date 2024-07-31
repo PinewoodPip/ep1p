@@ -112,6 +112,8 @@ namespace dse
 		SYM_OFF(Effect_UpdateIsVisible);
 		SYM_OFF(MoveableObject_CheckVisible);
 		SYM_OFF(CDivinityStats_Item_DegradeDurability);
+		SYM_OFF(CDivinityStats_Character_GetDefenseDamageReduction);
+		SYM_OFF(CDivinityStats_Character_GetDefenseFromLevel);
 		SYM_OFF(ecl_EocUIControl_ShowCommonMessageBox);
 		SYM_OFF(esv_ScriptParam_GetItem);
 		SYM_OFF(esv_ScriptParam_GetCharacter);
