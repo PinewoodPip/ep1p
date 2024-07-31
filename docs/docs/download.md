@@ -2,7 +2,7 @@
 !!! info ""
     Only version 2.0.119.430 (Steam release) of the game is supported.
 
-- [Latest version download (v0.9.0.1).](https://drive.google.com/file/d/1k_EnjWN7A-MPyri944bwMtTEKxY77Ibp/view?usp=drive_link)
+- [Latest version download (v1.0.0.0).](https://drive.google.com/file/d/1k8IKS5cNyOsVrTxA67Bi9yQFb0GHX-UJ/view?usp=drive_link)
 - [Patchnotes](patchnotes.md)
 
 Ep1p can be installed or removed at any point alongside any `.pak` mods and does not require starting a new playthrough.

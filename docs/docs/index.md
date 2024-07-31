@@ -25,7 +25,8 @@ Ep1p features various QoL & UI improvements and fixes, most of them being config
 The health bar UI that appears when hovering over characters has received numerous improvements, mainly to reduce the amount of trips to the examine UI:
 
 - Exact character vitality amounts are now shown.
-- Character resistances are now shown.
+- Character resistances are now shown, as well as armor and physical damage reduction for player characters.
+    - The physical damage reduction shown is against enemies of the same level as the character, like in the character sheet tooltip.
 - Statuses now display in 2 columns, like in DOS2 - making better use of screen space and making them less likely to overflow the screen.
 
 ![Target info UI.](img/features/target_info.png)
@@ -63,9 +64,9 @@ Settings have been added to "share" loremaster and lucky charm scores across the
 There is currently no visual feedback for this.
 
 ### Other features
-- **Auto-identify**: marks items as identified when they're generated.
-- **Unlimited carry weight**: prevents characters from gaining the "overencumbered" status
-- **Unlimited equipment durability**: prevents weapons and armor from losing durability.
+- **Auto-identify**: marks items as identified when they're generated if the party has enough loremaster and an identifying glass, with an option to bypass these requirements.
+- **Unlimited carry weight**: prevents characters from gaining the "overencumbered" status.
+- **Unlimited equipment durability**: prevents weapons and armor from losing durability. Does not affect unrepairable items.
 - Dead party members in Tactician & Honour modes can receive experience.
 - Showing world tooltips for all containers (barrels, crates, etc.)
     - Unfortunately, clicking their tooltips will still cause your character to attempt to pick them up rather than loot them.
