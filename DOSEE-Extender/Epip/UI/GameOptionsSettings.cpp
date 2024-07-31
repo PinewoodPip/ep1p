@@ -56,7 +56,7 @@ void GameOptionsSettings::Render(ig::FlashPlayer* flashPlayer)
 		L"Shared Loremaster",
 		L"Full information",
 	}), (int)gSettings->ExamineInformation);
-	CHECKBOX(InfiniteEquipmentDurability, L"Unlimited Equipment Durability", L"If enabled, weapons and armor will not lose durability from use.<br>Existing broken items will still need to be repaired.");
+	CHECKBOX(InfiniteEquipmentDurability, L"Unlimited Equipment Durability", L"If enabled, weapons and armor will not lose durability from use, unless they are unrepairable.<br>Existing broken items will still need to be repaired.");
 	CHECKBOX(InfiniteCarryWeight, L"Unlimited Carry Weight", L"If enabled, characters will no longer become overencumbered from surpassing their carry weight limit.<br>Existing overencumbered characters will remain overencumbered.");
 	CHECKBOX(DeadPartyMemberXP, L"Always grant XP to dead party members", L"If enabled, dead party members will be able to receive experience in Tactician & Honour modes.");
 	SLIDER(CameraMaxDistance, L"Maximum Camera Distance", L"Controls how far you can zoom out the camera.<br>Game default is 19m.", 19.0f, 30.0f, 1.0f);
