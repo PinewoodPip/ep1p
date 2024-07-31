@@ -51,4 +51,9 @@ bool UIUtils::IsPausedOrInputFocused()
 	return ((*gStaticSymbols->UIObjectManager__Instance)->AggregateModalFlags_m & 0x1e00) != 0;
 }
 
+bool UIUtils::IsVisible(UIObject* ui)
+{
+	return (ui->Flags & (int)UIObject::UIFlags::Visible) != 0;
+}
+
 END_SE()

@@ -498,6 +498,14 @@ namespace dse
 			Examine = 110
 		};
 
+		enum class UIFlags
+		{
+			Loaded = 0x1,
+			RequestDelete_m = 0x4,
+			Visible = 0x8,
+			Activated = 0x10,
+		};
+
 		struct VMT
 		{
 			OnFunctionCalledProc OnFunctionCalled;
@@ -1339,7 +1347,7 @@ namespace dse
 			uint64_t field_98;
 		};
 
-		struct UIExamine : public EoCUI
+		/*struct UIExamine : public EoCUI
 		{
 			uint64_t UIStatusIconHelper[3];
 			void* NetEventManagerVMT;
@@ -1359,6 +1367,86 @@ namespace dse
 			ComponentHandle OH1;
 			ComponentHandle ObjectBeingExamined;
 			uint64_t field_250;
+		};*/
+		struct UIExamine : UIObject
+		{
+			undefined field1_0xb4;
+			undefined field2_0xb5;
+			undefined field3_0xb6;
+			undefined field4_0xb7;
+			undefined field5_0xb8;
+			undefined field6_0xb9;
+			undefined field7_0xba;
+			undefined field8_0xbb;
+			undefined field9_0xbc;
+			undefined field10_0xbd;
+			undefined field11_0xbe;
+			undefined field12_0xbf;
+			undefined field13_0xc0;
+			undefined field14_0xc1;
+			undefined field15_0xc2;
+			undefined field16_0xc3;
+			undefined field17_0xc4;
+			undefined field18_0xc5;
+			undefined field19_0xc6;
+			undefined field20_0xc7;
+			undefined field21_0xc8;
+			undefined field22_0xc9;
+			undefined field23_0xca;
+			undefined field24_0xcb;
+			undefined field25_0xcc;
+			undefined field26_0xcd;
+			undefined field27_0xce;
+			undefined field28_0xcf;
+			undefined field29_0xd0;
+			undefined field30_0xd1;
+			undefined field31_0xd2;
+			undefined field32_0xd3;
+			undefined field33_0xd4;
+			undefined field34_0xd5;
+			undefined field35_0xd6;
+			undefined field36_0xd7;
+			undefined field37_0xd8;
+			undefined field38_0xd9;
+			undefined field39_0xda;
+			undefined field40_0xdb;
+			undefined field41_0xdc;
+			undefined field42_0xdd;
+			undefined field43_0xde;
+			undefined field44_0xdf;
+			undefined field45_0xe0;
+			undefined field46_0xe1;
+			undefined field47_0xe2;
+			undefined field48_0xe3;
+			undefined field49_0xe4;
+			undefined field50_0xe5;
+			undefined field51_0xe6;
+			undefined field52_0xe7;
+			undefined field53_0xe8;
+			undefined field54_0xe9;
+			undefined field55_0xea;
+			undefined field56_0xeb;
+			undefined field57_0xec;
+			undefined field58_0xed;
+			undefined field59_0xee;
+			undefined field60_0xef;
+			undefined field61_0xf0;
+			undefined field62_0xf1;
+			undefined field63_0xf2;
+			undefined field64_0xf3;
+			undefined field65_0xf4;
+			undefined field66_0xf5;
+			undefined field67_0xf6;
+			undefined field68_0xf7;
+			undefined1 IconCustomDrawStruct;
+			undefined field70_0xf9;
+			undefined field71_0xfa;
+			undefined field72_0xfb;
+			undefined field73_0xfc;
+			undefined field74_0xfd;
+			undefined field75_0xfe;
+			undefined field76_0xff;
+			ObjectHandle CurrentObjectHandle;
 		};
 
 		struct UILoadingScreen : public EoCUI

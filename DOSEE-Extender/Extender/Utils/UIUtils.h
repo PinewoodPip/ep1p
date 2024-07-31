@@ -11,6 +11,7 @@ public:
 	static ig::InvokeDataValue CreateBoolInvokeData(bool value);
 	static ig::InvokeDataValue CreateStringInvokeData(STDWString value);
 	static bool IsPausedOrInputFocused();
+	static bool IsVisible(UIObject* ui);
 };
 
 END_SE()
