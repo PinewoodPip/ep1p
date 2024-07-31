@@ -229,6 +229,7 @@ namespace dse
 		ecl_ItemProtocol_UpdateItemsProc* ecl_ItemProtocol_UpdateItems{ nullptr };
 
 		ComponentFactory<ecl::Inventory>** ecl_InventoryFactory{ nullptr };
+		ComponentFactory<esv::Inventory>** esv_InventoryFactory{ nullptr };
 
 		FixedString::CreateProc* ls__FixedString__Create{ nullptr };
 		GlobalStringTable const** ls__GlobalStrings{ nullptr };

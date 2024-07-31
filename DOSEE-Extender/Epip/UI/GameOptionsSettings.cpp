@@ -46,7 +46,11 @@ void GameOptionsSettings::Render(ig::FlashPlayer* flashPlayer)
 	CHECKBOX(ExtraTargetInfo, L"Show resistances by target healthbar", L"If enabled, the healthbar UI that shows while hovering over characters will show their resistances.");
 	CHECKBOX(MoreWorldTooltips, L"Show world tooltips for containers", L"If enabled, world tooltips will be shown for all container items.");
 	CHECKBOX(SharedLuckyCharmLooting, L"Shared Lucky Charm", L"If enabled, looting will use the highest Lucky Charm of all characters in the party. Does not affect any other Lucky Charm effects.");
-	CHECKBOX(AutoIdentify, L"Auto-Identify", L"If enabled, new looted items will not require to be identified.");
+	RenderComboBox(flashPlayer, (int)EpipSettings::Settings::AutoIdentifyMode, L"Auto-Identify", L"Determines whether newly-generated items should be automatically identified.<br>- Disabled: items will not be auto-identified.<br>- With requirements: items will be identified if anyone in the party meets the loremaster requirement and the party has an identifying glass.<br>- Always: items will always be identified regardless of requirements.", std::vector<STDWString>({
+		L"Disabled",
+		L"With requirements",
+		L"Always",
+		}), (int)gSettings->AutoIdentifyMode);
 	RenderComboBox(flashPlayer, (int)EpipSettings::Settings::ExamineInformation, L"Examine UI Information", L"Controls the information displayed within the Examine UI.<br>- Vanilla: unchanged.<br>- Shared Loremaster: the highest Loremaster of all party members will be used to determine which information to show.<br>- Full information: all information is shown regardless of Loremaster.", std::vector<STDWString>({
 		L"Vanilla",
 		L"Shared Loremaster",

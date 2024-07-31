@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "Extender/Utils/CharacterUtils.h"
 #include "Epip/EpipSettings.h"
 #include "ExamineTweaks.h"
 #include "Extender/ScriptExtender.h"
@@ -19,17 +20,6 @@ void ExamineTweaks::OnSetupInformation(StaticSymbols::ecl_UIExamine_SetupInforma
 	return next(self, clearPanel);
 }
 
-int GetLoremaster(CDivinityStats_Character* stats)
-{
-	int loremaster = 0;
-	for (CharacterDynamicStat* dynStat : stats->DynamicStats)
-	{
-		loremaster += dynStat->Loremaster;
-	}
-	// TODO check for traits (Materialistic higher than Spiritual)
-	return loremaster;
-}
-
 int ExamineTweaks::OnGetAbilityBoost(CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts)
 {
 	if (_IsPreparingExamine)
@@ -37,7 +27,7 @@ int ExamineTweaks::OnGetAbilityBoost(CDivinityStats_Character* stats, AbilityTyp
 		_IsPreparingExamine = false;
 
 		auto setting = gSettings->ExamineInformation;
-		int characterLoremaster = GetLoremaster(stats);
+		int characterLoremaster = SharedCharacterUtils::GetLoremaster(stats);
 		if (setting == EpipSettings::ExamineInformationChoices::FullInformation)
 		{
 			// Add a boost to bring loremaster to 5
@@ -53,7 +43,7 @@ int ExamineTweaks::OnGetAbilityBoost(CDivinityStats_Character* stats, AbilityTyp
 			{
 				if (otherCharacter->PlayerData != nullptr && otherCharacter->Stats != stats)
 				{
-					highestLoremaster = std::max(highestLoremaster, GetLoremaster(otherCharacter->Stats));
+					highestLoremaster = std::max(highestLoremaster, SharedCharacterUtils::GetLoremaster(otherCharacter->Stats));
 				}
 			}
 			// Add a boost to bring the calculated Lucky Charm to the maximum of all party members.

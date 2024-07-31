@@ -14,7 +14,6 @@ BEGIN_NS(epip)
 	EPIP_FOR_SETTING(ForceStoryPatching) \
 	EPIP_FOR_SETTING(SharedLuckyCharmLooting) \
 	EPIP_FOR_SETTING(DeadPartyMemberXP) \
-	EPIP_FOR_SETTING(AutoIdentify) \
 	EPIP_FOR_SETTING(InfiniteEquipmentDurability) \
 	EPIP_FOR_SETTING(InfiniteCarryWeight) \
 	EPIP_FOR_SETTING(StoryLogging) \
@@ -25,6 +24,7 @@ BEGIN_NS(epip)
 	
 #define EPIP_FOR_ALL_ENUM_SETTINGS() \
 	EPIP_FOR_SETTING(ExamineInformation) \
+	EPIP_FOR_SETTING(AutoIdentifyMode)
 
 #define EPIP_FOR_ALL_FLOAT_SETTINGS() \
 	EPIP_FOR_SETTING(CameraMaxDistance)
@@ -44,7 +44,7 @@ public:
 		ForceStoryPatching,
 		SharedLuckyCharmLooting,
 		DeadPartyMemberXP,
-		AutoIdentify,
+		AutoIdentifyMode,
 		InfiniteEquipmentDurability,
 		InfiniteCarryWeight,
 		StoryLogging,
@@ -61,6 +61,12 @@ public:
 		SharedLoremaster,
 		FullInformation,
 	};
+	enum class AutoIdentifyModeChoices
+	{
+		Disabled,
+		WithRequirements,
+		Always,
+	};
 
 	bool ExtendedHotbar = false;
 	bool ExtraTargetInfo = true;
@@ -69,7 +75,7 @@ public:
 	bool ForceStoryPatching = false;
 	bool SharedLuckyCharmLooting = true;
 	bool DeadPartyMemberXP = false;
-	bool AutoIdentify = false;
+	AutoIdentifyModeChoices AutoIdentifyMode = AutoIdentifyModeChoices::Disabled;
 	bool InfiniteEquipmentDurability = false;
 	bool InfiniteCarryWeight = false;
 	bool StoryLogging = false;

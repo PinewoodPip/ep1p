@@ -10,6 +10,7 @@ public:
 
 private:
 	esv::Item* OnTreasureItemGenerated(StaticSymbols::esv_ItemHelpers_GenerateTreasureItemProc* next, void* request, int16_t unknown);
+	bool CanAutoIdentify(esv::Item* item);
 };
 
 END_NS()

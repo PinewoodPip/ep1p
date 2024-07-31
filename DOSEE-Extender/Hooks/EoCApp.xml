@@ -256,6 +256,16 @@
 			44 0f b7 c0 //    MOVZX      param_3,AX
 			<Target Type="Indirect" Offset="@ref" Symbol="ecl_InventoryFactory" />
 		</Mapping>
+		<Mapping Name="esv::InventoryFactory">
+			74 3c //          JZ         LAB_140b9dc40
+			a9 00 00 ff 03 //      TEST       EAX,0x3ff0000
+			74 35 //          JZ         LAB_140b9dc40
+			@ref 48 8b 15 36 0f 7b 00 //      MOV        param_2,qword ptr [esv_Inventory_Factory]        = ??
+			0f b7 c8 //       MOVZX      param_1,AX
+			3b 4a 24 //       CMP        param_1,dword ptr [RDX + param_2->field26_0x24]
+			73 26 //          JNC        LAB_140b9dc40
+			<Target Type="Indirect" Offset="@ref" Symbol="esv_InventoryFactory" />
+		</Mapping>
 		<Mapping Name="ecl::ItemProtocol::UpdateItems">
 			49 8b cd //       MOV        RCX,R13
 			@call e8 13 d1 ff ff //      CALL       ecl::ItemProtocol::UpdateItems
