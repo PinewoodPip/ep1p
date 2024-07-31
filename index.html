@@ -659,7 +659,10 @@
 <p>The health bar UI that appears when hovering over characters has received numerous improvements, mainly to reduce the amount of trips to the examine UI:</p>
 <ul>
 <li>Exact character vitality amounts are now shown.</li>
-<li>Character resistances are now shown.</li>
+<li>Character resistances are now shown, as well as armor and physical damage reduction for player characters.<ul>
+<li>The physical damage reduction shown is against enemies of the same level as the character, like in the character sheet tooltip.</li>
+</ul>
+</li>
 <li>Statuses now display in 2 columns, like in DOS2 - making better use of screen space and making them less likely to overflow the screen.</li>
 </ul>
 <p><img alt="Target info UI." src="img/features/target_info.png"></p>
@@ -686,9 +689,9 @@
 <p>There is currently no visual feedback for this.</p>
 <h3 id="other-features">Other features<a class="headerlink" href="#other-features" title="Permanent link">¶</a></h3>
 <ul>
-<li><strong>Auto-identify</strong>: marks items as identified when they're generated.</li>
-<li><strong>Unlimited carry weight</strong>: prevents characters from gaining the "overencumbered" status</li>
-<li><strong>Unlimited equipment durability</strong>: prevents weapons and armor from losing durability.</li>
+<li><strong>Auto-identify</strong>: marks items as identified when they're generated if the party has enough loremaster and an identifying glass, with an option to bypass these requirements.</li>
+<li><strong>Unlimited carry weight</strong>: prevents characters from gaining the "overencumbered" status.</li>
+<li><strong>Unlimited equipment durability</strong>: prevents weapons and armor from losing durability. Does not affect unrepairable items.</li>
 <li>Dead party members in Tactician &amp; Honour modes can receive experience.</li>
 <li>Showing world tooltips for all containers (barrels, crates, etc.)<ul>
 <li>Unfortunately, clicking their tooltips will still cause your character to attempt to pick them up rather than loot them.</li>
