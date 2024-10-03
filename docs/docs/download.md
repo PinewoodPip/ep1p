@@ -5,6 +5,9 @@
 - [Latest version download (v1.0.0.0).](https://drive.google.com/file/d/1k8IKS5cNyOsVrTxA67Bi9yQFb0GHX-UJ/view?usp=drive_link)
 - [Patchnotes](patchnotes.md)
 
+!!! warning ""
+    UI changes are not available for the controller UI, but other features will work; you will have to use the keyboard+mouse UI at least once to access the settings menu to configure them, however.
+
 Ep1p can be installed or removed at any point alongside any `.pak` mods and does not require starting a new playthrough.
 
 Installation:
