@@ -1592,9 +1592,15 @@ END_NS()
 
 BEGIN_NS(ecl)
 
+struct PartyGroupHolder
+{
+	void* unknown;
+	CompactSet<ObjectHandle> CharacterHandles_m;
+};
+
 struct PartyGroup
 {
-
+	PartyGroupHolder* SomeHolder;
 };
 
 struct Party
@@ -1751,6 +1757,790 @@ struct CharacterBody : public ProtectedGameObject<CharacterBody>
 	ActionState* ActionState;
 };
 
+struct CharacterTask
+{
+	typedef enum Type : int32_t {
+		UseSkill_m = 3,
+		Sneak = 5,
+		UseItem = 6,
+		PickupItem = 8
+	};
+
+	virtual void dtor() = 0;
+	virtual void CreateNew() = 0;
+	virtual void RaiseFlags() = 0;
+	virtual void ClearFlags() = 0;
+	virtual void field4_0x20() = 0;
+	virtual void field5_0x28() = 0;
+	virtual bool CanExecute(bool unknown) = 0;
+	virtual void GetPriority() = 0;
+	virtual int GetAPCost() = 0;
+	virtual void GetTotalAPCost_m() = 0;
+	virtual void ShowError() = 0;
+	virtual void field11_0x58() = 0;
+	virtual void UpdateCursor() = 0;
+	virtual void field13_0x68() = 0;
+	virtual void field14_0x70() = 0;
+	virtual void UpdateHighlights() = 0;
+	virtual void ClearHighlights() = 0;
+	virtual void field17_0x88() = 0;
+	virtual void Execute2() = 0;
+	virtual void ShowNotification() = 0;
+	virtual void Execute() = 0;
+	virtual void field21_0xa8() = 0;
+	virtual void field22_0xb0() = 0;
+	virtual void GetName() = 0;
+	virtual void GetTooltip() = 0;
+	virtual void field25_0xc8() = 0;
+	virtual void UpdateMoreEffects() = 0;
+	virtual void UpdateMoreEffects2() = 0;
+	virtual void field28_0xe0() = 0;
+
+	undefined field1_0x8;
+	undefined field2_0x9;
+	undefined field3_0xa;
+	undefined field4_0xb;
+	undefined field5_0xc;
+	undefined field6_0xd;
+	undefined field7_0xe;
+	undefined field8_0xf;
+	Type TaskType;
+	undefined1 Flags_m; /* Created by retype action */
+	undefined field11_0x15;
+	undefined field12_0x16;
+	undefined field13_0x17;
+	undefined field14_0x18;
+	undefined field15_0x19;
+	undefined field16_0x1a;
+	undefined field17_0x1b;
+	undefined field18_0x1c;
+	undefined field19_0x1d;
+	undefined field20_0x1e;
+	undefined field21_0x1f;
+	undefined field22_0x20;
+	undefined field23_0x21;
+	undefined field24_0x22;
+	undefined field25_0x23;
+	undefined field26_0x24;
+	undefined field27_0x25;
+	undefined field28_0x26;
+	undefined field29_0x27;
+	undefined field30_0x28;
+	undefined field31_0x29;
+	undefined field32_0x2a;
+	undefined field33_0x2b;
+	undefined field34_0x2c;
+	undefined field35_0x2d;
+	undefined field36_0x2e;
+	undefined field37_0x2f;
+	undefined ObjectSet; /* Created by retype action */
+	undefined field39_0x31;
+	undefined field40_0x32;
+	undefined field41_0x33;
+	undefined field42_0x34;
+	undefined field43_0x35;
+	undefined field44_0x36;
+	undefined field45_0x37;
+	undefined field46_0x38;
+	undefined field47_0x39;
+	undefined field48_0x3a;
+	undefined field49_0x3b;
+	undefined field50_0x3c;
+	undefined field51_0x3d;
+	undefined field52_0x3e;
+	undefined field53_0x3f;
+	undefined field54_0x40;
+	undefined field55_0x41;
+	undefined field56_0x42;
+	undefined field57_0x43;
+	undefined field58_0x44;
+	undefined field59_0x45;
+	undefined field60_0x46;
+	undefined field61_0x47;
+	undefined field62_0x48;
+	undefined field63_0x49;
+	undefined field64_0x4a;
+	undefined field65_0x4b;
+	undefined field66_0x4c;
+	undefined field67_0x4d;
+	undefined field68_0x4e;
+	undefined field69_0x4f;
+	undefined field70_0x50;
+	undefined field71_0x51;
+	undefined field72_0x52;
+	undefined field73_0x53;
+	undefined field74_0x54;
+	undefined field75_0x55;
+	undefined field76_0x56;
+	undefined field77_0x57;
+	undefined field78_0x58;
+	undefined field79_0x59;
+	undefined field80_0x5a;
+	undefined field81_0x5b;
+	undefined field82_0x5c;
+	undefined field83_0x5d;
+	undefined field84_0x5e;
+	undefined field85_0x5f;
+	undefined field86_0x60;
+	undefined field87_0x61;
+	undefined field88_0x62;
+	undefined field89_0x63;
+	undefined field90_0x64;
+	undefined field91_0x65;
+	undefined field92_0x66;
+	undefined field93_0x67;
+	undefined1 ObjectSet2; /* Created by retype action */
+	undefined field95_0x69;
+	undefined field96_0x6a;
+	undefined field97_0x6b;
+	undefined field98_0x6c;
+	undefined field99_0x6d;
+	undefined field100_0x6e;
+	undefined field101_0x6f;
+	undefined field102_0x70;
+	undefined field103_0x71;
+	undefined field104_0x72;
+	undefined field105_0x73;
+	undefined field106_0x74;
+	undefined field107_0x75;
+	undefined field108_0x76;
+	undefined field109_0x77;
+	undefined field110_0x78;
+	undefined field111_0x79;
+	undefined field112_0x7a;
+	undefined field113_0x7b;
+	undefined field114_0x7c;
+	undefined field115_0x7d;
+	undefined field116_0x7e;
+	undefined field117_0x7f;
+	undefined field118_0x80;
+	undefined field119_0x81;
+	undefined field120_0x82;
+	undefined field121_0x83;
+	undefined field122_0x84;
+	undefined field123_0x85;
+	undefined field124_0x86;
+	undefined field125_0x87;
+	undefined field126_0x88;
+	undefined field127_0x89;
+	undefined field128_0x8a;
+	undefined field129_0x8b;
+	undefined field130_0x8c;
+	undefined field131_0x8d;
+	undefined field132_0x8e;
+	undefined field133_0x8f;
+	FixedString field134_0x90;
+	undefined field135_0x98;
+	undefined field136_0x99;
+	undefined field137_0x9a;
+	undefined field138_0x9b;
+	undefined field139_0x9c;
+	undefined field140_0x9d;
+	undefined field141_0x9e;
+	undefined field142_0x9f;
+	undefined field143_0xa0;
+	undefined field144_0xa1;
+	undefined field145_0xa2;
+	undefined field146_0xa3;
+	undefined field147_0xa4;
+	undefined field148_0xa5;
+	undefined field149_0xa6;
+	undefined field150_0xa7;
+	undefined field151_0xa8;
+	undefined field152_0xa9;
+	undefined field153_0xaa;
+	undefined field154_0xab;
+	undefined field155_0xac;
+	undefined field156_0xad;
+	undefined field157_0xae;
+	undefined field158_0xaf;
+	undefined field159_0xb0;
+	undefined field160_0xb1;
+	undefined field161_0xb2;
+	undefined field162_0xb3;
+	undefined field163_0xb4;
+	undefined field164_0xb5;
+	undefined field165_0xb6;
+	undefined field166_0xb7;
+	undefined field167_0xb8;
+	undefined field168_0xb9;
+	undefined field169_0xba;
+	undefined field170_0xbb;
+	undefined field171_0xbc;
+	undefined field172_0xbd;
+	undefined field173_0xbe;
+	undefined field174_0xbf;
+	undefined field175_0xc0;
+	undefined field176_0xc1;
+	undefined field177_0xc2;
+	undefined field178_0xc3;
+	undefined field179_0xc4;
+	undefined field180_0xc5;
+	undefined field181_0xc6;
+	undefined field182_0xc7;
+	undefined field183_0xc8;
+	undefined field184_0xc9;
+	undefined field185_0xca;
+	undefined field186_0xcb;
+	undefined field187_0xcc;
+	undefined field188_0xcd;
+	undefined field189_0xce;
+	undefined field190_0xcf;
+	undefined field191_0xd0;
+	undefined field192_0xd1;
+	undefined field193_0xd2;
+	undefined field194_0xd3;
+	undefined field195_0xd4;
+	undefined field196_0xd5;
+	undefined field197_0xd6;
+	undefined field198_0xd7;
+	undefined field199_0xd8;
+	undefined field200_0xd9;
+	undefined field201_0xda;
+	undefined field202_0xdb;
+	undefined field203_0xdc;
+	undefined field204_0xdd;
+	undefined field205_0xde;
+	undefined field206_0xdf;
+	undefined field207_0xe0;
+	undefined field208_0xe1;
+	undefined field209_0xe2;
+	undefined field210_0xe3;
+	short field211_0xe4;
+	undefined field212_0xe6;
+	undefined field213_0xe7;
+	undefined field214_0xe8;
+	undefined field215_0xe9;
+	undefined field216_0xea;
+	undefined field217_0xeb;
+	int field218_0xec;
+	undefined field219_0xf0;
+	undefined field220_0xf1;
+	undefined field221_0xf2;
+	undefined field222_0xf3;
+	undefined field223_0xf4;
+	undefined field224_0xf5;
+	undefined field225_0xf6;
+	undefined field226_0xf7;
+	undefined field227_0xf8;
+	undefined field228_0xf9;
+	undefined field229_0xfa;
+	undefined field230_0xfb;
+	undefined field231_0xfc;
+	undefined field232_0xfd;
+	undefined field233_0xfe;
+	undefined field234_0xff;
+	undefined field235_0x100;
+	undefined field236_0x101;
+	undefined field237_0x102;
+	undefined field238_0x103;
+	undefined field239_0x104;
+	undefined field240_0x105;
+	undefined field241_0x106;
+	undefined field242_0x107;
+	undefined field243_0x108;
+	undefined field244_0x109;
+	undefined field245_0x10a;
+	undefined field246_0x10b;
+	undefined field247_0x10c;
+	undefined field248_0x10d;
+	undefined field249_0x10e;
+	undefined field250_0x10f;
+	undefined field251_0x110;
+	undefined field252_0x111;
+	undefined field253_0x112;
+	undefined field254_0x113;
+	undefined field255_0x114;
+	undefined field256_0x115;
+	undefined field257_0x116;
+	undefined field258_0x117;
+	undefined field259_0x118;
+	undefined field260_0x119;
+	undefined field261_0x11a;
+	undefined field262_0x11b;
+	undefined field263_0x11c;
+	undefined field264_0x11d;
+	undefined field265_0x11e;
+	undefined field266_0x11f;
+	ObjectHandle SomeHandle1;
+	ObjectHandle SomeHandle2;
+	undefined EffectList;
+	undefined field270_0x129;
+	undefined field271_0x12a;
+	undefined field272_0x12b;
+	undefined field273_0x12c;
+	undefined field274_0x12d;
+	undefined field275_0x12e;
+	undefined field276_0x12f;
+	undefined field277_0x130;
+	undefined field278_0x131;
+	undefined field279_0x132;
+	undefined field280_0x133;
+	undefined field281_0x134;
+	undefined field282_0x135;
+	undefined field283_0x136;
+	undefined field284_0x137;
+	undefined field285_0x138;
+	undefined field286_0x139;
+	undefined field287_0x13a;
+	undefined field288_0x13b;
+	undefined field289_0x13c;
+	undefined field290_0x13d;
+	undefined field291_0x13e;
+	undefined field292_0x13f;
+	undefined SomeByte;
+	undefined field294_0x141;
+	undefined field295_0x142;
+	undefined field296_0x143;
+};
+
+struct CharacterTask_Item_Use : public CharacterTask
+{
+	undefined field1_0x144;
+	undefined field2_0x145;
+	undefined field3_0x146;
+	undefined field4_0x147;
+	undefined field5_0x148;
+	undefined field6_0x149;
+	undefined field7_0x14a;
+	undefined field8_0x14b;
+	ObjectHandle ItemHandle;
+	ObjectHandle Handle2;
+	int field11_0x154;
+	int Something;
+};
+
+struct InputController
+{
+	virtual void field0_0x0() = 0;
+	virtual void field1_0x8() = 0;
+	virtual void field2_0x10() = 0;
+	virtual void GetControllerPriority_m() = 0;
+	virtual void Update_m() = 0;
+	virtual void Resume() = 0;
+	virtual void field6_0x30() = 0;
+	virtual void field7_0x38() = 0;
+	virtual void field8_0x40() = 0;
+	virtual void field9_0x48() = 0;
+	virtual void OnInputEvent() = 0;
+	virtual void field11_0x58() = 0;
+	virtual CharacterTask* GetTaskByType(CharacterTask::Type taskType) = 0;
+	virtual void ForcePreviewTask_m() = 0;
+	virtual void field14_0x70() = 0;
+	virtual bool ForceExecuteNextTask_m(CharacterTask* task, bool forcePreview, bool forcePreviewPassedBool) = 0;
+
+	void* unknown;
+	bool IsActive;
+};
+
+struct Status
+{
+	enum class StatusType : uint32_t 
+	{
+		Unknown = 0,
+		Hit_m = 1,
+		Dead = 2,
+		Heal = 3,
+		Burning = 4,
+		Frozen = 5,
+		Poisoned = 6,
+		Stunned = 7,
+		Wet = 8,
+		Muted = 9,
+		Charmed = 10,
+		KnockedDown = 11,
+		Healing = 13,
+		Thrown = 14,
+		Shielded = 15,
+		Consume = 17,
+		Combat = 18,
+		AttackOfOpportunity = 19,
+		StoryFreeze = 20,
+		Sneaking = 21,
+		Unlock = 22,
+		Fear = 23,
+		Rot = 24,
+		Boost = 25,
+		Unsheathed = 26,
+		Stance = 27,
+		Sitting = 28,
+		Lying = 29,
+		Crippled = 30,
+		Cursed = 31,
+		Weak = 32,
+		Slowed = 33,
+		Hasted = 34,
+		Raged = 35,
+		Lucky = 36,
+		Diseased = 37,
+		Fortified = 38,
+		Blessed = 39,
+		Drunk = 40,
+		Chilled = 41,
+		Warm = 42,
+		Bleeding = 43,
+		Blind = 44,
+		Smelly = 45,
+		Clean = 46,
+		Diseased_Also = 47,
+		Petrified = 48,
+		Invisible = 49,
+		Encumbered = 51,
+		Invulnerable = 54,
+		VoidAura = 55,
+		Galvanised = 56,
+		Material = 57,
+		Leadership = 58,
+		Explode = 59,
+		Adrenaline = 60,
+		ShacklesOfPain = 61,
+		ShacklesOfPainCaster = 62,
+		ImprovedInitiative = 63,
+		ImprovedInitiativeAura = 64,
+		WindWalker = 65,
+		DarkAvenger = 66,
+		FireImmunity = 67,
+		FireImmunityAura = 68,
+		WaterImmunity = 69,
+		WaterImmunityAura = 70,
+		EarthImmunity = 71,
+		EarthImmunityAura = 72,
+		AirImmunity = 73,
+		AirImmunityAura = 74,
+		ElementalImmunity = 75,
+		ElementalImmunityAura = 76,
+		PhysicalImmunity = 77,
+		PhysicalImmunityAura = 78,
+		AggroMarked = 79,
+		Remorse = 80,
+		EtherealSoles = 81,
+		DecayingTouch = 82,
+		CrawlingInfestation = 83,
+		MarkOfDeath = 84,
+		Taunted = 85,
+		Oiled = 86,
+		Unhealable = 87,
+		Flanked = 88,
+		Explosive = 89
+	};
+
+	virtual void dtor() = 0;
+	virtual void SetHandle_m(ObjectHandle* handle) = 0;
+	virtual void Unknown1() = 0;
+	virtual StatusType GetStatusType() = 0;
+	virtual void Enter() = 0;
+	virtual void Resume() = 0;
+	virtual void Unknown2() = 0;
+	virtual void Unknown3() = 0;
+	virtual void Exit() = 0;
+	virtual void GetIcon() = 0; // TODO params and ret type
+	virtual void GetFormattedName() = 0; // TODO params and ret type
+	virtual void Unknown4() = 0;
+	virtual void Unknown5() = 0;
+};
+
+
+struct StatusMachine
+{
+	undefined field0_0x0;
+	undefined field1_0x1;
+	undefined field2_0x2;
+	undefined field3_0x3;
+	undefined field4_0x4;
+	undefined field5_0x5;
+	undefined field6_0x6;
+	undefined field7_0x7;
+	undefined field8_0x8;
+	undefined field9_0x9;
+	undefined field10_0xa;
+	undefined field11_0xb;
+	undefined field12_0xc;
+	undefined field13_0xd;
+	undefined field14_0xe;
+	undefined field15_0xf;
+	undefined field16_0x10;
+	undefined field17_0x11;
+	undefined field18_0x12;
+	undefined field19_0x13;
+	undefined field20_0x14;
+	undefined field21_0x15;
+	undefined field22_0x16;
+	undefined field23_0x17;
+	undefined field24_0x18;
+	undefined field25_0x19;
+	undefined field26_0x1a;
+	undefined field27_0x1b;
+	undefined field28_0x1c;
+	undefined field29_0x1d;
+	undefined field30_0x1e;
+	undefined field31_0x1f;
+	undefined field32_0x20;
+	undefined field33_0x21;
+	undefined field34_0x22;
+	undefined field35_0x23;
+	undefined field36_0x24;
+	undefined field37_0x25;
+	undefined field38_0x26;
+	undefined field39_0x27;
+	undefined field40_0x28;
+	undefined field41_0x29;
+	undefined field42_0x2a;
+	undefined field43_0x2b;
+	undefined field44_0x2c;
+	undefined field45_0x2d;
+	undefined field46_0x2e;
+	undefined field47_0x2f;
+	undefined field48_0x30;
+	undefined field49_0x31;
+	undefined field50_0x32;
+	undefined field51_0x33;
+	undefined field52_0x34;
+	undefined field53_0x35;
+	undefined field54_0x36;
+	undefined field55_0x37;
+	undefined field56_0x38;
+	undefined field57_0x39;
+	undefined field58_0x3a;
+	undefined field59_0x3b;
+	undefined field60_0x3c;
+	undefined field61_0x3d;
+	undefined field62_0x3e;
+	undefined field63_0x3f;
+	undefined field64_0x40;
+	undefined field65_0x41;
+	undefined field66_0x42;
+	undefined field67_0x43;
+	undefined field68_0x44;
+	undefined field69_0x45;
+	undefined field70_0x46;
+	undefined field71_0x47;
+	undefined field72_0x48;
+	undefined field73_0x49;
+	undefined field74_0x4a;
+	undefined field75_0x4b;
+	undefined field76_0x4c;
+	undefined field77_0x4d;
+	undefined field78_0x4e;
+	undefined field79_0x4f;
+	undefined field80_0x50;
+	undefined field81_0x51;
+	undefined field82_0x52;
+	undefined field83_0x53;
+	undefined field84_0x54;
+	undefined field85_0x55;
+	undefined field86_0x56;
+	undefined field87_0x57;
+	undefined field88_0x58;
+	undefined field89_0x59;
+	undefined field90_0x5a;
+	undefined field91_0x5b;
+	undefined field92_0x5c;
+	undefined field93_0x5d;
+	undefined field94_0x5e;
+	undefined field95_0x5f;
+	undefined field96_0x60;
+	undefined field97_0x61;
+	undefined field98_0x62;
+	undefined field99_0x63;
+	undefined field100_0x64;
+	undefined field101_0x65;
+	undefined field102_0x66;
+	undefined field103_0x67;
+	undefined field104_0x68;
+	undefined field105_0x69;
+	undefined field106_0x6a;
+	undefined field107_0x6b;
+	undefined field108_0x6c;
+	undefined field109_0x6d;
+	undefined field110_0x6e;
+	undefined field111_0x6f;
+	undefined field112_0x70;
+	undefined field113_0x71;
+	undefined field114_0x72;
+	undefined field115_0x73;
+	undefined field116_0x74;
+	undefined field117_0x75;
+	undefined field118_0x76;
+	undefined field119_0x77;
+	undefined field120_0x78;
+	undefined field121_0x79;
+	undefined field122_0x7a;
+	undefined field123_0x7b;
+	undefined field124_0x7c;
+	undefined field125_0x7d;
+	undefined field126_0x7e;
+	undefined field127_0x7f;
+	undefined field128_0x80;
+	undefined field129_0x81;
+	undefined field130_0x82;
+	undefined field131_0x83;
+	undefined field132_0x84;
+	undefined field133_0x85;
+	undefined field134_0x86;
+	undefined field135_0x87;
+	undefined field136_0x88;
+	undefined field137_0x89;
+	undefined field138_0x8a;
+	undefined field139_0x8b;
+	undefined field140_0x8c;
+	undefined field141_0x8d;
+	undefined field142_0x8e;
+	undefined field143_0x8f;
+	undefined field144_0x90;
+	undefined field145_0x91;
+	undefined field146_0x92;
+	undefined field147_0x93;
+	undefined field148_0x94;
+	undefined field149_0x95;
+	undefined field150_0x96;
+	undefined field151_0x97;
+	undefined field152_0x98;
+	undefined field153_0x99;
+	undefined field154_0x9a;
+	undefined field155_0x9b;
+	undefined field156_0x9c;
+	undefined field157_0x9d;
+	undefined field158_0x9e;
+	undefined field159_0x9f;
+	undefined field160_0xa0;
+	undefined field161_0xa1;
+	undefined field162_0xa2;
+	undefined field163_0xa3;
+	undefined field164_0xa4;
+	undefined field165_0xa5;
+	undefined field166_0xa6;
+	undefined field167_0xa7;
+	undefined field168_0xa8;
+	undefined field169_0xa9;
+	undefined field170_0xaa;
+	undefined field171_0xab;
+	undefined field172_0xac;
+	undefined field173_0xad;
+	undefined field174_0xae;
+	undefined field175_0xaf;
+	undefined field176_0xb0;
+	undefined field177_0xb1;
+	undefined field178_0xb2;
+	undefined field179_0xb3;
+	undefined field180_0xb4;
+	undefined field181_0xb5;
+	undefined field182_0xb6;
+	undefined field183_0xb7;
+	undefined field184_0xb8;
+	undefined field185_0xb9;
+	undefined field186_0xba;
+	undefined field187_0xbb;
+	undefined field188_0xbc;
+	undefined field189_0xbd;
+	undefined field190_0xbe;
+	undefined field191_0xbf;
+	undefined field192_0xc0;
+	undefined field193_0xc1;
+	undefined field194_0xc2;
+	undefined field195_0xc3;
+	undefined field196_0xc4;
+	undefined field197_0xc5;
+	undefined field198_0xc6;
+	undefined field199_0xc7;
+	undefined field200_0xc8;
+	undefined field201_0xc9;
+	undefined field202_0xca;
+	undefined field203_0xcb;
+	undefined field204_0xcc;
+	undefined field205_0xcd;
+	undefined field206_0xce;
+	undefined field207_0xcf;
+	undefined field208_0xd0;
+	undefined field209_0xd1;
+	undefined field210_0xd2;
+	undefined field211_0xd3;
+	undefined field212_0xd4;
+	undefined field213_0xd5;
+	undefined field214_0xd6;
+	undefined field215_0xd7;
+	undefined field216_0xd8;
+	undefined field217_0xd9;
+	undefined field218_0xda;
+	undefined field219_0xdb;
+	undefined field220_0xdc;
+	undefined field221_0xdd;
+	undefined field222_0xde;
+	undefined field223_0xdf;
+	undefined field224_0xe0;
+	undefined field225_0xe1;
+	undefined field226_0xe2;
+	undefined field227_0xe3;
+	undefined field228_0xe4;
+	undefined field229_0xe5;
+	undefined field230_0xe6;
+	undefined field231_0xe7;
+	undefined field232_0xe8;
+	undefined field233_0xe9;
+	undefined field234_0xea;
+	undefined field235_0xeb;
+	undefined field236_0xec;
+	undefined field237_0xed;
+	undefined field238_0xee;
+	undefined field239_0xef;
+	undefined field240_0xf0;
+	undefined field241_0xf1;
+	undefined field242_0xf2;
+	undefined field243_0xf3;
+	undefined field244_0xf4;
+	undefined field245_0xf5;
+	undefined field246_0xf6;
+	undefined field247_0xf7;
+	undefined field248_0xf8;
+	undefined field249_0xf9;
+	undefined field250_0xfa;
+	undefined field251_0xfb;
+	undefined field252_0xfc;
+	undefined field253_0xfd;
+	undefined field254_0xfe;
+	undefined field255_0xff;
+	undefined field256_0x100;
+	undefined field257_0x101;
+	undefined field258_0x102;
+	undefined field259_0x103;
+	undefined field260_0x104;
+	undefined field261_0x105;
+	undefined field262_0x106;
+	undefined field263_0x107;
+	undefined field264_0x108;
+	undefined field265_0x109;
+	undefined field266_0x10a;
+	undefined field267_0x10b;
+	undefined field268_0x10c;
+	undefined field269_0x10d;
+	undefined field270_0x10e;
+	undefined field271_0x10f;
+	undefined field272_0x110;
+	undefined field273_0x111;
+	undefined field274_0x112;
+	undefined field275_0x113;
+	undefined field276_0x114;
+	undefined field277_0x115;
+	undefined field278_0x116;
+	undefined field279_0x117;
+	undefined field280_0x118;
+	bool Active;
+	undefined field282_0x11a;
+	undefined field283_0x11b;
+	undefined field284_0x11c;
+	undefined field285_0x11d;
+	undefined field286_0x11e;
+	undefined field287_0x11f;
+	undefined field288_0x120;
+	undefined field289_0x121;
+	undefined field290_0x122;
+	undefined field291_0x123;
+	undefined field292_0x124;
+	undefined field293_0x125;
+	undefined field294_0x126;
+	undefined field295_0x127;
+	Set<ecl::Status*> StatusesSet;
+};
+
 // : public IEoCClientReplicatedObject ? TODO inherit from IGameObject
 struct Character
 {
@@ -1770,7 +2560,8 @@ struct Character
 	Status* GetStatus(NetId handle) const;
 
 	int unknownInt;
-	char unknown1[12];
+	char unknown1[8];
+	ObjectHandle Handle_m;
 	int Flags1;
 	char unknown2[4];
 	FixedString SomeFS;
@@ -1789,8 +2580,43 @@ struct Character
 	char unknown9[20];
 	CDivinityStats_Character* Stats;
 	ObjectHandle InventoryHandle;
-	char unknown10[76];
-	void* StatusMachine;
+	undefined moreUnknown[20];
+	void* field194_0x118;
+	undefined moreUnknown2[8];
+	InputController* InputController; /* Created by retype action */
+	undefined field204_0x130;
+	undefined field205_0x131;
+	undefined field206_0x132;
+	undefined field207_0x133;
+	undefined field208_0x134;
+	undefined field209_0x135;
+	undefined field210_0x136;
+	undefined field211_0x137;
+	undefined field212_0x138;
+	undefined field213_0x139;
+	undefined field214_0x13a;
+	undefined field215_0x13b;
+	undefined field216_0x13c;
+	undefined field217_0x13d;
+	undefined field218_0x13e;
+	undefined field219_0x13f;
+	undefined field220_0x140;
+	undefined field221_0x141;
+	undefined field222_0x142;
+	undefined field223_0x143;
+	undefined field224_0x144;
+	undefined field225_0x145;
+	undefined field226_0x146;
+	undefined field227_0x147;
+	undefined field228_0x148;
+	undefined field229_0x149;
+	undefined field230_0x14a;
+	undefined field231_0x14b;
+	undefined field232_0x14c;
+	undefined field233_0x14d;
+	undefined field234_0x14e;
+	undefined field235_0x14f;
+	ecl::StatusMachine* StatusMachine;
 	void* SkillManager;
 	char unknown11[25];
 	bool SomeBool;

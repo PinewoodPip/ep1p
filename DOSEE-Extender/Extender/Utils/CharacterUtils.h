@@ -1,6 +1,7 @@
 #pragma once
 #include <GameDefinitions/RPGStats.h>
 #include <GameDefinitions/Item.h>
+#include <GameDefinitions/Character.h>
 
 BEGIN_SE()
 
@@ -11,6 +12,7 @@ public:
 	static ecl::Character* GetCharacter(CDivinityStats_Character* stats);
 	static CompactSet<ecl::Character*>* GetPartyMembers(ComponentHandle partyHandle);
 	static ecl::Character* GetPlayerCharacter(short playerID = 1);
+	static bool HasStatusType(ecl::Character* character, ecl::Status::StatusType statusType);
 };
 
 class ServerCharacterUtils

@@ -433,6 +433,23 @@
 			<Target Type="Indirect" Offset="@itemgetter" Symbol="esv_ScriptParam_GetItem" />
 			<Target Type="Indirect" Offset="@charactergetter" Symbol="esv_ScriptParam_GetCharacter" />
 		</Mapping>
+		<Mapping Name="ecl_Party_RequestDetach">
+			f3 0f 11 44 24 40 //     MOVSS      dword ptr [RSP  + local_218 ],XMM0
+			@call e8 20 75 f9 ff //     CALL       ecl::Party::RequestDetach                        undefined RequestDetach()
+			48 8b 05 e1 b6 9c 00 //     MOV        RAX ,qword ptr [DAT_1412ee708 ]                   = ??
+			48 8b 88 98 00 00 00 //     MOV        RCX ,qword ptr [RAX  + 0x98 ]
+			4c 8d 05 03 84 75 00 //     LEA        R8,[s_UI_Game_Party_Split_14107b438 ]            = "UI_Game_Party_Split"
+
+
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_Party_RequestDetach" />
+		</Mapping>
+		<Mapping Name="ecl_Party_AddToGroup">
+			f3 0f 11 44 24 40 //     MOVSS      dword ptr [RSP  + local_218 ],XMM0
+			@call e8 dc 70 f9 ff //     CALL       ecl::Party::AddToGroup                           undefined AddToGroup(ecl::Party
+			48 8b 05 3d b6 9c 00 //    MOV        RAX ,qword ptr [DAT_1412ee708 ]                   = ??
+			4c 8d 05 3e 84 75 00 //     LEA        R8,[s_UI_Game_Party_Merge_14107b510 ]            = "UI_Game_Party_Merge"
+			<Target Type="Indirect" Offset="@call" Symbol="ecl_Party_AddToGroup" />
+		</Mapping>
 		<Mapping Name="esv::CharacterManager">
 			@ref 48 8b 15 a6 50 7b 00 //      MOV        RDX,qword ptr [ls_ObjectFactory__esv_Character]  = ??
 			0f b7 c8 //       MOVZX      ECX,AX

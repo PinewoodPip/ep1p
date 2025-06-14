@@ -117,6 +117,8 @@ namespace dse
 		SYM_OFF(ecl_EocUIControl_ShowCommonMessageBox);
 		SYM_OFF(esv_ScriptParam_GetItem);
 		SYM_OFF(esv_ScriptParam_GetCharacter);
+		SYM_OFF(ecl_Party_AddToGroup);
+		SYM_OFF(ecl_Party_RequestDetach);
 		SYM_OFF(esv_Item_GenerateTreasure);
 		SYM_OFF(CDivinityStats_Character_GetAbilityBoostFromPrimaryStat);
 		SYM_OFF(CDivinityStats_Character_HasTalent);

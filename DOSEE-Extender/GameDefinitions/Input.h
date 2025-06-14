@@ -7,7 +7,7 @@
 
 BEGIN_SE()
 
-enum RawInputType
+enum RawInputType : short
 {
     None = -1,
     Return = 0,
@@ -181,7 +181,7 @@ enum InputValue : uint8_t
 
 struct InputRawChange
 {
-    short RawInputID;
+    RawInputType RawInputID;
     float Value1;
     float Value2;
     InputValue State;

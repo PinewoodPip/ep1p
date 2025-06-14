@@ -41,6 +41,20 @@ ecl::Character* ClientCharacterUtils::GetPlayerCharacter(short playerID)
 	return GetStaticSymbols().ecl_PlayerManager_GetCharacterByPlayerID(manager, playerID);
 }
 
+bool ClientCharacterUtils::HasStatusType(ecl::Character* character, ecl::Status::StatusType statusType)
+{
+	auto set = character->StatusMachine->StatusesSet;
+	for (int i = 0; i < set.size(); ++i) // TODO why does iterator not work on this set? Different kind of set?
+	{
+		auto status = set[i];
+		if (status->GetStatusType() == statusType)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 // SERVER UTILS
 
 esv::Character* ServerCharacterUtils::GetCharacter(ComponentHandle handle)

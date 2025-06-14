@@ -208,6 +208,11 @@ namespace dse
 		using esv_ScriptParam_GetItemProc = esv::Item* (esv::PlanManager::ScriptParam* self);
 		esv_ScriptParam_GetItemProc* esv_ScriptParam_GetItem{ nullptr };
 
+		using ecl_Party_AddToGroupProc = void(ecl::Party* party, ObjectHandle charHandle, int groupID, int indexToAddAt_m);
+		ecl_Party_AddToGroupProc* ecl_Party_AddToGroup{ nullptr };
+		using ecl_Party_RequestDetachProc = void(ecl::Party* party, ObjectHandle charHandle, int groupID_m);
+		ecl_Party_RequestDetachProc* ecl_Party_RequestDetach{ nullptr };
+
 		using esv_Item_GenerateTreasureProc = void(esv::Item* self, esv::Character* character);
 		esv_Item_GenerateTreasureProc* esv_Item_GenerateTreasure{ nullptr };
 

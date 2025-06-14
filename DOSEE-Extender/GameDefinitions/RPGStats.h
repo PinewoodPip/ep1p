@@ -187,7 +187,9 @@ struct CDivinityStats_Character
 	uint32_t Experience_m;
 	uint32_t Reputation;
 	uint8_t Flanked;
-	uint32_t Karma;
+    //uint32_t Karma;
+    uint8_t SomeFlags;
+    char Unknown[3];
 	char unknown2[31];
 	int32_t unknownInt;
 	char unknown3[20];

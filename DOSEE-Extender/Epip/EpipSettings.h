@@ -30,7 +30,11 @@ BEGIN_NS(epip)
 	EPIP_FOR_SETTING(CameraMaxDistance)
 
 #define EPIP_FOR_ALL_UINT_SETTINGS() \
-	EPIP_FOR_SETTING(ExamineKeybind)
+	EPIP_FOR_SETTING(ExamineKeybind) \
+	EPIP_FOR_SETTING(TogglePartyChainKeybind) \
+	EPIP_FOR_SETTING(TogglePartySneakKeybind) \
+	EPIP_FOR_SETTING(TogglePartyChainKeybindModifier) \
+	EPIP_FOR_SETTING(TogglePartySneakKeybindModifier)
 
 struct EpipSettings
 {
@@ -54,6 +58,10 @@ public:
 		LockBottomBar,
 		CreateConsole,
 		ExamineKeybind,
+		TogglePartyChainKeybind,
+		TogglePartySneakKeybind,
+		TogglePartyChainKeybindModifier,
+		TogglePartySneakKeybindModifier,
 	};
 	enum class ExamineInformationChoices
 	{
@@ -85,6 +93,10 @@ public:
 	bool LockBottomBar = false;
 	bool CreateConsole = false;
 	uint32_t ExamineKeybind = (uint32_t)RawInputType::T;
+	uint32_t TogglePartyChainKeybind = (uint32_t)RawInputType::None;
+	uint32_t TogglePartySneakKeybind = (uint32_t)RawInputType::None;
+	uint32_t TogglePartyChainKeybindModifier = (uint32_t)RawInputType::None;
+	uint32_t TogglePartySneakKeybindModifier = (uint32_t)RawInputType::None;
 
 	void SetByID(int id, bool value)
 	{
