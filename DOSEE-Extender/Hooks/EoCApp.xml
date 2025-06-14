@@ -273,6 +273,16 @@
 			e9 f0 04 00 00 //      JMP        LAB_140a39267
 			<Target Type="Indirect" Offset="@call" Symbol="ecl_ItemProtocol_UpdateItems" />
 		</Mapping>
+		<Mapping Name="ecl::KeywordControl::ShowUIDialog camera patch">
+			e8 ae 45 f8 ff //      CALL       FUN_140870700                                    undefined FUN_140870700()
+			48 8b 0d //       MOV        RCX,qword ptr [ecl_PlayerManager]                = ??
+			1f 5a 9f 00 0f b7 d3 // MOVZX      EDX,playerID
+			e8 ff e7 f8 ff //      CALL       ecl::PlayerManager::GetCamera                    undefined GetCamera()
+			@patch 80 88 c8 03 00 00 04 //      OR         byte ptr [camera + 0x3c8],0x4
+			<Patch Type="Absolute" Offset="@patch">
+				80 88 c8 03 00 00 00
+			</Patch>
+		</Mapping>
 		<Mapping Name="ecl::UIBottomBar::FillIconBuffer patch">
 			8d 3c 80 //       LEA        EDI,[RAX + RAX*0x4]
 			03 ff //          ADD        index,index

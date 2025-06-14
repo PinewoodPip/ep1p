@@ -20,6 +20,7 @@ BEGIN_NS(epip)
 	EPIP_FOR_SETTING(FixDontCareScriptParam) \
 	EPIP_FOR_SETTING(FixSkillRangeGFX) \
 	EPIP_FOR_SETTING(LockBottomBar) \
+	EPIP_FOR_SETTING(UnlockDialogCamera) \
 	EPIP_FOR_SETTING(CreateConsole)
 	
 #define EPIP_FOR_ALL_ENUM_SETTINGS() \
@@ -58,6 +59,7 @@ public:
 		LockBottomBar,
 		CreateConsole,
 		ExamineKeybind,
+		UnlockDialogCamera,
 		TogglePartyChainKeybind,
 		TogglePartySneakKeybind,
 		TogglePartyChainKeybindModifier,
@@ -91,6 +93,7 @@ public:
 	bool FixSkillRangeGFX = true;
 	float CameraMaxDistance = 19.0f; // Game default
 	bool LockBottomBar = false;
+	bool UnlockDialogCamera = false;
 	bool CreateConsole = false;
 	uint32_t ExamineKeybind = (uint32_t)RawInputType::T;
 	uint32_t TogglePartyChainKeybind = (uint32_t)RawInputType::None;
