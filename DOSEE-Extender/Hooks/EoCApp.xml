@@ -467,6 +467,14 @@
 			0f 83 26 01 00 00 //      JNC        LAB_140b99bf4
 			<Target Type="Indirect" Offset="@ref" Symbol="ObjectFactory__esv_Character" />
 		</Mapping>
+		<Mapping Name="ecl::ItemManager">
+			@ref 48 8b 0d f5 53 a1 00 //      MOV        RCX,qword ptr [ls_ObjectFactory__ecl_Item]       = ??
+			48 8d 54 24 40 //      LEA        RDX=>local_de8,[RSP + 0x40]
+			f3 0f 11 44 24 40 //      MOVSS      dword ptr [RSP + local_de8],XMM0
+			e8 dd 83 7e ff //      CALL       FUN_140121920                                    undefined FUN_140121920()
+			48 8b d0 //       MOV        RDX,RAX
+			<Target Type="Indirect" Offset="@ref" Symbol="ObjectFactory__ecl_Item" />
+		</Mapping>
 		<Mapping Name="esv::ItemManager">
 			0f 84 c3 00 00 00 //      JZ         LAB_140c01edc
 			41 8b 04 24 //    MOV        EAX,dword ptr [R12]

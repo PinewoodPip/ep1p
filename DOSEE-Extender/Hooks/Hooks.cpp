@@ -125,7 +125,25 @@ static bool OnInvoke0(ig::FlashPlayer* flashPlayer, int64_t invokeEnum)
 			}
 		}
 	}
-	return flashPlayerHooks.OriginalInvoke0(flashPlayer, invokeEnum);
+
+	// Call orig
+	bool retVal = flashPlayerHooks.OriginalInvoke0(flashPlayer, invokeEnum);
+
+	// Fire "After" hooks
+	if (ui)
+	{
+		Hooks hooks = gExtender->GetHooks();
+		if (hooks.EventListeners.contains(ui->TypeId))
+		{
+			auto listeners = hooks.EventListeners.find(ui->TypeId)->second;
+			for (auto listener : listeners)
+			{
+				listener->AfterInvoke0(ui, invokeEnum);
+			}
+		}
+	}
+
+	return retVal;
 }
 
 static bool OnInvoke1(ig::FlashPlayer* flashPlayer, int64_t invokeEnum, ig::InvokeDataValue* invokeData1)

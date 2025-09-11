@@ -106,6 +106,7 @@ namespace dse
 		SYM_OFF(esv_PartyManager);
 		SYM_OFF(esv_ScriptParam_DontCare);
 		SYM_OFF(ObjectFactory__esv_Character);
+		SYM_OFF(ObjectFactory__ecl_Item);
 		SYM_OFF(ObjectFactory__esv_Item);
 		SYM_OFF(ecl_GameStateEventManager_ExecuteGameStateChangedEvent);
 		SYM_OFF(ObjectPool__esv_ScriptParam_Release);

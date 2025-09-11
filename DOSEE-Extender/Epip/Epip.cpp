@@ -12,6 +12,7 @@ void Epip::Startup()
 	this->_TargetInfo.Startup();
 	this->_KeyboardBottomBar.Setup();
 	this->_WorldTooltips.Setup();
+	this->_ControllerEquipmentPanel.Setup();
 	this->_InfiniteCarryWeight.Setup();
 	this->_SkillRangeEffectsFix.Setup();
 	this->_OsirisImprovements.Setup();

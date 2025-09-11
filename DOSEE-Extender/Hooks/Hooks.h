@@ -8,6 +8,7 @@ class UIEventListener
 {
 public:
 	virtual bool OnInvoke0(UIObject* ui, int64_t invokeEnum) { return false; };
+	virtual void AfterInvoke0(UIObject* ui, int64_t invokeEnum) { };
 	virtual bool OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1) { return false; };
 	virtual bool OnInvoke2(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2) { return false; };
 	virtual bool OnInvoke3(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1, ig::InvokeDataValue* invokeData2, ig::InvokeDataValue* invokeData3) { return false; };

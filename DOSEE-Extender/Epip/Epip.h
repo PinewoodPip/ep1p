@@ -16,6 +16,7 @@
 #include "CameraTweaks.h"
 #include "Hotkeys.h"
 #include "UI/MainMenu.h"
+#include "UI/ControllerEquipmentPanel.h"
 
 using namespace epip;
 
@@ -32,6 +33,7 @@ private:
 	KeyboardBottomBar _KeyboardBottomBar;
 	GameOptionsSettings _GameOptionsSettings;
 	WorldTooltips _WorldTooltips;
+	ControllerEquipmentPanel _ControllerEquipmentPanel;
 	InfiniteCarryWeight _InfiniteCarryWeight;
 	ScriptBugWatchdog _ScriptBugWatchdog;
 	SkillRangeEffectsFix _SkillRangeEffectsFix;

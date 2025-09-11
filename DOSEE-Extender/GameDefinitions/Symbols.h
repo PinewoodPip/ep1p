@@ -139,6 +139,7 @@ namespace dse
 		ComponentFactory<ecl::Character>** ObjectFactory__ecl_Character{ nullptr };
 		ComponentFactory<esv::Character>** ObjectFactory__esv_Character{ nullptr };
 
+		ComponentFactory<ecl::Item>** ObjectFactory__ecl_Item{ nullptr };
 		ComponentFactory<esv::Item>** ObjectFactory__esv_Item{ nullptr };
 
 		using ecl_PickingHelper_DoPickProc = void (ecl::PickingHelper* self);

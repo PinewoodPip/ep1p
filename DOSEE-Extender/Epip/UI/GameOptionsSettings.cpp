@@ -141,11 +141,6 @@ void GameOptionsSettings::SaveToFile()
 	gSettings->Save();
 }
 
-bool GameOptionsSettings::OnInvoke0(UIObject* ui, int64_t invokeEnum)
-{
-	return false;
-}
-
 bool GameOptionsSettings::OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1)
 {
 	if (invokeEnum == UIGameOptionsMenu::Invokes::setTopTitle)

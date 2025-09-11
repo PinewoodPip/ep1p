@@ -474,6 +474,7 @@ namespace dse
 			ControllerBottomBar = 62,
 			ControllerMinimap = 63,
 			StatsPanel_c = 67,
+			ControllerEquipmentPanel = 68,
 			CharacterCreation = 76,
 			ControllerJournal = 77,
 			ControllerMainMenu = 79,
@@ -722,6 +723,23 @@ namespace dse
 			addBtnHint,
 			clearBtnHints,
 			addingDone,
+		};
+	};
+
+	struct UIControllerEquipmentPanel : UIObject
+	{
+	};
+
+	struct UIContextMenu : UIObject
+	{
+		enum Invokes
+		{
+			clearButtons = 1,
+			close,
+			open,
+			setTitle,
+			addButton,
+			updateButtons,
 		};
 	};
 
