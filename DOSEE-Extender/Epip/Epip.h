@@ -17,6 +17,7 @@
 #include "Hotkeys.h"
 #include "UI/MainMenu.h"
 #include "UI/ControllerEquipmentPanel.h"
+#include "UI/Dialog.h"
 
 using namespace epip;
 
@@ -46,6 +47,7 @@ private:
 	CameraTweaks _CameraTweaks;
 	Hotkeys _Hotkeys;
 	MainMenu _MainMenu;
+	Dialog _Dialog;
 };
 
 END_NS()

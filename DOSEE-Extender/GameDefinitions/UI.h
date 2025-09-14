@@ -703,6 +703,45 @@ namespace dse
 		void SetMovieClipSize(float width, float height, std::optional<float> scale);
 	};
 
+	struct UIDialog : UIObject
+	{
+		enum Invokes
+		{
+			setDiscussionWaitingTextVisible = 1,
+			setAnchorId,
+			setTradeBtnTooltip,
+			setDiscussionLabels,
+			clearAll,
+			skipDiscussionAnimation,
+			chooseAnswer,
+			addText,
+			setWaitingText,
+			addAnswerHolder,
+			addKeywordAnswer,
+			setTradeBtnVisible,
+			setTradeBtnDisabled,
+			setDialogIsDualDialog,
+			addAnswersDone,
+			showDiscussion,
+			hideDiscussion,
+			setPlayerWonText,
+			setDiscussionPlayersPoints,
+			discussionShowBattle,
+			enableRPSButtons,
+			disableRPSButtons,
+			setTalkingNPCIcon,
+			setStopListenBtnVisible,
+			setAlternativeScrollMode,
+			setDiscussionPlayer,
+			hideDialog,
+			showDialog,
+			clearAnswers,
+
+			pipSetAlwaysAutoScroll,
+			pipSetAutoStopListening,
+		};
+	};
+
 	struct UIGameOptionsMenu : UIObject
 	{
 		enum Invokes
@@ -750,6 +789,8 @@ namespace dse
 		char unknown2[4];
 		ComponentHandle CurrentItemHandle;
 		ComponentHandle CurrentObjectHandle;
+		undefined unknown3[9];
+		char Flags;
 	};
 
 	struct ecl::EocUIControl

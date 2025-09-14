@@ -18,7 +18,6 @@ UIObject* UIUtils::GetUIByType(UIObject::TypeID typeID)
 	return nullptr;
 }
 
-
 ig::InvokeDataValue UIUtils::CreateDoubleInvokeData(int value)
 {
 	ig::InvokeDataValue data = ig::InvokeDataValue();
