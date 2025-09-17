@@ -75,6 +75,7 @@ void Hooks::OnCreateUIObject(UIObjectManager* self, ComponentHandle* handle, uns
 
 void Hooks::OnPickingHelperDone(ecl::PickingHelper* self)
 {
+	// Track handles of picked gameobjects, only keeping valid handles
 	ComponentHandle characterHandle = self->CurrentCharacterHandle;
 	ecl::Character* character = ClientCharacterUtils::GetCharacter(characterHandle);
 	if (character)
@@ -82,6 +83,12 @@ void Hooks::OnPickingHelperDone(ecl::PickingHelper* self)
 		LastPickerCharacterHandle = characterHandle;
 	}
 	CurrentPickerCharacterHandle = character ? characterHandle : ComponentHandle();
+
+	// Forward event
+	for (auto listener : PickerListeners)
+	{
+		listener->OnPickingDone(self);
+	}
 }
 
 int Hooks::OnCharacterStatsGetAbilityBoostFromPrimaryStat(StaticSymbols::CDivinityStats_Character_GetAbilityBoostFromPrimaryStatProc* next, CDivinityStats_Character* stats, AbilityType ability, bool excludeBoosts)
@@ -389,6 +396,11 @@ void Hooks::RegisterGameStateChangedListener(GameStateChangedEventListener* list
 void Hooks::RegisterInputListener(InputListener* listener)
 {
 	InputListeners.push_back(listener);
+}
+
+void Hooks::RegisterPickerListener(PickerListener* listener)
+{
+	PickerListeners.push_back(listener);
 }
 
 void Hooks::RegisterAbilityBoostListener(GetAbilityBoostListener* listener)

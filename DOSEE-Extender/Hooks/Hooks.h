@@ -31,6 +31,12 @@ public:
 	virtual void OnRawInput(InputManager* self, InputRawChange* change, bool unknown) = 0;
 };
 
+class PickerListener
+{
+public:
+	virtual void OnPickingDone(ecl::PickingHelper* picker) = 0;
+};
+
 class GetAbilityBoostListener
 {
 public:
@@ -69,6 +75,7 @@ public:
 	void RegisterUIListener(int typeID, UIEventListener* listener);
 	void RegisterGameStateChangedListener(GameStateChangedEventListener* listener);
 	void RegisterInputListener(InputListener* listener);
+	void RegisterPickerListener(PickerListener* listener);
 	void RegisterAbilityBoostListener(GetAbilityBoostListener* listener);
 
 	std::unordered_map<UIObject::VMT*, UIObject::OnFunctionCalledProc>& GetOriginalUIObjectCallHandlers();
@@ -80,6 +87,7 @@ public:
 	std::unordered_map<int, std::vector<UIEventListener*>> EventListeners;
 	std::set<GameStateChangedEventListener*> GameStateChangedListeners;
 	std::vector<InputListener*> InputListeners;
+	std::vector<PickerListener*> PickerListeners;
 	std::vector<GetAbilityBoostListener*> AbilityBoostListeners;
 private:
 	bool loaded_{ false };

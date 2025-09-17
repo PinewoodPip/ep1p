@@ -2450,6 +2450,32 @@ struct CharacterTask
 		PickupItem = 8
 	};
 
+	struct VMT
+	{
+		void (*dtor)();
+		void (*CreateNew)(); // TODO params
+		void (*RaiseFlags)();
+		void (*ClearFlags)();
+		void (*field4_0x20)();
+		void (*field5_0x28)();
+		bool (*CanExecute)(CharacterTask* self, bool unknown);
+		void (*GetPriority)() = 0;
+		int (*GetAPCost)() = 0;
+		void (*GetTotalAPCost_m)() = 0;
+		void (*ShowError)() = 0;
+		void (*field11_0x58)() = 0;
+		void (*UpdateCursor)() = 0;
+		void (*field13_0x68)() = 0;
+		void (*field14_0x70)() = 0;
+		void (*UpdateHighlights)() = 0;
+		void (*ClearHighlights)() = 0;
+		void (*field17_0x88)() = 0;
+		void (*Execute2)() = 0;
+		void (*ShowNotification)() = 0;
+		void (*Execute)(CharacterTask* self) = 0;
+		// TODO rest of methods
+	};
+
 	virtual void dtor() = 0;
 	virtual void CreateNew() = 0;
 	virtual void RaiseFlags() = 0;
@@ -2480,14 +2506,7 @@ struct CharacterTask
 	virtual void UpdateMoreEffects2() = 0;
 	virtual void field28_0xe0() = 0;
 
-	undefined field1_0x8;
-	undefined field2_0x9;
-	undefined field3_0xa;
-	undefined field4_0xb;
-	undefined field5_0xc;
-	undefined field6_0xd;
-	undefined field7_0xe;
-	undefined field8_0xf;
+	ecl::Character* BoundCharacter;
 	Type TaskType;
 	undefined1 Flags_m; /* Created by retype action */
 	undefined field11_0x15;
@@ -2796,8 +2815,13 @@ struct CharacterTask_Item_Use : public CharacterTask
 
 struct InputController
 {
+	struct VMT
+	{
+		void (*dtor)();
+		void (*SomeUpdate_m)(InputController* self, void* unknown);
+	};
 	virtual void field0_0x0() = 0;
-	virtual void field1_0x8() = 0;
+	virtual void SomeUpdate_m(InputController* self, void* unknown) = 0;
 	virtual void field2_0x10() = 0;
 	virtual void GetControllerPriority_m() = 0;
 	virtual void Update_m() = 0;
@@ -2809,12 +2833,198 @@ struct InputController
 	virtual void OnInputEvent() = 0;
 	virtual void field11_0x58() = 0;
 	virtual CharacterTask* GetTaskByType(CharacterTask::Type taskType) = 0;
-	virtual void ForcePreviewTask_m() = 0;
+	virtual void ForcePreviewTask_m(bool unknown) = 0;
 	virtual void field14_0x70() = 0;
-	virtual bool ForceExecuteNextTask_m(CharacterTask* task, bool forcePreview, bool forcePreviewPassedBool) = 0;
+	virtual bool ForceExecuteNextTask(CharacterTask* task, bool forcePreview, bool forcePreviewPassedBool) = 0;
 
-	void* unknown;
-	bool IsActive;
+	void* Unknown;
+	bool IsActive; /* Created by retype action */
+	undefined field10_0x11;
+	undefined field11_0x12;
+	undefined field12_0x13;
+	undefined field13_0x14;
+	undefined field14_0x15;
+	undefined field15_0x16;
+	undefined field16_0x17;
+	undefined field17_0x18;
+	undefined field18_0x19;
+	undefined field19_0x1a;
+	undefined field20_0x1b;
+	undefined field21_0x1c;
+	undefined field22_0x1d;
+	undefined field23_0x1e;
+	undefined field24_0x1f;
+	bool field25_0x20;
+	undefined1 SomeCameraBool; /* Created by retype action */
+	bool field27_0x22;
+	undefined1 IsEnabled_m; /* Created by retype action */
+	ObjectHandle SomeHandle;
+	undefined field30_0x28;
+	undefined field31_0x29;
+	undefined field32_0x2a;
+	undefined field33_0x2b;
+	undefined field34_0x2c;
+	undefined field35_0x2d;
+	undefined field36_0x2e;
+	undefined field37_0x2f;
+	void** CharacterTasksSet; /* Created by retype action */
+	int field39_0x38;
+	int CharacterTaskSize;
+	undefined field41_0x40;
+	undefined field42_0x41;
+	undefined field43_0x42;
+	undefined field44_0x43;
+	undefined field45_0x44;
+	undefined field46_0x45;
+	undefined field47_0x46;
+	undefined field48_0x47;
+	undefined field49_0x48;
+	undefined field50_0x49;
+	undefined field51_0x4a;
+	undefined field52_0x4b;
+	undefined field53_0x4c;
+	undefined field54_0x4d;
+	undefined field55_0x4e;
+	undefined field56_0x4f;
+	struct ecl::CharacterTask** TasksSet; /* Created by retype action */
+	undefined field58_0x58;
+	undefined field59_0x59;
+	undefined field60_0x5a;
+	undefined field61_0x5b;
+	uint CharacterTasksSetSize; /* Created by retype action */
+	undefined field63_0x60;
+	undefined field64_0x61;
+	undefined field65_0x62;
+	undefined field66_0x63;
+	undefined field67_0x64;
+	undefined field68_0x65;
+	undefined field69_0x66;
+	undefined field70_0x67;
+	bool IsPreviewing_m;
+	undefined field72_0x69;
+	undefined field73_0x6a;
+	undefined field74_0x6b;
+	undefined field75_0x6c;
+	undefined field76_0x6d;
+	undefined field77_0x6e;
+	undefined field78_0x6f;
+	struct ecl::CharacterTask* SomeTask2;
+	struct ecl::CharacterTask* SomeTask;
+	undefined field81_0x80;
+	undefined field82_0x81;
+	undefined field83_0x82;
+	undefined field84_0x83;
+	undefined field85_0x84;
+	undefined field86_0x85;
+	undefined field87_0x86;
+	undefined field88_0x87;
+	CharacterTask* CurrentTask;
+	undefined field90_0x90;
+	undefined field91_0x91;
+	undefined field92_0x92;
+	undefined field93_0x93;
+	undefined field94_0x94;
+	undefined field95_0x95;
+	undefined field96_0x96;
+	undefined field97_0x97;
+	undefined field98_0x98;
+	undefined field99_0x99;
+	undefined field100_0x9a;
+	undefined field101_0x9b;
+	float SomeFloat1;
+	undefined field103_0xa0;
+	undefined field104_0xa1;
+	undefined field105_0xa2;
+	undefined field106_0xa3;
+	float SomeFloat2; /* Created by retype action */
+	undefined field108_0xa8;
+	undefined field109_0xa9;
+	undefined field110_0xaa;
+	undefined field111_0xab;
+	undefined field112_0xac;
+	undefined field113_0xad;
+	undefined field114_0xae;
+	undefined field115_0xaf;
+	undefined field116_0xb0;
+	undefined field117_0xb1;
+	undefined field118_0xb2;
+	undefined field119_0xb3;
+	undefined field120_0xb4;
+	undefined field121_0xb5;
+	undefined field122_0xb6;
+	undefined field123_0xb7;
+	undefined field124_0xb8;
+	undefined field125_0xb9;
+	undefined field126_0xba;
+	undefined field127_0xbb;
+	undefined field128_0xbc;
+	undefined field129_0xbd;
+	undefined field130_0xbe;
+	undefined field131_0xbf;
+	undefined field132_0xc0;
+	undefined field133_0xc1;
+	undefined field134_0xc2;
+	undefined field135_0xc3;
+	undefined field136_0xc4;
+	undefined field137_0xc5;
+	undefined field138_0xc6;
+	undefined field139_0xc7;
+	undefined field140_0xc8;
+	undefined field141_0xc9;
+	undefined field142_0xca;
+	undefined field143_0xcb;
+	undefined field144_0xcc;
+	undefined field145_0xcd;
+	undefined field146_0xce;
+	undefined field147_0xcf;
+	undefined field148_0xd0;
+	undefined field149_0xd1;
+	undefined field150_0xd2;
+	undefined field151_0xd3;
+	undefined field152_0xd4;
+	undefined field153_0xd5;
+	undefined field154_0xd6;
+	undefined field155_0xd7;
+	undefined field156_0xd8;
+	undefined field157_0xd9;
+	undefined field158_0xda;
+	undefined field159_0xdb;
+	undefined field160_0xdc;
+	undefined field161_0xdd;
+	undefined field162_0xde;
+	undefined field163_0xdf;
+	undefined field164_0xe0;
+	undefined field165_0xe1;
+	undefined field166_0xe2;
+	undefined field167_0xe3;
+	undefined field168_0xe4;
+	undefined field169_0xe5;
+	undefined field170_0xe6;
+	undefined field171_0xe7;
+	undefined field172_0xe8;
+	undefined field173_0xe9;
+	undefined field174_0xea;
+	undefined field175_0xeb;
+	undefined field176_0xec;
+	undefined field177_0xed;
+	undefined field178_0xee;
+	undefined field179_0xef;
+	undefined field180_0xf0;
+	undefined field181_0xf1;
+	undefined field182_0xf2;
+	undefined field183_0xf3;
+	undefined field184_0xf4;
+	undefined field185_0xf5;
+	undefined field186_0xf6;
+	undefined field187_0xf7;
+	undefined field188_0xf8;
+	undefined field189_0xf9;
+	undefined field190_0xfa;
+	undefined field191_0xfb;
+	undefined field192_0xfc;
+	undefined field193_0xfd;
+	undefined field194_0xfe;
+	undefined field195_0xff;
 };
 
 struct Status

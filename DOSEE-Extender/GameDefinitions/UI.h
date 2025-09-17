@@ -742,6 +742,14 @@ namespace dse
 		};
 	};
 
+	struct UIWorldTooltip : UIObject
+	{
+		undefined unknown[31];
+		bool HasHoveredItem;
+		undefined unknown2[4];
+		ComponentHandle HoveredItemHandle;
+	};
+
 	struct UIGameOptionsMenu : UIObject
 	{
 		enum Invokes
