@@ -23,6 +23,7 @@ BEGIN_NS(epip)
 	EPIP_FOR_SETTING(UnlockDialogCamera) \
 	EPIP_FOR_SETTING(AutoScrollListenedDialogues) \
 	EPIP_FOR_SETTING(AutoStopListening) \
+	EPIP_FOR_SETTING(LootContainersFromWorldTooltips) \
 	EPIP_FOR_SETTING(CreateConsole)
 	
 #define EPIP_FOR_ALL_ENUM_SETTINGS() \
@@ -68,6 +69,7 @@ public:
 		TogglePartySneakKeybindModifier,
 		AutoScrollListenedDialogues,
 		AutoStopListening,
+		LootContainersFromWorldTooltips,
 	};
 	enum class ExamineInformationChoices
 	{
@@ -100,6 +102,7 @@ public:
 	bool UnlockDialogCamera = false;
 	bool AutoScrollListenedDialogues = false;
 	bool AutoStopListening = false;
+	bool LootContainersFromWorldTooltips = false;
 	bool CreateConsole = false;
 	uint32_t ExamineKeybind = (uint32_t)RawInputType::T;
 	uint32_t TogglePartyChainKeybind = (uint32_t)RawInputType::None;

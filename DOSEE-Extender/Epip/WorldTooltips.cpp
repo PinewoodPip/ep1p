@@ -74,8 +74,8 @@ bool WorldTooltips::OnFunctionCalled(const char* uiCall, int paramsCount, ig::In
 {
 	if (strcmp(uiCall, "tooltipClicked") == 0)
 	{
-		// Request the next picker update to execute the use/loot character task
-		_RequestLooting = true;
+		// Request the next picker update to execute the use/loot character task, if enabled
+		_RequestLooting = gSettings->LootContainersFromWorldTooltips;
 	}
 	else if (strcmp(uiCall, "tooltipOver") == 0)
 	{
@@ -99,7 +99,7 @@ void WorldTooltips::WorldTooltipsInputListener::OnRawInput(InputManager* self, I
 	// If left-clicking a world tooltip, attempt to loot/open the item instead
 	UIWorldTooltip* worldTooltipsUI = (UIWorldTooltip*)UIUtils::GetUIByType(UIObject::TypeID::WorldTooltip);
 	auto _ItemHandle = _WorldTooltips->_ItemHandle;
-	if (_ItemHandle && UIUtils::IsVisible(worldTooltipsUI) && change->RawInputID == RawInputType::Left_2)
+	if (_ItemHandle && UIUtils::IsVisible(worldTooltipsUI) && change->RawInputID == RawInputType::Left_2 && gSettings->LootContainersFromWorldTooltips)
 	{
 		auto& lib = gExtender->GetEngineHooks();
 
@@ -125,7 +125,7 @@ void WorldTooltips::WorldTooltipsPickerListener::OnPickingDone(ecl::PickingHelpe
 	UIWorldTooltip* worldTooltipsUI = (UIWorldTooltip*)UIUtils::GetUIByType(UIObject::TypeID::WorldTooltip);
 	//if (worldTooltipsUI->HoveredItemHandle)
 	auto _ItemHandle = _WorldTooltips->_ItemHandle;
-	if (_WorldTooltips->_ItemHandle && UIUtils::IsVisible(worldTooltipsUI)) // If you first hover over the item then the tooltip then it fucking works
+	if (_WorldTooltips->_ItemHandle && UIUtils::IsVisible(worldTooltipsUI) && gSettings->LootContainersFromWorldTooltips) // If you first hover over the item then the tooltip then it fucking works
 	{
 		// Override picker handles; if not done, then this feature would only work if the cursor was first over a gameobject *right* before hovering onto a world tooltip
 		picker->CurrentItemHandle = _ItemHandle;
