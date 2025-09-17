@@ -58,6 +58,7 @@ void Epip::LoadConfig(std::wstring const& configPath, EpipSettings& config)
 #define EPIP_FOR_SETTING(setting) config.ConfigGet(root, #setting, config.setting);
 	EPIP_FOR_ALL_BOOL_SETTINGS();
 	EPIP_FOR_ALL_FLOAT_SETTINGS()
+	EPIP_FOR_ALL_INT_SETTINGS();
 	EPIP_FOR_ALL_UINT_SETTINGS();
 #define EPIP_FOR_SETTING(setting) uint32_t setting##Temp; \
 	config.ConfigGet(root, #setting, setting##Temp); \

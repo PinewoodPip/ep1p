@@ -33,12 +33,15 @@ BEGIN_NS(epip)
 #define EPIP_FOR_ALL_FLOAT_SETTINGS() \
 	EPIP_FOR_SETTING(CameraMaxDistance)
 
-#define EPIP_FOR_ALL_UINT_SETTINGS() \
+// Keybind settings are int instead of uint as unbound value (RawInput None) is -1
+#define EPIP_FOR_ALL_INT_SETTINGS() \
 	EPIP_FOR_SETTING(ExamineKeybind) \
 	EPIP_FOR_SETTING(TogglePartyChainKeybind) \
 	EPIP_FOR_SETTING(TogglePartySneakKeybind) \
 	EPIP_FOR_SETTING(TogglePartyChainKeybindModifier) \
 	EPIP_FOR_SETTING(TogglePartySneakKeybindModifier)
+
+#define EPIP_FOR_ALL_UINT_SETTINGS() // None for now.
 
 struct EpipSettings
 {
@@ -104,11 +107,11 @@ public:
 	bool AutoStopListening = false;
 	bool LootContainersFromWorldTooltips = false;
 	bool CreateConsole = false;
-	uint32_t ExamineKeybind = (uint32_t)RawInputType::T;
-	uint32_t TogglePartyChainKeybind = (uint32_t)RawInputType::None;
-	uint32_t TogglePartySneakKeybind = (uint32_t)RawInputType::None;
-	uint32_t TogglePartyChainKeybindModifier = (uint32_t)RawInputType::None;
-	uint32_t TogglePartySneakKeybindModifier = (uint32_t)RawInputType::None;
+	int ExamineKeybind = (int)RawInputType::T;
+	int TogglePartyChainKeybind = (int)RawInputType::None;
+	int TogglePartySneakKeybind = (int)RawInputType::None;
+	int TogglePartyChainKeybindModifier = (int)RawInputType::None;
+	int TogglePartySneakKeybindModifier = (int)RawInputType::None;
 
 	void SetByID(int id, bool value)
 	{
@@ -121,6 +124,9 @@ public:
 	{
 #define EPIP_FOR_SETTING(setting) if (id == (int)Settings::setting) setting = (setting##Choices) value;
 		EPIP_FOR_ALL_ENUM_SETTINGS();
+#undef EPIP_FOR_SETTING
+#define EPIP_FOR_SETTING(setting) if (id == (int)Settings::setting) setting = value;
+		EPIP_FOR_ALL_INT_SETTINGS();
 #undef EPIP_FOR_SETTING
 	}
 
@@ -171,6 +177,14 @@ public:
 		}
 	}
 
+	void ConfigGet(Json::Value& node, char const* key, int& value)
+	{
+		auto configVar = node[key];
+		if (!configVar.isNull() && configVar.isInt()) {
+			value = configVar.asInt();
+		}
+	}
+
 	void ConfigGet(Json::Value& node, char const* key, float& value)
 	{
 		auto configVar = node[key];
@@ -193,6 +207,7 @@ public:
 #define EPIP_FOR_SETTING(setting) root[#setting] = setting;
 		EPIP_FOR_ALL_BOOL_SETTINGS();
 		EPIP_FOR_ALL_FLOAT_SETTINGS();
+		EPIP_FOR_ALL_INT_SETTINGS();
 		EPIP_FOR_ALL_UINT_SETTINGS();
 #define EPIP_FOR_SETTING(setting) root[#setting] = (int)setting;
 		EPIP_FOR_ALL_ENUM_SETTINGS();
