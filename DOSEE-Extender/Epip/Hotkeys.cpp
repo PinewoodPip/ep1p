@@ -110,7 +110,7 @@ void Hotkeys::OnRawInput(InputManager* self, InputRawChange* change, bool unknow
 	{
 		//LOG(std::format("RawInputType {} Value1 {} Value2 {} State {}", (int)change->RawInputID, change->Value1, change->Value2, (uint8_t)change->State).c_str());
 
-		if (change->RawInputID == (RawInputType)gSettings->ExamineKeybind)
+		if (IsKeybindPressed(ExamineKeybind))
 		{
 			ecl::Character* character = PointerUtils::GetCurrentPickerCharacter();
 			ObjectHandle characterHandle = gExtender->GetHooks().LastPickerCharacterHandle;

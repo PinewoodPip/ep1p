@@ -25,7 +25,7 @@ BEGIN_NS(epip)
 	EPIP_FOR_SETTING(AutoStopListening) \
 	EPIP_FOR_SETTING(LootContainersFromWorldTooltips) \
 	EPIP_FOR_SETTING(CreateConsole)
-	
+
 #define EPIP_FOR_ALL_ENUM_SETTINGS() \
 	EPIP_FOR_SETTING(ExamineInformation) \
 	EPIP_FOR_SETTING(AutoIdentifyMode)
@@ -36,6 +36,7 @@ BEGIN_NS(epip)
 // Keybind settings are int instead of uint as unbound value (RawInput None) is -1
 #define EPIP_FOR_ALL_INT_SETTINGS() \
 	EPIP_FOR_SETTING(ExamineKeybind) \
+	EPIP_FOR_SETTING(ExamineKeybindModifier) \
 	EPIP_FOR_SETTING(TogglePartyChainKeybind) \
 	EPIP_FOR_SETTING(TogglePartySneakKeybind) \
 	EPIP_FOR_SETTING(TogglePartyChainKeybindModifier) \
@@ -65,6 +66,7 @@ public:
 		LockBottomBar,
 		CreateConsole,
 		ExamineKeybind,
+		ExamineKeybindModifier,
 		UnlockDialogCamera,
 		TogglePartyChainKeybind,
 		TogglePartySneakKeybind,
@@ -108,6 +110,7 @@ public:
 	bool LootContainersFromWorldTooltips = false;
 	bool CreateConsole = false;
 	int ExamineKeybind = (int)RawInputType::T;
+	int ExamineKeybindModifier = (int)RawInputType::None;
 	int TogglePartyChainKeybind = (int)RawInputType::None;
 	int TogglePartySneakKeybind = (int)RawInputType::None;
 	int TogglePartyChainKeybindModifier = (int)RawInputType::None;
