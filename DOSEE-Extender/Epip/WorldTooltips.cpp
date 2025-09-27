@@ -70,7 +70,7 @@ void WorldTooltips::OnUpdateItems(void* netProtocol)
 	}
 }
 
-bool WorldTooltips::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
+bool WorldTooltips::OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
 {
 	if (strcmp(uiCall, "tooltipClicked") == 0)
 	{

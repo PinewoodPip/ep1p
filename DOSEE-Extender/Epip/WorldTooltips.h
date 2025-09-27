@@ -25,7 +25,7 @@ public:
 
 	void OnUpdateItems(void* netProtocol);
 
-	bool OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
+	bool OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
 
 private:
 	WorldTooltipsInputListener _InputListener;

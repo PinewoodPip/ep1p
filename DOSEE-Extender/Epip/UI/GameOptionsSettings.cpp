@@ -154,7 +154,7 @@ bool GameOptionsSettings::OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::Invoke
 	return false;
 }
 
-bool GameOptionsSettings::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
+bool GameOptionsSettings::OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
 {
 	if (strcmp(uiCall, "checkBoxID") == 0)
 	{

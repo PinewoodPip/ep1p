@@ -76,7 +76,7 @@ void ControllerEquipmentPanel::AfterInvoke0(UIObject* ui, int64_t invokeEnum)
 	}
 }
 
-bool ControllerEquipmentPanel::OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
+bool ControllerEquipmentPanel::OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
 {
 	if (strcmp(uiCall, "showDollActionMenuItem") == 0) // From equipment UI
 	{

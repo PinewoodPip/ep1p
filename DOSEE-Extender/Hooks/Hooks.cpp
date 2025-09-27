@@ -347,7 +347,7 @@ void UIObjectFunctionCallCapture(UIObject* self, const char* function, unsigned 
 		auto listeners = hooks.EventListeners.find(self->TypeId)->second;
 		for (auto listener : listeners)
 		{
-			bool preventRequested = listener->OnFunctionCalled(function, numArgs, args);
+			bool preventRequested = listener->OnFunctionCalled(self, function, numArgs, args);
 			prevented |= preventRequested;
 		}
 	}

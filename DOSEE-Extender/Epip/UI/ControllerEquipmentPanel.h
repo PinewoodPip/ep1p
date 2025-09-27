@@ -18,7 +18,7 @@ public:
 	void Setup();
 
 	virtual void AfterInvoke0(UIObject* ui, int64_t invokeEnum) override;
-	bool OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
+	bool OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
 
 private:
 	bool _NextItemIsHelmet = false;

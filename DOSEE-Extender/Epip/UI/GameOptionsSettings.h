@@ -18,7 +18,7 @@ public:
 	void SaveToFile();
 
 	virtual bool OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* invokeData1) override;
-	bool OnFunctionCalled(const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
+	bool OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
 
 private:
 	EpipSettings* _CurrentSettings;
