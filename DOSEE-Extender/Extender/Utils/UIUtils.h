@@ -12,6 +12,7 @@ public:
 	static ig::InvokeDataValue CreateStringInvokeData(STDWString value);
 	static bool IsPausedOrInputFocused();
 	static bool IsVisible(UIObject* ui);
+	static bool IsModifierKey(RawInputType inputType); // Returns whether an input is considered a modifier and not valid as a standalone keybind.
 };
 
 END_SE()

@@ -36,6 +36,7 @@ void Hooks::Startup()
 
 void Hooks::OnGameStateChanged(void* eventManager, uint32_t newState, uint32_t unknown2)
 {
+	CurrentClientGameState = (ecl::EoCClient::GameState)newState;
 	if (newState == ecl::EoCClient::GameState::PrepareRunning)
 	{
 		gExtender->RegisterIggyCallbacks();

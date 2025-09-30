@@ -18,6 +18,7 @@
 #include "UI/MainMenu.h"
 #include "UI/ControllerEquipmentPanel.h"
 #include "UI/Dialog.h"
+#include "UI/ControlsMenu.h"
 
 using namespace epip;
 
@@ -48,6 +49,7 @@ private:
 	Hotkeys _Hotkeys;
 	MainMenu _MainMenu;
 	Dialog _Dialog;
+	ControlsMenu _ControlsMenu;
 };
 
 END_NS()

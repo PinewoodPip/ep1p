@@ -83,6 +83,7 @@ public:
 
 	ComponentHandle LastPickerCharacterHandle = {};
 	ComponentHandle CurrentPickerCharacterHandle = {};
+	ecl::EoCClient::GameState CurrentClientGameState;
 
 	std::unordered_map<int, std::vector<UIEventListener*>> EventListeners;
 	std::set<GameStateChangedEventListener*> GameStateChangedListeners;

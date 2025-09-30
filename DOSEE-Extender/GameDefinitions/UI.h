@@ -750,6 +750,33 @@ namespace dse
 		ComponentHandle HoveredItemHandle;
 	};
 
+	struct UIControlsMenu : UIObject
+	{
+		enum Invokes
+		{
+			setMenuTexts = 0, // This UI actually doesn't call the base RegisterInvokeNames() method, curiously.
+			setButtonText,
+			removeContent,
+			addTab,
+			selectTab,
+			addEntry,
+			setInput,
+			closeMenu,
+			popupShow,
+			popupHide,
+			hideOverlay,
+			changeOverlayText,
+			setButtonDisable,
+			enableSaveButton,
+			disableSaveButton,
+			initDone,
+			addTitle,
+			setTitle,
+
+			pipHideSecondInput,
+		};
+	};
+
 	struct UIGameOptionsMenu : UIObject
 	{
 		enum Invokes

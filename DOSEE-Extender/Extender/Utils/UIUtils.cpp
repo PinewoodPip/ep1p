@@ -50,6 +50,11 @@ bool UIUtils::IsPausedOrInputFocused()
 	return ((*gStaticSymbols->UIObjectManager__Instance)->AggregateModalFlags_m & 0x1e00) != 0;
 }
 
+bool UIUtils::IsModifierKey(RawInputType input)
+{
+	return input == RawInputType::LShift || input == RawInputType::RShift || input == RawInputType::LCtrl || input == RawInputType::RCtrl || input == RawInputType::LAlt || input == RawInputType::RAlt || input == RawInputType::LGUI || input == RawInputType::RGUI;
+}
+
 bool UIUtils::IsVisible(UIObject* ui)
 {
 	return (ui->Flags & (int)UIObject::UIFlags::Visible) != 0;

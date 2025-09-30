@@ -44,6 +44,20 @@ BEGIN_NS(epip)
 
 #define EPIP_FOR_ALL_UINT_SETTINGS() // None for now.
 
+#define EPIP_FOR_ALL_KEYBIND_SETTINGS() \
+	EPIP_FOR_SETTING(ExamineKeybind) \
+	EPIP_FOR_SETTING(ExamineKeybindModifier) \
+	EPIP_FOR_SETTING(TogglePartyChainKeybind) \
+	EPIP_FOR_SETTING(TogglePartySneakKeybind) \
+	EPIP_FOR_SETTING(TogglePartyChainKeybindModifier) \
+	EPIP_FOR_SETTING(TogglePartySneakKeybindModifier)
+
+// All keybind settings *without* the modifiers.
+#define EPIP_FOR_ALL_BASE_KEYBIND_SETTINGS() \
+	EPIP_FOR_SETTING(ExamineKeybind) \
+	EPIP_FOR_SETTING(TogglePartyChainKeybind) \
+	EPIP_FOR_SETTING(TogglePartySneakKeybind) \
+
 struct EpipSettings
 {
 public:
