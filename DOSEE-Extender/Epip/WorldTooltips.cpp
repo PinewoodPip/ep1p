@@ -103,6 +103,9 @@ void WorldTooltips::WorldTooltipsInputListener::OnRawInput(InputManager* self, I
 	{
 		ecl::Item* item = (*gStaticSymbols->ObjectFactory__ecl_Item)->Get(_ItemHandle);
 		if (!item) return;
+		eoc::ItemTemplate* itemTemplate = (eoc::ItemTemplate*)item->GetCurrentTemplate();
+		if (!itemTemplate || !GetActionData(itemTemplate, eoc::IActionData::ActionType::OpenClose)) return; // itemTemplate should always exist (else the item would have no world tooltip to begin with), but eh let's keep a sanity check
+
 		// These flags must be set for this hacky way of interacting with the item to work.
 		// They appear to correspond to CanBeMoved (one of them, at least - no idea about the other) - as the hack works on moveable items only without overriding the flags (possibly because of differences in context menu options?).
 		ecl::Item::Flags1 prevFlags = item->Flags;
