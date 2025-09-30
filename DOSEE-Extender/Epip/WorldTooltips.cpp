@@ -74,7 +74,7 @@ bool WorldTooltips::OnFunctionCalled(UIObject* ui, const char* uiCall, int param
 {
 	if (strcmp(uiCall, "tooltipClicked") == 0)
 	{
-		// Request the next picker update to execute the use/loot character task, if enabled
+		// Request the next picker update to execute the use/loot character task, if the item is a container and the setting is enabled
 		_RequestLooting = gSettings->LootContainersFromWorldTooltips;
 	}
 	else if (strcmp(uiCall, "tooltipOver") == 0)
@@ -99,12 +99,25 @@ void WorldTooltips::WorldTooltipsInputListener::OnRawInput(InputManager* self, I
 	// If left-clicking a world tooltip, attempt to loot/open the item instead
 	UIWorldTooltip* worldTooltipsUI = (UIWorldTooltip*)UIUtils::GetUIByType(UIObject::TypeID::WorldTooltip);
 	auto _ItemHandle = _WorldTooltips->_ItemHandle;
-	if (_ItemHandle && UIUtils::IsVisible(worldTooltipsUI) && change->RawInputID == RawInputType::Left_2 && gSettings->LootContainersFromWorldTooltips)
+	if (_ItemHandle && UIUtils::IsVisible(worldTooltipsUI) && change->RawInputID == RawInputType::Left_2 && gSettings->LootContainersFromWorldTooltips && change->State == Released)
 	{
+		ecl::Item* item = (*gStaticSymbols->ObjectFactory__ecl_Item)->Get(_ItemHandle);
+		if (!item) return;
+		// These flags must be set for this hacky way of interacting with the item to work.
+		// They appear to correspond to CanBeMoved (one of them, at least - no idea about the other) - as the hack works on moveable items only without overriding the flags (possibly because of differences in context menu options?).
+		ecl::Item::Flags1 prevFlags = item->Flags;
+		item->Flags = (ecl::Item::Flags1)((int)item->Flags | ((int)(ecl::Item::Flags1::Unknown3) | (int)(ecl::Item::Flags1::Unknown4)));
+
 		auto& lib = gExtender->GetEngineHooks();
 
 		// Do a right-click first to open the context menu
 		change->RawInputID = Right_2;
+		change->State = Pressed;
+		change->Value1 = 1;
+		lib.ls_InputManager_InjectInput.CallOriginal(self, change, unknown);
+		change->RawInputID = Right_2;
+		change->State = Released;
+		change->Value1 = 0;
 		lib.ls_InputManager_InjectInput.CallOriginal(self, change, unknown);
 
 		// Select the "Open" context menu entry
@@ -117,6 +130,14 @@ void WorldTooltips::WorldTooltipsInputListener::OnRawInput(InputManager* self, I
 
 		// Back to the left-click (won't do anything either way)
 		change->RawInputID = Left_2;
+		change->State = Released;
+		change->Value1 = 0;
+		lib.ls_InputManager_InjectInput.CallOriginal(self, change, unknown);
+
+		// Reset bookkeeping
+		_WorldTooltips->_ItemHandle = ComponentHandle();
+		_WorldTooltips->_OverridePicker = false;
+		item->Flags = prevFlags;
 	}
 }
 

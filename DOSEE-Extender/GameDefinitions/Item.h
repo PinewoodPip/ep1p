@@ -1363,7 +1363,15 @@ struct Item : public IGameObject {
     static constexpr auto ObjectTypeIndex = ObjectHandleType::ClientItem;
     enum class Flags1 : int32_t
     {
-        WorldTooltipShown = 1,
+        WorldTooltipShown = 0x1,
+        Unknown2 = 0x2,
+        Unknown3 = 0x4, // Possibly CanBeMoved or CanBePickedUp
+        Unknown4 = 0x8, // Possibly CanBeMoved or CanBePickedUp
+        Unknown5 = 0x10,
+        Unknown6 = 0x20,
+        Unknown7 = 0x40,
+        Unknown8 = 0x80,
+        Unknown9 = 0x100,
         Looted = 0x4000,
         WakePhysics = 0x8000,
     };
