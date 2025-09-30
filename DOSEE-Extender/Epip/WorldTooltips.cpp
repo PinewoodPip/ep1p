@@ -70,6 +70,18 @@ void WorldTooltips::OnUpdateItems(void* netProtocol)
 	}
 }
 
+bool WorldTooltips::OnInvoke0(UIObject* ui, int64_t invokeEnum)
+{
+	// tooltipOut UICall is not made when tooltips are hidden from letting go the keybind,
+	// thus we must reset bookkeeping manually to avoid getting stuck in the state of having hovered over an item.
+	if (invokeEnum == UIWorldTooltip::Invokes::clearAll)
+	{
+		_OverridePicker = false;
+		_ItemHandle = ComponentHandle();
+	}
+	return false;
+}
+
 bool WorldTooltips::OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData)
 {
 	if (strcmp(uiCall, "tooltipClicked") == 0)

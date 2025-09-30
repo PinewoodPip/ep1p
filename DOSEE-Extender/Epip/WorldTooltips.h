@@ -25,6 +25,7 @@ public:
 
 	void OnUpdateItems(void* netProtocol);
 
+	bool OnInvoke0(UIObject* ui, int64_t invokeEnum) override;
 	bool OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
 
 private:

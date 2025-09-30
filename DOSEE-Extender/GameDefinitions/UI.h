@@ -744,6 +744,13 @@ namespace dse
 
 	struct UIWorldTooltip : UIObject
 	{
+		enum Invokes
+		{
+			setWindow = 1,
+			updateTooltips = 2, // Updates via arrays.
+			clearAll = 3,
+			setControllerMode = 4,
+		};
 		undefined unknown[31];
 		bool HasHoveredItem;
 		undefined unknown2[4];
