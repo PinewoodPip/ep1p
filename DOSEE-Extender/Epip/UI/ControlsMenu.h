@@ -199,7 +199,6 @@ public:
     void GetKeybind(EpipSettings::Settings baseKeySetting, EpipSettings::Settings modifierKeySetting, int& baseKey, int& modifierKey);
     void SetKeybindLabel(UIObject* ui, int entryID, EpipKeybind keybind);
 
-	bool OnInvoke0(UIObject* ui, int64_t invokeEnum) override;
     bool OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* a1) override;
 	bool OnFunctionCalled(UIObject* ui, const char* uiCall, int paramsCount, ig::InvokeDataValue* invokeData) override;
 

@@ -20,18 +20,16 @@ void ControlsMenu::Setup()
 	}
 }
 
-bool ControlsMenu::OnInvoke0(UIObject* ui, int64_t invokeEnum)
-{
-	if (invokeEnum == UIControlsMenu::Invokes::initDone)
-	{
-		// Add entries for Ep1p keybinds
-		RenderEntries(ui);
-	}
-	return false;
-}
-
 bool ControlsMenu::OnInvoke1(UIObject* ui, int64_t invokeEnum, ig::InvokeDataValue* a1)
 {
+	// Add entries for Ep1p keybinds;
+	// done with setTitle invoke as it occurs before the vanilla entries are added,
+	// thus placing Ep1p's at the top of the menu.
+	if (invokeEnum == UIControlsMenu::Invokes::setTitle)
+	{
+		RenderEntries(ui);
+	}
+
 	if (invokeEnum == UIControlsMenu::Invokes::changeOverlayText && _CurrentKeybind)
 	{
 		// Parse the entered keybind from the string passed to the UI
