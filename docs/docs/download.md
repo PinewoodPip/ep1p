@@ -1,8 +1,8 @@
 
 !!! info ""
-    Only version 2.0.119.430 (Steam release) of the game is supported.
+    Only version 2.0.119.430 (Steam release) of the game is supported. [See the FAQ for getting Ep1p to work on GOG copies](../faq#i-have-a-gog-copy-can-i-use-ep1p).
 
-- [Latest version download (v1.0.0.0).](https://drive.google.com/file/d/1k8IKS5cNyOsVrTxA67Bi9yQFb0GHX-UJ/view?usp=drive_link)
+- [Latest version download (v1.1.0.0).](https://drive.google.com/file/d/12_Q4AdZItj-djkBYFELp7aW7aFfAGtZx/view?usp=drive_link)
 - [Patchnotes](patchnotes.md)
 
 !!! warning ""
@@ -10,7 +10,7 @@
 
 Ep1p can be installed or removed at any point alongside any `.pak` mods and does not require starting a new playthrough.
 
-Installation:
+## Installation
 
 1. Unzip the archive.
 2. Copy `DXGI.dll` from the `Shipping` folder into the game's `Shipping` folder, so that it is in the same folder as `EoCApp.exe`.

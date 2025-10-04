@@ -3,12 +3,24 @@
 ## Why is the mod a .dll?
 Ep1p uses code injection to make changes to the game that would not be possible with a regular `.pak` mod, similar to Norbyte's DOS2 Script Extender. The mod's repository is [available on GitHub](https://github.com/PinewoodPip/ep1p) and is buildable from source.
 
-## Can I rebind the new hotkeys?
-The in-game settings menu cannot currently be used for this, but you can rebind the new hotkeys by editing the mod's settings file (`Ep1pSettings.json`), which is created after modifying the settings at least once.
+## Known issues
+- When using the "Toggle Party Chain" hotkeys, the "Target group is too far away" notification can sometimes appear erroneously.
 
-The relevant settings are:
+## I have a GOG copy, can I use Ep1p?
+Ep1p relies on finding patterns within game memory to make the necessary patches; these are different between the different builds of the game and were only reverse-engineered for the Steam build due to the massive time effort required.
+
+However, if you have a GOG copy of the game, **replacing the executable (`EoCApp.exe`) with one from a Steam copy is enough to get Ep1p to work.**
+
+## Can I rebind the new hotkeys?
+As of v1.1.0.0 you can use the in-game settings menu to rebind hotkeys.
+
+You can also rebind them by editing the mod's settings file (`Ep1pSettings.json`), which is created after modifying the settings at least once.
+
+The relevant settings are the following; modifiers are set through separate settings suffixed with "`Modifier`":
 
 - `ExamineHotkey`: hotkey to open the examine UI. Default is ++t++ (key #`55`)
+- `TogglePartyChainKeybind`: hotkey to chain/unchain controlled characters.
+- `TogglePartySneakKeybind`: hotkey to sneak/unsneak controlled characters.
 
 Keys are identified by numerical IDs, as per the following table:
 
@@ -177,4 +189,5 @@ Keys are identified by numerical IDs, as per the following table:
 | Touch_Rotate | 159 |
 | Touch_Flick | 160 |
 
-Modifiers (binding to ++lshift++ / ++lalt++ / ++lctrl++ + another key) are not currently supported.
+## Older releases
+For archival purposes, you can find all previous releases [here](https://drive.google.com/drive/folders/1KRuwsqnzpyH-EvKhXrqI357mbrriJehy?usp=drive_link). You can also use them in case of some *cathestrophe* where you need to downgrade. Ideally though, in such case you'd notify me what the issue is and I'd fix it.

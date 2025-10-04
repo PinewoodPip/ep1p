@@ -38,12 +38,12 @@ An option to use a longer hotbar that displays 20 slots at once has been added (
 
 Additionally, a lock button has been added; when enabled, the contents of the slots cannot be dragged out.
 
-In addition to this, a bug has been fixed in the UI that made dragging slots out far easier than was intended - you now need to move the cursor 10 pixels instead of just 1 pixel to start dragging, solving the infamous accidental dragging issues.
+In addition to this, a bug has been fixed in the UI that made dragging slots out far easier than was intended; you now need to move the cursor 10 pixels instead of just 1 pixel to start dragging, solving the infamous accidental dragging issues.
 
 These last two features are available when the extended hotbar is disabled as well.
 
 !!! info ""
-    Note that the maximum amount of hotbar slots (50) remains unchanged - as such, the extra 10 slots to the right of the third row are not usable.
+    Note that the maximum amount of hotbar slots (50) remains unchanged - as such, the extra 10 slots to the right of the third row are greyed out and not usable.
 
 ### Player portraits UI
 The status bars by the player portraits on the right will now wrap once a player character has >6 statuses, reducing the likelihood of them obscuring the center of the screen.
@@ -51,17 +51,28 @@ The status bars by the player portraits on the right will now wrap once a player
 ![Wrapping status bar.](img/features/player_info.png)
 
 ### Examine UI
-A hotkey to open the examine UI for characters has been added, defaulting to `T`. This hotkey is usable even in situations where you normally wouldn't be able to bring up the context menu, such as when it is not your turn.
+A hotkey to open the examine UI for characters has been added, defaulting to `T` and rebindable within the controls settings menu. This hotkey is usable even in situations where you normally wouldn't be able to bring up the context menu, such as when it is not your turn.
 
 Additionally, it's possible to configure the UI to show all information regardless of loremaster, or use the [highest loremaster of the party](#shared-civils).
-
-!!! info ""
-    Hotkeys currently cannot be modified in-game, but you can change them by [editing the settings file](faq.md#can-i-rebind-the-new-hotkeys).
 
 ### Shared "civils"
 Settings have been added to "share" loremaster and lucky charm scores across the party for the purposes of examining and looting respectively, like in DOS2. Mods that add scripted aspects to these stats are unaffected.
 
 There is currently no visual feedback for this.
+
+### Dialogue improvements
+Various improvements have been made to dialogues, particularly in regards to listening to dialogues in multiplayer:
+
+- When listening to dialogues in multiplayer, you can have the UI automatically close when the dialogue ends ("*Automatically stop listening to dialogues*" setting), rather than having to press "stop listening" manually.
+- Dialogues you're listening to can automatically scroll down when new lines are added ("*Automatically scroll listened dialogues*" setting)
+- A setting exists to allow rotating the camera while in dialogue ("*Allow rotating camera in dialogue*")
+
+### Hotkeys
+Hotkeys have been added to chain/unchain and sneak/unsneak the party members you control. These can be bound from the ingame controls settings menu, and are unbound by default.
+
+You can set hotkeys to any key the game supports, with up to 1 modifier ( ++shift++/++ctrl++/++alt++ ).
+
+![New keybinds within the vanilla controls settings menu.](img/features/controls_menu.png)
 
 ### Other features
 - **Auto-identify**: marks items as identified when they're generated if the party has enough loremaster and an identifying glass, with an option to bypass these requirements.
@@ -69,7 +80,10 @@ There is currently no visual feedback for this.
 - **Unlimited equipment durability**: prevents weapons and armor from losing durability. Does not affect unrepairable items.
 - Dead party members in Tactician & Honour modes can receive experience.
 - Showing world tooltips for all containers (barrels, crates, etc.)
-    - Unfortunately, clicking their tooltips will still cause your character to attempt to pick them up rather than loot them.
+- Looting containers by clicking on their world tooltips, like in Epip.
+    - This can speed up looting clumped, small containers that are otherwise hard to click.
+- You can now toggle your helmet's visibility when playing with a controller.
+    - To do so, open the context menu for the equipped helmet and select the new "*Hide helmet*", "*Always show helmet*" or "*Only show helmet in combat*" context menu options. Changes will be reflected upon closing the UI.
 - The maximum camera zoom can be adjusted.
     - Note that render distance limits are not adjusted; as such, at high camera distances, you may see features such as shadows or surfaces disappear.
     
@@ -78,7 +92,7 @@ Some bugs in the game have had workarounds made for them:
 
 - Added a workaround for the scripting engine breaking "randomly", most infamously during the tutorial dungeon while using Epic Encounters.
     - This appears to be the bug that caused the door and pressure plate at the end of the tutorial to not work, as well as random mechanics breaking and torches not getting toggled when interacting with them, fixable only by fully restarting the game.
-    - If you disable this workaround in the settings menu, Ep1p will still notify with a message box you when it detects the issue has occurred.
+    - If you disable this workaround in the settings menu, Ep1p will still notify you with a message box when it detects the issue has occurred.
 - Added a workaround for the skill range indicator effects not appearing if you begin casting a skill while the caster is not on screen.
 
 ### Settings menu
