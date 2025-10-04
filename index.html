@@ -313,6 +313,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dialogue-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dialogue improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hotkeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotkeys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-features" class="md-nav__link">
     <span class="md-ellipsis">
       Other features
@@ -575,6 +593,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dialogue-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dialogue improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hotkeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hotkeys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-features" class="md-nav__link">
     <span class="md-ellipsis">
       Other features
@@ -670,31 +706,44 @@
 <p>An option to use a longer hotbar that displays 20 slots at once has been added (<em>"Extended Hotbar"</em> setting).</p>
 <p><img alt="Extended Hotbar." src="img/features/bottom_bar.png"></p>
 <p>Additionally, a lock button has been added; when enabled, the contents of the slots cannot be dragged out.</p>
-<p>In addition to this, a bug has been fixed in the UI that made dragging slots out far easier than was intended - you now need to move the cursor 10 pixels instead of just 1 pixel to start dragging, solving the infamous accidental dragging issues.</p>
+<p>In addition to this, a bug has been fixed in the UI that made dragging slots out far easier than was intended; you now need to move the cursor 10 pixels instead of just 1 pixel to start dragging, solving the infamous accidental dragging issues.</p>
 <p>These last two features are available when the extended hotbar is disabled as well.</p>
 <div class="admonition info">
-<p>Note that the maximum amount of hotbar slots (50) remains unchanged - as such, the extra 10 slots to the right of the third row are not usable.</p>
+<p>Note that the maximum amount of hotbar slots (50) remains unchanged - as such, the extra 10 slots to the right of the third row are greyed out and not usable.</p>
 </div>
 <h3 id="player-portraits-ui">Player portraits UI<a class="headerlink" href="#player-portraits-ui" title="Permanent link">¶</a></h3>
 <p>The status bars by the player portraits on the right will now wrap once a player character has &gt;6 statuses, reducing the likelihood of them obscuring the center of the screen.</p>
 <p><img alt="Wrapping status bar." src="img/features/player_info.png"></p>
 <h3 id="examine-ui">Examine UI<a class="headerlink" href="#examine-ui" title="Permanent link">¶</a></h3>
-<p>A hotkey to open the examine UI for characters has been added, defaulting to <code>T</code>. This hotkey is usable even in situations where you normally wouldn't be able to bring up the context menu, such as when it is not your turn.</p>
+<p>A hotkey to open the examine UI for characters has been added, defaulting to <code>T</code> and rebindable within the controls settings menu. This hotkey is usable even in situations where you normally wouldn't be able to bring up the context menu, such as when it is not your turn.</p>
 <p>Additionally, it's possible to configure the UI to show all information regardless of loremaster, or use the <a href="#shared-civils">highest loremaster of the party</a>.</p>
-<div class="admonition info">
-<p>Hotkeys currently cannot be modified in-game, but you can change them by <a href="faq/#can-i-rebind-the-new-hotkeys">editing the settings file</a>.</p>
-</div>
 <h3 id="shared-civils">Shared "civils"<a class="headerlink" href="#shared-civils" title="Permanent link">¶</a></h3>
 <p>Settings have been added to "share" loremaster and lucky charm scores across the party for the purposes of examining and looting respectively, like in DOS2. Mods that add scripted aspects to these stats are unaffected.</p>
 <p>There is currently no visual feedback for this.</p>
+<h3 id="dialogue-improvements">Dialogue improvements<a class="headerlink" href="#dialogue-improvements" title="Permanent link">¶</a></h3>
+<p>Various improvements have been made to dialogues, particularly in regards to listening to dialogues in multiplayer:</p>
+<ul>
+<li>When listening to dialogues in multiplayer, you can have the UI automatically close when the dialogue ends ("<em>Automatically stop listening to dialogues</em>" setting), rather than having to press "stop listening" manually.</li>
+<li>Dialogues you're listening to can automatically scroll down when new lines are added ("<em>Automatically scroll listened dialogues</em>" setting)</li>
+<li>A setting exists to allow rotating the camera while in dialogue ("<em>Allow rotating camera in dialogue</em>")</li>
+</ul>
+<h3 id="hotkeys">Hotkeys<a class="headerlink" href="#hotkeys" title="Permanent link">¶</a></h3>
+<p>Hotkeys have been added to chain/unchain and sneak/unsneak the party members you control. These can be bound from the ingame controls settings menu, and are unbound by default.</p>
+<p>You can set hotkeys to any key the game supports, with up to 1 modifier ( <span class="keys"><kbd class="key-shift">Shift</kbd></span>/<span class="keys"><kbd class="key-control">Ctrl</kbd></span>/<span class="keys"><kbd class="key-alt">Alt</kbd></span> ).</p>
+<p><img alt="New keybinds within the vanilla controls settings menu." src="img/features/controls_menu.png"></p>
 <h3 id="other-features">Other features<a class="headerlink" href="#other-features" title="Permanent link">¶</a></h3>
 <ul>
 <li><strong>Auto-identify</strong>: marks items as identified when they're generated if the party has enough loremaster and an identifying glass, with an option to bypass these requirements.</li>
 <li><strong>Unlimited carry weight</strong>: prevents characters from gaining the "overencumbered" status.</li>
 <li><strong>Unlimited equipment durability</strong>: prevents weapons and armor from losing durability. Does not affect unrepairable items.</li>
 <li>Dead party members in Tactician &amp; Honour modes can receive experience.</li>
-<li>Showing world tooltips for all containers (barrels, crates, etc.)<ul>
-<li>Unfortunately, clicking their tooltips will still cause your character to attempt to pick them up rather than loot them.</li>
+<li>Showing world tooltips for all containers (barrels, crates, etc.)</li>
+<li>Looting containers by clicking on their world tooltips, like in Epip.<ul>
+<li>This can speed up looting clumped, small containers that are otherwise hard to click.</li>
+</ul>
+</li>
+<li>You can now toggle your helmet's visibility when playing with a controller.<ul>
+<li>To do so, open the context menu for the equipped helmet and select the new "<em>Hide helmet</em>", "<em>Always show helmet</em>" or "<em>Only show helmet in combat</em>" context menu options. Changes will be reflected upon closing the UI.</li>
 </ul>
 </li>
 <li>The maximum camera zoom can be adjusted.<ul>
@@ -707,7 +756,7 @@
 <ul>
 <li>Added a workaround for the scripting engine breaking "randomly", most infamously during the tutorial dungeon while using Epic Encounters.<ul>
 <li>This appears to be the bug that caused the door and pressure plate at the end of the tutorial to not work, as well as random mechanics breaking and torches not getting toggled when interacting with them, fixable only by fully restarting the game.</li>
-<li>If you disable this workaround in the settings menu, Ep1p will still notify with a message box you when it detects the issue has occurred.</li>
+<li>If you disable this workaround in the settings menu, Ep1p will still notify you with a message box when it detects the issue has occurred.</li>
 </ul>
 </li>
 <li>Added a workaround for the skill range indicator effects not appearing if you begin casting a skill while the caster is not on screen.</li>

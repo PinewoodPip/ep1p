@@ -318,9 +318,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-have-a-gog-copy-can-i-use-ep1p" class="md-nav__link">
+    <span class="md-ellipsis">
+      I have a GOG copy, can I use Ep1p?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#can-i-rebind-the-new-hotkeys" class="md-nav__link">
     <span class="md-ellipsis">
       Can I rebind the new hotkeys?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#older-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Older releases
     </span>
   </a>
   
@@ -433,9 +460,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-have-a-gog-copy-can-i-use-ep1p" class="md-nav__link">
+    <span class="md-ellipsis">
+      I have a GOG copy, can I use Ep1p?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#can-i-rebind-the-new-hotkeys" class="md-nav__link">
     <span class="md-ellipsis">
       Can I rebind the new hotkeys?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#older-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Older releases
     </span>
   </a>
   
@@ -459,11 +513,22 @@
 <div><h1 id="frequently-asked-questions">Frequently-Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">¶</a></h1>
 <h2 id="why-is-the-mod-a-dll">Why is the mod a .dll?<a class="headerlink" href="#why-is-the-mod-a-dll" title="Permanent link">¶</a></h2>
 <p>Ep1p uses code injection to make changes to the game that would not be possible with a regular <code>.pak</code> mod, similar to Norbyte's DOS2 Script Extender. The mod's repository is <a href="https://github.com/PinewoodPip/ep1p">available on GitHub</a> and is buildable from source.</p>
+<h2 id="known-issues">Known issues<a class="headerlink" href="#known-issues" title="Permanent link">¶</a></h2>
+<ul>
+<li>When using the "Toggle Party Chain" hotkeys, the "Target group is too far away" notification can sometimes appear erroneously (benign issue).</li>
+<li>The "Fix skill range indicators" setting can cause seemingly random crashes on some PCs (at least on Nvidia setups)</li>
+</ul>
+<h2 id="i-have-a-gog-copy-can-i-use-ep1p">I have a GOG copy, can I use Ep1p?<a class="headerlink" href="#i-have-a-gog-copy-can-i-use-ep1p" title="Permanent link">¶</a></h2>
+<p>Ep1p relies on finding patterns within game memory to make the necessary patches; these are different between the different builds of the game and were only reverse-engineered for the Steam build due to the massive time effort required.</p>
+<p>However, if you have a GOG copy of the game, <strong>replacing the executable (<code>EoCApp.exe</code>) with one from a Steam copy is enough to get Ep1p to work.</strong></p>
 <h2 id="can-i-rebind-the-new-hotkeys">Can I rebind the new hotkeys?<a class="headerlink" href="#can-i-rebind-the-new-hotkeys" title="Permanent link">¶</a></h2>
-<p>The in-game settings menu cannot currently be used for this, but you can rebind the new hotkeys by editing the mod's settings file (<code>Ep1pSettings.json</code>), which is created after modifying the settings at least once.</p>
-<p>The relevant settings are:</p>
+<p>As of v1.1.0.0 you can use the in-game settings menu to rebind hotkeys.</p>
+<p>You can also rebind them by editing the mod's settings file (<code>Ep1pSettings.json</code>), which is created after modifying the settings at least once.</p>
+<p>The relevant settings are the following; modifiers are set through separate settings suffixed with "<code>Modifier</code>":</p>
 <ul>
 <li><code>ExamineHotkey</code>: hotkey to open the examine UI. Default is <span class="keys"><kbd class="key-t">T</kbd></span> (key #<code>55</code>)</li>
+<li><code>TogglePartyChainKeybind</code>: hotkey to chain/unchain controlled characters.</li>
+<li><code>TogglePartySneakKeybind</code>: hotkey to sneak/unsneak controlled characters.</li>
 </ul>
 <p>Keys are identified by numerical IDs, as per the following table:</p>
 <table>
@@ -1124,7 +1189,8 @@
 </tr>
 </tbody>
 </table>
-<p>Modifiers (binding to <span class="keys"><kbd class="key-left-shift">Left Shift</kbd></span> / <span class="keys"><kbd class="key-left-alt">Left Alt</kbd></span> / <span class="keys"><kbd class="key-left-control">Left Ctrl</kbd></span> + another key) are not currently supported.</p></div>
+<h2 id="older-releases">Older releases<a class="headerlink" href="#older-releases" title="Permanent link">¶</a></h2>
+<p>For archival purposes, you can find all previous releases <a href="https://drive.google.com/drive/folders/1KRuwsqnzpyH-EvKhXrqI357mbrriJehy?usp=drive_link">here</a>. You can also use them in case of some <em>cathestrophe</em> where you need to downgrade. Ideally though, in such case you'd notify me what the issue is and I'd fix it.</p></div>
 
 
 
