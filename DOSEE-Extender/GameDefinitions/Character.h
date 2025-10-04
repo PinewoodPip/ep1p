@@ -1592,15 +1592,15 @@ END_NS()
 
 BEGIN_NS(ecl)
 
-struct PartyGroupHolder
-{
-	void* unknown;
-	CompactSet<ObjectHandle> CharacterHandles_m;
-};
-
 struct PartyGroup
 {
-	PartyGroupHolder* SomeHolder;
+	// TODO this is using some different set type, one with a VMT - but which one?
+	//Set<ObjectHandle>* CharacterHandlesSet;
+	void* unknown;
+	ObjectHandle* CharacterHandles;
+	int unknown3;
+	int CharacterHandlesAmount;
+
 };
 
 struct Party

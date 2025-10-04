@@ -23,22 +23,47 @@ void Hotkeys::TogglePartyChain()
 	ecl::Character* activeChar = ClientCharacterUtils::GetPlayerCharacter();
 	int reservedPlayerID = activeChar->ReservedPlayerID_m;
 
-	bool shouldUnchain = partyGroups->size() == 1;
+	// Count the player's party groups
+	// It's not enough to simply check the amount of groups,
+	// as in multiplayer they'll belong to different players -
+	// and we want to only operate on the groups that belong to the client
+	int clientCharacterPartyGroups = 0;
+	ecl::PartyGroup* targetGroup = nullptr; // The first group that belongs to the client.
+	int targetGroupID = -1; // Note: group ID is same as index in the arrays.
+	for (int i = 0; i < partyGroups->size(); i++)
+	{
+		auto group = partyGroups->data()[i];
+		for (int j = 0; j < group->CharacterHandlesAmount; j++)
+		{
+			auto characterHandle = group->CharacterHandles[j];
+			auto character = ClientCharacterUtils::GetCharacter(characterHandle);
+			if (character && character->ReservedPlayerID_m == reservedPlayerID)
+			{
+				clientCharacterPartyGroups++;
+				if (!targetGroup)
+				{
+					targetGroup = group;
+					targetGroupID = i;
+				}
+				break; // Note: chars of a group all belong to the same player
+			}
+		}
+	}
+
+	// Unchain characters if the client player has only 1 group
+	bool shouldUnchain = clientCharacterPartyGroups == 1;
 	if (shouldUnchain)
 	{
 		for (auto character : *partyMembers)
 		{
 			if (character->ReservedPlayerID_m == reservedPlayerID)
 			{
-				GetStaticSymbols().ecl_Party_RequestDetach(party, character->Handle_m, 0); // TODO what should the ID be?
+				GetStaticSymbols().ecl_Party_RequestDetach(party, character->Handle_m, targetGroupID);
 			}
 		}
 	}
-	else
+	else if (targetGroup)
 	{
-		auto targetGroup = partyGroups->data()[0];
-		auto targetGroupID = 0;
-
 		// Toggle chaining in reverse order to avoid shuffling characters around.
 		// TODO this will order characters by their order in the array - should preserve the player's order instead
 		for (int i = partyMembers->size() - 1; i >= 0; --i)
@@ -46,8 +71,9 @@ void Hotkeys::TogglePartyChain()
 			auto character = partyMembers->data()[i];
 			bool isInGroup = false;
 			bool isControlled = character->ReservedPlayerID_m == reservedPlayerID;
-			for (auto handle : targetGroup->SomeHolder->CharacterHandles_m)
+			for (int j = 0; j < targetGroup->CharacterHandlesAmount; j++)
 			{
+				auto handle = targetGroup->CharacterHandles[j];
 				if (handle == character->Handle_m)
 				{
 					isInGroup = true;
@@ -55,7 +81,7 @@ void Hotkeys::TogglePartyChain()
 			}
 			if (isControlled && !isInGroup)
 			{
-				GetStaticSymbols().ecl_Party_AddToGroup(party, character->Handle_m, 0, targetGroup->SomeHolder->CharacterHandles_m.size());
+				GetStaticSymbols().ecl_Party_AddToGroup(party, character->Handle_m, targetGroupID, targetGroup->CharacterHandlesAmount);
 			}
 		}
 	}
