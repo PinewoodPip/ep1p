@@ -57,6 +57,7 @@ void GameOptionsSettings::Render(ig::FlashPlayer* flashPlayer)
 		L"Full information",
 	}), (int)gSettings->ExamineInformation);
 	CHECKBOX(LootContainersFromWorldTooltips, L"Loot containers through world tooltips", L"If enabled, clicking on world tooltips of container items will attempt to loot them.");
+	CHECKBOX(UnlockDialogCamera, L"Allow rotating camera in dialogue", L"If enabled, camera rotation will be allowed while in dialogues.");
 	CHECKBOX(AutoScrollListenedDialogues, L"Automatically scroll listened dialogues", L"If enabled, dialogs you're listening to in multiplayer will automatically scroll to new dialog lines.");
 	CHECKBOX(AutoStopListening, L"Automatically stop listening to dialogues", L"If enabled, dialogs you're listening to will automatically close when the dialogue is finished by the player that started it.");
 	CHECKBOX(InfiniteEquipmentDurability, L"Unlimited Equipment Durability", L"If enabled, weapons and armor will not lose durability from use, unless they are unrepairable.<br>Existing broken items will still need to be repaired.");
