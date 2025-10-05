@@ -4,7 +4,8 @@
 Ep1p uses code injection to make changes to the game that would not be possible with a regular `.pak` mod, similar to Norbyte's DOS2 Script Extender. The mod's repository is [available on GitHub](https://github.com/PinewoodPip/ep1p) and is buildable from source.
 
 ## Known issues
-- When using the "Toggle Party Chain" hotkeys, the "Target group is too far away" notification can sometimes appear erroneously.
+- When using the "Toggle Party Chain" hotkeys, the "Target group is too far away" notification can sometimes appear erroneously (benign issue).
+- The "Fix skill range indicators" setting can cause seemingly random crashes on some PCs (at least on Nvidia setups)
 
 ## I have a GOG copy, can I use Ep1p?
 Ep1p relies on finding patterns within game memory to make the necessary patches; these are different between the different builds of the game and were only reverse-engineered for the Steam build due to the massive time effort required.

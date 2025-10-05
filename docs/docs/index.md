@@ -2,11 +2,16 @@
 
 Ep1p is the spiritual prequel to [Epip](https://pinewood.team/epip), bringing numerous QoL & UI adjustments to *Divinity: Original Sin Enhanced Edition*, such as more informative healthbars, a longer hotbar, shared loremaster & lucky charm, engine bug fixes and more.
 
-## Links
-- [Download and installation instructions](download.md)
-- [Features overview](#features)
-- [FAQ](faq.md)
-- [Epip & Ep1p development Discord channel](https://discord.gg/SevYmQc573)
+!!! info ""
+    - ![Ep1p icon](img/ep1p_icon.png){style='height:24px;vertical-align:middle'} [Download and installation instructions](download.md)
+    - [✨ Features overview](#features)
+    - [![Discord icon](img/discord_icon.png){style='height:16px;vertical-align:middle'} Epip & Ep1p development Discord channel](https://discord.gg/SevYmQc573)
+    - [❔ FAQ](faq.md)
+
+
+<center>![Target info UI.](img/features/target_info.png)</center>
+![Extended Hotbar.](img/features/bottom_bar.png)
+<center><i>Some of the sweet UI improvements in Ep1p.</i></center>
 
 <details markdown="1">
 <summary>Credits & Special Thanks</summary>
@@ -29,7 +34,7 @@ The health bar UI that appears when hovering over characters has received numero
     - The physical damage reduction shown is against enemies of the same level as the character, like in the character sheet tooltip.
 - Statuses now display in 2 columns, like in DOS2 - making better use of screen space and making them less likely to overflow the screen.
 
-![Target info UI.](img/features/target_info.png)
+<center>![Target info UI.](img/features/target_info.png)</center>
 
 ### Hotbar
 An option to use a longer hotbar that displays 20 slots at once has been added (*"Extended Hotbar"* setting).
@@ -84,8 +89,14 @@ You can set hotkeys to any key the game supports, with up to 1 modifier ( ++shif
     - This can speed up looting clumped, small containers that are otherwise hard to click.
 - You can now toggle your helmet's visibility when playing with a controller.
     - To do so, open the context menu for the equipped helmet and select the new "*Hide helmet*", "*Always show helmet*" or "*Only show helmet in combat*" context menu options. Changes will be reflected upon closing the UI.
+    ![Helmet visibility context menu options.](img/features/helmet_visibility.png)
+
 - The maximum camera zoom can be adjusted.
     - Note that render distance limits are not adjusted; as such, at high camera distances, you may see features such as shadows or surfaces disappear.
+
+![New maximum camera zoom out level.](img/features/camera_zoom.png)
+
+<center><i>Example screenshot of the highest zoom-out level.</i></center>
     
 ### Bug fixes
 Some bugs in the game have had workarounds made for them:

@@ -1,5 +1,8 @@
 # Patchnotes
 
+!!! info ""
+    See the [download page](download.md) for the latest version & installation instructions.
+
 ## v1.1.0.0 - 4/10/2025 - 1st anniversary-ish update!
 Surprise!!! Ep1p is epiback with more DOS1 goodies!!!
 
@@ -14,7 +17,11 @@ This patch adds various new hotkeys & features that I somehow didn't think about
 - Ep1p hotkeys can now be set through within the in-game control settings UI; they'll display at the top, prefixed with "*Ep1p*"
     - Currently, you can only set one binding per hotkey.
 
+![New keybinds within the vanilla controls settings menu.](img/features/controls_menu.png)
+
 ### Dialogue improvements
+Dialogues have received improvements to make them behave more like in DOS2:
+
 - Added a setting to allow rotating the camera while in dialogue ("*Allow rotating camera in dialogue*")
 - Added a setting to automatically stop listening to dialogues in multiplayer when the dialogue ends ("*Automatically stop listening to dialogues*")
 - Added a setting to automatically scroll dialogues while listening when new lines are added ("*Automatically scroll listened dialogues*")
@@ -24,6 +31,7 @@ This patch adds various new hotkeys & features that I somehow didn't think about
 - Added a setting to allow looting containers by clicking their world tooltips, like in Epip ("*Loot containers through world tooltips*" setting)
 - Added context menu options to allow toggling helmet visibility while playing with controllers; within the equipment UI, open the context menu for the equipped helmet and select the new "*Hide helmet*", "*Always show helmet*" or "*Only show helmet in combat*" context menu options.
     - Due to technical limitations, the changes will only be reflected after you exit the UI.
+    ![Helmet visibility context menu options.](img/features/helmet_visibility.png)
 
 ### Fixes
 - Fixed unbound keybinds not serializing properly in the settings json file (benign issue)
