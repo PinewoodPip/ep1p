@@ -77,8 +77,10 @@ void KeyboardBottomBar::OnGameStateChanged(int newState)
 	{
 		auto ui = UIUtils::GetUIByType(UIObject::TypeID::SkillBar);
 
-		// Won't exist in main menu.
-		if (ui)
+		// The UI won't exist in main menu.
+		// The check for invoke amount is necessary as a level swap
+		// re-enters PrepareRunning but does not re-create the UI.
+		if (ui && ui->FlashPlayer->Invokes.size() <= (int)UIKeyboardBottomBar::Invokes::pipSetExtendedMode)
 		{
 			// Should only run once per UI, as bottomBar is recreated per-session.
 			ui->FlashPlayer->AddInvokeName((int)UIKeyboardBottomBar::Invokes::pipSetExtendedMode, "pipSetExtendedMode");
