@@ -3,6 +3,10 @@
 !!! info ""
     See the [download page](download.md) for the latest version & installation instructions.
 
+## v1.1.0.1 - 22/11/2025 - Minor hotbar hotfix
+
+- Fixed Hotbar UI elements becoming mispositioned after changing maps if *"Extended Hotbar"* was disabled.
+
 ## v1.1.0.0 - 4/10/2025 - 1st anniversary-ish update!
 Surprise!!! Ep1p is epiback with more DOS1 goodies!!!
 

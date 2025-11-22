@@ -101,7 +101,7 @@ You can set hotkeys to any key the game supports, with up to 1 modifier ( ++shif
 ### Bug fixes
 Some bugs in the game have had workarounds made for them:
 
-- Added a workaround for the scripting engine breaking "randomly", most infamously during the tutorial dungeon while using Epic Encounters.
+- **Added a workaround for the scripting engine breaking "randomly"**, most infamously during the tutorial dungeon while using Epic Encounters.
     - This appears to be the bug that caused the door and pressure plate at the end of the tutorial to not work, as well as random mechanics breaking and torches not getting toggled when interacting with them, fixable only by fully restarting the game.
     - If you disable this workaround in the settings menu, Ep1p will still notify you with a message box when it detects the issue has occurred.
 - Added a workaround for the skill range indicator effects not appearing if you begin casting a skill while the caster is not on screen.

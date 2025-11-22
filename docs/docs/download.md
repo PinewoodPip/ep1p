@@ -2,7 +2,7 @@
 !!! info ""
     Only version 2.0.119.430 (Steam release) of the game is supported. [See the FAQ for getting Ep1p to work on GOG copies](../faq#i-have-a-gog-copy-can-i-use-ep1p).
 
-- [Latest version download (v1.1.0.0).](https://drive.google.com/file/d/12_Q4AdZItj-djkBYFELp7aW7aFfAGtZx/view?usp=drive_link)
+- [Latest version download (v1.1.0.1).](https://drive.google.com/file/d/17YzJ-MwOuONdy0D_lb6kui4FVoWN8GHn/view?usp=drive_link)
 - [Patchnotes](patchnotes.md)
 
 !!! warning ""
