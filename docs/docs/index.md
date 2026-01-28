@@ -9,7 +9,7 @@ Ep1p is the spiritual prequel to [Epip](https://pinewood.team/epip), bringing nu
     - [❔ FAQ](faq.md)
 
 
-<center>![Target info UI.](img/features/target_info.png)</center>
+<center markdown="1">![Target info UI.](img/features/target_info.png)</center>
 ![Extended Hotbar.](img/features/bottom_bar.png)
 <center><i>Some of the sweet UI improvements in Ep1p.</i></center>
 
@@ -34,7 +34,7 @@ The health bar UI that appears when hovering over characters has received numero
     - The physical damage reduction shown is against enemies of the same level as the character, like in the character sheet tooltip.
 - Statuses now display in 2 columns, like in DOS2 - making better use of screen space and making them less likely to overflow the screen.
 
-<center>![Target info UI.](img/features/target_info.png)</center>
+<center markdown="1">![Target info UI.](img/features/target_info.png)</center>
 
 ### Hotbar
 An option to use a longer hotbar that displays 20 slots at once has been added (*"Extended Hotbar"* setting).
