@@ -131,7 +131,7 @@ namespace dse
 			return !CriticalInitFailed;
 		}
 
-		auto initStart = std::chrono::high_resolution_clock::now();
+		auto initStart = std::chrono::steady_clock::now();
 
 		symbolMapper_.MapAllSymbols(true);
 
@@ -153,7 +153,7 @@ namespace dse
 			TypeInformationRepository::GetInstance().Initialize();*/
 		}
 
-		auto initEnd = std::chrono::high_resolution_clock::now();
+		auto initEnd = std::chrono::steady_clock::now();
 		auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(initEnd - initStart).count();
 		/*Log("LibraryManager::PostStartupFindLibraries() took %d ms", ms);*/
 
