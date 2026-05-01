@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugEditor|Win32">
+      <Configuration>DebugEditor</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugEditor|x64">
+      <Configuration>DebugEditor</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{00448a5e-f5f9-4228-9e12-3c6608810f52}</ProjectGuid>
+    <RootNamespace>DOSEEExtender</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\glm;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\glm;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\glm;$(IncludePath)</IncludePath>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DOSEEEXTENDER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DOSEEEXTENDER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;DOSEEEXTENDER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;DOSEEEXTENDER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_ITERATOR_DEBUG_LEVEL=0;OSI_EOCAPP</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\jsoncpp-master\include;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\Detours\include;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>true</EnableUAC>
+      <ModuleDefinitionFile>Exports.def</ModuleDefinitionFile>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);dbghelp.lib;detours.lib;version.lib;jsoncpp_static.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\jsoncpp-build\lib\Debug;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\x64-windows\lib;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\Detours\lib.X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Divinity Original Sin Enhanced Edition\Shipping\DXGI.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugEditor|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;DOSEEEXTENDER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_ITERATOR_DEBUG_LEVEL=0;OSI_EOCPLUGIN</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\Detours\include;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender;$(SolutionDir)\External\jsoncpp-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>true</EnableUAC>
+      <ModuleDefinitionFile>Exports.def</ModuleDefinitionFile>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);dbghelp.lib;detours.lib;version.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\x64-windows\lib;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\Detours\lib.X64;$(SolutionDir)\External\jsoncpp-build\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\The Divinty Engine Enhanced Edition\DXGI.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;DOSEEEXTENDER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);OSI_EOCAPP</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\jsoncpp-master\include;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\Detours\include;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>true</EnableUAC>
+      <AdditionalLibraryDirectories>C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\jsoncpp-build\lib\Release;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\x64-windows\lib;C:\Users\Usuario\Documents\ActualDocuments\Dev\EE\DOS1\Extender\DOSEE-Extender\DOSEE-Extender\External\Detours\lib.X64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);dbghelp.lib;detours.lib;version.lib;jsoncpp_static.lib</AdditionalDependencies>
+      <ModuleDefinitionFile>Exports.def</ModuleDefinitionFile>
+      <LinkTimeCodeGeneration />
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Divinity Original Sin Enhanced Edition\Shipping\DXGI.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Epip\CameraTweaks.h" />
+    <ClInclude Include="DeadPartyXP.h" />
+    <ClInclude Include="Epip\AutoIdentify.h" />
+    <ClInclude Include="Epip\EpipSettings.h" />
+    <ClInclude Include="Epip\UI\ControllerEquipmentPanel.h" />
+    <ClInclude Include="Epip\UI\ControlsMenu.h" />
+    <ClInclude Include="Epip\UI\Dialog.h" />
+    <ClInclude Include="Epip\UI\TargetInfo.h" />
+    <ClInclude Include="Epip\EquipmentDegradation.h" />
+    <ClInclude Include="Epip\UI\ExamineTweaks.h" />
+    <ClInclude Include="Extender\Utils\CharacterUtils.h" />
+    <ClInclude Include="Extender\Utils\Pointer.h" />
+    <ClInclude Include="GameDefinitions\Character.h" />
+    <ClInclude Include="GameDefinitions\Effect.h" />
+    <ClInclude Include="GameDefinitions\EntitySystem.h" />
+    <ClInclude Include="GameDefinitions\Enumerations.h" />
+    <ClInclude Include="GameDefinitions\Input.h" />
+    <ClInclude Include="GameDefinitions\Inventory.h" />
+    <ClInclude Include="GameDefinitions\Item.h" />
+    <ClInclude Include="GameDefinitions\Level.h" />
+    <ClInclude Include="GameDefinitions\Misc.h" />
+    <ClInclude Include="GameDefinitions\Player.h" />
+    <ClInclude Include="GameDefinitions\UI.h" />
+    <ClInclude Include="Epip\UI\GameOptionsSettings.h" />
+    <ClInclude Include="Hooks\Hooks.h" />
+    <ClInclude Include="Hooks\EngineHooks.h" />
+    <ClInclude Include="Hooks\DataLibraries.h" />
+    <ClInclude Include="DxgiWrapper.h" />
+    <ClInclude Include="External\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="GameDefinitions\Base\Base.h" />
+    <ClInclude Include="GameDefinitions\Base\BaseArray.h" />
+    <ClInclude Include="GameDefinitions\Base\BaseMap.h" />
+    <ClInclude Include="GameDefinitions\Base\BaseMemory.h" />
+    <ClInclude Include="GameDefinitions\Base\BaseString.h" />
+    <ClInclude Include="GameDefinitions\Base\BaseTypeInformation.h" />
+    <ClInclude Include="GameDefinitions\Base\BaseTypes.h" />
+    <ClInclude Include="GameDefinitions\Base\BaseUtilities.h" />
+    <ClInclude Include="GameDefinitions\Base\ForwardDeclarations.h" />
+    <ClInclude Include="GameDefinitions\Base\HalfHelpers.h" />
+    <ClInclude Include="GameDefinitions\Base\ObjectVisitor.h" />
+    <ClInclude Include="Hooks\SymbolMapper.h" />
+    <ClInclude Include="Epip\Epip.h" />
+    <ClInclude Include="Epip\UI\KeyboardBottomBar.h" />
+    <ClInclude Include="Epip\InfiniteCarryWeight.h" />
+    <ClInclude Include="Epip\OsirisImprovements.h" />
+    <ClInclude Include="Epip\Hotkeys.h" />
+    <ClInclude Include="Epip\UI\MainMenu.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="GameDefinitions\Symbols.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="Extender\ScriptExtender.h" />
+    <ClInclude Include="GameDefinitions\RPGStats.h" />
+    <ClInclude Include="Epip\ScriptBugWatchdog.h" />
+    <ClInclude Include="Epip\SkillRangeEffectFix.h" />
+    <ClInclude Include="Epip\SharedCivils.h" />
+    <ClInclude Include="Extender\Utils\UIUtils.h" />
+    <ClInclude Include="Utils\Text.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Hooks\Wrappers.h" />
+    <ClInclude Include="Epip\WorldTooltips.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Epip\CameraTweaks.cpp" />
+    <ClCompile Include="DeadPartyXP.cpp" />
+    <ClCompile Include="Epip\AutoIdentify.cpp" />
+    <ClCompile Include="Epip\EpipSettings.cpp" />
+    <ClCompile Include="Epip\UI\ControllerEquipmentPanel.cpp" />
+    <ClCompile Include="Epip\UI\ControlsMenu.cpp" />
+    <ClCompile Include="Epip\UI\Dialog.cpp" />
+    <ClCompile Include="Epip\UI\TargetInfo.cpp" />
+    <ClCompile Include="Epip\EquipmentDegradation.cpp" />
+    <ClCompile Include="Epip\UI\ExamineTweaks.cpp" />
+    <ClCompile Include="Extender\Utils\CharacterUtils.cpp" />
+    <ClCompile Include="Epip\UI\GameOptionsSettings.cpp" />
+    <ClCompile Include="Extender\Utils\Pointer.cpp" />
+    <ClCompile Include="Hooks\DataLibrariesEoCPlugin.cpp" />
+    <ClCompile Include="Hooks\Hooks.cpp" />
+    <ClCompile Include="Hooks\DataLibrariesEoCApp.cpp" />
+    <ClCompile Include="Hooks\DataLibraries.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="DxgiWrapper.cpp" />
+    <ClCompile Include="External\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="GameDefinitions\Base\Base.cpp" />
+    <ClCompile Include="GameDefinitions\GameHelpers.cpp" />
+    <ClCompile Include="Hooks\EngineHooks.cpp" />
+    <ClCompile Include="Hooks\SymbolMapper.cpp" />
+    <ClCompile Include="Epip\Epip.cpp" />
+    <ClCompile Include="Epip\UI\KeyboardBottomBar.cpp" />
+    <ClCompile Include="Epip\InfiniteCarryWeight.cpp" />
+    <ClCompile Include="Epip\OsirisImprovements.cpp" />
+    <ClCompile Include="Epip\Hotkeys.cpp" />
+    <ClCompile Include="Epip\UI\MainMenu.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugEditor|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugEditor|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GameDefinitions\Symbols.cpp" />
+    <ClCompile Include="Extender\ScriptExtender.cpp" />
+    <ClCompile Include="GameDefinitions\RPGStats.cpp" />
+    <ClCompile Include="Epip\ScriptBugWatchdog.cpp" />
+    <ClCompile Include="Epip\SkillRangeEffectFix.cpp" />
+    <ClCompile Include="Epip\SharedCivils.cpp" />
+    <ClCompile Include="Extender\Utils\UIUtils.cpp" />
+    <ClCompile Include="Utils\Text.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Epip\WorldTooltips.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Exports.def" />
+    <None Include="Hooks\EngineHooks.inl" />
+    <None Include="Hooks\EoCApp.exe" />
+    <None Include="script_e.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Hooks\EoCApp.xml" />
+    <Xml Include="Hooks\EoCPlugin.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DOSEE-Extender.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="NatvisFile.natvis" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
