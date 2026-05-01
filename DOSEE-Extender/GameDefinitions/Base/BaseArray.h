@@ -399,7 +399,7 @@ public:
 	}
 
 private:
-	uint64_t capacityIncrementSize_{ 0 };
+	uint32_t capacityIncrementSize_{ 0 };
 };
 
 template <class T, class TSizeType = uint32_t, class Allocator = GameMemoryAllocator>

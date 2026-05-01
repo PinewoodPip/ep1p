@@ -55,6 +55,7 @@ struct FlashPlayerHooks
 	ig::FlashPlayer::VMT::Invoke1Proc OriginalInvoke1{ nullptr };
 	ig::FlashPlayer::VMT::Invoke0Proc OriginalInvoke0{ nullptr };
 	ig::FlashPlayer::VMT::InvokeArgsProc OriginalInvokeArgs{ nullptr };
+	ig::FlashPlayer::VMT::GetFlashMoviePropertiesProc OriginalGetFlashMovieProperties{ nullptr };
 
 	/*void Hook(ig::FlashPlayer::VMT* vmt);*/
 };
